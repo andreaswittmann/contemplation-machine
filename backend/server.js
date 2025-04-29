@@ -55,6 +55,21 @@ const audioCacheDir = path.join(dataDir, 'audio-cache');
 debugLog(`Setting up audio cache directory: ${audioCacheDir}`);
 fs.ensureDirSync(audioCacheDir);
 
+// Ensure presets directory exists
+const presetsDir = path.join(dataDir, 'presets');
+debugLog(`Setting up presets directory: ${presetsDir}`);
+fs.ensureDirSync(presetsDir);
+
+// Define OpenAI voice descriptions
+const openAIVoiceDescriptions = {
+  'alloy': 'Alloy - Versatile, balanced voice',
+  'echo': 'Echo - Clear, confident voice',
+  'fable': 'Fable - Warm, soft-spoken voice',
+  'onyx': 'Onyx - Deep, authoritative voice',
+  'nova': 'Nova - Bright, friendly voice',
+  'shimmer': 'Shimmer - Gentle, soothing voice'
+};
+
 // File path for meditation instructions
 const instructionsPath = path.join(dataDir, 'instructions.json');
 debugLog(`Instructions file path: ${instructionsPath}`);
@@ -732,6 +747,181 @@ app.get('/api/elevenlabs/voices', async (req, res) => {
   } catch (error) {
     console.error('Error fetching ElevenLabs voices:', error);
     res.status(500).json({ error: 'Failed to fetch ElevenLabs voices' });
+  }
+});
+
+// ====== Preset API Endpoints ======
+
+// GET all presets
+app.get('/api/presets', (req, res) => {
+  debugLog(`GET /api/presets request received from ${req.ip}`);
+  try {
+    // Read all JSON files from presets directory
+    if (!fs.existsSync(presetsDir)) {
+      debugLog(`Creating presets directory: ${presetsDir}`);
+      fs.ensureDirSync(presetsDir);
+      return res.json([]);
+    }
+    
+    const files = fs.readdirSync(presetsDir).filter(file => file.endsWith('.json'));
+    debugLog(`Found ${files.length} preset files`);
+    
+    const presets = files.map(file => {
+      try {
+        const presetPath = path.join(presetsDir, file);
+        const preset = fs.readJsonSync(presetPath);
+        return preset;
+      } catch (error) {
+        debugLog(`Error reading preset file ${file}: ${error.message}`);
+        return null;
+      }
+    }).filter(Boolean); // Remove any null entries from failed reads
+    
+    res.json(presets);
+  } catch (error) {
+    debugLog(`Error retrieving presets: ${error.message}`, error);
+    console.error('Error retrieving presets:', error);
+    res.status(500).json({ error: 'Failed to retrieve meditation presets' });
+  }
+});
+
+// GET a preset by ID
+app.get('/api/presets/:id', (req, res) => {
+  const presetId = req.params.id;
+  debugLog(`GET /api/presets/${presetId} request received`);
+  
+  try {
+    const presetPath = path.join(presetsDir, `${presetId}.json`);
+    
+    if (!fs.existsSync(presetPath)) {
+      debugLog(`Preset with ID ${presetId} not found`);
+      return res.status(404).json({ error: 'Preset not found' });
+    }
+    
+    const preset = fs.readJsonSync(presetPath);
+    debugLog(`Successfully retrieved preset: ${preset.name}`);
+    res.json(preset);
+  } catch (error) {
+    debugLog(`Error retrieving preset ${presetId}: ${error.message}`, error);
+    console.error('Error retrieving preset:', error);
+    res.status(500).json({ error: 'Failed to retrieve meditation preset' });
+  }
+});
+
+// POST create a new preset
+app.post('/api/presets', (req, res) => {
+  debugLog('POST /api/presets request received', { body: req.body });
+  
+  try {
+    const { name, description, config } = req.body;
+    
+    // Validate required fields
+    if (!name || !config) {
+      return res.status(400).json({ error: 'Name and config are required fields' });
+    }
+    
+    // Ensure presets directory exists
+    if (!fs.existsSync(presetsDir)) {
+      debugLog(`Creating presets directory: ${presetsDir}`);
+      fs.ensureDirSync(presetsDir);
+    }
+    
+    // Generate a unique ID for the preset
+    const presetId = `preset-${Date.now().toString()}`;
+    
+    // Add human-readable voice information to help with display
+    let voiceDisplayName = '';
+    if (config.useVoiceGuidance) {
+      if (config.voiceType === 'browser') {
+        voiceDisplayName = 'Browser Default';
+      } else if (config.voiceType === 'openai') {
+        voiceDisplayName = openAIVoiceDescriptions[config.openaiVoice] || config.openaiVoice;
+      } else if (config.voiceType === 'elevenlabs') {
+        // We don't have the voice names from ElevenLabs cached on server side, so store the ID
+        voiceDisplayName = `ElevenLabs ID: ${config.elevenlabsVoiceId}`;
+      }
+    }
+    
+    const newPreset = {
+      id: presetId,
+      name,
+      description: description || '',
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      config,
+      voiceDisplayName
+    };
+    
+    const presetPath = path.join(presetsDir, `${presetId}.json`);
+    debugLog(`Writing new preset to ${presetPath}`, newPreset);
+    
+    // Write the preset to a JSON file
+    fs.writeJsonSync(presetPath, newPreset, { spaces: 2 });
+    
+    res.status(201).json(newPreset);
+  } catch (error) {
+    debugLog(`Error creating preset: ${error.message}`, error);
+    console.error('Error creating preset:', error);
+    res.status(500).json({ error: 'Failed to create meditation preset' });
+  }
+});
+
+// PUT update an existing preset
+app.put('/api/presets/:id', (req, res) => {
+  const presetId = req.params.id;
+  debugLog(`PUT /api/presets/${presetId} request received`, { body: req.body });
+  
+  try {
+    const presetPath = path.join(presetsDir, `${presetId}.json`);
+    
+    if (!fs.existsSync(presetPath)) {
+      debugLog(`Preset with ID ${presetId} not found for update`);
+      return res.status(404).json({ error: 'Preset not found' });
+    }
+    
+    const existingPreset = fs.readJsonSync(presetPath);
+    
+    // Update fields
+    const updatedPreset = {
+      ...existingPreset,
+      name: req.body.name || existingPreset.name,
+      description: req.body.description !== undefined ? req.body.description : existingPreset.description,
+      config: req.body.config || existingPreset.config,
+      updatedAt: new Date().toISOString()
+    };
+    
+    debugLog(`Updating preset at ${presetPath}`, updatedPreset);
+    fs.writeJsonSync(presetPath, updatedPreset, { spaces: 2 });
+    
+    res.json(updatedPreset);
+  } catch (error) {
+    debugLog(`Error updating preset ${presetId}: ${error.message}`, error);
+    console.error('Error updating preset:', error);
+    res.status(500).json({ error: 'Failed to update meditation preset' });
+  }
+});
+
+// DELETE a preset
+app.delete('/api/presets/:id', (req, res) => {
+  const presetId = req.params.id;
+  debugLog(`DELETE /api/presets/${presetId} request received`);
+  
+  try {
+    const presetPath = path.join(presetsDir, `${presetId}.json`);
+    
+    if (!fs.existsSync(presetPath)) {
+      debugLog(`Preset with ID ${presetId} not found for deletion`);
+      return res.status(404).json({ error: 'Preset not found' });
+    }
+    
+    debugLog(`Deleting preset: ${presetPath}`);
+    fs.removeSync(presetPath);
+    
+    res.json({ message: 'Preset successfully deleted' });
+  } catch (error) {
+    debugLog(`Error deleting preset ${presetId}: ${error.message}`, error);
+    console.error('Error deleting preset:', error);
+    res.status(500).json({ error: 'Failed to delete meditation preset' });
   }
 });
 
