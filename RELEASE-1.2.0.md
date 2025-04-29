@@ -1,10 +1,10 @@
 # Meditation App Release 1.2.0
 
-**Release Date**: April 30, 2025
+**Release Date**: April 29, 2025
 
 ## Summary
 
-Release 1.2.0 introduces a powerful new preset feature that allows users to save and load meditation configuration settings. This highly requested feature enhances the user experience by enabling quick switching between different meditation configurations without manually adjusting each setting. Users can now maintain a library of personal meditation presets customized for different needs, moods, or times of day.
+Release 1.2.0 introduces a powerful new preset feature that allows users to save and load meditation configuration settings, along with significant UI improvements for a more consistent user experience. This highly requested feature enhances the user experience by enabling quick switching between different meditation configurations without manually adjusting each setting. Users can now maintain a library of personal meditation presets customized for different needs, moods, or times of day.
 
 ## New Features
 
@@ -14,6 +14,14 @@ Release 1.2.0 introduces a powerful new preset feature that allows users to save
 - **Load Configuration Presets**: Users can instantly load previously saved presets to quickly configure a meditation session
 - **Preset Management**: A new interface for browsing, viewing, and deleting saved presets
 - **Persistent Storage**: All presets are stored on disk and preserved across application restarts
+
+### UI Improvements
+
+- **Harmonized Interface**: Consistent preset selection UI between Meditate and Settings pages
+- **Improved Preset Controls**: Streamlined preset management with intuitive dropdown selection
+- **Enhanced Description Display**: Clear visibility of preset descriptions and last update times
+- **Simplified Workflow**: Unified approach to creating, updating, and managing presets
+- **Responsive Design**: Mobile-friendly layout for all preset management features
 
 ## Technical Implementation
 
@@ -31,9 +39,10 @@ Release 1.2.0 introduces a powerful new preset feature that allows users to save
 
 - New `PresetContext` for managing preset state and operations
 - UI components for preset management:
+  - Unified preset dropdown selector across pages
   - "Save as Preset" modal with name and description fields
   - Preset list component with load and delete options
-  - Preset loading interface integrated into the Configuration View
+  - Improved preset management interface in Configuration View
 - Extended API service with preset operations
 - Integration with existing `MeditationConfigContext` for applying loaded presets
 
@@ -61,46 +70,28 @@ Each preset is stored as a JSON file with the following structure:
 }
 ```
 
-## Upgrade Instructions
-
-1. Stop any existing containers:
-   ```bash
-   docker-compose down
-   ```
-
-2. Pull the latest code:
-   ```bash
-   git pull
-   ```
-
-3. Rebuild and start the unified container:
-   ```bash
-   docker-compose build
-   docker-compose up -d
-   ```
-
 ## User Guide
 
 ### Saving a Preset
 
 1. Configure your meditation settings as desired in the Settings page
-2. Click the "Save as Preset" button
+2. Click the "Save as New Preset" button
 3. Enter a name and optional description for your preset
 4. Click "Save" to store your preset
 
 ### Loading a Preset
 
-1. Navigate to the Settings page
-2. Click the "Load Preset" button or open the presets panel
-3. Browse the list of available presets
-4. Click "Load" on your desired preset to apply those settings
+1. Use the preset dropdown selector in either the Meditate or Settings page
+2. Select your desired preset from the list
+3. The configuration will be automatically applied
 
 ### Managing Presets
 
-1. Open the presets panel from the Settings page
-2. Browse your saved presets
-3. View preset details including name, description, and settings
-4. Delete unwanted presets using the delete option
+1. Use the preset dropdown to select and load presets
+2. Update the current preset using the "Update Preset" button
+3. Create new presets using "Save as New Preset"
+4. View preset details including name, description, and last update time
+5. Clear the current preset selection using the "Clear" button
 
 ## Known Limitations
 
@@ -114,7 +105,9 @@ Each preset is stored as a JSON file with the following structure:
 - Preset sharing between users
 - Partial preset application (applying only selected settings)
 - Preset export/import functionality
+- Cloud synchronization of presets
+- Preset search and filtering
 
 ---
 
-This release improves the meditation experience by enabling users to quickly switch between different meditation configurations, making the app more versatile and user-friendly.
+This release significantly improves the meditation experience by enabling users to quickly switch between different meditation configurations and providing a more consistent, intuitive interface across the application.

@@ -734,7 +734,204 @@ app.get('/api/network-test', (req, res) => {
   }
 });
 
-// Track generated audio files with their instruction ID
+// Import API key manager
+const keyManager = require('./utils/keyManager');
+
+// API Key management routes
+app.get('/api/keys/status', (req, res) => {
+  try {
+    const statuses = keyManager.getApiKeyStatuses();
+    
+    // Determine which services are available based on key status
+    const serviceStatus = {
+      openai: {
+        available: !!(statuses.openai && statuses.openai.exists && statuses.openai.validated),
+        lastChecked: statuses.openai ? statuses.openai.lastValidated : null,
+        features: ["tts"]
+      },
+      elevenlabs: {
+        available: !!(statuses.elevenlabs && statuses.elevenlabs.exists && statuses.elevenlabs.validated),
+        lastChecked: statuses.elevenlabs ? statuses.elevenlabs.lastValidated : null,
+        features: ["tts"]
+      }
+    };
+    
+    res.json({
+      services: serviceStatus
+    });
+  } catch (error) {
+    console.error('Error getting API key statuses:', error);
+    res.status(500).json({ error: 'Failed to retrieve API key statuses' });
+  }
+});
+
+// Set an API key
+app.post('/api/keys', async (req, res) => {
+  try {
+    const { service, key } = req.body;
+    
+    if (!service || !key) {
+      return res.status(400).json({ error: 'Service and key are required' });
+    }
+    
+    // Validate that service is supported
+    if (!['openai', 'elevenlabs'].includes(service)) {
+      return res.status(400).json({ error: 'Unsupported service' });
+    }
+    
+    // Validate the key with the service
+    let isValid = false;
+    let validationError = null;
+    
+    try {
+      isValid = await validateApiKey(service, key);
+    } catch (error) {
+      validationError = error.message;
+    }
+    
+    // Save the key even if validation fails (user might be offline or API temporarily unavailable)
+    keyManager.setApiKey(service, key, { validated: isValid });
+    
+    // Set environment variable so it's available for the current session
+    if (service === 'openai') {
+      process.env.OPENAI_API_KEY = key;
+    } else if (service === 'elevenlabs') {
+      process.env.ELEVENLABS_API_KEY = key;
+    }
+    
+    res.json({
+      success: true,
+      service,
+      validated: isValid,
+      error: validationError
+    });
+  } catch (error) {
+    console.error('Error setting API key:', error);
+    res.status(500).json({ error: 'Failed to set API key' });
+  }
+});
+
+// Delete an API key
+app.delete('/api/keys/:service', (req, res) => {
+  try {
+    const { service } = req.params;
+    
+    // Validate that service is supported
+    if (!['openai', 'elevenlabs'].includes(service)) {
+      return res.status(400).json({ error: 'Unsupported service' });
+    }
+    
+    const deleted = keyManager.deleteApiKey(service);
+    
+    // Also remove from environment variables for current session
+    if (service === 'openai') {
+      delete process.env.OPENAI_API_KEY;
+    } else if (service === 'elevenlabs') {
+      delete process.env.ELEVENLABS_API_KEY;
+    }
+    
+    if (deleted) {
+      res.json({ success: true, message: `${service} API key deleted` });
+    } else {
+      res.status(404).json({ error: `No ${service} API key found` });
+    }
+  } catch (error) {
+    console.error('Error deleting API key:', error);
+    res.status(500).json({ error: 'Failed to delete API key' });
+  }
+});
+
+// Test an API key
+app.post('/api/keys/validate', async (req, res) => {
+  try {
+    const { service, key } = req.body;
+    
+    if (!service || !key) {
+      return res.status(400).json({ error: 'Service and key are required' });
+    }
+    
+    // Validate that service is supported
+    if (!['openai', 'elevenlabs'].includes(service)) {
+      return res.status(400).json({ error: 'Unsupported service' });
+    }
+    
+    try {
+      const isValid = await validateApiKey(service, key);
+      
+      res.json({
+        valid: isValid,
+        service
+      });
+    } catch (error) {
+      console.error(`API key validation error for ${service}:`, error);
+      res.status(400).json({ 
+        valid: false, 
+        service,
+        error: error.message
+      });
+    }
+  } catch (error) {
+    console.error('Error validating API key:', error);
+    res.status(500).json({ error: 'Failed to validate API key' });
+  }
+});
+
+// Helper function to validate an API key with its service
+async function validateApiKey(service, key) {
+  if (service === 'openai') {
+    // Test with a simple model call
+    const response = await fetch('https://api.openai.com/v1/models', {
+      headers: {
+        'Authorization': `Bearer ${key}`
+      }
+    });
+    
+    if (!response.ok) {
+      throw new Error(`OpenAI validation failed: ${response.status} ${response.statusText}`);
+    }
+    
+    return true;
+  } else if (service === 'elevenlabs') {
+    // Test with a voices list call
+    const response = await fetch(`${ELEVENLABS_API_URL}/voices`, {
+      headers: {
+        'xi-api-key': key
+      }
+    });
+    
+    if (!response.ok) {
+      throw new Error(`ElevenLabs validation failed: ${response.status} ${response.statusText}`);
+    }
+    
+    return true;
+  }
+  
+  throw new Error('Unsupported service');
+}
+
+// Load API keys on startup and set environment variables
+function loadApiKeysFromStorage() {
+  try {
+    const openaiKey = keyManager.getApiKey('openai');
+    if (openaiKey) {
+      process.env.OPENAI_API_KEY = openaiKey;
+      console.log('Loaded OpenAI API key from storage');
+    }
+    
+    const elevenlabsKey = keyManager.getApiKey('elevenlabs');
+    if (elevenlabsKey) {
+      process.env.ELEVENLABS_API_KEY = elevenlabsKey;
+      console.log('Loaded ElevenLabs API key from storage');
+    }
+  } catch (error) {
+    console.error('Error loading API keys from storage:', error);
+  }
+}
+
+// Load API keys on server startup
+loadApiKeysFromStorage();
+
+// Modify TTS endpoint to use the stored API keys and handle graceful fallbacks
 app.post('/api/tts', async (req, res) => {
   try {
     const { text, voice = 'alloy', instructionId, provider = 'openai', isStartingInstruction = false } = req.body;
@@ -749,10 +946,25 @@ app.post('/api/tts', async (req, res) => {
     }
     
     // Check if appropriate API key is configured
-    if (provider === 'openai' && !process.env.OPENAI_API_KEY) {
-      return res.status(500).json({ error: 'OpenAI API key not configured' });
-    } else if (provider === 'elevenlabs' && !process.env.ELEVENLABS_API_KEY) {
-      return res.status(500).json({ error: 'ElevenLabs API key not configured' });
+    let apiKey = null;
+    if (provider === 'openai') {
+      apiKey = process.env.OPENAI_API_KEY || keyManager.getApiKey('openai');
+      if (!apiKey) {
+        return res.status(400).json({ 
+          error: 'OpenAI API key not configured', 
+          missingKey: true,
+          provider: 'openai'
+        });
+      }
+    } else if (provider === 'elevenlabs') {
+      apiKey = process.env.ELEVENLABS_API_KEY || keyManager.getApiKey('elevenlabs');
+      if (!apiKey) {
+        return res.status(400).json({ 
+          error: 'ElevenLabs API key not configured', 
+          missingKey: true,
+          provider: 'elevenlabs'
+        });
+      }
     }
 
     // Check cache first
