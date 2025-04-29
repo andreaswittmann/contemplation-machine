@@ -3,7 +3,7 @@
   "name": "Breathing with Grace from Elevenapps",
   "description": "Mindfullness of breathing using the voice grace from ElevenLabs.",
   "createdAt": "2025-04-29T11:05:15.187Z",
-  "updatedAt": "2025-04-29T11:05:15.187Z",
+  "updatedAt": "2025-04-29T11:51:13.940Z",
   "config": {
     "duration": 2,
     "bellAtStart": true,
