@@ -10,29 +10,34 @@ The application is structured as a single-page web application with a lightweigh
 
 ### High-Level Overview
 
-The system follows a simplified two-tier architecture:
+The system follows a simplified unified architecture:
 
 1. **Frontend Layer**: Single-page React application for user interface
 2. **Backend Layer**: Lightweight Node.js server with file-based persistence
+
+Both layers are now deployed in a single container for simplicity.
 
 ![Meditation App Architecture Diagram](./assets/meditation-app-architecture.png)
 
 *Note: To view the full architecture diagram, please export the `meditation-app-architecture.drawio` file as a PNG image and place it in the assets folder.*
 
 <!-- Original ASCII diagram preserved for reference
-┌─────────────────┐     ┌─────────────────┐
-│                 │     │                 │
-│  React Frontend │◄────►  Node.js Backend│
-│  (Single Page)  │     │  (Express)      │
-│                 │     │                 │
-└─────────────────┘     └────────┬────────┘
-│
-┌────────▼────────┐
-│                 │
-│  JSON File      │
-│  Storage        │
-│                 │
-└─────────────────┘
+┌─────────────────────────────────────────┐
+│             Single Container            │
+│  ┌─────────────────┐ ┌─────────────────┐│
+│  │                 │ │                 ││
+│  │  React Frontend │◄►│  Node.js Backend││
+│  │  (Static Files) │ │  (Express)      ││
+│  │                 │ │                 ││
+│  └─────────────────┘ └────────┬────────┘│
+│                              │         │
+│           ┌────────▼─────────┐         │
+│           │                 │         │
+│           │  JSON File      │         │
+│           │  Storage        │         │
+│           │                 │         │
+│           └─────────────────┘         │
+└─────────────────────────────────────────┘
 -->
 
 ## Frontend Architecture
@@ -60,7 +65,7 @@ The system follows a simplified two-tier architecture:
 
 ### Server Components
 
-- **Express.js Server**: Lightweight API endpoints
+- **Express.js Server**: Lightweight API endpoints and static file serving
 - **File System Module**: Direct interaction with JSON storage
 - **OpenAI Integration**: API wrapper for TTS functionality
 
@@ -117,9 +122,10 @@ The system follows a simplified two-tier architecture:
 
 ## Deployment Architecture
 
-- **Docker Container**: Single container deployment
+- **Unified Docker Container**: Single container deployment containing both frontend and backend
 - **Volume Mounting**: External volume for JSON data persistence
 - **Environment Variables**: Configuration for OpenAI API keys and app settings
+- **Simplified Networking**: No need for container-to-container communication
 
 ## Implementation Considerations
 
@@ -129,7 +135,6 @@ The system follows a simplified two-tier architecture:
 - **Accessibility**: Screen reader support for meditation instructions
 
 This architecture provides a complete solution for the Meditation App while maintaining simplicity and avoiding unnecessary technical complexity.
-
 
 # Implementation Phases for Meditation App
 
@@ -231,16 +236,16 @@ We've successfully completed the final phase of the Meditation App implementatio
 - Optimized motion for reduced motion preferences
 
 ## Docker Containerization
-- Created optimized Dockerfiles for both frontend and backend services
-- Set up docker-compose orchestration with proper service networking
+- Created optimized unified Docker container for both frontend and backend services
 - Implemented volume mounting for persistent data storage
-- Added Nginx configuration with performance optimizations
 - Configured environment variable support for secure deployment
+- Simplified deployment by eliminating container-to-container communication
+- Removed unnecessary CORS complexity by serving frontend and API from same origin
 
 ## Performance Optimization
 - Added server monitoring capabilities for memory usage and performance
 - Implemented enhanced cache management with age-based cleanup options
-- Optimized static asset delivery with compression and cache headers
+- Optimized static asset delivery by serving directly from Node.js
 - Improved resource cleanup for audio playback
 - Added API endpoint performance metrics
 
@@ -251,4 +256,80 @@ We've successfully completed the final phase of the Meditation App implementatio
 - Documented system architecture and implementation details
 - Created Phase 4 completion summary
 
-The completion of Phase 4 marks the readiness of our Meditation App for production deployment. The application now provides a polished user experience across all device types, with robust error handling, performance optimizations, and a well-documented deployment process.
+The completion of Phase 4 marks the readiness of our Meditation App for production deployment. The application now provides a polished user experience across all device types, with robust error handling, performance optimizations, and a well-documented deployment process. The simplified single-container architecture makes deployment and scaling more straightforward while eliminating CORS issues.
+
+# Development & Deployment Guide
+
+## Development Approach
+
+We've implemented a streamlined development workflow that mimics our production unified container architecture:
+
+### Local Development Setup
+
+The application can be run in two ways:
+
+1. **Development Mode** - Uses separate servers with proxy configuration 
+2. **Production Mode** - Uses a unified Docker container
+
+#### Running in Development Mode
+
+We've created a development script that starts both frontend and backend servers and configures them to work together:
+
+```bash
+# Run both frontend and backend development servers
+./dev.sh
+```
+
+This script:
+- Starts the backend server on port 3001
+- Starts the frontend development server on port 3000
+- Configures the frontend to proxy API requests to the backend
+- Handles proper cleanup when shutting down
+
+The frontend development server uses the proxy configuration in `package.json` to forward API requests to the backend server, which simulates how requests will work in the unified container architecture.
+
+**Advantages of Development Mode:**
+- Hot reloading for both frontend and backend code
+- Separate log outputs for easier debugging
+- Same API request patterns as production (relative URLs)
+- No need to rebuild containers during development
+
+#### Testing the Unified Architecture
+
+Before deploying to production, you can test the unified architecture to ensure that:
+1. API requests work correctly with relative paths
+2. Static assets are properly served by the Express server
+3. CORS issues are eliminated by serving from the same origin
+
+#### Environment Variables
+
+Both development and production modes require the following environment variables:
+- `OPENAI_API_KEY` - For text-to-speech functionality via OpenAI
+- `ELEVENLABS_API_KEY` - For enhanced voice options via ElevenLabs
+
+## Deploying to Production
+
+To deploy the application to production, use the unified Docker container approach:
+
+```bash
+# Build and start the container
+docker-compose build
+docker-compose up -d
+```
+
+This creates a single container that:
+- Builds the React frontend
+- Serves the static frontend files
+- Handles API requests
+- Persists data through a Docker volume
+
+The application will be available at http://localhost:8088 (or the host's IP address on port 8088).
+
+### Production Advantages
+
+The unified container approach provides several benefits:
+- Simplified deployment with just one container
+- No CORS issues as everything is served from the same origin
+- Reduced resource usage compared to running separate containers
+- Simplified networking with no container-to-container communication
+- Easier scaling and maintenance

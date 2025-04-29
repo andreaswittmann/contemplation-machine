@@ -3,7 +3,6 @@ const cors = require('cors');
 const path = require('path');
 const fs = require('fs-extra');
 const crypto = require('crypto');
-// Remove the ElevenLabs SDK import as we'll use direct API calls
 require('dotenv').config();
 
 const app = express();
@@ -119,6 +118,9 @@ app.post('/api/tts/cache/manage', (req, res) => {
   }
 });
 
+// API Endpoints
+// Note: All API endpoints are prefixed with /api to distinguish them from frontend routes
+
 // Cache status endpoint - for diagnostics
 app.get('/api/tts/cache/status', (req, res) => {
   try {
@@ -140,7 +142,6 @@ app.get('/api/tts/cache/status', (req, res) => {
   }
 });
 
-// API Endpoints
 app.get('/api/instructions', (req, res) => {
   try {
     const instructions = fs.readJsonSync(instructionsPath);
@@ -603,10 +604,45 @@ app.get('/api/elevenlabs/voices', async (req, res) => {
   }
 });
 
+// Serve static files from the React build directory
+// This needs to be AFTER all API routes to prevent conflicts
+let staticFilesPath;
+// Check if we're running in a Docker container
+if (fs.existsSync('/app/frontend/build')) {
+  // Docker container path
+  staticFilesPath = '/app/frontend/build';
+  console.log('Running in Docker: Serving frontend from', staticFilesPath);
+} else {
+  // Local development path
+  staticFilesPath = path.join(__dirname, '../frontend/build');
+  console.log('Running in development: Serving frontend from', staticFilesPath);
+}
+
+// Check if the frontend build directory exists
+if (!fs.existsSync(staticFilesPath)) {
+  console.warn(`Warning: Frontend build directory not found at ${staticFilesPath}`);
+} else {
+  console.log(`Frontend build directory found at ${staticFilesPath}`);
+}
+
+app.use(express.static(staticFilesPath));
+
+// For any other request, serve the React app (handle client-side routing)
+app.get('*', (req, res) => {
+  if (fs.existsSync(path.join(staticFilesPath, 'index.html'))) {
+    res.sendFile(path.join(staticFilesPath, 'index.html'));
+  } else {
+    console.error(`Error: index.html not found at ${path.join(staticFilesPath, 'index.html')}`);
+    res.status(500).send('Frontend files not found. Please build the frontend first or check container paths.');
+  }
+});
+
 // Start server on specified host and port to make it accessible on the network
 app.listen(PORT, HOST, () => {
-  console.log(`Server running at http://${HOST}:${PORT}`);
+  console.log(`Server running in unified container mode at http://${HOST}:${PORT}`);
   console.log(`For local access: http://localhost:${PORT}`);
+  console.log(`API available at: http://localhost:${PORT}/api`);
+  console.log(`Frontend available at: http://localhost:${PORT}`);
   // Try to get the local network IP for easier sharing
   try {
     const { networkInterfaces } = require('os');
