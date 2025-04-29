@@ -1,0 +1,17 @@
+{
+  "id": "preset-1745924350843",
+  "name": "Silent Mediation",
+  "description": "Just a Mediation Timer with Bells",
+  "createdAt": "2025-04-29T10:59:10.843Z",
+  "updatedAt": "2025-04-29T10:59:10.843Z",
+  "config": {
+    "duration": 2,
+    "bellAtStart": true,
+    "bellAtEnd": true,
+    "instructionsFrequency": "medium",
+    "useVoiceGuidance": false,
+    "voiceType": "openai",
+    "selectedInstructionId": null,
+    "openaiVoice": "nova"
+  }
+}
