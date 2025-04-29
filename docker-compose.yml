@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "8088:80"
+    depends_on:
+      - backend
+    environment:
+      - REACT_APP_API_URL=http://localhost:3001/api
+    networks:
+      - meditation-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+      - NODE_ENV=production
+      # Include your OpenAI API key in an .env file or set as an environment variable
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      # Include your ElevenLabs API key
+      - ELEVENLABS_API_KEY=${ELEVENLABS_API_KEY}
+    volumes:
+      # Mount the data directory for persistence
+      - meditation-data:/app/data
+    networks:
+      - meditation-network
+
+networks:
+  meditation-network:
+    driver: bridge
+
+volumes:
+  meditation-data:
+    # Use named volume for data persistence between container restarts
+    driver: local
