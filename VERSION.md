@@ -11,7 +11,7 @@ We follow a simplified [Semantic Versioning](https://semver.org/):
 
 ## Current Version
 
-Current version: 1.1.0
+Current version: 1.1.1
 
 ## Development Process
 
@@ -22,6 +22,46 @@ Current version: 1.1.0
 5. Tag significant releases with `v1.2.3` format tags
 
 ## Releases
+
+### Version 1.1.1 - April 29, 2025
+
+#### Summary
+
+This patch release fixes a critical issue that caused API requests to fail when running in the Docker container environment, resulting in an "Error: Load failed" message in the user interface.
+
+#### Key Changes
+
+- **Fixed API URL Configuration**: Modified the frontend's API service to use relative URLs in production builds, ensuring proper connectivity to the backend API when running in the Docker container.
+- **Improved Error Handling**: Enhanced error handling for network issues with more descriptive error messages.
+- **Better Debugging**: Added more detailed logging of API requests and environment mode.
+
+#### Affected Components
+
+- `frontend/src/services/ApiService.ts`: Updated to detect environment and use appropriate API URLs.
+
+#### Impact
+
+- Resolves the "Error: Load failed" error message when accessing the application in Docker.
+- Fixes meditation instruction file loading in the unified container architecture.
+- Improves error messaging for better troubleshooting.
+
+#### Upgrade Instructions
+
+1. Stop any existing containers:
+   ```
+   docker-compose down
+   ```
+
+2. Pull the latest code:
+   ```
+   git pull
+   ```
+
+3. Rebuild and start the unified container:
+   ```
+   docker-compose build
+   docker-compose up -d
+   ```
 
 ### Version 1.1.0 - April 29, 2025
 
@@ -50,6 +90,13 @@ This release represents a significant architectural improvement to the Meditatio
 - **Path Verification**: Added build-time verification of directory structure
 - **Improved Error Handling**: Better error messages when frontend files cannot be located
 
+##### Static File Serving Improvements
+
+- **Enhanced MIME Types**: Added proper content type handling for audio files and other assets
+- **Caching Strategy**: Implemented file-type specific caching headers
+- **Special Routes**: Added dedicated handling for sound files
+- **Improved Debugging**: Better logging for static file requests and errors
+
 ##### Documentation
 
 - **Updated README**: Comprehensive documentation of the new architecture
@@ -63,6 +110,7 @@ This release represents a significant architectural improvement to the Meditatio
 - **Improved Development Experience**: Seamless development workflow with the dev script
 - **Reduced Resource Usage**: Lower memory and CPU overhead
 - **Better Error Handling**: More informative error messages during startup
+- **Fixed Load Issues**: Resolved "Error: Load failed" problems with static files
 
 #### Known Issues
 

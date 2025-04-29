@@ -1,133 +1,141 @@
 # Meditation App Deployment Guide
 
-This guide explains how to deploy the Meditation App using Docker. The application consists of a React frontend and a Node.js backend with persistent storage for meditation instructions and audio cache.
+## Unified Container Deployment
 
-## Prerequisites
+This application uses a single-container architecture that incorporates both the frontend and backend components.
 
-- [Docker](https://docs.docker.com/get-docker/)
-- [Docker Compose](https://docs.docker.com/compose/install/)
-- OpenAI API key for text-to-speech functionality
+### Requirements
 
-## Environment Setup
+- Docker and Docker Compose
+- Environment variables for API keys:
+  - `OPENAI_API_KEY` (required for TTS functionality)
+  - `ELEVENLABS_API_KEY` (optional for enhanced voice options)
 
-1. Create a `.env` file in the project root directory with your OpenAI API key:
+### Deployment Steps
 
-```
-OPENAI_API_KEY=your_openai_api_key_here
-```
+1. Clone the repository:
+   ```bash
+   git clone [repository-url]
+   cd meditation-app
+   ```
 
-## Deployment Steps
+2. Set up environment variables:
+   ```bash
+   # Create .env file from sample
+   cp backend/sample.env .env
+   
+   # Edit the .env file with your API keys
+   # OPENAI_API_KEY=your_openai_api_key
+   # ELEVENLABS_API_KEY=your_elevenlabs_api_key
+   ```
 
-### Using Docker Compose (Recommended)
+3. Build and start the container:
+   ```bash
+   docker-compose build
+   docker-compose up -d
+   ```
 
-1. Build and start the containers:
+4. Access the application:
+   - Browser: http://localhost:8088
+   - API endpoints: http://localhost:8088/api
 
-```bash
-docker-compose up -d
-```
+### Updating the Application
 
-This command builds the frontend and backend images and starts the containers in detached mode.
+To update to a new version:
 
-2. Verify the containers are running:
+1. Pull the latest code:
+   ```bash
+   git pull
+   ```
 
-```bash
-docker-compose ps
-```
+2. Rebuild and restart the container:
+   ```bash
+   docker-compose down
+   docker-compose build
+   docker-compose up -d
+   ```
 
-3. Access the application:
-   - Frontend: http://localhost
-   - Backend API: http://localhost:3001/api
+## Development Mode
 
-### Manual Deployment
+For local development without Docker:
 
-If you prefer to build and run the containers manually:
+1. Install dependencies for both frontend and backend:
+   ```bash
+   cd backend && npm install
+   cd ../frontend && npm install
+   ```
 
-1. Build and run the backend:
+2. Run the development script:
+   ```bash
+   ./dev.sh
+   ```
 
-```bash
-cd backend
-docker build -t meditation-backend .
-docker run -d -p 3001:3001 -e OPENAI_API_KEY=your_key_here --name meditation-backend meditation-backend
-```
-
-2. Build and run the frontend:
-
-```bash
-cd frontend
-docker build -t meditation-frontend .
-docker run -d -p 80:80 --name meditation-frontend meditation-frontend
-```
-
-## Data Persistence
-
-The application uses Docker volumes to ensure data persistence:
-
-- Meditation instructions are stored in `/app/data/instructions.json`
-- Audio cache files are stored in `/app/data/audio-cache/`
-
-These files are preserved in the `meditation-data` Docker volume, which persists across container restarts.
-
-To inspect the volume:
-
-```bash
-docker volume inspect meditation-data
-```
-
-## Scaling Considerations
-
-For production environments with higher load:
-
-1. Add a load balancer in front of multiple frontend instances
-2. Scale the backend using Docker Swarm or Kubernetes
-3. Consider external storage solutions for audio cache files
+This runs both frontend and backend servers with hot reload capability.
 
 ## Troubleshooting
 
-### Audio TTS Issues
+### "Error: Load failed" Issue
 
-If text-to-speech is not working:
+Some users may encounter an "Error: Load failed" message when accessing the application in the browser. This is typically related to how certain assets (particularly audio files) are loaded.
 
-1. Verify your OpenAI API key is correctly set in the environment variables
-2. Check the backend logs for API errors:
+#### Debugging Steps
 
-```bash
-docker-compose logs backend
-```
+1. **Check browser console for specific errors**
+   - Open developer tools (F12 or right-click > Inspect)
+   - Look at the Console tab for detailed error messages about which files failed to load
 
-### Network Connectivity
+2. **Verify Docker logs**
+   ```bash
+   docker-compose logs -f
+   ```
+   - Look for "Serving static file" messages to confirm files are being served
+   - Check for any 404 (Not Found) or 500 (Server Error) responses
 
-If the frontend cannot connect to the backend:
+3. **Verify file paths in the container**
+   ```bash
+   docker-compose exec meditation-app ls -la /app/frontend/build
+   docker-compose exec meditation-app ls -la /app/frontend/build/sounds
+   ```
 
-1. Ensure both containers are running
-2. Check that the frontend environment variable `REACT_APP_API_URL` is correctly set
-3. Verify network connectivity between containers:
+4. **Try these workarounds**:
+   - Perform a hard refresh (Ctrl+Shift+R or Cmd+Shift+R)
+   - Clear browser cache and reload
+   - Access the app in Incognito/Private browsing mode
+   - Try a different browser
 
-```bash
-docker network inspect meditation-network
-```
+5. **Check network requests**
+   - In browser developer tools, go to the Network tab
+   - Reload the page and look for failed requests (red items)
+   - Note the paths of failed resources
 
-### Container Restart
+#### Advanced Troubleshooting
 
-To restart the services:
-
-```bash
-docker-compose restart
-```
-
-## Backup and Restore
-
-To backup your meditation data:
-
-```bash
-# Find the volume path
-docker volume inspect meditation-data
-
-# Create a backup
-docker run --rm -v meditation-data:/data -v $(pwd):/backup alpine tar -czf /backup/meditation-data-backup.tar.gz -C /data .
-```
-
-To restore from backup:
+If you need to access the container to perform deeper debugging:
 
 ```bash
-docker run --rm -v meditation-data:/data -v $(pwd):/backup alpine sh -c "rm -rf /data/* && tar -xzf /backup/meditation-data-backup.tar.gz -C /data"
+# Access container shell
+docker-compose exec meditation-app sh
+
+# Check environment variables
+env | grep API_KEY
+
+# Verify node process is running
+ps aux | grep node
+
+# Check files in the data directory
+ls -la /app/data
 ```
+
+### Other Common Issues
+
+1. **API Keys Not Working**
+   - Verify the environment variables are correctly set in `.env` file
+   - Check if keys are valid and have necessary permissions
+
+2. **Audio Generation Fails**
+   - Check OpenAI API key status and quota
+   - Verify the TTS endpoints are accessible from your environment
+
+3. **Container Fails to Start**
+   - Check Docker logs for startup errors
+   - Verify port 8088 is not used by another application

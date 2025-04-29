@@ -9,6 +9,20 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 const HOST = process.env.HOST || '0.0.0.0'; // Listen on all network interfaces
 
+// Debug logging function
+const debugLog = (message, data = null) => {
+  const timestamp = new Date().toISOString();
+  const logMessage = `[${timestamp}] ${message}`;
+  
+  if (data) {
+    console.log(logMessage, typeof data === 'object' ? JSON.stringify(data, null, 2) : data);
+  } else {
+    console.log(logMessage);
+  }
+};
+
+debugLog('Starting Meditation App server');
+
 // ElevenLabs API base URL
 const ELEVENLABS_API_URL = 'https://api.elevenlabs.io/v1';
 
@@ -33,18 +47,35 @@ app.use((req, res, next) => {
 
 // Ensure data directory exists
 const dataDir = path.join(__dirname, 'data');
+debugLog(`Setting up data directory: ${dataDir}`);
 fs.ensureDirSync(dataDir);
 
 // Ensure audio cache directory exists
 const audioCacheDir = path.join(dataDir, 'audio-cache');
+debugLog(`Setting up audio cache directory: ${audioCacheDir}`);
 fs.ensureDirSync(audioCacheDir);
 
 // File path for meditation instructions
 const instructionsPath = path.join(dataDir, 'instructions.json');
+debugLog(`Instructions file path: ${instructionsPath}`);
 
 // Initialize empty instructions file if it doesn't exist
 if (!fs.existsSync(instructionsPath)) {
+  debugLog('Instructions file does not exist, creating empty file');
   fs.writeJsonSync(instructionsPath, [], { spaces: 2 });
+  debugLog('Created empty instructions file');
+} else {
+  debugLog('Instructions file already exists');
+  try {
+    const stats = fs.statSync(instructionsPath);
+    debugLog(`Instructions file size: ${stats.size} bytes, last modified: ${stats.mtime}`);
+    
+    // Check if file is readable and parse its content
+    const instructionsContent = fs.readJsonSync(instructionsPath);
+    debugLog(`Instructions file contains ${instructionsContent.length} entries`);
+  } catch (error) {
+    debugLog(`Error reading instructions file: ${error.message}`, error);
+  }
 }
 
 // Helper function to generate a unique hash for text + voice + provider
@@ -143,10 +174,20 @@ app.get('/api/tts/cache/status', (req, res) => {
 });
 
 app.get('/api/instructions', (req, res) => {
+  debugLog(`GET /api/instructions request received from ${req.ip}`);
   try {
+    debugLog(`Reading instructions file at: ${instructionsPath}`);
+    
+    if (!fs.existsSync(instructionsPath)) {
+      debugLog('WARNING: Instructions file not found when trying to read it');
+      return res.status(404).json({ error: 'Instructions file not found' });
+    }
+    
     const instructions = fs.readJsonSync(instructionsPath);
+    debugLog(`Successfully read ${instructions.length} instructions`);
     res.json(instructions);
   } catch (error) {
+    debugLog(`Error reading instructions: ${error.message}`, error);
     console.error('Error reading instructions:', error);
     res.status(500).json({ error: 'Failed to retrieve meditation instructions' });
   }
@@ -154,26 +195,49 @@ app.get('/api/instructions', (req, res) => {
 
 // GET a single instruction by ID
 app.get('/api/instructions/:id', (req, res) => {
+  const instructionId = req.params.id;
+  debugLog(`GET /api/instructions/${instructionId} request received from ${req.ip}`);
+  
   try {
+    debugLog(`Reading instructions file for ID: ${instructionId}`);
+    
+    if (!fs.existsSync(instructionsPath)) {
+      debugLog(`WARNING: Instructions file not found when trying to read instruction ID: ${instructionId}`);
+      return res.status(404).json({ error: 'Instructions file not found' });
+    }
+    
     const instructions = fs.readJsonSync(instructionsPath);
-    const instructionId = req.params.id;
+    debugLog(`Successfully read ${instructions.length} instructions, searching for ID: ${instructionId}`);
+    
     const instruction = instructions.find(i => i.id === instructionId);
     
     if (!instruction) {
-      console.log(`Instruction with ID ${instructionId} not found`);
+      debugLog(`Instruction with ID ${instructionId} not found`);
       return res.status(404).json({ error: 'Instruction file not found' });
     }
     
+    debugLog(`Successfully found instruction "${instruction.name}" with ID: ${instructionId}`);
     res.json(instruction);
   } catch (error) {
+    debugLog(`Error retrieving instruction by ID ${instructionId}: ${error.message}`, error);
     console.error('Error retrieving instruction by ID:', error);
     res.status(500).json({ error: 'Failed to retrieve meditation instruction' });
   }
 });
 
 app.post('/api/instructions', (req, res) => {
+  debugLog('POST /api/instructions request received', { body: req.body });
+  
   try {
+    if (!fs.existsSync(instructionsPath)) {
+      debugLog('WARNING: Instructions file not found when trying to create new instruction');
+      fs.writeJsonSync(instructionsPath, [], { spaces: 2 });
+      debugLog('Created new empty instructions file');
+    }
+    
     const instructions = fs.readJsonSync(instructionsPath);
+    debugLog(`Read ${instructions.length} existing instructions`);
+    
     const newInstruction = {
       id: Date.now().toString(),
       name: req.body.name,
@@ -182,25 +246,42 @@ app.post('/api/instructions', (req, res) => {
       createdAt: new Date().toISOString()
     };
     
+    debugLog('Created new instruction object', newInstruction);
     instructions.push(newInstruction);
+    
+    debugLog(`Writing updated instructions file with ${instructions.length} entries`);
     fs.writeJsonSync(instructionsPath, instructions, { spaces: 2 });
+    debugLog('Successfully wrote instructions file');
     
     res.status(201).json(newInstruction);
   } catch (error) {
+    debugLog(`Error saving instruction: ${error.message}`, error);
     console.error('Error saving instruction:', error);
     res.status(500).json({ error: 'Failed to save meditation instruction' });
   }
 });
 
 app.put('/api/instructions/:id', (req, res) => {
+  const instructionId = req.params.id;
+  debugLog(`PUT /api/instructions/${instructionId} request received`, { body: req.body });
+  
   try {
+    if (!fs.existsSync(instructionsPath)) {
+      debugLog(`WARNING: Instructions file not found when trying to update instruction ID: ${instructionId}`);
+      return res.status(404).json({ error: 'Instructions file not found' });
+    }
+    
     const instructions = fs.readJsonSync(instructionsPath);
-    const instructionId = req.params.id;
+    debugLog(`Read ${instructions.length} instructions, searching for ID: ${instructionId}`);
+    
     const instructionIndex = instructions.findIndex(i => i.id === instructionId);
     
     if (instructionIndex === -1) {
+      debugLog(`Instruction with ID ${instructionId} not found for update`);
       return res.status(404).json({ error: 'Instruction file not found' });
     }
+    
+    debugLog(`Found instruction at index ${instructionIndex}, updating fields`);
     
     const updatedInstruction = {
       ...instructions[instructionIndex],
@@ -212,45 +293,95 @@ app.put('/api/instructions/:id', (req, res) => {
     };
     
     instructions[instructionIndex] = updatedInstruction;
+    debugLog('Updated instruction object', updatedInstruction);
+    
+    debugLog(`Writing updated instructions file with ${instructions.length} entries`);
     fs.writeJsonSync(instructionsPath, instructions, { spaces: 2 });
+    debugLog('Successfully wrote instructions file');
     
     // Invalidate cache for this instruction ID
     invalidateInstructionCache(instructionId);
     
     res.json(updatedInstruction);
   } catch (error) {
+    debugLog(`Error updating instruction ${instructionId}: ${error.message}`, error);
     console.error('Error updating instruction:', error);
     res.status(500).json({ error: 'Failed to update meditation instruction' });
   }
 });
 
 app.delete('/api/instructions/:id', (req, res) => {
+  const instructionId = req.params.id;
+  debugLog(`DELETE /api/instructions/${instructionId} request received`);
+  
   try {
-    const instructions = fs.readJsonSync(instructionsPath);
-    const instructionId = req.params.id;
-    const initialLength = instructions.length;
+    if (!fs.existsSync(instructionsPath)) {
+      debugLog(`WARNING: Instructions file not found when trying to delete instruction ID: ${instructionId}`);
+      return res.status(404).json({ error: 'Instructions file not found' });
+    }
     
+    const instructions = fs.readJsonSync(instructionsPath);
+    debugLog(`Read ${instructions.length} instructions, filtering out ID: ${instructionId}`);
+    
+    const initialLength = instructions.length;
     const filteredInstructions = instructions.filter(i => i.id !== instructionId);
     
     if (filteredInstructions.length === initialLength) {
+      debugLog(`Instruction with ID ${instructionId} not found for deletion`);
       return res.status(404).json({ error: 'Instruction file not found' });
     }
     
+    debugLog(`Removed instruction, writing updated file with ${filteredInstructions.length} entries`);
     fs.writeJsonSync(instructionsPath, filteredInstructions, { spaces: 2 });
+    debugLog('Successfully wrote instructions file');
     
     // Invalidate cache for this instruction ID
     invalidateInstructionCache(instructionId);
     
     res.json({ message: 'Instruction file successfully deleted' });
   } catch (error) {
+    debugLog(`Error deleting instruction ${instructionId}: ${error.message}`, error);
     console.error('Error deleting instruction:', error);
     res.status(500).json({ error: 'Failed to delete meditation instruction' });
   }
 });
 
-// Health check endpoint
+// Health check endpoint with instruction file status
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', timestamp: new Date().toISOString() });
+  debugLog('GET /api/health request received');
+  
+  try {
+    // Check instruction file status
+    const instructionStatus = {
+      exists: fs.existsSync(instructionsPath),
+      stats: fs.existsSync(instructionsPath) ? fs.statSync(instructionsPath) : null,
+      entries: 0
+    };
+    
+    if (instructionStatus.exists) {
+      try {
+        const instructions = fs.readJsonSync(instructionsPath);
+        instructionStatus.entries = instructions.length;
+        instructionStatus.readable = true;
+      } catch (err) {
+        instructionStatus.readable = false;
+        instructionStatus.readError = err.message;
+      }
+    }
+    
+    res.json({
+      status: 'ok',
+      timestamp: new Date().toISOString(),
+      instructions: instructionStatus
+    });
+  } catch (error) {
+    debugLog(`Error in health check: ${error.message}`, error);
+    res.status(500).json({ 
+      status: 'error',
+      timestamp: new Date().toISOString(),
+      error: error.message
+    });
+  }
 });
 
 // Network connectivity test endpoint
@@ -623,16 +754,59 @@ if (!fs.existsSync(staticFilesPath)) {
   console.warn(`Warning: Frontend build directory not found at ${staticFilesPath}`);
 } else {
   console.log(`Frontend build directory found at ${staticFilesPath}`);
+  // List the contents to help with debugging
+  try {
+    const files = fs.readdirSync(staticFilesPath);
+    console.log(`Found ${files.length} files in build directory:`, files.slice(0, 10).join(', ') + (files.length > 10 ? '...' : ''));
+  } catch (err) {
+    console.error('Error reading build directory:', err);
+  }
 }
 
-app.use(express.static(staticFilesPath));
+// Configure static file serving with proper options
+app.use(express.static(staticFilesPath, {
+  etag: true, // Enable ETag for caching
+  lastModified: true, // Enable Last-Modified for caching
+  setHeaders: (res, path) => {
+    // Set proper caching headers based on file type
+    if (path.endsWith('.html')) {
+      // Don't cache HTML files
+      res.setHeader('Cache-Control', 'no-cache');
+    } else if (path.match(/\.(js|css|png|jpg|jpeg|gif|ico|svg)$/)) {
+      // Cache static assets for 1 day
+      res.setHeader('Cache-Control', 'public, max-age=86400');
+    } else if (path.match(/\.(mp3|wav)$/)) {
+      // Cache audio files for 1 week
+      res.setHeader('Cache-Control', 'public, max-age=604800');
+      // Ensure proper content type for audio files
+      if (path.endsWith('.mp3')) {
+        res.setHeader('Content-Type', 'audio/mpeg');
+      } else if (path.endsWith('.wav')) {
+        res.setHeader('Content-Type', 'audio/wav');
+      }
+    }
+    // Log file access to help with debugging
+    console.log(`Serving static file: ${path}`);
+  }
+}));
+
+// Special route for public/sounds directory in case we need to access audio files directly
+app.use('/sounds', express.static(path.join(staticFilesPath, 'sounds'), {
+  setHeaders: (res, path) => {
+    console.log(`Serving sound file: ${path}`);
+    res.setHeader('Content-Type', path.endsWith('.mp3') ? 'audio/mpeg' : 'audio/wav');
+    res.setHeader('Cache-Control', 'public, max-age=604800'); // 1 week
+  }
+}));
 
 // For any other request, serve the React app (handle client-side routing)
 app.get('*', (req, res) => {
-  if (fs.existsSync(path.join(staticFilesPath, 'index.html'))) {
-    res.sendFile(path.join(staticFilesPath, 'index.html'));
+  const indexPath = path.join(staticFilesPath, 'index.html');
+  if (fs.existsSync(indexPath)) {
+    console.log(`Serving index.html for path: ${req.originalUrl}`);
+    res.sendFile(indexPath);
   } else {
-    console.error(`Error: index.html not found at ${path.join(staticFilesPath, 'index.html')}`);
+    console.error(`Error: index.html not found at ${indexPath}`);
     res.status(500).send('Frontend files not found. Please build the frontend first or check container paths.');
   }
 });

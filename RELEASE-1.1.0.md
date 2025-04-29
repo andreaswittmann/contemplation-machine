@@ -43,7 +43,15 @@ This release represents a significant architectural improvement to the Meditatio
 
 ## Known Issues
 
-None at this time.
+1. **"Error: Load failed" on Initial Access**: Some users may encounter an "Error: Load failed" message when first accessing the application in the browser. This appears to be related to how certain resources are loaded in the React application, particularly audio files or specific assets.
+
+   **Workarounds**:
+   - Perform a hard refresh in the browser (Ctrl+Shift+R or Cmd+Shift+R)
+   - Clear browser cache and reload the application
+   - Try accessing the application in Chrome's Incognito mode or Firefox's Private Browsing mode
+   - For developers: Check the browser's developer console to identify which specific resources are failing to load
+
+   **Long-term fix**: We're investigating this issue and will address it in a future patch release. It appears to be related to how the React application handles asset loading in the Docker environment rather than an issue with the server's static file handling.
 
 ## Upgrade Instructions
 
