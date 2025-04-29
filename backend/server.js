@@ -3,7 +3,7 @@ const cors = require('cors');
 const path = require('path');
 const fs = require('fs-extra');
 const crypto = require('crypto');
-require('dotenv').config();
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') }); // Updated to look for .env at project root
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -118,6 +118,97 @@ const getCachedAudio = (text, voice, provider = 'openai') => {
 // Create a mapping of instruction IDs to their cached audio files
 let instructionAudioMap = {};
 
+// Track usage analytics for instructions
+let cacheAnalytics = {
+  accessCount: {}, // Track how many times each audio file is accessed
+  lastAccessed: {}, // Track when each audio file was last accessed
+  priorityScores: {}, // Store calculated priority scores for each audio file
+  instructionFrequency: {}, // Track which instructions are used most frequently
+  startingInstructions: {}, // Track which instructions are commonly used at the start
+};
+
+// Load cache analytics from disk if exists
+const cacheAnalyticsPath = path.join(dataDir, 'cache-analytics.json');
+try {
+  if (fs.existsSync(cacheAnalyticsPath)) {
+    cacheAnalytics = fs.readJsonSync(cacheAnalyticsPath);
+    console.log(`Loaded cache analytics data with ${Object.keys(cacheAnalytics.accessCount).length} entries`);
+  } else {
+    // Initialize and save empty analytics file
+    fs.writeJsonSync(cacheAnalyticsPath, cacheAnalytics, { spaces: 2 });
+    console.log('Created new cache analytics file');
+  }
+} catch (error) {
+  console.error('Error loading cache analytics:', error);
+}
+
+// Function to save cache analytics to disk
+const saveCacheAnalytics = () => {
+  try {
+    fs.writeJsonSync(cacheAnalyticsPath, cacheAnalytics, { spaces: 2 });
+  } catch (error) {
+    console.error('Error saving cache analytics:', error);
+  }
+};
+
+// Calculate priority score for audio file based on analytics
+const calculatePriorityScore = (audioHash) => {
+  const now = Date.now();
+  const accessCount = cacheAnalytics.accessCount[audioHash] || 0;
+  const lastAccessed = cacheAnalytics.lastAccessed[audioHash] || 0;
+  const daysSinceLastAccess = (now - lastAccessed) / (1000 * 60 * 60 * 24);
+  
+  // Formula: accessCount * (recency factor)
+  // Higher access count and more recent access results in higher score
+  const recencyFactor = Math.max(0.1, 1 - (daysSinceLastAccess / 30)); // Decays over 30 days
+  
+  // Calculate final score
+  const score = accessCount * recencyFactor;
+  
+  // Store the calculated score
+  cacheAnalytics.priorityScores[audioHash] = score;
+  
+  return score;
+};
+
+// Update cache analytics when audio is accessed
+const updateCacheAnalytics = (audioHash, instructionId, isStartingInstruction = false) => {
+  // Update access count
+  if (!cacheAnalytics.accessCount[audioHash]) {
+    cacheAnalytics.accessCount[audioHash] = 0;
+  }
+  cacheAnalytics.accessCount[audioHash]++;
+  
+  // Update last accessed timestamp
+  cacheAnalytics.lastAccessed[audioHash] = Date.now();
+  
+  // Update instruction frequency if instructionId is provided
+  if (instructionId) {
+    if (!cacheAnalytics.instructionFrequency[instructionId]) {
+      cacheAnalytics.instructionFrequency[instructionId] = 0;
+    }
+    cacheAnalytics.instructionFrequency[instructionId]++;
+    
+    // Track starting instructions
+    if (isStartingInstruction) {
+      if (!cacheAnalytics.startingInstructions[instructionId]) {
+        cacheAnalytics.startingInstructions[instructionId] = 0;
+      }
+      cacheAnalytics.startingInstructions[instructionId]++;
+    }
+  }
+  
+  // Recalculate priority score
+  calculatePriorityScore(audioHash);
+  
+  // Save analytics to disk (debounced to reduce disk writes)
+  clearTimeout(saveAnalyticsTimeout);
+  saveAnalyticsTimeout = setTimeout(saveCacheAnalytics, 5000); // Save after 5 seconds of inactivity
+};
+
+// Debounce timer for saving analytics
+let saveAnalyticsTimeout = null;
+
 // Function to invalidate cached audio for specific instruction content
 const invalidateInstructionCache = (instructionId) => {
   // If we have tracked cached files for this instruction, remove them
@@ -130,11 +221,21 @@ const invalidateInstructionCache = (instructionId) => {
       if (fs.existsSync(filePath)) {
         fs.unlinkSync(filePath);
         console.log(`Removed cached file: ${file}`);
+        
+        // Also remove from analytics
+        delete cacheAnalytics.accessCount[file];
+        delete cacheAnalytics.lastAccessed[file];
+        delete cacheAnalytics.priorityScores[file];
       }
     });
     
     // Clear the tracking for this instruction
     delete instructionAudioMap[instructionId];
+    delete cacheAnalytics.instructionFrequency[instructionId];
+    delete cacheAnalytics.startingInstructions[instructionId];
+    
+    // Save analytics to disk
+    saveCacheAnalytics();
   }
 };
 
@@ -185,6 +286,212 @@ app.get('/api/tts/cache/status', (req, res) => {
   } catch (error) {
     console.error('Error getting cache status:', error);
     res.status(500).json({ error: 'Failed to get cache status' });
+  }
+});
+
+// Enhanced cache status endpoint with analytics
+app.get('/api/tts/cache/analytics', (req, res) => {
+  try {
+    const files = fs.readdirSync(audioCacheDir);
+    const cacheSize = files.reduce((total, file) => {
+      const filePath = path.join(audioCacheDir, file);
+      const stats = fs.statSync(filePath);
+      return total + stats.size;
+    }, 0);
+    
+    // Get top accessed files
+    const accessCounts = Object.entries(cacheAnalytics.accessCount)
+      .map(([hash, count]) => ({ hash, count }))
+      .sort((a, b) => b.count - a.count)
+      .slice(0, 10);
+    
+    // Get recently accessed files
+    const recentAccess = Object.entries(cacheAnalytics.lastAccessed)
+      .map(([hash, timestamp]) => ({ hash, timestamp }))
+      .sort((a, b) => b.timestamp - a.timestamp)
+      .slice(0, 10);
+    
+    // Get highest priority files
+    const highPriority = Object.entries(cacheAnalytics.priorityScores)
+      .map(([hash, score]) => ({ hash, score }))
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 10);
+    
+    // Get most frequently used instructions
+    const frequentInstructions = Object.entries(cacheAnalytics.instructionFrequency)
+      .map(([id, count]) => ({ id, count }))
+      .sort((a, b) => b.count - a.count)
+      .slice(0, 5);
+    
+    // Get common starting instructions
+    const startingInstructions = Object.entries(cacheAnalytics.startingInstructions)
+      .map(([id, count]) => ({ id, count }))
+      .sort((a, b) => b.count - a.count)
+      .slice(0, 5);
+    
+    res.json({
+      summary: {
+        files: files.length,
+        sizeBytes: cacheSize,
+        sizeMB: Math.round((cacheSize / (1024 * 1024)) * 100) / 100,
+        uniqueInstructions: Object.keys(instructionAudioMap).length,
+        trackedFiles: Object.keys(cacheAnalytics.accessCount).length
+      },
+      analytics: {
+        topAccessed: accessCounts,
+        recentAccess,
+        highPriority,
+        frequentInstructions,
+        startingInstructions
+      }
+    });
+  } catch (error) {
+    console.error('Error getting cache analytics:', error);
+    res.status(500).json({ error: 'Failed to get cache analytics' });
+  }
+});
+
+// Smart cache cleanup endpoint
+app.post('/api/tts/cache/optimize', async (req, res) => {
+  try {
+    const { maxSize, keepHighPriority = true, maxAge } = req.body;
+    
+    const stats = {
+      beforeFiles: 0,
+      afterFiles: 0,
+      beforeSizeBytes: 0,
+      afterSizeBytes: 0,
+      deletedFiles: 0,
+      savedBytes: 0
+    };
+    
+    // Get all files in cache directory with stats
+    const files = fs.readdirSync(audioCacheDir);
+    stats.beforeFiles = files.length;
+    
+    // Map of filename to stats
+    const fileStats = {};
+    
+    // Calculate initial size and gather stats
+    files.forEach(file => {
+      const filePath = path.join(audioCacheDir, file);
+      if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
+        const stat = fs.statSync(filePath);
+        const fileHash = file.replace('.mp3', '');
+        
+        fileStats[file] = {
+          path: filePath,
+          size: stat.size,
+          mtime: stat.mtime.getTime(),
+          atime: stat.atime.getTime(),
+          score: cacheAnalytics.priorityScores[fileHash] || 0,
+          accessCount: cacheAnalytics.accessCount[fileHash] || 0,
+          lastAccessed: cacheAnalytics.lastAccessed[fileHash] || 0
+        };
+        
+        stats.beforeSizeBytes += stat.size;
+      }
+    });
+    
+    // Files to delete
+    const filesToDelete = [];
+    
+    // If maxAge specified, mark old files for deletion
+    if (maxAge && !isNaN(parseInt(maxAge))) {
+      const maxAgeMs = parseInt(maxAge) * 24 * 60 * 60 * 1000; // Convert days to ms
+      const now = Date.now();
+      
+      Object.entries(fileStats).forEach(([file, stat]) => {
+        const lastAccessedTime = stat.lastAccessed || stat.atime;
+        if ((now - lastAccessedTime) > maxAgeMs) {
+          filesToDelete.push(file);
+        }
+      });
+    }
+    
+    // If maxSize specified, remove lowest priority files until we're under the limit
+    if (maxSize && !isNaN(parseInt(maxSize))) {
+      const maxSizeBytes = parseInt(maxSize) * 1024 * 1024; // Convert MB to bytes
+      
+      if (stats.beforeSizeBytes > maxSizeBytes) {
+        // Calculate current size after age-based deletions
+        const currentSize = stats.beforeSizeBytes - filesToDelete.reduce((total, file) => {
+          return total + (fileStats[file]?.size || 0);
+        }, 0);
+        
+        if (currentSize > maxSizeBytes) {
+          // Sort remaining files by priority score (ascending = lowest priority first)
+          const remainingFiles = Object.entries(fileStats)
+            .filter(([file]) => !filesToDelete.includes(file))
+            .sort((a, b) => a[1].score - b[1].score);
+          
+          let sizeToFree = currentSize - maxSizeBytes;
+          
+          // Remove files until we're under the limit
+          for (const [file, stat] of remainingFiles) {
+            if (sizeToFree <= 0) break;
+            
+            // Skip high priority files if requested
+            if (keepHighPriority && stat.score > 5) continue;
+            
+            filesToDelete.push(file);
+            sizeToFree -= stat.size;
+          }
+        }
+      }
+    }
+    
+    // Delete the files
+    for (const file of filesToDelete) {
+      const filePath = fileStats[file].path;
+      const fileSize = fileStats[file].size;
+      
+      try {
+        fs.unlinkSync(filePath);
+        stats.deletedFiles++;
+        stats.savedBytes += fileSize;
+        
+        // Remove from analytics
+        const fileHash = file.replace('.mp3', '');
+        delete cacheAnalytics.accessCount[fileHash];
+        delete cacheAnalytics.lastAccessed[fileHash];
+        delete cacheAnalytics.priorityScores[fileHash];
+        
+        // Remove from instructionAudioMap
+        for (const instructionId in instructionAudioMap) {
+          const index = instructionAudioMap[instructionId].indexOf(file);
+          if (index !== -1) {
+            instructionAudioMap[instructionId].splice(index, 1);
+            if (instructionAudioMap[instructionId].length === 0) {
+              delete instructionAudioMap[instructionId];
+            }
+          }
+        }
+      } catch (error) {
+        console.error(`Error deleting file ${file}:`, error);
+      }
+    }
+    
+    // Save updated analytics
+    saveCacheAnalytics();
+    
+    // Calculate final stats
+    stats.afterFiles = stats.beforeFiles - stats.deletedFiles;
+    stats.afterSizeBytes = stats.beforeSizeBytes - stats.savedBytes;
+    
+    res.json({
+      message: `Cache optimization complete. Deleted ${stats.deletedFiles} files, saved ${formatBytes(stats.savedBytes)}`,
+      stats: {
+        beforeCount: stats.beforeFiles,
+        afterCount: stats.afterFiles,
+        beforeSize: formatBytes(stats.beforeSizeBytes),
+        afterSize: formatBytes(stats.afterSizeBytes),
+        savedSpace: formatBytes(stats.savedBytes)
+      }
+    });
+  } catch (error) {
+    console.error('Error optimizing cache:', error);
+    res.status(500).json({ error: 'Failed to optimize cache' });
   }
 });
 
@@ -430,7 +737,7 @@ app.get('/api/network-test', (req, res) => {
 // Track generated audio files with their instruction ID
 app.post('/api/tts', async (req, res) => {
   try {
-    const { text, voice = 'alloy', instructionId, provider = 'openai' } = req.body;
+    const { text, voice = 'alloy', instructionId, provider = 'openai', isStartingInstruction = false } = req.body;
     
     if (!text || typeof text !== 'string' || text.trim().length === 0) {
       return res.status(400).json({ error: 'Text is required for TTS conversion' });
@@ -451,8 +758,8 @@ app.post('/api/tts', async (req, res) => {
     // Check cache first
     const cachedAudioPath = getCachedAudio(text, voice, provider);
     const audioHash = cachedAudioPath ? 
-      path.basename(cachedAudioPath) : 
-      generateAudioFileHash(text, voice, provider) + '.mp3';
+      path.basename(cachedAudioPath, '.mp3') : 
+      generateAudioFileHash(text, voice, provider);
     
     // Track this audio file with its instruction (if provided)
     if (instructionId) {
@@ -461,13 +768,16 @@ app.post('/api/tts', async (req, res) => {
       }
       
       // Only add to tracking if not already tracked
-      if (!instructionAudioMap[instructionId].includes(audioHash)) {
-        instructionAudioMap[instructionId].push(audioHash);
+      if (!instructionAudioMap[instructionId].includes(audioHash + '.mp3')) {
+        instructionAudioMap[instructionId].push(audioHash + '.mp3');
       }
     }
     
     if (cachedAudioPath) {
       console.log(`Using cached audio for: "${text.substring(0, 30)}${text.length > 30 ? '...' : ''}" (${provider}/${voice})`);
+      
+      // Update cache analytics
+      updateCacheAnalytics(audioHash, instructionId, isStartingInstruction);
       
       // Return cached audio file
       return res.sendFile(cachedAudioPath);
@@ -540,6 +850,9 @@ app.post('/api/tts', async (req, res) => {
     // Save to cache
     const newAudioPath = getCachedAudioPath(text, voice, provider);
     await fs.writeFile(newAudioPath, buffer);
+    
+    // Update analytics for newly created file
+    updateCacheAnalytics(audioHash, instructionId, isStartingInstruction);
     
     // Send response to client
     res.setHeader('Content-Type', 'audio/mpeg');

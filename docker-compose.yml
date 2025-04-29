@@ -7,12 +7,10 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8088:3001"
+    env_file:
+      - .env
     environment:
-      - PORT=3001
       - NODE_ENV=production
-      # API keys from host environment
-      - OPENAI_API_KEY=${OPENAI_API_KEY}
-      - ELEVENLABS_API_KEY=${ELEVENLABS_API_KEY}
     volumes:
       # Mount the data directory for persistence
       - meditation-data:/app/data

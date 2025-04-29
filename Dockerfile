@@ -19,6 +19,10 @@ FROM node:18-alpine
 
 WORKDIR /app
 
+# Copy root level .env file if it exists (using a safer approach)
+COPY .env* ./
+# The file might not exist, but that's ok - Docker will just skip it without error
+
 # Install backend dependencies first
 COPY backend/package*.json ./
 RUN npm install

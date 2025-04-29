@@ -45,6 +45,11 @@ The Meditation App is designed as a simple yet comprehensive mindfulness applica
 - Cached audio files
 - Local storage for preferences
 
+### Configuration
+- Centralized environment configuration (`.env` file at project root)
+- API key management through the user interface
+- Unified configuration for both backend and frontend services
+
 ## Implementation Status
 
 All planned phases have been successfully completed:
@@ -84,16 +89,21 @@ All planned phases have been successfully completed:
 - OpenAI API key (optional)
 - ElevenLabs API key (optional)
 
+### Environment Setup
+1. Copy `.env.sample` to `.env` at the project root
+2. Edit `.env` and set your API keys and configuration options
+3. If upgrading from a previous version, run `./migrate-env.js` to migrate settings
+
 ### Development Setup
 1. Clone the repository
 2. Install dependencies for backend and frontend
-3. Set up environment variables
+3. Set up environment variables as described above
 4. Run development server
 
 For detailed instructions see:
 - [API Key Setup](./backend/API_KEY_INSTRUCTIONS.md)
 - [Deployment Guide](./Deployment.md)
-- [Latest Release Notes](./RELEASE-1.3.0.md)
+- [Latest Release Notes](./RELEASE-1.4.0.md)
 
 ## Architecture Diagram
 
