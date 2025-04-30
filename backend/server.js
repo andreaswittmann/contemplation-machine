@@ -742,17 +742,19 @@ app.get('/api/keys/status', (req, res) => {
   try {
     const statuses = keyManager.getApiKeyStatuses();
     
-    // Determine which services are available based on key status
+    // Determine which services are available based on key status and environment variables
     const serviceStatus = {
       openai: {
         available: !!(statuses.openai && statuses.openai.exists && statuses.openai.validated),
         lastChecked: statuses.openai ? statuses.openai.lastValidated : null,
-        features: ["tts"]
+        features: ["tts"],
+        envKeyPresent: !!process.env.OPENAI_API_KEY
       },
       elevenlabs: {
         available: !!(statuses.elevenlabs && statuses.elevenlabs.exists && statuses.elevenlabs.validated),
         lastChecked: statuses.elevenlabs ? statuses.elevenlabs.lastValidated : null,
-        features: ["tts"]
+        features: ["tts"],
+        envKeyPresent: !!process.env.ELEVENLABS_API_KEY
       }
     };
     

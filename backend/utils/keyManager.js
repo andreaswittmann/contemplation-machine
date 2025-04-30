@@ -4,7 +4,9 @@ const path = require('path');
 
 // Configuration for encryption
 const ENCRYPTION_ALGORITHM = 'aes-256-gcm';
-const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY || 'default-encryption-key-change-in-production';
+const rawKey = process.env.ENCRYPTION_KEY || 'default-encryption-key-change-in-production';
+// Create a 32-byte key using SHA256
+const ENCRYPTION_KEY = crypto.createHash('sha256').update(rawKey).digest();
 const IV_LENGTH = 16; // For AES, this is always 16 bytes
 const AUTH_TAG_LENGTH = 16;
 
