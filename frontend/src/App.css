@@ -80,6 +80,13 @@
   box-sizing: border-box;
 }
 
+/* When meditation is active, allow full width */
+.app-content.meditation-active {
+  max-width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
 /* Footer */
 .app-footer {
   background-color: #4a6fa5;

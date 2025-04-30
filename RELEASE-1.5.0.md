@@ -1,8 +1,10 @@
 # Meditation App Release 1.5.0
 
+**Release Date**: May 1, 2025
+
 ## Summary
 
-This release introduces important improvements to the Meditation App, including a new system for managing default settings and user customizations, as well as several key optimizations and refinements to the codebase.
+Release 1.5.0 enhances the user experience with significant visual and functional improvements to the meditation interface. The update introduces a custom Buddha logo, implements better responsive design for meditation sessions, and improves the preset management system with a "Promote to Default" feature.
 
 ## Breaking Changes
 
@@ -10,15 +12,37 @@ This release introduces important improvements to the Meditation App, including 
 
 ## New Features
 
-- **Preset Promotion System**: Users can now promote their custom presets to become default presets. This feature allows users to:
+### Visual Identity Enhancement
+- Added Buddha lotus logo as the application's visual identity
+- Improved header design with centered logo presentation
+- Enhanced visual branding across the application
+
+### Responsive Meditation Interface
+- Implemented full-width meditation view that automatically scales with the window size
+- Optimized text display for better readability on all screen sizes
+- Enhanced typography with responsive font sizes for meditation instructions
+- Improved layout for meditation controls and timer display
+
+### Preset Management Improvements
+- Added "Promote to Default" functionality allowing users to convert their personal presets to system defaults
+- Enhanced preset list display with clearer visual hierarchy
+- Improved preset management modal accessibility
+
+### User Interface Refinements
+- Updated version display in footer (now showing "Meditation App - Version 1.5.0")
+- Improved user feedback during meditation session transitions
+- Enhanced visual cohesion across different views
+
+### Preset Promotion System
+- Users can now promote their custom presets to become default presets. This feature allows users to:
   - Convert custom presets to default presets that persist across application rebuilds
   - Share well-crafted meditation configurations with all users
   - Access promoted presets automatically on fresh installations
 
-- **Improved Default Configuration Management**: 
-  - The application now supports storing default presets as individual files in the `defaults/presets` directory
-  - Individual preset files are easier to manage, version, and distribute than a single JSON file
-  - Server automatically merges default presets with user customizations on startup
+### Improved Default Configuration Management
+- The application now supports storing default presets as individual files in the `defaults/presets` directory
+- Individual preset files are easier to manage, version, and distribute than a single JSON file
+- Server automatically merges default presets with user customizations on startup
 
 ## Concept Overview
 
@@ -51,7 +75,22 @@ This release introduces a new system for managing default settings and user cust
 
 ### Technical Implementation
 
-- Default settings files location: `/defaults/`
+### Frontend Changes
+- Modified App.tsx to implement logo and responsive container behavior
+- Enhanced SessionView component to utilize available screen space better
+- Updated CSS with improved responsive design principles
+- Added dynamic class application based on application state
+
+### Backend Changes
+- Implemented new API endpoint for preset promotion
+- Enhanced preset storage and retrieval with isDefault flag support
+- Updated documentation to reflect new preset management capabilities
+
+### Asset Additions
+- Added Buddha lotus logo image file
+- Optimized image assets for faster loading
+
+### Default settings files location: `/defaults/`
   - `instructions.json`
   - `presets/` directory for individual preset JSON files
 - User data storage: `/data/`
@@ -147,4 +186,35 @@ For organizational deployments, administrators can:
 4. Share the configured Docker volume
 
 This ensures all users in the organization start with the same set of default meditation options while still allowing individuals to customize their personal settings.
+
+## User Experience Improvements
+
+### Meditation Experience
+- Larger, more readable meditation instructions during active sessions
+- Cleaner, distraction-free meditation interface
+- Better visual hierarchy focusing on the current instruction
+- Improved timer visibility
+
+### Preset Management
+- More intuitive preset system with clearer promotion path
+- Improved user control over meditation content ecosystem
+- Better distinction between system and user presets
+
+## Testing
+
+Testing has been completed for:
+- Responsive behavior across multiple device sizes
+- Preset promotion functionality
+- Visual display of Buddha logo across browsers
+- Meditation interface scaling on various screen resolutions
+
+## Documentation
+
+- Updated PRESET-MANAGEMENT.md with new promotion functionality
+- Updated main README.md to reference latest release
+- Added comprehensive release notes
+
+---
+
+This release significantly improves the visual identity and user experience of the meditation app, with particular focus on the active meditation experience. The responsive design changes enhance usability on all screen sizes, while the preset promotion feature gives users more control over their meditation content.
 

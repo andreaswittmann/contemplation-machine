@@ -134,7 +134,7 @@ const SessionView: React.FC = () => {
   }, [session.isActive, session.isPaused, session.currentInstructionIndex, session.progress, instructionLines.length, currentInstruction]);
 
   return (
-    <div className="session-view">
+    <div className={`session-view ${session.isActive ? 'active-meditation' : ''}`}>
       {session.isPreparingAudio ? (
         <div className="preparing-session">
           <h2>Preparing Your Session</h2>

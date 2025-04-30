@@ -4,6 +4,51 @@
   padding: 2rem;
 }
 
+/* When meditation is active, make the view use full window width */
+.session-view.active-meditation {
+  max-width: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.session-view.active-meditation .active-session {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 1rem;
+}
+
+.session-view.active-meditation .timer-display {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+}
+
+.session-view.active-meditation .instruction-display {
+  background-color: white;
+  padding: 2rem 1rem;
+  border-radius: 0;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin: 1rem 0;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Verbesserte Textgrößen für die aktive Meditation */
+.session-view.active-meditation .current-instruction p {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  line-height: 1.4;
+}
+
+.session-view.active-meditation .time {
+  font-size: clamp(3.5rem, 6vw, 5rem);
+}
+
 /* Start screen styling */
 .session-start {
   display: flex;
@@ -312,4 +357,159 @@
   color: #555;
   opacity: 0.8;
   animation: breathe 4s infinite ease-in-out;
+}
+
+/* Fullscreen meditation session - Fixed Implementation */
+.session-view.fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  max-width: 100%;
+  margin: 0;
+  padding: 2rem;
+  z-index: 1000;
+  background-color: #f5f5f7;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.session-view.fullscreen .active-session {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.session-view.fullscreen .instruction-display {
+  width: 90%;
+  max-width: 1000px;
+  padding: 2rem;
+  margin: 2rem auto;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.session-view.fullscreen .current-instruction p {
+  font-size: 2rem;
+  line-height: 1.4;
+}
+
+.session-view.fullscreen .time {
+  font-size: 4rem;
+}
+
+/* Exit fullscreen button */
+.exit-fullscreen-btn {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.2rem;
+  z-index: 1010;
+}
+
+/* Fullscreen button styling */
+.fullscreen-button {
+  background-color: #3498db;
+  color: white;
+}
+
+.fullscreen-button:hover {
+  background-color: #2980b9;
+}
+
+/* Animation for entering fullscreen */
+@keyframes enterFullscreen {
+  from {
+    opacity: 0.8;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Media queries for responsive fullscreen mode */
+@media (max-width: 1440px) {
+  .session-view.fullscreen .current-instruction p {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .session-view.fullscreen .current-instruction p {
+    font-size: 1.6rem;
+  }
+  
+  .session-view.fullscreen .time {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .session-view.fullscreen .current-instruction p {
+    font-size: 1.4rem;
+  }
+  
+  .session-view.fullscreen .time {
+    font-size: 3rem;
+  }
+}
+
+/* Responsive sizing for the active session */
+.session-view.active-meditation .instruction-display {
+  background-color: white;
+  padding: 2rem 1rem;
+  border-radius: 0;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin: 1rem 0;
+  width: 90%;
+  max-width: 1200px;
+}
+
+.session-view.active-meditation .current-instruction p {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  line-height: 1.4;
+  font-weight: 500;
+}
+
+.session-view.active-meditation .time {
+  font-size: clamp(3.5rem, 6vw, 5rem);
+}
+
+/* Making session controls more centered and visible */
+.session-view.active-meditation .session-controls {
+  margin: 0 auto;
+  width: fit-content;
+  gap: 2rem;
+}
+
+/* Responsive adjustments */
+@media (min-width: 1440px) {
+  .session-view.active-meditation {
+    max-width: 80%;
+  }
+}
+
+@media (max-width: 768px) {
+  .session-view.active-meditation {
+    max-width: 100%;
+    padding: 1rem;
+  }
 }

@@ -103,7 +103,7 @@ All planned phases have been successfully completed:
 For detailed instructions see:
 - [API Key Setup](./backend/API_KEY_INSTRUCTIONS.md)
 - [Deployment Guide](./Deployment.md)
-- [Latest Release Notes](./RELEASE-1.4.0.md)
+- [Latest Release Notes](./RELEASE-1.5.0.md)
 
 ## Architecture Diagram
 
