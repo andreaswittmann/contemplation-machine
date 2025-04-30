@@ -1014,12 +1014,23 @@ app.post('/api/tts', async (req, res) => {
     
     console.log(`[TTS] Request received - Provider: ${provider}, Voice: ${voice}, Text: "${text.substring(0, 30)}..."`);
 
-    // Validate provider
-    if (!['openai', 'elevenlabs'].includes(provider)) {
-      return res.status(400).json({ error: 'Invalid provider. Must be "openai" or "elevenlabs"' });
+    // Check cache first
+    const cachedAudioPath = getCachedAudio(text, voice, provider);
+    const audioHash = cachedAudioPath ? 
+      path.basename(cachedAudioPath, '.mp3') : 
+      generateAudioFileHash(text, voice, provider);
+
+    if (cachedAudioPath) {
+      console.log(`Using cached audio for: "${text.substring(0, 30)}${text.length > 30 ? '...' : ''}" (${provider}/${voice})`);
+      
+      // Update cache analytics
+      updateCacheAnalytics(audioHash, instructionId, isStartingInstruction);
+      
+      // Return cached audio file
+      return res.sendFile(cachedAudioPath);
     }
-    
-    // Check if appropriate API key is configured
+
+    // Proceed with API key validation only if no cached file is found
     let apiKey = null;
     if (provider === 'openai') {
       apiKey = process.env.OPENAI_API_KEY || keyManager.getApiKey('openai');
@@ -1041,34 +1052,6 @@ app.post('/api/tts', async (req, res) => {
       }
     }
 
-    // Check cache first
-    const cachedAudioPath = getCachedAudio(text, voice, provider);
-    const audioHash = cachedAudioPath ? 
-      path.basename(cachedAudioPath, '.mp3') : 
-      generateAudioFileHash(text, voice, provider);
-    
-    // Track this audio file with its instruction (if provided)
-    if (instructionId) {
-      if (!instructionAudioMap[instructionId]) {
-        instructionAudioMap[instructionId] = [];
-      }
-      
-      // Only add to tracking if not already tracked
-      if (!instructionAudioMap[instructionId].includes(audioHash + '.mp3')) {
-        instructionAudioMap[instructionId].push(audioHash + '.mp3');
-      }
-    }
-    
-    if (cachedAudioPath) {
-      console.log(`Using cached audio for: "${text.substring(0, 30)}${text.length > 30 ? '...' : ''}" (${provider}/${voice})`);
-      
-      // Update cache analytics
-      updateCacheAnalytics(audioHash, instructionId, isStartingInstruction);
-      
-      // Return cached audio file
-      return res.sendFile(cachedAudioPath);
-    }
-    
     console.log(`Generating new audio for: "${text.substring(0, 30)}${text.length > 30 ? '...' : ''}" (${provider}/${voice})`);
 
     let buffer;
