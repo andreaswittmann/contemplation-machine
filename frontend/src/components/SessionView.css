@@ -1,0 +1,315 @@
+.session-view {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Start screen styling */
+.session-start {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.selected-instruction-info {
+  background-color: #f5f5f5;
+  padding: 1rem;
+  border-radius: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+.audio-settings-summary {
+  background-color: #f0f7ff;
+  padding: 1rem;
+  border-radius: 8px;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.audio-settings-summary ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0.5rem 0;
+}
+
+.audio-settings-summary li {
+  padding: 0.25rem 0;
+}
+
+.start-button {
+  background-color: #4caf50;
+  color: white;
+  font-size: 1.2rem;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.start-button:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Loading screen styling */
+.preparing-session {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  text-align: center;
+}
+
+.loading-spinner {
+  border: 5px solid rgba(0, 0, 0, 0.1);
+  border-top: 5px solid #3498db;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin: 1.5rem 0;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Active session styling */
+.active-session {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.timer-display {
+  text-align: center;
+}
+
+.time {
+  font-size: 3.5rem;
+  font-weight: bold;
+  color: #333;
+  margin: 1rem 0;
+}
+
+.progress-container {
+  margin-top: 1rem;
+}
+
+.progress-bar {
+  height: 10px;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: #3498db;
+  transition: width 0.5s ease;
+}
+
+.progress-percentage {
+  text-align: right;
+  color: #666;
+  font-size: 0.9rem;
+  margin-top: 0.3rem;
+}
+
+.instruction-display {
+  background-color: #f9f9f9;
+  padding: 1.5rem;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.current-instruction {
+  min-height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.current-instruction p {
+  font-size: 1.5rem;
+  color: #333;
+  font-weight: 500;
+  margin: 0;
+  line-height: 1.5;
+  transition: opacity 0.5s ease;
+}
+
+.instruction-progress {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eaeaea;
+}
+
+.instruction-counter {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 0.7rem;
+}
+
+.instruction-dots {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.instruction-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #ddd;
+  display: inline-block;
+}
+
+.instruction-dot.active {
+  background-color: #3498db;
+  transform: scale(1.3);
+  transition: all 0.3s ease;
+}
+
+.instruction-dot.completed {
+  background-color: #78c0ff;
+}
+
+.session-controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.pause-button, .resume-button, .stop-button {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pause-button, .resume-button {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.pause-button:hover, .resume-button:hover {
+  background-color: #e0e0e0;
+}
+
+.stop-button {
+  background-color: #ff6b6b;
+  color: white;
+}
+
+.stop-button:hover {
+  background-color: #ff5252;
+}
+
+/* Preset selector styling */
+.preset-selector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 1rem;
+}
+
+.preset-selector label {
+  font-weight: 500;
+  color: #555;
+}
+
+.preset-dropdown {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background-color: white;
+  font-size: 1rem;
+  color: #333;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='none' stroke='%23999' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='4,6 7,9 10,6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 14px;
+}
+
+.preset-dropdown:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+.preset-dropdown option {
+  padding: 10px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .time {
+    font-size: 2.5rem;
+  }
+  
+  .current-instruction p {
+    font-size: 1.2rem;
+  }
+}
+
+/* Bell playing screen styling */
+.bell-playing-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  text-align: center;
+  min-height: 300px;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+.bell-playing-screen h2 {
+  font-size: 1.8rem;
+  color: #3498db;
+  margin-bottom: 1rem;
+  animation: breathe 3s infinite ease-in-out;
+}
+
+.bell-playing-screen .progress-container {
+  width: 80%;
+  max-width: 400px;
+}
+
+.bell-playing-screen .progress-bar {
+  height: 12px;
+  border-radius: 6px;
+}
+
+.bell-playing-screen .progress-fill {
+  transition: width 0.3s ease;
+}
+
+.bell-playing-screen .breath-text {
+  margin-top: 1.5rem;
+  font-size: 1.2rem;
+  color: #555;
+  opacity: 0.8;
+  animation: breathe 4s infinite ease-in-out;
+}

@@ -1,0 +1,127 @@
+/* Animations and Transitions for Meditation App */
+
+/* Fade in animation */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Gentle pulse animation for meditation timer */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* Breathing animation for meditation visual */
+@keyframes breathe {
+  0%, 100% { transform: scale(0.95); opacity: 0.7; }
+  50% { transform: scale(1.05); opacity: 1; }
+}
+
+/* Slide in from right */
+@keyframes slideInRight {
+  from { transform: translateX(30px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* Slide in from left */
+@keyframes slideInLeft {
+  from { transform: translateX(-30px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* Slide in from bottom */
+@keyframes slideInBottom {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Slide up animation for modals */
+@keyframes slideUp {
+  from { transform: translateY(50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* CSS classes to apply animations */
+.fade-in {
+  animation: fadeIn 0.5s ease-in forwards;
+}
+
+.timer-pulse {
+  animation: pulse 4s ease-in-out infinite;
+}
+
+.breathe-animation {
+  animation: breathe 5s ease-in-out infinite;
+}
+
+.slide-in-right {
+  animation: slideInRight 0.3s ease-out forwards;
+}
+
+.slide-in-left {
+  animation: slideInLeft 0.3s ease-out forwards;
+}
+
+.slide-in-bottom {
+  animation: slideInBottom 0.3s ease-out forwards;
+}
+
+/* Staggered animation delays for lists */
+.staggered-item:nth-child(1) { animation-delay: 0.05s; }
+.staggered-item:nth-child(2) { animation-delay: 0.1s; }
+.staggered-item:nth-child(3) { animation-delay: 0.15s; }
+.staggered-item:nth-child(4) { animation-delay: 0.2s; }
+.staggered-item:nth-child(5) { animation-delay: 0.25s; }
+.staggered-item:nth-child(6) { animation-delay: 0.3s; }
+.staggered-item:nth-child(7) { animation-delay: 0.35s; }
+.staggered-item:nth-child(8) { animation-delay: 0.4s; }
+.staggered-item:nth-child(9) { animation-delay: 0.45s; }
+.staggered-item:nth-child(10) { animation-delay: 0.5s; }
+
+/* Smooth transitions for interactive elements */
+.smooth-transition {
+  transition: all 0.3s ease;
+}
+
+button, .interactive {
+  transition: transform 0.15s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+button:hover, .interactive:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+button:active, .interactive:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Page transitions */
+.page-enter {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.page-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.page-exit {
+  opacity: 1;
+}
+
+.page-exit-active {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Visual meditation progress */
+.meditation-progress-circle {
+  transition: stroke-dashoffset 1s ease;
+}

@@ -1,0 +1,259 @@
+.App {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f5f5f7;
+  color: #333;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Header */
+.App-header {
+  background-color: #4a6fa5;
+  padding: 1.5rem 0;
+  color: white;
+  min-height: auto;
+  display: block;
+}
+
+.App-header h1 {
+  margin: 0 0 1rem;
+  font-size: 1.8rem;
+  font-weight: 500;
+}
+
+/* Navigation */
+.app-navigation {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.app-navigation button {
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.app-navigation button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.app-navigation button.active {
+  background-color: rgba(255, 255, 255, 0.3);
+  font-weight: 500;
+}
+
+/* Main Content Area */
+.app-content {
+  flex: 1;
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Footer */
+.app-footer {
+  background-color: #4a6fa5;
+  color: white;
+  padding: 1rem;
+  font-size: 0.9rem;
+}
+
+/* Configuration View */
+.configuration-view {
+  background-color: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.config-section {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.config-section h3 {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  color: #4a6fa5;
+}
+
+.checkbox-group {
+  margin: 0.75rem 0;
+}
+
+.select-group {
+  margin: 1rem 0;
+}
+
+.select-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+select, input[type="range"] {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.25rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Session View */
+.session-view {
+  background-color: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.session-start {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 0;
+}
+
+.timer-display {
+  margin-bottom: 2rem;
+}
+
+.timer-display .time {
+  font-size: 3rem;
+  font-weight: 300;
+  margin: 1rem 0;
+}
+
+.progress-bar {
+  height: 8px;
+  background-color: #e0e0e0;
+  border-radius: 4px;
+  margin: 1rem 0;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: #4a6fa5;
+  transition: width 1s linear;
+}
+
+.instruction-display {
+  min-height: 100px;
+  margin: 2rem 0;
+  font-size: 1.2rem;
+  font-style: italic;
+  color: #555;
+}
+
+.session-controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+/* Instruction Form */
+.instruction-form {
+  background-color: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+/* Buttons */
+button {
+  background-color: #4a6fa5;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #3b5a84;
+}
+
+button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.start-button {
+  background-color: #4CAF50;
+  font-size: 1.1rem;
+  padding: 1rem 2rem;
+}
+
+.start-button:hover {
+  background-color: #3e8e41;
+}
+
+.stop-button {
+  background-color: #f44336;
+}
+
+.stop-button:hover {
+  background-color: #d32f2f;
+}
+
+.pause-button, .resume-button {
+  background-color: #ff9800;
+}
+
+.pause-button:hover, .resume-button:hover {
+  background-color: #f57c00;
+}
+
+/* Messages */
+.message {
+  padding: 0.75rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.message.success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.message.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}

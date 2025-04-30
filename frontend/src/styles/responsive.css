@@ -1,0 +1,125 @@
+/* Responsive Design Utilities */
+
+/* Base styles for all devices */
+:root {
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.5rem;
+  --font-size-xxl: 2rem;
+}
+
+/* Mobile styles (up to 576px) */
+@media (max-width: 576px) {
+  :root {
+    --spacing-lg: 1rem;
+    --spacing-xl: 1.5rem;
+    
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-size-xxl: 1.75rem;
+  }
+  
+  .responsive-container {
+    padding: var(--spacing-md);
+  }
+  
+  .btn-responsive {
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: var(--font-size-md);
+  }
+  
+  .hide-mobile {
+    display: none !important;
+  }
+  
+  .timer-display {
+    font-size: var(--font-size-xl) !important;
+  }
+  
+  .instruction-text {
+    font-size: var(--font-size-md) !important;
+    padding: var(--spacing-sm) !important;
+  }
+  
+  .settings-panel {
+    width: 100% !important;
+  }
+}
+
+/* Tablet styles (577px to 992px) */
+@media (min-width: 577px) and (max-width: 992px) {
+  .responsive-container {
+    padding: var(--spacing-lg);
+  }
+  
+  .btn-responsive {
+    padding: var(--spacing-sm) var(--spacing-lg);
+  }
+  
+  .hide-tablet {
+    display: none !important;
+  }
+  
+  .settings-panel {
+    width: 80% !important;
+  }
+}
+
+/* Desktop styles (993px and above) */
+@media (min-width: 993px) {
+  .responsive-container {
+    padding: var(--spacing-xl);
+  }
+  
+  .btn-responsive {
+    padding: var(--spacing-sm) var(--spacing-xl);
+  }
+  
+  .hide-desktop {
+    display: none !important;
+  }
+}
+
+/* Orientation-specific adjustments */
+@media (orientation: landscape) and (max-height: 600px) {
+  .vertical-space {
+    margin-top: var(--spacing-sm) !important;
+    margin-bottom: var(--spacing-sm) !important;
+  }
+  
+  .compact-layout {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .compact-layout > div {
+    margin-right: var(--spacing-md);
+  }
+}
+
+/* Touch-friendly targets for mobile */
+@media (hover: none) and (pointer: coarse) {
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  input[type="range"] {
+    height: 44px;
+  }
+  
+  select, button, input[type="checkbox"] {
+    min-height: 44px;
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+}
