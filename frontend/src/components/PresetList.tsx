@@ -10,6 +10,7 @@ interface PresetListProps {
 const PresetList: React.FC<PresetListProps> = ({ isOpen, onClose }) => {
   const { presets, isLoading, error, loadPreset, deletePreset, loadPresets } = usePresets();
   const [actionInProgress, setActionInProgress] = useState<string | null>(null);
+  const [promotionId, setPromotionId] = useState<string | null>(null);
   const [localError, setLocalError] = useState<string | null>(null);
 
   if (!isOpen) return null;
@@ -56,6 +57,43 @@ const PresetList: React.FC<PresetListProps> = ({ isOpen, onClose }) => {
       setLocalError('An unexpected error occurred. Please try again.');
     } finally {
       setActionInProgress(null);
+    }
+  };
+  
+  const handlePromoteToDefault = async (presetId: string) => {
+    // Confirm promotion
+    if (!window.confirm('Promote this preset to a default preset? This will make it available to all users of the application.')) {
+      return;
+    }
+    
+    setPromotionId(presetId);
+    setLocalError(null);
+    
+    try {
+      const response = await fetch(`/api/presets/${presetId}/promote`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to promote preset');
+      }
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        // Refresh the presets list to show updated status
+        await loadPresets();
+      } else {
+        setLocalError('Failed to promote preset. Please try again.');
+      }
+    } catch (err) {
+      console.error('Error promoting preset:', err);
+      setLocalError('An unexpected error occurred. Please try again.');
+    } finally {
+      setPromotionId(null);
     }
   };
 
@@ -131,6 +169,14 @@ const PresetList: React.FC<PresetListProps> = ({ isOpen, onClose }) => {
                       disabled={actionInProgress === preset.id}
                     >
                       {actionInProgress === preset.id ? 'Loading...' : 'Load'}
+                    </button>
+                    {/* Always show the Promote button for testing */}
+                    <button
+                      className="btn btn-secondary"
+                      onClick={() => handlePromoteToDefault(preset.id)}
+                      disabled={promotionId === preset.id}
+                    >
+                      {promotionId === preset.id ? 'Promoting...' : 'Promote to Default'}
                     </button>
                     <button
                       className="btn btn-danger"

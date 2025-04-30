@@ -27,6 +27,13 @@ function App() {
               <PresetProvider>
                 <ApiKeyProvider>
                   <header className="App-header">
+                    <div className="logo-container">
+                      <img 
+                        src="/assets/buddha-lotus-logo.png" 
+                        alt="Buddha Meditation Logo" 
+                        className="app-logo"
+                      />
+                    </div>
                     <h1 className="slide-in-bottom">Mindful Meditation</h1>
                     <nav className="app-navigation">
                       <button 

@@ -56,6 +56,27 @@ fs.ensureDirSync(dataDir);
 fs.ensureDirSync(audioCacheDir);
 fs.ensureDirSync(presetsDir);
 
+// Ensure default audio cache is copied to data/audio-cache if it doesn't exist
+const defaultAudioCacheDir = path.join(defaultsDir, 'audio-cache');
+if (!fs.existsSync(audioCacheDir) || fs.readdirSync(audioCacheDir).length === 0) {
+  console.log('Copying default audio cache to data/audio-cache...');
+  fs.copySync(defaultAudioCacheDir, audioCacheDir);
+  console.log('Default audio cache copied successfully.');
+}
+
+// Ensure default presets and instructions are copied to data directory if they don't exist
+if (!fs.existsSync(instructionsPath)) {
+  console.log('Copying default instructions to data directory...');
+  fs.copySync(defaultInstructionsPath, instructionsPath);
+  console.log('Default instructions copied successfully.');
+}
+
+if (!fs.existsSync(presetsDir) || fs.readdirSync(presetsDir).length === 0) {
+  console.log('Copying default presets to data directory...');
+  fs.copySync(path.join(defaultsDir, 'presets'), presetsDir);
+  console.log('Default presets copied successfully.');
+}
+
 // Helper function to merge defaults with user data
 const mergeWithDefaults = (userItems, defaultItems) => {
   const mergedItems = [...defaultItems];
@@ -105,9 +126,37 @@ const initializeInstructions = () => {
 // Initialize or update presets with defaults
 const initializePresets = () => {
   try {
-    const defaultPresets = fs.existsSync(defaultPresetsPath) 
-      ? fs.readJsonSync(defaultPresetsPath)
-      : [];
+    // Check both the JSON file and the presets directory for defaults
+    let defaultPresets = [];
+    const defaultPresetsDir = path.join(defaultsDir, 'presets');
+    
+    // First, check if there are individual preset files in defaults/presets
+    if (fs.existsSync(defaultPresetsDir)) {
+      debugLog(`Looking for default presets in directory: ${defaultPresetsDir}`);
+      const presetFiles = fs.readdirSync(defaultPresetsDir).filter(file => file.endsWith('.json'));
+      
+      if (presetFiles.length > 0) {
+        debugLog(`Found ${presetFiles.length} preset files in defaults/presets directory`);
+        
+        // Load each preset from its individual file
+        presetFiles.forEach(file => {
+          try {
+            const presetPath = path.join(defaultPresetsDir, file);
+            const preset = fs.readJsonSync(presetPath);
+            defaultPresets.push(preset);
+            debugLog(`Loaded default preset from file: ${file}`);
+          } catch (err) {
+            debugLog(`Error reading preset file ${file}: ${err.message}`);
+          }
+        });
+      }
+    }
+    
+    // Then, load presets from the JSON file as a fallback
+    if (defaultPresets.length === 0 && fs.existsSync(defaultPresetsPath)) {
+      debugLog(`No presets found in directory, loading from JSON file: ${defaultPresetsPath}`);
+      defaultPresets = fs.readJsonSync(defaultPresetsPath);
+    }
     
     debugLog(`Loaded ${defaultPresets.length} default presets`);
 
@@ -1489,6 +1538,56 @@ app.delete('/api/presets/:id', (req, res) => {
     debugLog(`Error deleting preset ${presetId}: ${error.message}`, error);
     console.error('Error deleting preset:', error);
     res.status(500).json({ error: 'Failed to delete meditation preset' });
+  }
+});
+
+// Promote a preset to default (copy from data/presets to defaults/presets)
+app.post('/api/presets/:id/promote', (req, res) => {
+  const presetId = req.params.id;
+  debugLog(`POST /api/presets/${presetId}/promote request received`);
+  
+  try {
+    // Check if the preset exists
+    const sourcePath = path.join(presetsDir, `${presetId}.json`);
+    if (!fs.existsSync(sourcePath)) {
+      debugLog(`Preset with ID ${presetId} not found for promotion`);
+      return res.status(404).json({ error: 'Preset not found' });
+    }
+    
+    // Ensure defaults/presets directory exists
+    const defaultPresetsDir = path.join(defaultsDir, 'presets');
+    if (!fs.existsSync(defaultPresetsDir)) {
+      debugLog(`Creating defaults/presets directory: ${defaultPresetsDir}`);
+      fs.ensureDirSync(defaultPresetsDir);
+    }
+    
+    // Read the preset
+    const preset = fs.readJsonSync(sourcePath);
+    
+    // Mark it as a default preset
+    const defaultPreset = {
+      ...preset,
+      isDefault: true,
+      updatedAt: new Date().toISOString()
+    };
+    
+    // Write to defaults/presets directory
+    const targetPath = path.join(defaultPresetsDir, `${presetId}.json`);
+    fs.writeJsonSync(targetPath, defaultPreset, { spaces: 2 });
+    
+    // Update the data/presets version as well
+    fs.writeJsonSync(sourcePath, defaultPreset, { spaces: 2 });
+    
+    debugLog(`Successfully promoted preset ${presetId} to default preset`);
+    res.json({ 
+      success: true, 
+      message: 'Preset successfully promoted to default',
+      preset: defaultPreset 
+    });
+  } catch (error) {
+    debugLog(`Error promoting preset ${presetId}: ${error.message}`, error);
+    console.error('Error promoting preset:', error);
+    res.status(500).json({ error: 'Failed to promote preset to default' });
   }
 });
 

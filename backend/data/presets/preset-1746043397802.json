@@ -1,0 +1,19 @@
+{
+  "id": "preset-1746043397802",
+  "name": "Mein Atemachtsamkeit",
+  "description": "",
+  "isDefault": false,
+  "createdAt": "2025-04-30T20:03:17.802Z",
+  "updatedAt": "2025-04-30T20:47:42.724Z",
+  "config": {
+    "duration": 1,
+    "bellAtStart": true,
+    "bellAtEnd": true,
+    "useVoiceGuidance": true,
+    "voiceType": "elevenlabs",
+    "openaiVoice": "alloy",
+    "elevenlabsVoiceId": "EXAVITQu4vr4xnSDxMaL",
+    "selectedInstructionId": "1746025880691"
+  },
+  "voiceDisplayName": "ElevenLabs ID: umDfZDi2AcMmDUsDsBfA"
+}

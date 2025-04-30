@@ -1,0 +1,18 @@
+{
+  "id": "preset-1746046073713",
+  "name": "Test Preset",
+  "description": "",
+  "createdAt": "2025-04-30T20:47:53.713Z",
+  "updatedAt": "2025-04-30T21:02:20.705Z",
+  "config": {
+    "duration": 10,
+    "bellAtStart": true,
+    "bellAtEnd": true,
+    "useVoiceGuidance": true,
+    "voiceType": "elevenlabs",
+    "openaiVoice": "alloy",
+    "elevenlabsVoiceId": "EXAVITQu4vr4xnSDxMaL",
+    "selectedInstructionId": "1746025880691"
+  },
+  "voiceDisplayName": "ElevenLabs ID: EXAVITQu4vr4xnSDxMaL"
+}

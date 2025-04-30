@@ -1,0 +1,24 @@
+{
+  "id": "default-preset-beginner",
+  "name": "Beginner's Journey",
+  "description": "A gentle introduction to meditation with basic breathing instructions",
+  "createdAt": "2025-04-30T00:00:00.000Z",
+  "updatedAt": "2025-04-30T00:00:00.000Z",
+  "keywords": [
+    "beginner",
+    "start",
+    "new",
+    "basic"
+  ],
+  "isDefault": true,
+  "config": {
+    "duration": 10,
+    "bellAtStart": true,
+    "bellAtEnd": true,
+    "useVoiceGuidance": true,
+    "voiceType": "openai",
+    "openaiVoice": "nova",
+    "selectedInstructionId": "default-instruction-1",
+    "elevenlabsVoiceId": null
+  }
+}
