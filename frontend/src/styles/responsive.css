@@ -52,6 +52,10 @@
   .settings-panel {
     width: 100% !important;
   }
+  
+  select {
+    font-size: var(--font-size-md);
+  }
 }
 
 /* Tablet styles (577px to 992px) */
@@ -118,8 +122,14 @@
     height: 44px;
   }
   
-  select, button, input[type="checkbox"] {
+  select {
     min-height: 44px;
     padding: var(--spacing-sm) var(--spacing-md);
+    font-size: var(--font-size-md);
+  }
+  
+  select option {
+    padding: var(--spacing-sm) var(--spacing-md);
+    min-height: 44px;
   }
 }

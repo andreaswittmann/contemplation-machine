@@ -103,12 +103,40 @@
   font-weight: 500;
 }
 
-select, input[type="range"] {
+.select-group select,
+.config-section select,
+select.form-control,
+.filter-controls select {
   width: 100%;
-  padding: 0.5rem;
-  margin-top: 0.25rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background-color: white;
+  font-size: 1rem;
+  color: #333;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='none' stroke='%23999' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='4,6 7,9 10,6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.select-group select:focus,
+.config-section select:focus,
+select.form-control:focus,
+.filter-controls select:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+.select-group select:hover,
+.config-section select:hover,
+select.form-control:hover,
+.filter-controls select:hover {
+  border-color: #3498db;
 }
 
 /* Session View */

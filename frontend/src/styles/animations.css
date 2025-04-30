@@ -125,3 +125,21 @@ button:active, .interactive:active {
 .meditation-progress-circle {
   transition: stroke-dashoffset 1s ease;
 }
+
+/* Dropdown animations */
+@keyframes selectFocus {
+  from { transform: scale(1); }
+  to { transform: scale(1.002); }
+}
+
+/* Add to existing animations */
+select:focus {
+  animation: selectFocus 0.2s ease forwards;
+}
+
+.select-group select,
+.config-section select,
+select.form-control,
+.filter-controls select {
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}

@@ -1,0 +1,78 @@
+[
+  {
+    "id": "default-preset-beginner",
+    "name": "Beginner's Journey",
+    "description": "A gentle introduction to meditation with basic breathing instructions",
+    "createdAt": "2025-04-30T00:00:00.000Z",
+    "updatedAt": "2025-04-30T00:00:00.000Z",
+    "keywords": ["beginner", "start", "new", "basic"],
+    "isDefault": true,
+    "config": {
+      "duration": 10,
+      "bellAtStart": true,
+      "bellAtEnd": true,
+      "useVoiceGuidance": true,
+      "voiceType": "openai",
+      "openaiVoice": "nova",
+      "selectedInstructionId": "default-instruction-1",
+      "elevenlabsVoiceId": null
+    }
+  },
+  {
+    "id": "default-preset-mindfulness",
+    "name": "Pure Mindfulness",
+    "description": "Focus on present moment awareness with mindful breathing",
+    "createdAt": "2025-04-30T00:00:00.000Z",
+    "updatedAt": "2025-04-30T00:00:00.000Z",
+    "keywords": ["mindfulness", "awareness", "focus", "breath"],
+    "isDefault": true,
+    "config": {
+      "duration": 15,
+      "bellAtStart": true,
+      "bellAtEnd": true,
+      "useVoiceGuidance": true,
+      "voiceType": "openai",
+      "openaiVoice": "alloy",
+      "selectedInstructionId": "default-instruction-1",
+      "elevenlabsVoiceId": null
+    }
+  },
+  {
+    "id": "default-preset-compassion",
+    "name": "Loving-Kindness",
+    "description": "Develop compassion and goodwill through metta meditation",
+    "createdAt": "2025-04-30T00:00:00.000Z",
+    "updatedAt": "2025-04-30T00:00:00.000Z",
+    "keywords": ["compassion", "loving-kindness", "metta", "kindness"],
+    "isDefault": true,
+    "config": {
+      "duration": 20,
+      "bellAtStart": true,
+      "bellAtEnd": true,
+      "useVoiceGuidance": true,
+      "voiceType": "openai",
+      "openaiVoice": "shimmer",
+      "selectedInstructionId": "default-instruction-3",
+      "elevenlabsVoiceId": null
+    }
+  },
+  {
+    "id": "default-preset-silent",
+    "name": "Silent Contemplation",
+    "description": "A peaceful session with minimal guidance for experienced meditators",
+    "createdAt": "2025-04-30T00:00:00.000Z",
+    "updatedAt": "2025-04-30T00:00:00.000Z",
+    "keywords": ["silent", "quiet", "advanced", "peace"],
+    "isDefault": true,
+    "config": {
+      "duration": 30,
+      "bellAtStart": true,
+      "bellAtEnd": true,
+      "useVoiceGuidance": false,
+      "voiceType": "openai",
+      "openaiVoice": "nova",
+      "selectedInstructionId": null,
+      "elevenlabsVoiceId": null
+    }
+  }
+]

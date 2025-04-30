@@ -1,0 +1,26 @@
+[
+  {
+    "id": "default-instruction-1",
+    "name": "Mindfulness of Breathing",
+    "description": "Classic meditation focusing on breath awareness",
+    "content": "1. Find a quiet space and settle into a comfortable seated position with your back upright.\n2. Gently close your eyes, resting your hands on your lap or knees.\n3. Direct your attention to your natural breath, feeling each inhale and exhale.\n4. Notice thoughts as they arise, then calmly bring your focus back to the breath.\n5. Allow the breath to flow without forcing or controlling it.\n6. Observe any sensations in your body as you inhale and exhale.\n7. Remain present for several minutes, staying connected to the rhythm of your breathing.\n8. Slowly open your eyes, taking a moment before easing back into your daily activities.",
+    "createdAt": "2025-06-01T00:00:00.000Z",
+    "isDefault": true
+  },
+  {
+    "id": "default-instruction-2",
+    "name": "Settling the Mind",
+    "description": "Letting the mind rest in its natural state",
+    "content": "1. Sit upright in a relaxed posture, allowing your body to feel stable yet at ease.\n2. Keep your gaze gently lowered or close your eyes if that feels more comfortable.\n3. Rest your attention lightly on the space of your mind, noticing the arising of thoughts or emotions.\n4. Without suppressing or clinging to any mental event, let each thought or feeling pass through awareness naturally.\n5. Explore the clear, open quality of your mind, remaining present with whatever arises moment by moment.\n6. When you feel distracted, simply acknowledge it, then release and return to your open awareness.\n7. Maintain a relaxed vigilance, neither too tight nor too loose, allowing the mind to settle on its own.\n8. Conclude by gently reorienting yourself, opening your eyes, and taking a few mindful breaths.",
+    "createdAt": "2025-06-01T00:00:00.000Z",
+    "isDefault": true
+  },
+  {
+    "id": "default-instruction-3",
+    "name": "Loving-Kindness Meditation",
+    "description": "Cultivating compassion and goodwill",
+    "content": "1. Sit comfortably and allow your body to relax into a gentle, upright posture.\n2. Bring your attention to your heart center, connecting with a sense of warmth and openness.\n3. Begin by directing loving-kindness toward yourself, silently repeating: 'May I be happy, may I be healthy, may I be safe, may I live with ease'.\n4. Visualize someone you care deeply about, extending the same wishes to them.\n5. Gradually expand your circle of compassion to include neutral people in your life.\n6. With growing confidence, extend loving-kindness even to those with whom you have difficulties.\n7. Finally, extend these wishes to all beings everywhere: 'May all beings be happy, healthy, safe, and at ease'.\n8. Rest in the spacious awareness of universal goodwill before gently concluding your practice.",
+    "createdAt": "2025-06-01T00:00:00.000Z",
+    "isDefault": true
+  }
+]
