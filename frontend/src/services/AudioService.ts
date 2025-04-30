@@ -361,14 +361,17 @@ export const preGenerateSessionAudio = async (
 export const playPreGeneratedAudio = async (
   text: string, 
   useOpenAI = true, 
-  voice = 'alloy',
+  voice: string | null = 'alloy',
   provider: 'openai' | 'elevenlabs' = 'openai'
 ): Promise<void> => {
   try {
-    // Generate a cache key that includes provider
-    const cacheKey = `${text}-${useOpenAI ? (provider + '_' + voice) : 'browser'}`;
+    // Default to 'alloy' if voice is null
+    const effectiveVoice = voice || 'alloy';
     
-    // Prevent duplicate playback - if this text is already being played, don't play it again
+    // Generate a cache key that includes provider
+    const cacheKey = `${text}-${useOpenAI ? (provider + '_' + effectiveVoice) : 'browser'}`;
+    
+    // Prevent duplicate playback
     if (isAudioPlaying(cacheKey)) {
       console.log(`[AUDIO] Already playing: "${text.substring(0, 30)}...". Skipping duplicate.`);
       return Promise.resolve();
@@ -408,7 +411,7 @@ export const playPreGeneratedAudio = async (
     } else {
       // If not cached (should not happen), fall back to speak method
       console.warn(`Cache miss for: "${text.substring(0, 30)}...". Using speak method as fallback.`);
-      return speak(text, useOpenAI, voice, provider);
+      return speak(text, useOpenAI, effectiveVoice, provider);
     }
   } catch (error) {
     console.error('Error in playPreGeneratedAudio function:', error);
@@ -419,11 +422,14 @@ export const playPreGeneratedAudio = async (
 // Check if audio for text is already cached
 export const isAudioCached = (
   text: string,
-  voice: string = 'alloy',
+  voice: string | null = 'alloy',
   provider: 'openai' | 'elevenlabs' = 'openai'
 ): boolean => {
+  // Default to 'alloy' if voice is null
+  const effectiveVoice = voice || 'alloy';
+  
   // Generate a cache key that includes provider
-  const cacheKey = `${text}-${provider}_${voice}`;
+  const cacheKey = `${text}-${provider}_${effectiveVoice}`;
   
   // Check if we have this cached already
   const isCached = audioCache.has(cacheKey);
@@ -432,23 +438,22 @@ export const isAudioCached = (
 };
 
 // Fetch available ElevenLabs voices
-export const fetchElevenLabsVoices = async (limit?: number): Promise<any> => {
+export const fetchElevenLabsVoices = async (): Promise<any> => {
   try {
-    // Build URL with optional limit parameter
-    let url = getApiUrl('elevenlabs/voices');
-    if (limit !== undefined) {
-      url += `?limit=${limit}`;
-    }
-    
+    console.log('[AUDIO-SERVICE] Fetching ElevenLabs voices from server...');
+    const url = getApiUrl('elevenlabs/voices');
     const response = await fetch(url);
     
     if (!response.ok) {
       throw new Error(`Server responded with status: ${response.status}`);
     }
     
-    return await response.json();
+    const data = await response.json();
+    console.log('[AUDIO-SERVICE] Server response:', data);
+    console.log('[AUDIO-SERVICE] Number of voices received:', data.voices?.length || 0);
+    return data;
   } catch (error) {
-    console.error('Error fetching ElevenLabs voices:', error);
+    console.error('[AUDIO-SERVICE] Error fetching ElevenLabs voices:', error);
     throw error;
   }
 };
@@ -476,13 +481,16 @@ export const preGenerateSessionAudioProgressive = async (
   instructionLines: string[],
   preloadCount: number = 3,
   useOpenAI = true,
-  voice = 'alloy',
+  voice: string | null = 'alloy',
   provider: 'openai' | 'elevenlabs' = 'openai'
 ): Promise<void> => {
   if (instructionLines.length === 0) {
     console.log('[AUDIO] No instructions to pre-generate');
     return;
   }
+
+  // Default to 'alloy' if voice is null
+  const effectiveVoice = voice || 'alloy';
 
   // Ensure preloadCount doesn't exceed available instructions
   preloadCount = Math.min(preloadCount, instructionLines.length);
@@ -495,7 +503,7 @@ export const preGenerateSessionAudioProgressive = async (
 
   // Generate exactly preloadCount instructions - not in parallel for better control
   for (const text of preload) {
-    const cacheKey = `${text}-${useOpenAI ? (provider + '_' + voice) : 'browser'}`;
+    const cacheKey = `${text}-${useOpenAI ? (provider + '_' + effectiveVoice) : 'browser'}`;
     
     // Skip if already cached
     if (audioCache.has(cacheKey)) {
@@ -506,7 +514,7 @@ export const preGenerateSessionAudioProgressive = async (
     if (useOpenAI) {
       try {
         console.log(`[AUDIO] Pre-generating initial instruction: "${text.substring(0, 30)}..."`);
-        const blob = await textToSpeech(text, voice, undefined, provider);
+        const blob = await textToSpeech(text, effectiveVoice, undefined, provider);
         console.log(`[AUDIO] Cached initial instruction: "${text.substring(0, 30)}..."`);
         audioCache.set(cacheKey, blob);
       } catch (error) {
@@ -520,7 +528,7 @@ export const preGenerateSessionAudioProgressive = async (
     backgroundAudioQueue.push(() => {
       // Since we're generating one at a time in the background, use a simpler approach
       return new Promise<void>(async (resolve) => {
-        const cacheKey = `${text}-${useOpenAI ? (provider + '_' + voice) : 'browser'}`;
+        const cacheKey = `${text}-${useOpenAI ? (provider + '_' + effectiveVoice) : 'browser'}`;
         
         // Skip if already cached
         if (audioCache.has(cacheKey)) {
@@ -532,7 +540,7 @@ export const preGenerateSessionAudioProgressive = async (
         if (useOpenAI) {
           try {
             console.log(`[AUDIO-BG] Generating background instruction: "${text.substring(0, 30)}..."`);
-            const blob = await textToSpeech(text, voice, undefined, provider);
+            const blob = await textToSpeech(text, effectiveVoice, undefined, provider);
             console.log(`[AUDIO-BG] Cached background instruction: "${text.substring(0, 30)}..."`);
             audioCache.set(cacheKey, blob);
           } catch (error) {

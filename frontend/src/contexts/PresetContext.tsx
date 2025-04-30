@@ -10,7 +10,8 @@ export interface Preset {
   createdAt: string;
   updatedAt: string;
   config: MeditationConfig;
-  voiceDisplayName?: string; // Add the new voice display name field
+  voiceDisplayName?: string;
+  isDefault?: boolean;
 }
 
 // Context interface

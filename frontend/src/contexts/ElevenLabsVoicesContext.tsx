@@ -13,8 +13,7 @@ interface ElevenLabsVoicesContextType {
   voices: ElevenLabsVoice[];
   isLoading: boolean;
   error: string | null;
-  refreshVoices: (limit?: number) => Promise<void>;
-  setVoiceLimit: (limit: number | undefined) => void;
+  refreshVoices: () => Promise<void>;
 }
 
 // Create the context with default values
@@ -22,8 +21,7 @@ const ElevenLabsVoicesContext = createContext<ElevenLabsVoicesContextType>({
   voices: [],
   isLoading: false,
   error: null,
-  refreshVoices: async () => {},
-  setVoiceLimit: () => {}
+  refreshVoices: async () => {}
 });
 
 // Custom hook for accessing the ElevenLabs voices
@@ -34,24 +32,26 @@ export const ElevenLabsVoicesProvider: React.FC<{children: ReactNode}> = ({ chil
   const [voices, setVoices] = useState<ElevenLabsVoice[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [voiceLimit, setVoiceLimit] = useState<number | undefined>(undefined);
 
   // Function to fetch the voices from the API
-  const fetchVoices = async (limit?: number) => {
+  const fetchVoices = async () => {
+    console.log('[ELEVENLABS] Starting voice fetch...');
     setIsLoading(true);
     setError(null);
     try {
-      // Use the provided limit, or fall back to the state limit
-      const effectiveLimit = limit !== undefined ? limit : voiceLimit;
+      const response = await fetchElevenLabsVoices();
+      console.log('[ELEVENLABS] API Response:', response);
       
-      const response = await fetchElevenLabsVoices(effectiveLimit);
       if (response && response.voices) {
+        console.log(`[ELEVENLABS] Successfully loaded ${response.voices.length} voices:`, 
+          response.voices.map((v: ElevenLabsVoice) => `${v.name} (${v.voice_id})`));
         setVoices(response.voices);
       } else {
+        console.warn('[ELEVENLABS] No voices found in response');
         setVoices([]);
       }
     } catch (err) {
-      console.error('Error fetching ElevenLabs voices:', err);
+      console.error('[ELEVENLABS] Error fetching voices:', err);
       setError(err instanceof Error ? err.message : 'Failed to fetch voices');
       // Set some default voices when API call fails
       setVoices([
@@ -67,18 +67,23 @@ export const ElevenLabsVoicesProvider: React.FC<{children: ReactNode}> = ({ chil
     }
   };
 
-  // Fetch voices on mount or when voice limit changes
+  // Fetch voices on mount
   useEffect(() => {
+    console.log('[ELEVENLABS] Component mounted, initiating voice fetch');
     fetchVoices();
-  }, [voiceLimit]);
+  }, []);
+
+  // Debug log when voices state changes
+  useEffect(() => {
+    console.log('[ELEVENLABS] Voices state updated:', voices.length, 'voices available');
+  }, [voices]);
 
   return (
     <ElevenLabsVoicesContext.Provider value={{ 
       voices, 
       isLoading, 
       error, 
-      refreshVoices: fetchVoices,
-      setVoiceLimit 
+      refreshVoices: fetchVoices
     }}>
       {children}
     </ElevenLabsVoicesContext.Provider>

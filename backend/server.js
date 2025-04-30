@@ -3,11 +3,11 @@ const cors = require('cors');
 const path = require('path');
 const fs = require('fs-extra');
 const crypto = require('crypto');
-require('dotenv').config({ path: path.resolve(__dirname, '../.env') }); // Updated to look for .env at project root
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 
 const app = express();
 const PORT = process.env.PORT || 3001;
-const HOST = process.env.HOST || '0.0.0.0'; // Listen on all network interfaces
+const HOST = process.env.HOST || '0.0.0.0';
 
 // Debug logging function
 const debugLog = (message, data = null) => {
@@ -23,16 +23,22 @@ const debugLog = (message, data = null) => {
 
 debugLog('Starting Meditation App server');
 
-// ElevenLabs API base URL
-const ELEVENLABS_API_URL = 'https://api.elevenlabs.io/v1';
+// Directory paths
+const dataDir = path.join(__dirname, 'data');
+const defaultsDir = path.join(__dirname, 'defaults');
+const audioCacheDir = path.join(dataDir, 'audio-cache');
+const presetsDir = path.join(dataDir, 'presets');
+const instructionsPath = path.join(dataDir, 'instructions.json');
+const defaultInstructionsPath = path.join(defaultsDir, 'instructions.json');
+const defaultPresetsPath = path.join(defaultsDir, 'presets.json');
 
-// Enhanced CORS configuration
+// CORS and middleware configuration
 app.use(cors({
-  origin: '*', // Allow all origins
+  origin: '*',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
-  maxAge: 86400 // Cache preflight request for 1 day
+  maxAge: 86400
 }));
 
 app.use(express.json());
@@ -45,20 +51,89 @@ app.use((req, res, next) => {
   next();
 });
 
-// Ensure data directory exists
-const dataDir = path.join(__dirname, 'data');
-debugLog(`Setting up data directory: ${dataDir}`);
+// Ensure directories exist
 fs.ensureDirSync(dataDir);
-
-// Ensure audio cache directory exists
-const audioCacheDir = path.join(dataDir, 'audio-cache');
-debugLog(`Setting up audio cache directory: ${audioCacheDir}`);
 fs.ensureDirSync(audioCacheDir);
-
-// Ensure presets directory exists
-const presetsDir = path.join(dataDir, 'presets');
-debugLog(`Setting up presets directory: ${presetsDir}`);
 fs.ensureDirSync(presetsDir);
+
+// Helper function to merge defaults with user data
+const mergeWithDefaults = (userItems, defaultItems) => {
+  const mergedItems = [...defaultItems];
+  
+  // Add non-duplicate user items
+  userItems.forEach(userItem => {
+    if (!mergedItems.some(defaultItem => defaultItem.id === userItem.id)) {
+      mergedItems.push(userItem);
+    }
+  });
+  
+  return mergedItems;
+};
+
+// Initialize or update instructions with defaults
+const initializeInstructions = () => {
+  try {
+    let userInstructions = [];
+    let defaultInstructions = [];
+
+    // Load default instructions
+    if (fs.existsSync(defaultInstructionsPath)) {
+      defaultInstructions = fs.readJsonSync(defaultInstructionsPath);
+      debugLog(`Loaded ${defaultInstructions.length} default instructions`);
+    }
+
+    // Load user instructions if they exist
+    if (fs.existsSync(instructionsPath)) {
+      userInstructions = fs.readJsonSync(instructionsPath);
+      debugLog(`Loaded ${userInstructions.length} user instructions`);
+    }
+
+    // Merge instructions, keeping user customizations
+    const mergedInstructions = mergeWithDefaults(userInstructions, defaultInstructions);
+    
+    // Save merged instructions
+    fs.writeJsonSync(instructionsPath, mergedInstructions, { spaces: 2 });
+    debugLog(`Saved ${mergedInstructions.length} merged instructions`);
+
+    return mergedInstructions;
+  } catch (error) {
+    debugLog(`Error initializing instructions: ${error.message}`, error);
+    return [];
+  }
+};
+
+// Initialize or update presets with defaults
+const initializePresets = () => {
+  try {
+    const defaultPresets = fs.existsSync(defaultPresetsPath) 
+      ? fs.readJsonSync(defaultPresetsPath)
+      : [];
+    
+    debugLog(`Loaded ${defaultPresets.length} default presets`);
+
+    // Copy default presets to user presets directory if they don't exist
+    defaultPresets.forEach(preset => {
+      const presetPath = path.join(presetsDir, `${preset.id}.json`);
+      if (!fs.existsSync(presetPath)) {
+        fs.writeJsonSync(presetPath, preset, { spaces: 2 });
+        debugLog(`Created default preset: ${preset.name}`);
+      }
+    });
+
+    return true;
+  } catch (error) {
+    debugLog(`Error initializing presets: ${error.message}`, error);
+    return false;
+  }
+};
+
+// Initialize defaults on server startup
+debugLog('Initializing default configurations...');
+initializeInstructions();
+initializePresets();
+
+// ElevenLabs API base URL
+const ELEVENLABS_API_URL = 'https://api.elevenlabs.io/v1';
 
 // Define OpenAI voice descriptions
 const openAIVoiceDescriptions = {
@@ -68,51 +143,6 @@ const openAIVoiceDescriptions = {
   'onyx': 'Onyx - Deep, authoritative voice',
   'nova': 'Nova - Bright, friendly voice',
   'shimmer': 'Shimmer - Gentle, soothing voice'
-};
-
-// File path for meditation instructions
-const instructionsPath = path.join(dataDir, 'instructions.json');
-debugLog(`Instructions file path: ${instructionsPath}`);
-
-// Initialize empty instructions file if it doesn't exist
-if (!fs.existsSync(instructionsPath)) {
-  debugLog('Instructions file does not exist, creating empty file');
-  fs.writeJsonSync(instructionsPath, [], { spaces: 2 });
-  debugLog('Created empty instructions file');
-} else {
-  debugLog('Instructions file already exists');
-  try {
-    const stats = fs.statSync(instructionsPath);
-    debugLog(`Instructions file size: ${stats.size} bytes, last modified: ${stats.mtime}`);
-    
-    // Check if file is readable and parse its content
-    const instructionsContent = fs.readJsonSync(instructionsPath);
-    debugLog(`Instructions file contains ${instructionsContent.length} entries`);
-  } catch (error) {
-    debugLog(`Error reading instructions file: ${error.message}`, error);
-  }
-}
-
-// Helper function to generate a unique hash for text + voice + provider
-const generateAudioFileHash = (text, voice, provider = 'openai') => {
-  const hash = crypto.createHash('md5');
-  hash.update(`${text}_${voice}_${provider}`);
-  return hash.digest('hex');
-};
-
-// Helper function to get cached audio file path
-const getCachedAudioPath = (text, voice, provider = 'openai') => {
-  const hash = generateAudioFileHash(text, voice, provider);
-  return path.join(audioCacheDir, `${hash}.mp3`);
-};
-
-// Helper function to check if cached audio exists
-const getCachedAudio = (text, voice, provider = 'openai') => {
-  const audioPath = getCachedAudioPath(text, voice, provider);
-  if (fs.existsSync(audioPath)) {
-    return audioPath;
-  }
-  return null;
 };
 
 // Create a mapping of instruction IDs to their cached audio files
@@ -141,6 +171,26 @@ try {
 } catch (error) {
   console.error('Error loading cache analytics:', error);
 }
+
+// Helper functions
+const generateAudioFileHash = (text, voice, provider = 'openai') => {
+  const hash = crypto.createHash('md5');
+  hash.update(`${text}_${voice}_${provider}`);
+  return hash.digest('hex');
+};
+
+const getCachedAudioPath = (text, voice, provider = 'openai') => {
+  const hash = generateAudioFileHash(text, voice, provider);
+  return path.join(audioCacheDir, `${hash}.mp3`);
+};
+
+const getCachedAudio = (text, voice, provider = 'openai') => {
+  const audioPath = getCachedAudioPath(text, voice, provider);
+  if (fs.existsSync(audioPath)) {
+    return audioPath;
+  }
+  return null;
+};
 
 // Function to save cache analytics to disk
 const saveCacheAnalytics = () => {
@@ -933,14 +983,36 @@ function loadApiKeysFromStorage() {
 // Load API keys on server startup
 loadApiKeysFromStorage();
 
+// Helper function to map OpenAI voice names to ElevenLabs voice IDs
+const getElevenLabsVoiceId = (openaiVoice) => {
+  // Default premium voices from ElevenLabs
+  // Map OpenAI voices to similar ElevenLabs voices
+  const voiceMapping = {
+    'alloy': '21m00Tcm4TlvDq8ikWAM', // Rachel
+    'echo': 'AZnzlk1XvdvUeBnXmlld', // Domi
+    'fable': 'EXAVITQu4vr4xnSDxMaL', // Bella
+    'onyx': 'VR6AewLTigWG4xSOukaG', // Adam
+    'nova': 'pNInz6obpgDQGcFmaJgB', // Elli
+    'shimmer': 'jBpfuIE2acCO8z3wKNLl', // Grace
+  };
+  
+  const mappedVoice = voiceMapping[openaiVoice] || openaiVoice;
+  console.log(`[ELEVENLABS] Voice mapping: ${openaiVoice} -> ${mappedVoice}`);
+  return mappedVoice;
+};
+
 // Modify TTS endpoint to use the stored API keys and handle graceful fallbacks
 app.post('/api/tts', async (req, res) => {
   try {
-    const { text, voice = 'alloy', instructionId, provider = 'openai', isStartingInstruction = false } = req.body;
+    const { 
+      text, 
+      voice = 'alloy', 
+      instructionId, 
+      provider = 'openai', 
+      isStartingInstruction = false
+    } = req.body;
     
-    if (!text || typeof text !== 'string' || text.trim().length === 0) {
-      return res.status(400).json({ error: 'Text is required for TTS conversion' });
-    }
+    console.log(`[TTS] Request received - Provider: ${provider}, Voice: ${voice}, Text: "${text.substring(0, 30)}..."`);
 
     // Validate provider
     if (!['openai', 'elevenlabs'].includes(provider)) {
@@ -1029,11 +1101,14 @@ app.post('/api/tts', async (req, res) => {
       
     } else if (provider === 'elevenlabs') {
       try {
-        // Map OpenAI voice names to ElevenLabs voice IDs or use default
-        const voiceId = getElevenLabsVoiceId(voice);
+        // For ElevenLabs, use the voice ID directly if it's not an OpenAI voice name
+        const voiceId = voice.length === 21 ? voice : getElevenLabsVoiceId(voice);
+        console.log(`[ELEVENLABS] Using voice ID: ${voiceId} for request`);
         
-        // Call ElevenLabs API with simplified settings
-        const audioBuffer = await fetch(`${ELEVENLABS_API_URL}/text-to-speech/${voiceId}/stream`, {
+        const apiEndpoint = `${ELEVENLABS_API_URL}/text-to-speech/${voiceId}?output_format=mp3_44100_128`;
+        console.log(`[ELEVENLABS] Calling API endpoint: ${apiEndpoint}`);
+
+        const audioBuffer = await fetch(apiEndpoint, {
           method: 'POST',
           headers: {
             'xi-api-key': process.env.ELEVENLABS_API_KEY,
@@ -1041,22 +1116,24 @@ app.post('/api/tts', async (req, res) => {
           },
           body: JSON.stringify({
             text: text,
+            model_id: "eleven_multilingual_v2",
             voice_settings: {
               stability: 0.5,
-              similarity_boost: 0.75
+              similarity_boost: 0.5
             }
           })
         });
 
         if (!audioBuffer.ok) {
           const error = await audioBuffer.json();
-          console.error('ElevenLabs TTS API error:', error);
+          console.error('[ELEVENLABS] TTS API error:', error);
           return res.status(audioBuffer.status).json({ error: error.error?.message || 'Failed to generate speech with ElevenLabs' });
         }
 
+        console.log('[ELEVENLABS] Successfully generated audio');
         buffer = Buffer.from(await audioBuffer.arrayBuffer());
       } catch (elevenLabsError) {
-        console.error('ElevenLabs API error:', elevenLabsError);
+        console.error('[ELEVENLABS] API error:', elevenLabsError);
         return res.status(500).json({ error: 'Failed to generate speech with ElevenLabs' });
       }
     }
@@ -1222,34 +1299,17 @@ function formatBytes(bytes, decimals = 2) {
   return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
 }
 
-// Helper function to map OpenAI voice names to ElevenLabs voice IDs
-const getElevenLabsVoiceId = (openaiVoice) => {
-  // Default premium voices from ElevenLabs
-  // Map OpenAI voices to similar ElevenLabs voices
-  // These are example IDs - replace with actual ElevenLabs voice IDs
-  const voiceMapping = {
-    'alloy': '21m00Tcm4TlvDq8ikWAM', // Rachel
-    'echo': 'AZnzlk1XvdvUeBnXmlld', // Domi
-    'fable': 'EXAVITQu4vr4xnSDxMaL', // Bella
-    'onyx': 'VR6AewLTigWG4xSOukaG', // Adam
-    'nova': 'pNInz6obpgDQGcFmaJgB', // Elli
-    'shimmer': 'jBpfuIE2acCO8z3wKNLl', // Grace
-    // Add more mappings as needed
-  };
-  
-  return voiceMapping[openaiVoice] || '21m00Tcm4TlvDq8ikWAM'; // Default to Rachel if no match
-};
-
 // Helper function to check available ElevenLabs voices
 app.get('/api/elevenlabs/voices', async (req, res) => {
   try {
-    // Get the limit parameter from the query string (default to all voices if not specified)
-    const limit = req.query.limit ? parseInt(req.query.limit) : undefined;
+    debugLog('GET /api/elevenlabs/voices request received');
     
     if (!process.env.ELEVENLABS_API_KEY) {
+      debugLog('ERROR: ElevenLabs API key not configured');
       return res.status(500).json({ error: 'ElevenLabs API key not configured' });
     }
     
+    debugLog('Fetching voices from ElevenLabs API...');
     const response = await fetch(`${ELEVENLABS_API_URL}/voices`, {
       method: 'GET',
       headers: {
@@ -1259,20 +1319,17 @@ app.get('/api/elevenlabs/voices', async (req, res) => {
 
     if (!response.ok) {
       const errorData = await response.json();
-      console.error('Error fetching ElevenLabs voices:', errorData);
+      debugLog('Error from ElevenLabs API:', errorData);
       return res.status(response.status).json({ error: 'Failed to fetch ElevenLabs voices' });
     }
 
     const voicesData = await response.json();
-    
-    // If a limit was specified and is valid, limit the number of voices returned
-    if (limit && !isNaN(limit) && limit > 0) {
-      voicesData.voices = voicesData.voices.slice(0, limit);
-    }
+    debugLog(`Successfully fetched ${voicesData.voices?.length || 0} voices from ElevenLabs`);
+    debugLog('Voice names:', voicesData.voices?.map(v => v.name).join(', '));
     
     res.json(voicesData);
   } catch (error) {
-    console.error('Error fetching ElevenLabs voices:', error);
+    debugLog('Error fetching ElevenLabs voices:', error);
     res.status(500).json({ error: 'Failed to fetch ElevenLabs voices' });
   }
 });

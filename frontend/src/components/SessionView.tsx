@@ -76,7 +76,9 @@ const SessionView: React.FC = () => {
       instruction => instruction.id === config.selectedInstructionId
     );
     
-    return selectedInstruction?.name || "Unknown";
+    return selectedInstruction ? 
+      (selectedInstruction.isDefault ? `(System) ${selectedInstruction.name}` : selectedInstruction.name) 
+      : "Unknown";
   };
 
   // Update current instruction based on session progress
@@ -168,7 +170,7 @@ const SessionView: React.FC = () => {
               <option value="custom">Custom configuration</option>
               {presets.map(preset => (
                 <option key={preset.id} value={preset.id}>
-                  {preset.name}
+                  {preset.isDefault ? `(System) ${preset.name}` : preset.name}
                 </option>
               ))}
             </select>

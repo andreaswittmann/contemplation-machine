@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useMeditationConfig, OpenAIVoice } from '../contexts/MeditationConfigContext';
 import { useInstructions } from '../contexts/InstructionsContext';
 import { useElevenLabsVoices } from '../contexts/ElevenLabsVoicesContext';
@@ -10,9 +10,8 @@ import { format } from 'date-fns';
 const ConfigurationView: React.FC = () => {
   const { config, updateConfig } = useMeditationConfig();
   const { instructions, isLoading } = useInstructions();
-  const { voices: elevenLabsVoices, isLoading: isLoadingVoices, setVoiceLimit } = useElevenLabsVoices();
+  const { voices: elevenLabsVoices, isLoading: isLoadingVoices } = useElevenLabsVoices();
   const { presets, loadPresets, currentPreset, updatePreset, clearCurrentPreset, loadPreset } = usePresets();
-  const [voiceLimit, setLocalVoiceLimit] = useState<number | undefined>(undefined);
   const [isPresetModalOpen, setIsPresetModalOpen] = useState(false);
   const [isPresetListOpen, setIsPresetListOpen] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
@@ -41,20 +40,18 @@ const ConfigurationView: React.FC = () => {
     setIsUpdating(true);
     try {
       await updatePreset(currentPreset.id, {
-        config, // Update with current configuration
+        config,
         updatedAt: new Date().toISOString(),
       });
-      // Success notification could be added here
     } catch (error) {
       console.error("Error updating preset:", error);
-      // Error notification could be added here
     } finally {
       setIsUpdating(false);
     }
   };
 
   // Update selected preset based on current configuration and currentPreset
-  useEffect(() => {
+  React.useEffect(() => {
     if (currentPreset) {
       setSelectedPresetId(currentPreset.id);
     } else {
@@ -117,19 +114,10 @@ const ConfigurationView: React.FC = () => {
     });
   };
 
-  // Handle voice limit change
-  const handleVoiceLimitChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = e.target.value;
-    const limit = value === 'all' ? undefined : parseInt(value, 10);
-    setLocalVoiceLimit(limit);
-    setVoiceLimit(limit);
-  };
-
   return (
     <div className="configuration-view">
       <h2>Configure Your Meditation Session</h2>
       
-      {/* Preset management section */}
       <div className="config-section preset-controls">
         <div className="preset-selector">
           <label htmlFor="presetSelect">Meditation Preset:</label>
@@ -141,8 +129,12 @@ const ConfigurationView: React.FC = () => {
           >
             <option value="custom">Custom configuration</option>
             {presets.map(preset => (
-              <option key={preset.id} value={preset.id}>
-                {preset.name}
+              <option 
+                key={preset.id} 
+                value={preset.id}
+                className={preset.isDefault ? 'system-item' : ''}
+              >
+                {preset.isDefault ? `(System) ${preset.name}` : preset.name}
               </option>
             ))}
           </select>
@@ -215,8 +207,12 @@ const ConfigurationView: React.FC = () => {
             >
               <option value="none">None (Silent meditation)</option>
               {instructions.map(instruction => (
-                <option key={instruction.id} value={instruction.id}>
-                  {instruction.name} ({instruction.content.split('\n').filter(l => l.trim()).length} instructions)
+                <option 
+                  key={instruction.id} 
+                  value={instruction.id}
+                  className={instruction.isDefault ? 'system-item' : ''}
+                >
+                  {instruction.isDefault ? `(System) ${instruction.name}` : instruction.name} ({instruction.content.split('\n').filter(l => l.trim()).length} instructions)
                 </option>
               ))}
             </select>
@@ -302,49 +298,34 @@ const ConfigurationView: React.FC = () => {
                 </p>
               </div>
             )}
-            
-            {config.voiceType === 'elevenlabs' && (
-              <div className="select-group">
-                <label htmlFor="elevenlabsVoice">ElevenLabs Voice:</label>
-                {isLoadingVoices ? (
-                  <p>Loading ElevenLabs voices...</p>
-                ) : (
-                  <>
-                    <select
-                      id="elevenlabsVoice"
-                      value={config.elevenlabsVoiceId}
-                      onChange={handleElevenLabsVoiceChange}
-                    >
-                      {elevenLabsVoices.map(voice => (
-                        <option key={voice.voice_id} value={voice.voice_id}>
-                          {voice.name}
-                        </option>
-                      ))}
-                    </select>
-                    
-                    <div className="voice-control">
-                      <label htmlFor="voiceLimit">Voices to show:</label>
-                      <select
-                        id="voiceLimit"
-                        value={voiceLimit === undefined ? 'all' : voiceLimit.toString()}
-                        onChange={handleVoiceLimitChange}
-                      >
-                        <option value="all">Show all voices</option>
-                        <option value="3">Show 3 voices</option>
-                        <option value="5">Show 5 voices</option>
-                        <option value="10">Show 10 voices</option>
-                        <option value="20">Show 20 voices</option>
-                      </select>
-                    </div>
-                  </>
-                )}
+          </>
+        )}
+        
+        {config.voiceType === 'elevenlabs' && (
+          <div className="select-group">
+            <label htmlFor="elevenlabsVoice">ElevenLabs Voice:</label>
+            {isLoadingVoices ? (
+              <p>Loading ElevenLabs voices...</p>
+            ) : (
+              <>
+                <select
+                  id="elevenlabsVoice"
+                  value={config.elevenlabsVoiceId || (elevenLabsVoices.length > 0 ? elevenLabsVoices[0].voice_id : '')}
+                  onChange={handleElevenLabsVoiceChange}
+                >
+                  {elevenLabsVoices.map(voice => (
+                    <option key={voice.voice_id} value={voice.voice_id}>
+                      {voice.name}
+                    </option>
+                  ))}
+                </select>
                 <p className="voice-note">
                   Listen to voice samples on <a href="https://elevenlabs.io/text-to-speech" 
                      target="_blank" rel="noopener noreferrer">ElevenLabs website</a>
                 </p>
-              </div>
+              </>
             )}
-          </>
+          </div>
         )}
       </div>
 

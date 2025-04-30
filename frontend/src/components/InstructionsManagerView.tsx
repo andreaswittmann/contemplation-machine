@@ -86,9 +86,14 @@ const InstructionsManagerView: React.FC = () => {
         ) : (
           <ul className="instructions-list">
             {instructions.map(instruction => (
-              <li key={instruction.id} className="instruction-item">
+              <li 
+                key={instruction.id} 
+                className={`instruction-item ${instruction.isDefault ? 'system-item' : ''}`}
+              >
                 <div className="instruction-content">
-                  <h4 className="instruction-name">{instruction.name}</h4>
+                  <h4 className="instruction-name">
+                    {instruction.isDefault ? `(System) ${instruction.name}` : instruction.name}
+                  </h4>
                   {instruction.description && (
                     <p className="instruction-description">{instruction.description}</p>
                   )}

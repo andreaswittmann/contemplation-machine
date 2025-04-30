@@ -4,30 +4,25 @@ import { useInstructions } from './InstructionsContext';
 // Define available OpenAI voice options
 export type OpenAIVoice = 'alloy' | 'echo' | 'fable' | 'onyx' | 'nova' | 'shimmer';
 
-// Define available ElevenLabs voice options
-export type ElevenLabsVoiceId = string;
-
-// Define the shape of our meditation configuration
 export interface MeditationConfig {
   duration: number; // Duration in minutes
   bellAtStart: boolean;
   bellAtEnd: boolean;
   useVoiceGuidance: boolean;
   voiceType: 'browser' | 'openai' | 'elevenlabs';
-  openaiVoice: OpenAIVoice; // The specific OpenAI voice to use
-  elevenlabsVoiceId: ElevenLabsVoiceId; // The specific ElevenLabs voice ID to use
-  selectedInstructionId: string | null; // ID of selected instruction file
+  openaiVoice: OpenAIVoice;
+  elevenlabsVoiceId: string | null;
+  selectedInstructionId: string | null;
 }
 
-// Default configuration values
-const defaultConfig: MeditationConfig = {
+export const defaultConfig: MeditationConfig = {
   duration: 10,
   bellAtStart: true,
   bellAtEnd: true,
   useVoiceGuidance: true,
   voiceType: 'browser',
   openaiVoice: 'alloy',
-  elevenlabsVoiceId: '21m00Tcm4TlvDq8ikWAM', // Default to Rachel voice
+  elevenlabsVoiceId: null,
   selectedInstructionId: null
 };
 
@@ -42,7 +37,7 @@ interface MeditationConfigContextType {
 const MeditationConfigContext = createContext<MeditationConfigContextType>({
   config: defaultConfig,
   updateConfig: () => {},
-  resetConfig: () => {},
+  resetConfig: () => {}
 });
 
 // Custom hook for accessing the meditation config
@@ -101,7 +96,11 @@ export const MeditationConfigProvider: React.FC<{children: ReactNode}> = ({ chil
   };
 
   return (
-    <MeditationConfigContext.Provider value={{ config, updateConfig, resetConfig }}>
+    <MeditationConfigContext.Provider value={{ 
+      config, 
+      updateConfig, 
+      resetConfig
+    }}>
       {children}
     </MeditationConfigContext.Provider>
   );

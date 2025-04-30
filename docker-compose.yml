@@ -12,10 +12,9 @@ services:
     environment:
       - NODE_ENV=production
     volumes:
-      # Mount the data directory for persistence
-      - meditation-data:/app/data
-
-volumes:
-  meditation-data:
-    # Use named volume for data persistence between container restarts
-    driver: local
+      # Map data directory to host filesystem
+      - ./backend/data:/app/data
+      # Map audio cache directory specifically
+      - ./backend/data/audio-cache:/app/data/audio-cache
+      # Map presets directory
+      - ./backend/data/presets:/app/data/presets

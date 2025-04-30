@@ -20,21 +20,20 @@
   },
   {
     "id": "default-preset-mindfulness",
-    "name": "Pure Mindfulness",
+    "name": "Full Body Awareness - Autumn Veil",
     "description": "Focus on present moment awareness with mindful breathing",
     "createdAt": "2025-04-30T00:00:00.000Z",
-    "updatedAt": "2025-04-30T00:00:00.000Z",
-    "keywords": ["mindfulness", "awareness", "focus", "breath"],
+    "updatedAt": "2025-04-30T18:48:21.210Z",
     "isDefault": true,
     "config": {
       "duration": 15,
       "bellAtStart": true,
       "bellAtEnd": true,
       "useVoiceGuidance": true,
-      "voiceType": "openai",
+      "voiceType": "elevenlabs",
       "openaiVoice": "alloy",
-      "selectedInstructionId": "default-instruction-1",
-      "elevenlabsVoiceId": null
+      "elevenlabsVoiceId": "KoVIHoyLDrQyd4pGalbs",
+      "selectedInstructionId": "default-instruction-1"
     }
   },
   {
@@ -55,6 +54,25 @@
       "selectedInstructionId": "default-instruction-3",
       "elevenlabsVoiceId": null
     }
+  },
+  {
+    "id": "default-preset-achtsamkeit",
+    "name": "Achtsamkeit auf den Atem - Emanual (deutsch)",
+    "description": "Develop compassion and goodwill through metta meditation",
+    "createdAt": "2025-04-30T00:00:00.000Z",
+    "updatedAt": "2025-04-30T00:00:00.000Z",
+    "keywords": ["compassion", "loving-kindness", "metta", "kindness"],
+    "isDefault": true,
+    "config": {
+    "duration": 1,
+    "bellAtStart": true,
+    "bellAtEnd": true,
+    "useVoiceGuidance": true,
+    "voiceType": "elevenlabs",
+    "openaiVoice": "alloy",
+    "elevenlabsVoiceId": "umDfZDi2AcMmDUsDsBfA",
+    "selectedInstructionId": "default-instruction-4"
+  }
   },
   {
     "id": "default-preset-silent",

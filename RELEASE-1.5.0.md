@@ -2,92 +2,56 @@
 
 ## Summary
 
-Release 1.5.0 introduces a powerful keyword-based default preset system that helps users quickly find meditation configurations suited to their needs and experience level. This feature enhances the user experience by providing carefully curated preset configurations that match common meditation practices and user preferences.
+This release introduces important improvements to the Meditation App, including a new system for managing default settings and user customizations, as well as several key optimizations and refinements to the codebase.
 
-## New Features
 
-### Smart Default Presets
+## Concept Overview
 
-- **Keyword-Based Preset System**: Default presets are now tagged with relevant keywords for easy discovery
-- **Experience-Level Categories**: Presets tailored for different experience levels (beginner to advanced)
-- **Practice-Type Matching**: Presets aligned with different meditation practices (mindfulness, loving-kindness, etc.)
-- **Intelligent Defaults**: Each preset comes with optimized configurations for voice, duration, and instructions
+This release introduces a new system for managing default settings and user customizations in the Meditation App. The main focus is on improving the way we handle instructions, presets, and their persistence.
 
-### Default Preset Categories
+### Key Features
 
-1. **Beginner's Journey**
-   - Perfect for newcomers to meditation
-   - Shorter duration with clear guidance
-   - Basic breathing instructions
-   - Friendly, encouraging voice
+1. **Default Settings Management**
+   - Application ships with default instructions and presets
+   - Default settings stored in separate configuration files
+   - Seamless merging of defaults with user customizations
 
-2. **Pure Mindfulness**
-   - Focus on present moment awareness
-   - Intermediate duration
-   - Mindful breathing instructions
-   - Clear, balanced voice guidance
+2. **File System Integration**
+   - All user data is persisted to the server file system:
+     - Custom settings
+     - User-created presets
+     - Modified instructions
+     - Audio cache files
 
-3. **Loving-Kindness**
-   - Metta meditation practice
-   - Extended duration for deeper practice
-   - Compassion-focused instructions
-   - Gentle, soothing voice guidance
+3. **Container Integration**
+   - Default configurations are bundled within the container
+   - Ensures consistent initial setup across deployments
 
-4. **Silent Contemplation**
-   - Advanced meditation practice
-   - Longer duration
-   - Minimal guidance
-   - Bell-only experience
+### Technical Implementation
 
-## Technical Implementation
+- Default settings files location: `/defaults/`
+  - `instructions.json`
+  - `presets.json`
+- User data storage: `/data/`
+  - Custom instructions and presets
+  - Audio cache storage
+- Runtime behavior:
+  - On startup, default settings are merged with user customizations
+  - User changes are persisted to the file system
+  - Audio files are cached locally for improved performance
 
-### Backend Changes
+### Data Persistence
 
-- New `defaults/presets.json` file containing default preset configurations
-- Extended preset schema to include:
-  - Keywords array for preset discovery
-  - isDefault flag to distinguish system presets
-  - Optimized configuration mappings
-- Integration with existing preset management system
+The `/data` directory is configured as a Docker volume to ensure persistence across container rebuilds. This includes:
+- User-customized instructions
+- Custom presets
+- Audio cache files
+- API keys and configuration
 
-### Frontend Changes
+This setup ensures that:
+1. User customizations are preserved even when updating or rebuilding the application container
+2. The audio cache remains intact, preventing unnecessary re-downloads
+3. All user-specific settings persist independently of the container lifecycle
 
-- Enhanced preset selection interface
-- Keyword-based preset filtering
-- Clear categorization of default vs. custom presets
-- Improved preset discovery experience
+The default settings in `/defaults` are part of the container image and serve as initial values for new installations.
 
-## User Guide
-
-### Using Default Presets
-
-1. Navigate to the Configuration or Meditation view
-2. Open the preset dropdown menu
-3. Browse categorized default presets
-4. Select a preset matching your needs
-5. Optionally customize and save as a personal preset
-
-### Customizing Default Presets
-
-1. Load a default preset
-2. Modify any settings as desired
-3. Use "Save as New Preset" to create a personal copy
-4. Original default preset remains unchanged
-
-## Known Limitations
-
-- Default presets cannot be modified or deleted
-- Keyword search is case-sensitive
-- Limited to predefined categories
-
-## Future Enhancements
-
-- Dynamic keyword generation based on preset usage
-- User-suggested preset categories
-- Community-rated preset recommendations
-- AI-powered preset suggestions based on user preferences
-- Extended preset categories for specific meditation traditions
-
----
-
-This release significantly improves the onboarding experience for new users while providing valuable presets for practitioners of all levels. The keyword-based system ensures users can quickly find the right meditation configuration for their needs.

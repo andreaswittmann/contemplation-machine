@@ -9,6 +9,7 @@ interface Instruction {
   content: string; // Multi-line text with one instruction per line
   createdAt: string;
   updatedAt?: string;
+  isDefault?: boolean;
 }
 
 interface InstructionsContextType {

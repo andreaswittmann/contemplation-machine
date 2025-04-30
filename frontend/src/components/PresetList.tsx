@@ -95,9 +95,14 @@ const PresetList: React.FC<PresetListProps> = ({ isOpen, onClose }) => {
           ) : (
             <div className="preset-list">
               {presets.map((preset) => (
-                <div key={preset.id} className="preset-item staggered-item">
+                <div 
+                  key={preset.id} 
+                  className={`preset-item staggered-item ${preset.isDefault ? 'system-item' : ''}`}
+                >
                   <div className="preset-details">
-                    <h3 className="preset-name">{preset.name}</h3>
+                    <h3 className="preset-name">
+                      {preset.isDefault ? `(System) ${preset.name}` : preset.name}
+                    </h3>
                     {preset.description && (
                       <p className="preset-description">{preset.description}</p>
                     )}

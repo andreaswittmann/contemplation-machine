@@ -335,6 +335,21 @@ textarea.form-control {
   color: #333;
 }
 
+/* Add specific styling for system preset items */
+.preset-item.system-item {
+  background-color: #f8f9fa;
+  border-color: #dee2e6;
+}
+
+.preset-item.system-item .preset-actions {
+  opacity: 0.7;
+}
+
+select option.system-item {
+  font-style: italic;
+  color: #666;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .modal-content {
