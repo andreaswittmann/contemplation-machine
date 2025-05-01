@@ -129,3 +129,89 @@ Let's continue practicing in silence. And let's bring the session to a close.
 
 
 "content": "Intro with Full Body awareness - With relaxation as the foundation the very first taste when you enter the practice can be one of sweetness, of ease, of an inviting welcome to the practice. As you let your awareness settle in the body, you immediately feel your shoulders relax, your whole face soft. Let your body be still and rest in a posture of vigilance.\nBreath - And get your mind out of the way when it comes to your respiration. Let it flow without intervention, as you deeply relax all the way to the end of the out-breath, until the in-breath, whether it is deep or shallow, short or long, flows in of its own accord. Just let it be.\nLet go of thinking come to abdomen - Then disuse the turbulent mind, the mind that is habitually caught up in obsessive thinking and compulsive grasping onto the thinking. Our own obsessive compulsive disorder. Let your awareness come to a rest in this field of sensations with the rise and fall of the abdomen with each in- and out-breath. Attend with your mental awareness, keeping your eyes relaxed, soft, unfocused and certainly not focused downwards. The forehead spacious, open, relaxed. And recall that the first sign of progress in this practice is recognizing how turbulent the mind is, not something to be upset at, simply to acknowledge. And rather than trying to forcefully restraint this, gently release this with every out-breath.\nWhat is mindfulness? - The Buddhist meaning of the term mindfulness is just the opposite of forgetfulness. It has to do with recollection. And in this practice it is the ongoing flow of recollecting, recollecting, recollecting the mind that so easily becomes dispersed. Mindfulness is the opposite of mental entropy.\nReleasing and awakening - With each out-breath sustain this ongoing flow of mindfulness while you release the thoughts and grasping onto thoughts. And with each inhalation, recollect your attention. Focus it once again on the sensations of the breath at the abdomen. Just focusing on the sensations themselves with as little conceptual overlay as possible, your best approximation of bare attention.\nCounting - If you find counting the breath as a helpful reminder, an enhancer of recollection or mindfulness, then go ahead and count the breaths, one brief count at the end of the each inhalation. Counting 1 through 10 or simply continue counting if you wish, but only if you find it helpful.\nIntrospection - With your faculty of introspection, note if at any time you fall into dullness and if so, arouse your attention, take a fresh interest. Time and again, you're bound to fall into distraction, being carried away by thoughts. As soon as you note this, let the first response be one of relaxation, releasing the thought, releasing your grasping onto the through. In the same motion, let your awareness descend back to the tactile sensations of the abdomen.\nNoting quality of breaths - Noting the duration of each in- and out-breath, and with a gentle exertion of your will, to the best of your ability, let the sensations of the in- and out-breath, the whole course of the cycle of respiration be blanketed continuously with mindfulness.\nLet's continue practicing in silence. And let's bring the session to a close."
+
+
+## Ngöndro Zuflucht
+
+DORDSCHE TSCHANG THUNGMA - Ich bete zu dem großen Dordsche Tschang, Tilo, Naro, Marpa, Mila, Dharmameister Gampopa, Düsum Khyenpa, dem allwissenden Karmapa, den Haltern der vier großen und acht kleinen Linien, Dri, Tag, Tsäl und den glorreichen Drugpa, den unvergleichlichen Schützern der Wesen, den Dagpo-Kagyüpas, die den tiefgründigen Pfad von Mahamudra gemeistert haben. Gebt euren Segen, dass ich durch euer inspirierendes Beispiel die Linie der Kagyü-Lamas halte.
+Es wird gesagt, Abkehr von Samsara ist der Fuß der Meditation. So gib dem Meditierenden, der frei von Anhaftung an Nahrung und Besitz die Fesseln an dieses Leben zerschneidet, den Segen, dass er ohne Anhaftung an Reichtum und Ehre ist.
+Es wird gesagt, Hingabe ist der Kopf der Meditation. Bitte gib dem Meditierenden, der ständig zum Lama betet, der ihm das Tor zur Schatzkammer der mündlichen Belehrungen öffnet, deinen Segen, dass in ihm natürliche Hingabe entsteht.
+Es wird gesagt, Unzerstreutheit ist die eigentliche Meditation (der Körper der Meditation). Die Essenz der Gedanken, die entstehen, ist immer neu. Bitte gib deinen Segen, dass der Meditierende, der natürlich darin verweilt, beim Meditieren frei von Intellektualisieren ist.
+Es wird gesagt, die Essenz der Gedanken ist der Wahrheitszustand. Sie sind nichts und doch entstehen sie. Bitte gib dem Meditierenden, in dem sie als ungehindertes Spiel entstehen, deinen Segen, dass er Samsara und Nirvana als untrennbar erkennt.
+In allen Lebenszeiten nicht vom Lama getrennt zu sein und sich des Glanzes seiner Lehren zu erfreuen, die Eigenschaften der Ebenen und Wege vollständig zu vervollkommnen, möge dadurch der Zustand von Dordsche Tschang schnell erreicht werden.
+DIE VIER GRUNDLEGENDEN GEDANKEN - Meditiere zuerst über das kostbare Menschendasein, welches schwer zu erlangen und so leicht zu verlieren ist. Jetzt sollte ich dem Leben Sinn verleihen.
+Zweitens sind die Welt und die in ihr lebenden Lebewesen allesamt unbeständig. Besonders das Leben der Wesen ist zerbrechlich wie eine Wasserblase. Der Zeitpunkt unseres Todes ist ungewiss und wir werden dann zu einer Leiche. Weil der Dharma dann von Nutzen ist, sollte ich fleißig praktizieren.
+Drittens werden wir ohne eigene Kontrolle dem Tod begegnen. Um Karma selbst zu bestimmen, gebe ich alles Unheilsame auf und übe mich immerzu in guten Taten. So denkend untersuche ich täglich meinen eigenen Geist.
+Viertens, weil die Stätten Samsaras, die Freunde, Vergnügungen, Reichtümer und so weiter, mit den drei Arten von Leiden behaftet sind, sind sie wie ein Festmahl, bevor man zur Hinrichtung geführt wird. Die Anhaftung durchschneidend werde ich unablässig nach der Verwirklichung der Buddhaschaft streben.
+ZUFLUCHT UND BODHICHITTA - Vor mir im Himmel ist Guru Vajradhara, umgeben von den Gurus der Linie von Bedeutung und Segen und allen Gurus, denen ich vertraue und zu denen ich eine karmische Verbindung habe. Vor ihnen sind die Yidams, zu ihrer Rechten die Buddhas, dahinter der heilige Dharma, zu ihrer Linken der Sangha. Wie von einem Ozean sind sie jeweils umgeben von einem Gefolge ihresgleichen. 
+Mit allen fühlenden Wesen, meinen Müttern, stehe ich vor den Augen all derer, die die Quellen der Zuflucht sind. Einsgerichtet nehmen wir Zuflucht und erwecken Bodhichitta in uns. Ich und alle fühlenden Wesen nehmen Zuflucht zu den Gurus. Wir nehmen Zuflucht zu den Yidams. Wir nehmen Zuflucht zu den Buddhas. Wir nehmen Zuflucht zum Dharma. Wir nehmen Zuflucht zur Sangha.
+Pausiere nun die Wiedergabe. Nimm so oft wie möglich Zuflucht zu den fünf Juwelen. Erhalte dieselbe Visualisation aufrecht und erwecke Bodhichitta.
+Bis ich die Essenz der Erleuchtung erlangt habe, nehme ich Zuflucht zu den Buddhas. Auch zum Dharma und zur Versammlung der Bodhisattvas nehme ich Zuflucht.
+So wie in der Vergangenheit die Erleuchteten den Bodhichitta-Geist in sich erweckten, so wie sie Schritt für Schritt der Schulung eines Bodhisattvas folgten, So werde auch ich, um den wandernden Wesen zu helfen, den Geist des Bodhichitta erwecken, so werde auch ich, Schritt für Schritt, der Schulung eines Bodhisattvas folgen.
+Möge das kostbare und höchste Bodhichitta dort entstehen, wo es noch nicht entstanden ist. Möge es nicht abnehmen, wo es entstanden ist. Möge es mehr und mehr zunehmen.
+Am Ende lösen sich die Zufluchtsobjekte in Licht auf und verschmelzen mit mir.
+Kurze Widmung - Ich verteile diesen Verdienst, so dass alle Wesen den Zustand der Buddhaschaft erlangen, indem sie durch die Verbindung von Methode und Weisheit auf dem inneren Weg zum Vajra, dem beständigen und unsterblichen Glück des Vajra-Geistes gehen. Möge ich, nachdem ich durch diesen Verdienst schnell Mahamudra verwirklicht habe, alle Wesen ohne Ausnahme auf diese Stufe bringen.
+
+
+## Achtsamkeit auf den Atem (Stabilität)
+**Description**
+Meditation aus dem Kurs "Cultivating Emotional Balance" auf: https://anwi.gmbh/?page_id=493&lang=de
+
+**Mediation**
+Motivation: - Nachdem du eine bequeme Haltung eingenommen hast, nimm dir einen Moment Zeit um über die Vorteile für dein eigenes Leben nachzudenken, die entstehen, wenn du einen Geist kultivierst, der frei von Unruhe und erfüllt mit Konzentration und Stabilität ist. Konzentriere dich auf jede der Qualitäten, die du entwickeln möchtest, um ein besserer Mensch zu werden.
+Den Körper in seinen natürlichen Zustand versetzen: - Bevor du in die formelle Praxis eintrittst, lächle innerlich zu dir selbst und erwecke eine Präsenz von Leichtigkeit. Nun lasst uns, mit weniger Worten, den Körper in seinen natürlichen Zustand versetzen, erfüllt mit den drei Qualitäten: Entspannung, Stille und Wachsamkeit.
+Die Atmung in ihren natürlichen Rhythmus versetzen: - Nachdem du den Körper in seinen natürlichen Zustand gebracht hast, versetze deine Atmung in ihren natürlichen Rhythmus. Vertraue darauf, dass dein Körper so viel atmet, wie er es braucht, nicht mehr und nicht weniger.
+Das Bewusstsein in seinen natürlichen Zustand versetzen: - Während der Atem von alleine ein- und ausfließt, lass dein Bewusstsein im gegenwärtigen Moment zur Ruhe kommen. Lasse für einen kurzen Augenblick dein Bewusstsein in sich selbst ruhen, lenke deine  Aufmerksamkeit nicht auf irgendetwas, sondern sei einfach bewusst.
+Achtsame Atembeobachtung im ganzen Körper: - Mit einem Gefühl der Leichtigkeit, wende dich den Empfindungen im ganzen Körper zu insbesondere den Empfindungen die mit dem Atmen verbunden sind. Konzentriere dich darauf, bei jedem Ausatmen die überschüssige Spannung in Körper und Geist loszulassen. Lass dein Bewusstsein sich ausdehnen bis es das gesamte Feld der taktilen Empfindungen umfasst.
+Bauch: - Ohne dich zu verspannen, versuche die sanfte Übung der Konzentration anzuwenden, indem du deine Aufmerksamkeit auf den Empfindungen des Atems in deinem Bauch ruhen lässt. Achte auf das Ansteigen und Abfallen des Bauches bei jeder Ein- und Ausatmung. Halte deine Bauchmuskeln weich und entspannt und verändere den Atem in keiner Weise. Wenn du die Atemempfindungen nicht wahrnehmen kannst, dann achte auf alle anderen Empfindungen im Bauch.
+Erhöhe mit jeder Einatmung deine Aufmerksamkeit  und konzentriere dich noch mehr auf den Bauch. Beobachte die Empfindungen im Bauch mit so wenigen Konzepten wie möglich und nähere dich dem nackten Bewusstsein an. 
+Entspanne dich mit jedem Ausatmen noch tiefer und lasse sämtlichen Druck los, ruhe in einer Präsenz von Leichtigkeit. Wenn deine Aufmerksamkeit von deinem Bauch weggezogen wird, lass, was immer dich weggezogen hat, los und komme ruhig zurück.
+Wecke mit jedem Einatmen deine Aufmerksamkeit und überwinde dadurch Laxheit und entspanne dich noch tiefer bei jeder Ausatmung und überwinde Erregung. Erlaube auf diese Weise jedem Atemzyklus eine komplette Mediation für sich selbst zu sein, und balanciere so die Aufmerksamkeit aus. Die Achtsamkeit hat hier eine Qualität von scharfer Unterscheidung. Bemerke mit jedem Ein- und Ausatmen ob der Atem kurz oder lang ist und erhalte eine Qualität von wissen aufrecht.
+Achtsamkeit: - In jeder Übung zum Trainieren von Aufmerksamkeit, ist es wichtig, ein klares Verständnis davon zu haben, was das Objekt der Achtsamkeit ist. In dieser Phase der Achtsamkeit auf die Atmung sind es die taktilen Empfindungen des Atmens im Unterleib. Das soll nicht heißen, dass nichts anderes im Geist erscheint, aber wir konzentrieren unsere Aufmerksamkeit nicht absichtlich auf etwas anderes. Also, wann immer deine Aufmerksamkeit woanders hinzieht, lasse das, was dich weggeführt hat, los und komm zurück zur Beobachtung des Atmens im Bauch.
+Introspektion: - Zusätzlich zu deiner anhaltenden Achtsamkeit auf die Empfindung im Bauch, benutze auch die Introspektion und warne dich selbst, wenn Laxheit oder Erregung auftauchen. Sobald du feststellst, dass du stumpf, matt oder lethargisch wirst, ist es an der Zeit, deine Aufmerksamkeit neu zu wecken und ein größeres Interesse an der Übung zu zeigen.
+Wenn du zu irgendeinem Zeitpunkt fest wirst oder Verspannung fühlst oder in Gedanken gefangen bist, dann verfolge keinen mühseligen Ansatz der Unterdrückung und härterer Anstrengung, sondern werde lockerer und löse dich und kehre mit einer Präsenz der Leichtigkeit und einem freundlichen Lächeln zurück zur achtsamen Atembeobachtung im Bauch.
+Lasst uns jetzt in Stille bis zum Ende weiter üben.
+
+
+## Mental Woop 
+
+**Description**
+Classic Wish-Outcome-Obstacle-Plan Contemplation from https://woopmylife.org/
+
+**Meditation:**
+Wish: - Think about the next four weeks or your own timeframe, what is your one dearest wish that you would like to fulfil and that you also think you could fulfil during this time frame? Fulfilling your wish should be challenging for you, but you should feel that it is possible for you. If you have several wishes, select the one that is most important to you. The wish can be about your relationships, your health, a job, school, or anything else that is important to you. Find this one specific wish, summarize it in 3 to 6 words, and keep it in the front of your mind.
+Outcome: - Now, what is the best thing, the best outcome that you associate with fulfilling your wish? How would fulfilling your wish make you feel? What would be the best thing about achieving your wish? Find the best outcome, summarize it in 3 to 6 words, and keep it in the front of your mind.
+Now, imagine this best outcome as vividly as possible. Give your thoughts and images free reign. Let your mind go. You can close your eyes if you would like. Imagine and feel it as fully as you can.
+Obstacle: - What holds you back from realizing your wish? What is it in you that stands in the way of you making your wish come true? What is the obstacle in you that stands in the way of you fulfilling your wish? What behavior of yours or what emotion could hinder you from fulfilling your wish? Dig deeper, what is in you that stops you from realizing your wish? What is your one main inner obstacle? Find it, summarize it in 3 to 6 words, and keep it in the front of your mind.
+And again, imagine your one main inner obstacle occurring as vividly as possible. Give your thoughts and images free reign. Let your mind go. You can close your eyes if you would like. Imagine this one main obstacle. Imagine and feel it as fully as you can.
+Plan: - What can you do to overcome your obstacle? Identify one action you can take or one thought you can think to overcome your obstacle. What can you do? Identify one action or one thought. Find it, summarize it in 3 to 6 words, and keep it in the front of your mind.
+Now make an if-then plan: Take your obstacle and place it after the word “if.” Similarly, place the behavior to overcome your obstacle after the word “then”: If my obstacle appears then I will take this action or thought to overcome my obstacle. Once more: If my obstacle appears then I will take this action or thought to overcome my obstacle.
+
+
+## Metta-Sutta
+**Description**
+Das Sutra von der liebenden Güte (übersetzt von Vimalo)
+
+**Meditation:**
+Wem klar geworden, dass der Frieden des Geistes das Ziel seines Lebens ist, der bemühe sich um folgende Gesinnung: Er sei stark, aufrecht und gewissenhaft freundlich, sanft und ohne Stolz.
+Genügsam sei er leicht befriedigt nicht viel geschäftig und bedürfnislos.
+Die Sinne still,  klar der Verstand, nicht dreist nicht gierig sei sein Verhalten.
+Auch nicht im Kleinsten soll er sich vergehen wofür ihn Verständige tadeln könnten.
+Mögen alle Wesen glücklich sein und Frieden finden.
+Was es auch an lebenden Wesen gibt: ob stark oder schwach, ob groß oder klein, ob sichtbar oder unsichtbar, fern oder nah, ob geboren oder einer Geburt zustrebend, - mögen sie alle glücklich sein.
+Niemand betrüge oder verachte einen anderen.
+Aus Ärger oder Übelwollen wünsche man keinem
+irgendwelches Unglück.
+Wie eine Mutter mit ihrem Leben
+ihr einzig Kind beschützt und behütet /
+so möge man für alle Wesen und die ganze Welt
+ein unbegrenzt gütiges Gemüt erwecken:
+ohne Hass / ohne Feindschaft / ohne Beschränkung
+nach oben / nach unten und nach allen Seiten.
+Im Gehen oder Stehen / im Sitzen oder Liegen /
+entfalte man eifrig diese Gesinnung:
+Dies nennt man Weilen im Heiligen.
+Wer sich nicht an Ansichten verliert /
+Tugend und Einsicht gewinnt /
+dem Sinnengenuss nicht verhaftet ist –
+für den gibt es keine Geburt mehr.
