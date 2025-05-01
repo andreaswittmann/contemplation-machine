@@ -1,9 +1,46 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { useSession } from '../contexts/SessionContext';
 import { useMeditationConfig } from '../contexts/MeditationConfigContext';
 import { useInstructions } from '../contexts/InstructionsContext';
 import { usePresets } from '../contexts/PresetContext';
 import './SessionView.css';
+
+// Browser fullscreen API helpers - using type assertions instead of interface extensions
+// This avoids TypeScript interface conflicts
+const requestFullscreen = (element: HTMLElement): Promise<void> => {
+  if (element.requestFullscreen) {
+    return element.requestFullscreen();
+  } else if ((element as any).mozRequestFullScreen) {
+    return (element as any).mozRequestFullScreen();
+  } else if ((element as any).webkitRequestFullscreen) {
+    return (element as any).webkitRequestFullscreen();
+  } else if ((element as any).msRequestFullscreen) {
+    return (element as any).msRequestFullscreen();
+  }
+  return Promise.reject('Fullscreen API not supported');
+};
+
+const exitFullscreen = (): Promise<void> => {
+  if (document.exitFullscreen) {
+    return document.exitFullscreen();
+  } else if ((document as any).mozCancelFullScreen) {
+    return (document as any).mozCancelFullScreen();
+  } else if ((document as any).webkitExitFullscreen) {
+    return (document as any).webkitExitFullscreen();
+  } else if ((document as any).msExitFullscreen) {
+    return (document as any).msExitFullscreen();
+  }
+  return Promise.reject('Fullscreen API not supported');
+};
+
+const isFullscreenActive = (): boolean => {
+  return !!(
+    document.fullscreenElement ||
+    (document as any).mozFullScreenElement ||
+    (document as any).webkitFullscreenElement ||
+    (document as any).msFullscreenElement
+  );
+};
 
 const SessionView: React.FC = () => {
   const { session, startSession, pauseSession, resumeSession, stopSession, instructionLines } = useSession();
@@ -12,7 +49,9 @@ const SessionView: React.FC = () => {
   const { presets, loadPreset, currentPreset } = usePresets();
   const [currentInstruction, setCurrentInstruction] = useState<string>('');
   const [selectedPresetId, setSelectedPresetId] = useState<string>('');
+  const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
   const instructionDisplayRef = useRef<HTMLDivElement>(null);
+  const sessionContainerRef = useRef<HTMLDivElement>(null);
 
   // Function to check if the current configuration matches the loaded preset
   const isConfigMatchingPreset = () => {
@@ -80,6 +119,70 @@ const SessionView: React.FC = () => {
       : "Unknown";
   };
 
+  // Detect fullscreen changes and update state accordingly
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      const fullscreenState = isFullscreenActive();
+
+      setIsFullscreen(fullscreenState);
+
+      // Add class to body when in fullscreen mode
+      if (fullscreenState) {
+        document.body.classList.add('body-fullscreen');
+      } else {
+        document.body.classList.remove('body-fullscreen');
+      }
+    };
+
+    // Add event listeners for fullscreen change
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    document.addEventListener('mozfullscreenchange', handleFullscreenChange);
+    document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+    document.addEventListener('MSFullscreenChange', handleFullscreenChange);
+
+    // Add keyboard event listener for Escape key
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && isFullscreen) {
+        handleExitFullscreen();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    // Clean up event listeners on component unmount
+    return () => {
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+      document.removeEventListener('mozfullscreenchange', handleFullscreenChange);
+      document.removeEventListener('webkitfullscreenchange', handleFullscreenChange);
+      document.removeEventListener('MSFullscreenChange', handleFullscreenChange);
+      document.removeEventListener('keydown', handleKeyDown);
+      document.body.classList.remove('body-fullscreen');
+    };
+  }, [isFullscreen]);
+
+  // Enter fullscreen mode
+  const handleEnterFullscreen = useCallback(() => {
+    if (sessionContainerRef.current) {
+      requestFullscreen(sessionContainerRef.current)
+        .catch(error => console.error('Failed to enter fullscreen mode:', error));
+    }
+  }, []);
+
+  // Exit fullscreen mode
+  const handleExitFullscreen = useCallback(() => {
+    exitFullscreen()
+      .catch(error => console.error('Failed to exit fullscreen mode:', error));
+  }, []);
+
+  // Toggle fullscreen mode
+  const toggleFullscreen = useCallback(() => {
+    if (isFullscreen) {
+      handleExitFullscreen();
+    } else {
+      handleEnterFullscreen();
+    }
+  }, [isFullscreen, handleEnterFullscreen, handleExitFullscreen]);
+
   // Update current instruction based on session progress
   useEffect(() => {
     if (!session.isActive) {
@@ -94,16 +197,19 @@ const SessionView: React.FC = () => {
       return;
     }
 
+    // Get the instruction for the current index
     const index = session.currentInstructionIndex;
     if (index >= 0 && index < instructionLines.length) {
       const instruction = instructionLines[index];
       console.log(`[VIEW] Setting current instruction to "${instruction}" (index: ${index})`);
       setCurrentInstruction(instruction);
 
+      // Ensure text is properly displayed by adjusting container if needed
       if (instructionDisplayRef.current) {
         const container = instructionDisplayRef.current;
         const textLength = instruction.length;
 
+        // Dynamically adjust styles based on text length
         if (textLength > 200) {
           container.classList.add('long-text');
         } else if (textLength > 100) {
@@ -140,25 +246,28 @@ const SessionView: React.FC = () => {
       currentInstructionIndex: session.currentInstructionIndex,
       progress: session.progress,
       instructionLinesCount: instructionLines.length,
-      currentInstruction
+      currentInstruction,
+      isFullscreen
     });
-  }, [session.isActive, session.isPaused, session.currentInstructionIndex, session.progress, instructionLines.length, currentInstruction]);
+  }, [session.isActive, session.isPaused, session.currentInstructionIndex, session.progress, instructionLines.length, currentInstruction, isFullscreen]);
 
   // Calculate container class based on session state
   const getContainerClasses = () => {
-    const classes = ['session-view'];
+    const classes = ['session-view', 'harmonized'];
 
     if (session.isActive) {
       classes.push('active-meditation');
     }
 
-    classes.push('harmonized');
+    if (isFullscreen) {
+      classes.push('fullscreen');
+    }
 
     return classes.join(' ');
   };
 
   return (
-    <div className={getContainerClasses()}>
+    <div className={getContainerClasses()} ref={sessionContainerRef}>
       {session.isPreparingAudio ? (
         <div className="preparing-session harmonized-card">
           <h2>Preparing Your Session</h2>
@@ -245,6 +354,16 @@ const SessionView: React.FC = () => {
         </div>
       ) : (
         <div className="active-session harmonized-card">
+          {isFullscreen && (
+            <button
+              className="exit-fullscreen-btn"
+              onClick={handleExitFullscreen}
+              aria-label="Exit fullscreen mode"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          )}
+
           <div className="timer-display">
             <h2 className="section-title">Time Remaining</h2>
             <div className="time">{formatTimeRemaining(session.timeRemaining)}</div>
@@ -313,6 +432,14 @@ const SessionView: React.FC = () => {
               aria-label="End meditation session"
             >
               End Session
+            </button>
+
+            <button
+              className="fullscreen-button control-button"
+              onClick={toggleFullscreen}
+              aria-label={isFullscreen ? "Exit fullscreen mode" : "Enter fullscreen mode"}
+            >
+              {isFullscreen ? "Exit Fullscreen" : "Fullscreen"}
             </button>
           </div>
         </div>
