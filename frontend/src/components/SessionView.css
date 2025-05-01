@@ -1,7 +1,86 @@
+/* SessionView.css - Harmonized with other view components */
+
+/* Base container styling */
 .session-view {
+  width: 100%;
   max-width: 800px;
   margin: 0 auto;
-  padding: 2rem;
+  box-sizing: border-box;
+}
+
+/* Harmonized design for consistent look and feel with other components */
+.session-view.harmonized {
+  background-color: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Card styling for sub-components */
+.harmonized-card {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 1.5rem;
+}
+
+/* Consistent section titles */
+.section-title {
+  font-size: 1.5rem;
+  color: #4a6fa5;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* Info cards with consistent styling */
+.info-card {
+  background-color: #f9f9f9;
+  padding: 1rem;
+  border-radius: 8px;
+  width: 100%;
+  margin-bottom: 1rem;
+  border: 1px solid #eee;
+  box-sizing: border-box;
+}
+
+/* Settings display */
+.settings-title {
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+}
+
+.settings-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.settings-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.35rem 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.settings-list li:last-child {
+  border-bottom: none;
+}
+
+.setting-value {
+  font-weight: 500;
+  color: #555;
+}
+
+/* Duration display */
+.duration-display {
+  font-size: 1.1rem;
+  color: #333;
+  margin: 1rem 0;
+  text-align: center;
 }
 
 /* When meditation is active, make the view use full window width */
@@ -12,41 +91,17 @@
   padding: 0;
   border-radius: 0;
   box-shadow: none;
+  transition: all 0.3s ease-in-out;
 }
 
 .session-view.active-meditation .active-session {
   width: 100%;
-  max-width: 100%;
-  margin: 0;
-  padding: 1rem;
-}
-
-.session-view.active-meditation .timer-display {
-  width: 100%;
-  max-width: 100%;
-  margin: 0;
-}
-
-.session-view.active-meditation .instruction-display {
-  background-color: white;
-  padding: 2rem 1rem;
-  border-radius: 0;
-  text-align: center;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  margin: 1rem 0;
-  width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
-}
-
-/* Verbesserte Textgrößen für die aktive Meditation */
-.session-view.active-meditation .current-instruction p {
-  font-size: clamp(1.8rem, 4vw, 3rem);
-  line-height: 1.4;
-}
-
-.session-view.active-meditation .time {
-  font-size: clamp(3.5rem, 6vw, 5rem);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* Start screen styling */
@@ -55,70 +110,146 @@
   flex-direction: column;
   align-items: center;
   gap: 1.5rem;
-  margin-top: 2rem;
+  margin: 0 auto;
+  max-width: 600px;
 }
 
-.selected-instruction-info {
-  background-color: #f5f5f5;
-  padding: 1rem;
-  border-radius: 8px;
+/* Form elements with consistent styling */
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #555;
+}
+
+.form-select {
   width: 100%;
-  text-align: center;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background-color: white;
+  font-size: 1rem;
+  color: #333;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='none' stroke='%23999' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='4,6 7,9 10,6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 14px;
+  transition: all 0.2s ease;
 }
 
-.audio-settings-summary {
-  background-color: #f0f7ff;
-  padding: 1rem;
-  border-radius: 8px;
+.form-select:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+.form-select:hover {
+  border-color: #3498db;
+}
+
+/* Preset selector with consistent styling */
+.preset-selector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
   width: 100%;
-  margin-bottom: 1rem;
+  max-width: 400px;
 }
 
-.audio-settings-summary ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0.5rem 0;
-}
-
-.audio-settings-summary li {
-  padding: 0.25rem 0;
-}
-
-.start-button {
-  background-color: #4caf50;
+/* Common button styling */
+.primary-button {
+  display: inline-block;
+  background-color: #4a90e2;
   color: white;
-  font-size: 1.2rem;
-  padding: 1rem 2rem;
+  font-size: 1rem;
+  padding: 0.75rem 1.5rem;
   border: none;
-  border-radius: 50px;
+  border-radius: 30px;
   cursor: pointer;
+  font-weight: 500;
   transition: all 0.3s ease;
+  text-align: center;
+  line-height: 1.5;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.start-button:hover {
-  background-color: #45a049;
+.primary-button:hover {
+  background-color: #3a80d2;
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Loading screen styling */
+.primary-button:active {
+  transform: translateY(0);
+}
+
+/* Start button styling */
+.start-button {
+  background-color: #4caf50;
+  min-width: 180px;
+  font-size: 1.1rem;
+  padding: 0.9rem 1.8rem;
+}
+
+.start-button:hover {
+  background-color: #45a049;
+}
+
+/* Control buttons with consistent styling */
+.control-button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 30px;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 1rem;
+  min-width: 120px;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.pause-button, .resume-button {
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+.pause-button:hover, .resume-button:hover {
+  background-color: #e0e0e0;
+  transform: translateY(-2px);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.stop-button {
+  background-color: #ff6b6b;
+  color: white;
+}
+
+.stop-button:hover {
+  background-color: #ff5252;
+  transform: translateY(-2px);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Loading screen styling with improved visuals */
 .preparing-session {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 300px;
+  min-height: 300px;
   text-align: center;
+  gap: 1.5rem;
 }
 
 .loading-spinner {
-  border: 5px solid rgba(0, 0, 0, 0.1);
-  border-top: 5px solid #3498db;
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-top: 4px solid #3498db;
   border-radius: 50%;
   width: 50px;
   height: 50px;
   animation: spin 1s linear infinite;
-  margin: 1.5rem 0;
 }
 
 @keyframes spin {
@@ -126,7 +257,7 @@
   100% { transform: rotate(360deg); }
 }
 
-/* Active session styling */
+/* Active session styling with better text handling */
 .active-session {
   display: flex;
   flex-direction: column;
@@ -135,23 +266,29 @@
 
 .timer-display {
   text-align: center;
+  margin-bottom: 1rem;
 }
 
 .time {
-  font-size: 3.5rem;
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
   font-weight: bold;
   color: #333;
   margin: 1rem 0;
+  line-height: 1.2;
 }
 
 .progress-container {
   margin-top: 1rem;
+  width: 100%;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .progress-bar {
-  height: 10px;
+  height: 8px;
   background-color: #e0e0e0;
-  border-radius: 5px;
+  border-radius: 4px;
   overflow: hidden;
   position: relative;
 }
@@ -169,28 +306,54 @@
   margin-top: 0.3rem;
 }
 
+/* Improved instruction display for text of varying lengths */
 .instruction-display {
   background-color: #f9f9f9;
   padding: 1.5rem;
   border-radius: 10px;
   text-align: center;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: all 0.3s ease;
 }
 
 .current-instruction {
-  min-height: 80px;
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 120px;
+  transition: min-height 0.3s ease;
 }
 
-.current-instruction p {
-  font-size: 1.5rem;
+/* Base text styling */
+.instruction-text {
+  font-size: clamp(1.3rem, 2.5vw, 1.8rem);
   color: #333;
   font-weight: 500;
   margin: 0;
   line-height: 1.5;
-  transition: opacity 0.5s ease;
+  transition: all 0.5s ease;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+}
+
+/* Adjust instruction text size based on length */
+.instruction-display.medium-text .instruction-text {
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  line-height: 1.6;
+}
+
+.instruction-display.long-text .instruction-text {
+  font-size: clamp(1rem, 1.8vw, 1.3rem);
+  line-height: 1.7;
 }
 
 .instruction-progress {
@@ -205,12 +368,16 @@
   margin-bottom: 0.7rem;
 }
 
+/* Enhanced visual instruction progress indicator */
 .instruction-dots {
   display: flex;
   justify-content: center;
   gap: 5px;
   flex-wrap: wrap;
   margin-top: 0.5rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .instruction-dot {
@@ -219,12 +386,12 @@
   border-radius: 50%;
   background-color: #ddd;
   display: inline-block;
+  transition: all 0.3s ease;
 }
 
 .instruction-dot.active {
   background-color: #3498db;
   transform: scale(1.3);
-  transition: all 0.3s ease;
 }
 
 .instruction-dot.completed {
@@ -234,88 +401,8 @@
 .session-controls {
   display: flex;
   justify-content: center;
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-.pause-button, .resume-button, .stop-button {
-  padding: 0.8rem 1.5rem;
-  border: none;
-  border-radius: 30px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.pause-button, .resume-button {
-  background-color: #f0f0f0;
-  color: #333;
-}
-
-.pause-button:hover, .resume-button:hover {
-  background-color: #e0e0e0;
-}
-
-.stop-button {
-  background-color: #ff6b6b;
-  color: white;
-}
-
-.stop-button:hover {
-  background-color: #ff5252;
-}
-
-/* Preset selector styling */
-.preset-selector {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  width: 100%;
-  max-width: 400px;
-  margin-bottom: 1rem;
-}
-
-.preset-selector label {
-  font-weight: 500;
-  color: #555;
-}
-
-.preset-dropdown {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  background-color: white;
-  font-size: 1rem;
-  color: #333;
-  cursor: pointer;
-  appearance: none;
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='none' stroke='%23999' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='4,6 7,9 10,6'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 12px center;
-  background-size: 14px;
-}
-
-.preset-dropdown:focus {
-  outline: none;
-  border-color: #3498db;
-  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
-}
-
-.preset-dropdown option {
-  padding: 10px;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .time {
-    font-size: 2.5rem;
-  }
-  
-  .current-instruction p {
-    font-size: 1.2rem;
-  }
+  gap: 1.5rem;
+  margin-top: 1.5rem;
 }
 
 /* Bell playing screen styling */
@@ -359,157 +446,114 @@
   animation: breathe 4s infinite ease-in-out;
 }
 
-/* Fullscreen meditation session - Fixed Implementation */
-.session-view.fullscreen {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  max-width: 100%;
-  margin: 0;
-  padding: 2rem;
-  z-index: 1000;
-  background-color: #f5f5f7;
-  overflow-y: auto;
-  box-sizing: border-box;
+@keyframes breathe {
+  0%, 100% { transform: scale(0.98); opacity: 0.8; }
+  50% { transform: scale(1.02); opacity: 1; }
 }
 
-.session-view.fullscreen .active-session {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 80vh;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.session-view.fullscreen .instruction-display {
-  width: 90%;
-  max-width: 1000px;
-  padding: 2rem;
-  margin: 2rem auto;
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-}
-
-.session-view.fullscreen .current-instruction p {
-  font-size: 2rem;
-  line-height: 1.4;
-}
-
-.session-view.fullscreen .time {
-  font-size: 4rem;
-}
-
-/* Exit fullscreen button */
-.exit-fullscreen-btn {
-  position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
-  background-color: rgba(255, 255, 255, 0.8);
-  border: 1px solid #ddd;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 1.2rem;
-  z-index: 1010;
-}
-
-/* Fullscreen button styling */
-.fullscreen-button {
-  background-color: #3498db;
-  color: white;
-}
-
-.fullscreen-button:hover {
-  background-color: #2980b9;
-}
-
-/* Animation for entering fullscreen */
-@keyframes enterFullscreen {
-  from {
-    opacity: 0.8;
-    transform: scale(0.95);
+/* Responsive adjustments */
+@media (max-width: 960px) {
+  .session-view {
+    padding: 1rem;
   }
-  to {
-    opacity: 1;
-    transform: scale(1);
+  
+  .session-view.active-meditation .active-session {
+    padding: 1rem;
   }
-}
-
-/* Media queries for responsive fullscreen mode */
-@media (max-width: 1440px) {
-  .session-view.fullscreen .current-instruction p {
-    font-size: 2rem;
+  
+  .instruction-display {
+    padding: 1rem;
+  }
+  
+  .current-instruction {
+    min-height: 100px;
+  }
+  
+  .instruction-text {
+    font-size: clamp(1.2rem, 2vw, 1.6rem);
   }
 }
 
 @media (max-width: 768px) {
-  .session-view.fullscreen .current-instruction p {
-    font-size: 1.6rem;
+  .time {
+    font-size: clamp(2rem, 3vw, 2.5rem);
   }
   
-  .session-view.fullscreen .time {
-    font-size: 3rem;
+  .instruction-display {
+    min-height: 150px;
+  }
+  
+  .current-instruction {
+    min-height: 80px;
+  }
+  
+  .instruction-text {
+    font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+  }
+  
+  .instruction-display.medium-text .instruction-text {
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+  }
+  
+  .instruction-display.long-text .instruction-text {
+    font-size: clamp(0.9rem, 1.3vw, 1.1rem);
+  }
+  
+  .session-controls {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+  
+  .control-button {
+    width: 80%;
+    max-width: 250px;
   }
 }
 
 @media (max-width: 480px) {
-  .session-view.fullscreen .current-instruction p {
-    font-size: 1.4rem;
+  .session-view {
+    padding: 0.75rem;
   }
   
-  .session-view.fullscreen .time {
-    font-size: 3rem;
+  .session-view.active-meditation .active-session {
+    padding: 0.75rem;
+  }
+  
+  .instruction-display {
+    padding: 1rem 0.75rem;
+    min-height: 120px;
+  }
+  
+  .current-instruction {
+    min-height: 60px;
+  }
+  
+  .time {
+    font-size: clamp(1.8rem, 2.5vw, 2.2rem);
+  }
+  
+  .instruction-text {
+    font-size: clamp(1rem, 1.5vw, 1.3rem);
+  }
+  
+  .instruction-display.medium-text .instruction-text,
+  .instruction-display.long-text .instruction-text {
+    font-size: clamp(0.9rem, 1.2vw, 1rem);
+  }
+  
+  .control-button {
+    padding: 0.6rem 1.2rem;
+    width: 100%;
   }
 }
 
-/* Responsive sizing for the active session */
-.session-view.active-meditation .instruction-display {
-  background-color: white;
-  padding: 2rem 1rem;
-  border-radius: 0;
-  text-align: center;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  margin: 1rem 0;
-  width: 90%;
-  max-width: 1200px;
+/* Animation utility classes */
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
 }
 
-.session-view.active-meditation .current-instruction p {
-  font-size: clamp(1.8rem, 4vw, 3rem);
-  line-height: 1.4;
-  font-weight: 500;
-}
-
-.session-view.active-meditation .time {
-  font-size: clamp(3.5rem, 6vw, 5rem);
-}
-
-/* Making session controls more centered and visible */
-.session-view.active-meditation .session-controls {
-  margin: 0 auto;
-  width: fit-content;
-  gap: 2rem;
-}
-
-/* Responsive adjustments */
-@media (min-width: 1440px) {
-  .session-view.active-meditation {
-    max-width: 80%;
-  }
-}
-
-@media (max-width: 768px) {
-  .session-view.active-meditation {
-    max-width: 100%;
-    padding: 1rem;
-  }
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
