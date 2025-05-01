@@ -1,24 +1,19 @@
 {
   "id": "default-preset-achtsamkeit",
-  "name": "Achtsamkeit auf den Atem - Emanual (deutsch)",
-  "description": "Develop compassion and goodwill through metta meditation",
-  "createdAt": "2025-04-30T00:00:00.000Z",
-  "updatedAt": "2025-04-30T00:00:00.000Z",
-  "keywords": [
-    "compassion",
-    "loving-kindness",
-    "metta",
-    "kindness"
-  ],
+  "name": "Achtsamkeit auf den Atem - ElevenLabs-Emanuel (deutsch)",
+  "description": "",
+  "createdAt": "2025-05-01T11:54:10.006Z",
+  "updatedAt": "2025-05-01T11:54:10.006Z",
   "isDefault": true,
   "config": {
-    "duration": 1,
+    "duration": 24,
     "bellAtStart": true,
     "bellAtEnd": true,
     "useVoiceGuidance": true,
     "voiceType": "elevenlabs",
     "openaiVoice": "alloy",
     "elevenlabsVoiceId": "umDfZDi2AcMmDUsDsBfA",
-    "selectedInstructionId": "default-instruction-4"
-  }
+    "selectedInstructionId": "1746100381263"
+  },
+  "voiceDisplayName": "ElevenLabs ID: umDfZDi2AcMmDUsDsBfA"
 }

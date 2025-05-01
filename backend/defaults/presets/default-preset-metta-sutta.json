@@ -1,0 +1,19 @@
+{
+  "id": "default-preset-metta-sutta",
+  "name": "Metta-Sutta OpenAI-Shimmer (Deutsch)",
+  "description": "",
+  "createdAt": "2025-05-01T17:35:52.045Z",
+  "updatedAt": "2025-05-01T17:35:52.045Z",
+  "isDefault": true,
+  "config": {
+    "duration": 10,
+    "bellAtStart": true,
+    "bellAtEnd": true,
+    "useVoiceGuidance": true,
+    "voiceType": "openai",
+    "openaiVoice": "shimmer",
+    "elevenlabsVoiceId": null,
+    "selectedInstructionId": "1746120048478"
+  },
+  "voiceDisplayName": "Shimmer - Gentle, soothing voice"
+}
