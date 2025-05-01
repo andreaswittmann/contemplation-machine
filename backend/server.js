@@ -240,6 +240,9 @@ const openAIVoiceDescriptions = {
 // Create a mapping of instruction IDs to their cached audio files
 let instructionAudioMap = {};
 
+// Add a mapping of instruction line content to cache files
+let instructionLineAudioMap = {};
+
 // Track usage analytics for instructions
 let cacheAnalytics = {
   accessCount: {}, // Track how many times each audio file is accessed
@@ -351,33 +354,158 @@ const updateCacheAnalytics = (audioHash, instructionId, isStartingInstruction = 
 // Debounce timer for saving analytics
 let saveAnalyticsTimeout = null;
 
-// Function to invalidate cached audio for specific instruction content
-const invalidateInstructionCache = (instructionId) => {
-  // If we have tracked cached files for this instruction, remove them
-  if (instructionAudioMap[instructionId]) {
-    console.log(`Invalidating cache for instruction ID: ${instructionId}`);
+// Function to track audio cache files for a specific instruction text
+const trackInstructionAudio = (instructionId, text, audioFile) => {
+  // Track by instruction ID
+  if (!instructionAudioMap[instructionId]) {
+    instructionAudioMap[instructionId] = [];
+  }
+  if (!instructionAudioMap[instructionId].includes(audioFile)) {
+    instructionAudioMap[instructionId].push(audioFile);
+  }
+  
+  // Track by specific instruction text
+  if (!instructionLineAudioMap[text]) {
+    instructionLineAudioMap[text] = [];
+  }
+  if (!instructionLineAudioMap[text].includes(audioFile)) {
+    instructionLineAudioMap[text].push(audioFile);
+  }
+};
+
+// Function to get instruction content as an array of lines
+const getInstructionLines = (instructionId) => {
+  try {
+    if (!fs.existsSync(instructionsPath)) {
+      return [];
+    }
+    const instructions = fs.readJsonSync(instructionsPath);
+    const instruction = instructions.find(i => i.id === instructionId);
+    if (!instruction) return [];
     
-    const filesToRemove = instructionAudioMap[instructionId];
+    return instruction.content
+      .split('\n')
+      .filter(line => line.trim().length > 0);
+  } catch (error) {
+    console.error(`Error getting instruction lines for ${instructionId}:`, error);
+    return [];
+  }
+};
+
+// Enhanced function to intelligently invalidate cached audio for instruction content
+const invalidateInstructionCache = (instructionId) => {
+  console.log(`Invalidating cache for instruction ID: ${instructionId}`);
+  
+  // For deleted instructions, remove all cached files
+  if (!instructionAudioMap[instructionId]) {
+    console.log(`No cached files tracked for instruction ID: ${instructionId}`);
+    return;
+  }
+
+  try {
+    // Get previous lines (if available) and current lines
+    const currentLines = getInstructionLines(instructionId);
+    
+    // If the instruction was deleted or has no content
+    if (currentLines.length === 0) {
+      console.log(`Instruction ${instructionId} was deleted or has no content, cleaning up all cached files`);
+      const filesToRemove = instructionAudioMap[instructionId];
+      filesToRemove.forEach(file => {
+        const filePath = path.join(audioCacheDir, file);
+        if (fs.existsSync(filePath)) {
+          fs.unlinkSync(filePath);
+          console.log(`Removed cached file: ${file}`);
+          
+          // Also remove from analytics
+          const fileHash = file.replace('.mp3', '');
+          delete cacheAnalytics.accessCount[fileHash];
+          delete cacheAnalytics.lastAccessed[fileHash];
+          delete cacheAnalytics.priorityScores[fileHash];
+        }
+      });
+      
+      // Clear the tracking for this instruction
+      delete instructionAudioMap[instructionId];
+      delete cacheAnalytics.instructionFrequency[instructionId];
+      delete cacheAnalytics.startingInstructions[instructionId];
+      
+      // Save analytics to disk
+      saveCacheAnalytics();
+      return;
+    }
+    
+    // Check which files need to be invalidated
+    const filesToRemove = [];
+    
+    // Go through all files previously associated with this instruction
+    instructionAudioMap[instructionId].forEach(file => {
+      const fileHash = file.replace('.mp3', '');
+      
+      // Find what instruction line this file was for
+      let foundInCurrentLines = false;
+      
+      // Check if this file is used by any current instruction lines
+      for (const text of Object.keys(instructionLineAudioMap)) {
+        if (instructionLineAudioMap[text].includes(file)) {
+          // Check if this text is in the current instruction
+          if (currentLines.includes(text)) {
+            foundInCurrentLines = true;
+            break;
+          }
+        }
+      }
+      
+      // If this file is not used by any current lines, mark for removal
+      if (!foundInCurrentLines) {
+        filesToRemove.push(file);
+      }
+    });
+    
+    console.log(`Found ${filesToRemove.length} cache files to invalidate for changed lines`);
+    
+    // Remove the files marked for deletion
     filesToRemove.forEach(file => {
       const filePath = path.join(audioCacheDir, file);
       if (fs.existsSync(filePath)) {
         fs.unlinkSync(filePath);
         console.log(`Removed cached file: ${file}`);
         
-        // Also remove from analytics
-        delete cacheAnalytics.accessCount[file];
-        delete cacheAnalytics.lastAccessed[file];
-        delete cacheAnalytics.priorityScores[file];
+        // Remove file reference from instruction ID tracking
+        const fileIndex = instructionAudioMap[instructionId].indexOf(file);
+        if (fileIndex !== -1) {
+          instructionAudioMap[instructionId].splice(fileIndex, 1);
+        }
+        
+        // Remove file reference from instruction line tracking
+        for (const text of Object.keys(instructionLineAudioMap)) {
+          const lineIndex = instructionLineAudioMap[text].indexOf(file);
+          if (lineIndex !== -1) {
+            instructionLineAudioMap[text].splice(lineIndex, 1);
+            
+            // Clean up empty entries
+            if (instructionLineAudioMap[text].length === 0) {
+              delete instructionLineAudioMap[text];
+            }
+          }
+        }
+        
+        // Update analytics
+        const fileHash = file.replace('.mp3', '');
+        delete cacheAnalytics.accessCount[fileHash];
+        delete cacheAnalytics.lastAccessed[fileHash];
+        delete cacheAnalytics.priorityScores[fileHash];
       }
     });
     
-    // Clear the tracking for this instruction
-    delete instructionAudioMap[instructionId];
-    delete cacheAnalytics.instructionFrequency[instructionId];
-    delete cacheAnalytics.startingInstructions[instructionId];
+    // Clean up if there are no more files for this instruction
+    if (instructionAudioMap[instructionId].length === 0) {
+      delete instructionAudioMap[instructionId];
+    }
     
     // Save analytics to disk
     saveCacheAnalytics();
+  } catch (error) {
+    console.error(`Error during intelligent cache invalidation:`, error);
   }
 };
 
@@ -1118,6 +1246,11 @@ app.post('/api/tts', async (req, res) => {
       // Update cache analytics
       updateCacheAnalytics(audioHash, instructionId, isStartingInstruction);
       
+      // Track this audio file with the instruction if not already tracked
+      if (instructionId) {
+        trackInstructionAudio(instructionId, text, path.basename(cachedAudioPath));
+      }
+      
       // Return cached audio file
       return res.sendFile(cachedAudioPath);
     }
@@ -1219,6 +1352,11 @@ app.post('/api/tts', async (req, res) => {
     
     // Update analytics for newly created file
     updateCacheAnalytics(audioHash, instructionId, isStartingInstruction);
+    
+    // Track the audio file for the instruction
+    if (instructionId) {
+      trackInstructionAudio(instructionId, text, path.basename(newAudioPath));
+    }
     
     // Send response to client
     res.setHeader('Content-Type', 'audio/mpeg');
@@ -1539,6 +1677,12 @@ app.put('/api/presets/:id', (req, res) => {
     }
     
     const existingPreset = fs.readJsonSync(presetPath);
+    
+    // Prevent updating system presets
+    if (existingPreset.isDefault) {
+      debugLog(`Attempted to update system preset ${presetId}`);
+      return res.status(403).json({ error: 'System presets cannot be modified' });
+    }
     
     // Update fields
     const updatedPreset = {

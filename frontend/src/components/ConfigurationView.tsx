@@ -3,6 +3,7 @@ import { useMeditationConfig, OpenAIVoice } from '../contexts/MeditationConfigCo
 import { useInstructions } from '../contexts/InstructionsContext';
 import { useElevenLabsVoices } from '../contexts/ElevenLabsVoicesContext';
 import { usePresets } from '../contexts/PresetContext';
+import { useSession } from '../contexts/SessionContext';
 import SavePresetModal from './SavePresetModal';
 import PresetList from './PresetList';
 import { format } from 'date-fns';
@@ -12,6 +13,7 @@ const ConfigurationView: React.FC = () => {
   const { instructions, isLoading } = useInstructions();
   const { voices: elevenLabsVoices, isLoading: isLoadingVoices } = useElevenLabsVoices();
   const { presets, loadPresets, currentPreset, updatePreset, clearCurrentPreset, loadPreset } = usePresets();
+  const { startSession } = useSession();
   const [isPresetModalOpen, setIsPresetModalOpen] = useState(false);
   const [isPresetListOpen, setIsPresetListOpen] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
@@ -50,6 +52,11 @@ const ConfigurationView: React.FC = () => {
     }
   };
 
+  // Function to handle starting a meditation session
+  const handleBeginSession = () => {
+    startSession();
+  };
+
   // Update selected preset based on current configuration and currentPreset
   React.useEffect(() => {
     if (currentPreset) {
@@ -84,9 +91,22 @@ const ConfigurationView: React.FC = () => {
     updateConfig({ [name]: checked });
   };
 
-  // Handle duration change
+  // Handle duration change from slider
   const handleDurationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     updateConfig({ duration: parseInt(e.target.value, 10) });
+  };
+
+  // Handle duration change from numeric input
+  const handleDurationInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseInt(e.target.value, 10);
+    if (!isNaN(value) && value >= 1 && value <= 60) {
+      updateConfig({ duration: value });
+    }
+  };
+
+  // Handle quick duration preset buttons
+  const handleDurationPreset = (minutes: number) => {
+    updateConfig({ duration: minutes });
   };
 
   // Handle instruction file change
@@ -152,7 +172,8 @@ const ConfigurationView: React.FC = () => {
               <button 
                 className="btn btn-primary"
                 onClick={handleUpdatePreset}
-                disabled={isUpdating}
+                disabled={isUpdating || currentPreset.isDefault}
+                title={currentPreset.isDefault ? "System presets cannot be modified" : "Update current preset with these settings"}
               >
                 {isUpdating ? 'Updating...' : 'Update Preset'}
               </button>
@@ -179,18 +200,67 @@ const ConfigurationView: React.FC = () => {
       </div>
 
       <div className="config-section">
-        <label htmlFor="duration">
-          <strong>Duration:</strong> {config.duration} minutes
-        </label>
-        <input
-          type="range"
-          id="duration"
-          name="duration"
-          min="1"
-          max="60"
-          value={config.duration}
-          onChange={handleDurationChange}
-        />
+        <h3>Session Duration</h3>
+        <div className="duration-control">
+          <label htmlFor="duration">
+            <strong>Duration:</strong> {config.duration} minutes
+          </label>
+          <div className="duration-slider-input">
+            <input
+              type="range"
+              id="duration"
+              name="duration"
+              min="1"
+              max="60"
+              value={config.duration}
+              onChange={handleDurationChange}
+              className="duration-slider"
+            />
+            <input
+              type="number"
+              id="durationInput"
+              name="durationInput"
+              min="1"
+              max="60"
+              value={config.duration}
+              onChange={handleDurationInputChange}
+              className="duration-number"
+              aria-label="Meditation duration in minutes"
+            />
+          </div>
+          <div className="duration-presets">
+            <button 
+              className="btn btn-small"
+              onClick={() => handleDurationPreset(5)}
+            >
+              5 min
+            </button>
+            <button 
+              className="btn btn-small"
+              onClick={() => handleDurationPreset(10)}
+            >
+              10 min
+            </button>
+            <button 
+              className="btn btn-small"
+              onClick={() => handleDurationPreset(15)}
+            >
+              15 min
+            </button>
+            <button 
+              className="btn btn-small"
+              onClick={() => handleDurationPreset(20)}
+            >
+              20 min
+            </button>
+            <button 
+              className="btn btn-small"
+              onClick={() => handleDurationPreset(30)}
+            >
+              30 min
+            </button>
+          </div>
+        </div>
       </div>
 
       <div className="config-section">
@@ -327,6 +397,15 @@ const ConfigurationView: React.FC = () => {
             )}
           </div>
         )}
+      </div>
+
+      <div className="config-section">
+        <button 
+          className="btn btn-primary begin-session-button"
+          onClick={handleBeginSession}
+        >
+          Begin Session
+        </button>
       </div>
 
       {/* Add modals for preset functionality */}

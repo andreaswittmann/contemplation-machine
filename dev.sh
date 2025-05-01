@@ -198,6 +198,10 @@ clean() {
     echo "Cleaning backend..."
     rm -rf "$SCRIPT_DIR/backend/node_modules"
     rm -rf "$SCRIPT_DIR/backend/data/audio-cache"
+    rm -rf "$SCRIPT_DIR/backend/data/presets"
+    rm -rf "$SCRIPT_DIR/backend/data/instructions.json"
+    rm -rf "$SCRIPT_DIR/backend/data/api-keys.json"
+    rm -rf "$SCRIPT_DIR/backend/data/cache-analytics.json"
     
     echo "Clean completed successfully!"
 }

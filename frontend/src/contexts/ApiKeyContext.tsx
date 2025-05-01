@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { useElevenLabsVoices } from './ElevenLabsVoicesContext';
 
 interface ApiKeyStatus {
   exists: boolean;
@@ -60,6 +61,9 @@ export const ApiKeyProvider: React.FC<{ children: ReactNode }> = ({ children }) 
   // Error state
   const [error, setError] = useState<string | null>(null);
 
+  // Get the ElevenLabs voices refresh function
+  const { refreshVoices } = useElevenLabsVoices();
+
   // Load API key status on component mount
   useEffect(() => {
     refreshStatus();
@@ -107,6 +111,16 @@ export const ApiKeyProvider: React.FC<{ children: ReactNode }> = ({ children }) 
       
       // Update status after saving key
       await refreshStatus();
+      
+      // If this is an ElevenLabs API key and it was successfully validated, refresh the voice list
+      if (service === 'elevenlabs' && data.validated) {
+        console.log('ElevenLabs API key saved and validated. Refreshing voices list...');
+        try {
+          await refreshVoices();
+        } catch (voiceError) {
+          console.error('Error refreshing ElevenLabs voices after API key update:', voiceError);
+        }
+      }
       
       if (data.error) {
         setError(`API key saved but validation failed: ${data.error}`);
