@@ -14,7 +14,7 @@ services:
     volumes:
       # Map data directory to host filesystem
       - ./backend/data:/app/data
-      # Map audio cache directory specifically
-      - ./backend/data/audio-cache:/app/data/audio-cache
+      # We're removing the specific audio-cache mapping to allow the initialization code to work
       # Map presets directory
       - ./backend/data/presets:/app/data/presets
+      # Remove mappings for defaults directories as they should come from the container image

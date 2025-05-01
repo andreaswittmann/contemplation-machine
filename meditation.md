@@ -194,24 +194,10 @@ Das Sutra von der liebenden Güte (übersetzt von Vimalo)
 
 **Meditation:**
 Wem klar geworden, dass der Frieden des Geistes das Ziel seines Lebens ist, der bemühe sich um folgende Gesinnung: Er sei stark, aufrecht und gewissenhaft freundlich, sanft und ohne Stolz.
-Genügsam sei er leicht befriedigt nicht viel geschäftig und bedürfnislos.
-Die Sinne still,  klar der Verstand, nicht dreist nicht gierig sei sein Verhalten.
-Auch nicht im Kleinsten soll er sich vergehen wofür ihn Verständige tadeln könnten.
-Mögen alle Wesen glücklich sein und Frieden finden.
+Genügsam sei er leicht befriedigt nicht viel geschäftig und bedürfnislos. Die Sinne still,  klar der Verstand, nicht dreist nicht gierig sei sein Verhalten.
+Auch nicht im Kleinsten soll er sich vergehen wofür ihn Verständige tadeln könnten. Mögen alle Wesen glücklich sein und Frieden finden.
 Was es auch an lebenden Wesen gibt: ob stark oder schwach, ob groß oder klein, ob sichtbar oder unsichtbar, fern oder nah, ob geboren oder einer Geburt zustrebend, - mögen sie alle glücklich sein.
-Niemand betrüge oder verachte einen anderen.
-Aus Ärger oder Übelwollen wünsche man keinem
-irgendwelches Unglück.
-Wie eine Mutter mit ihrem Leben
-ihr einzig Kind beschützt und behütet /
-so möge man für alle Wesen und die ganze Welt
-ein unbegrenzt gütiges Gemüt erwecken:
-ohne Hass / ohne Feindschaft / ohne Beschränkung
-nach oben / nach unten und nach allen Seiten.
-Im Gehen oder Stehen / im Sitzen oder Liegen /
-entfalte man eifrig diese Gesinnung:
-Dies nennt man Weilen im Heiligen.
-Wer sich nicht an Ansichten verliert /
-Tugend und Einsicht gewinnt /
-dem Sinnengenuss nicht verhaftet ist –
-für den gibt es keine Geburt mehr.
+Niemand betrüge oder verachte einen anderen. Aus Ärger oder Übelwollen wünsche man keinem irgendwelches Unglück.
+Wie eine Mutter mit ihrem Leben ihr einzig Kind beschützt und behütet, so möge man für alle Wesen und die ganze Welt ein unbegrenzt gütiges Gemüt erwecken: ohne Hass, ohne Feindschaft, ohne Beschränkung nach oben, nach unten und nach allen Seiten.
+Im Gehen oder Stehen, im Sitzen oder Liegen entfalte man eifrig diese Gesinnung: Dies nennt man Weilen im Heiligen.
+Wer sich nicht an Ansichten verliert, Tugend und Einsicht gewinnt, dem Sinnengenuss nicht verhaftet ist – für den gibt es keine Geburt mehr.

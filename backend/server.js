@@ -58,10 +58,53 @@ fs.ensureDirSync(presetsDir);
 
 // Ensure default audio cache is copied to data/audio-cache if it doesn't exist
 const defaultAudioCacheDir = path.join(defaultsDir, 'audio-cache');
-if (!fs.existsSync(audioCacheDir) || fs.readdirSync(audioCacheDir).length === 0) {
-  console.log('Copying default audio cache to data/audio-cache...');
-  fs.copySync(defaultAudioCacheDir, audioCacheDir);
-  console.log('Default audio cache copied successfully.');
+
+// DEBUG: Check if directories exist and log their contents
+console.log('Default audio cache directory:', defaultAudioCacheDir);
+console.log('Default audio cache exists:', fs.existsSync(defaultAudioCacheDir));
+if (fs.existsSync(defaultAudioCacheDir)) {
+  console.log('Default audio cache files:', fs.readdirSync(defaultAudioCacheDir).length);
+}
+
+console.log('Target audio cache directory:', audioCacheDir);
+console.log('Target audio cache exists:', fs.existsSync(audioCacheDir));
+if (fs.existsSync(audioCacheDir)) {
+  console.log('Target audio cache files:', fs.readdirSync(audioCacheDir).length);
+}
+
+// Copy default audio files while preserving existing files
+try {
+  console.log('Starting smart copy of audio cache (preserving existing files)...');
+  fs.ensureDirSync(audioCacheDir);
+  
+  // Get list of default audio files
+  const defaultAudioFiles = fs.existsSync(defaultAudioCacheDir) ? 
+    fs.readdirSync(defaultAudioCacheDir) : [];
+    
+  // Get list of existing audio files
+  const existingAudioFiles = fs.existsSync(audioCacheDir) ?
+    fs.readdirSync(audioCacheDir) : [];
+    
+  // Create a set for faster lookups
+  const existingFileSet = new Set(existingAudioFiles);
+  
+  // Copy each missing file from defaults to data
+  let filesCopied = 0;
+  defaultAudioFiles.forEach(audioFile => {
+    // Only copy if this file doesn't already exist
+    if (!existingFileSet.has(audioFile)) {
+      const sourcePath = path.join(defaultAudioCacheDir, audioFile);
+      const destPath = path.join(audioCacheDir, audioFile);
+      
+      // Copy the file
+      fs.copySync(sourcePath, destPath);
+      filesCopied++;
+    }
+  });
+  
+  console.log(`Audio cache initialization complete. Copied ${filesCopied} new files while preserving existing ones.`);
+} catch (error) {
+  console.error('Error copying audio cache:', error);
 }
 
 // Ensure default presets and instructions are copied to data directory if they don't exist

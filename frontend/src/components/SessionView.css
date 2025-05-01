@@ -232,6 +232,18 @@
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
 }
 
+/* Fullscreen button styling */
+.fullscreen-button {
+  background-color: #3498db;
+  color: white;
+}
+
+.fullscreen-button:hover {
+  background-color: #2980b9;
+  transform: translateY(-2px);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
 /* Loading screen styling with improved visuals */
 .preparing-session {
   display: flex;
@@ -403,6 +415,7 @@
   justify-content: center;
   gap: 1.5rem;
   margin-top: 1.5rem;
+  flex-wrap: wrap;
 }
 
 /* Bell playing screen styling */
@@ -451,6 +464,156 @@
   50% { transform: scale(1.02); opacity: 1; }
 }
 
+/* Body style when in fullscreen mode */
+body.body-fullscreen {
+  overflow: hidden;
+  background-color: #f0f6ff;
+}
+
+/* Fullscreen mode styling */
+.session-view.fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  max-width: 100%;
+  margin: 0;
+  padding: 2rem;
+  z-index: 1000;
+  background-color: #f0f6ff;
+  overflow-y: auto;
+  box-sizing: border-box;
+  animation: enterFullscreen 0.5s ease-out;
+}
+
+/* Improved styling for fullscreen active session */
+.session-view.fullscreen .active-session {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+}
+
+/* Enhanced timer display in fullscreen mode */
+.session-view.fullscreen .timer-display {
+  margin-bottom: 3rem;
+}
+
+.session-view.fullscreen .time {
+  font-size: clamp(3.5rem, 8vw, 5.5rem);
+  color: #1a1a1a;
+}
+
+.session-view.fullscreen .progress-bar {
+  height: 12px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Enhanced instruction display in fullscreen mode */
+.session-view.fullscreen .instruction-display {
+  width: 90%;
+  max-width: 1000px;
+  padding: 3rem;
+  margin: 0 auto 3rem auto;
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  min-height: 250px;
+}
+
+.session-view.fullscreen .current-instruction {
+  min-height: 150px;
+}
+
+/* Larger text size in fullscreen mode */
+.session-view.fullscreen .instruction-text {
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.4;
+}
+
+.session-view.fullscreen .instruction-display.medium-text .instruction-text {
+  font-size: clamp(1.6rem, 3vw, 2.5rem);
+}
+
+.session-view.fullscreen .instruction-display.long-text .instruction-text {
+  font-size: clamp(1.3rem, 2.5vw, 2rem);
+}
+
+/* Enhanced instruction progress in fullscreen mode */
+.session-view.fullscreen .instruction-progress {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+}
+
+.session-view.fullscreen .instruction-counter {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.session-view.fullscreen .instruction-dot {
+  width: 10px;
+  height: 10px;
+  margin: 0 3px;
+}
+
+/* Enhanced session controls in fullscreen mode */
+.session-view.fullscreen .session-controls {
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.session-view.fullscreen .control-button {
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  min-width: 150px;
+}
+
+/* Exit fullscreen button */
+.exit-fullscreen-btn {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.5rem;
+  z-index: 1010;
+  transition: all 0.2s ease;
+}
+
+.exit-fullscreen-btn:hover {
+  background-color: white;
+  transform: scale(1.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Animation for entering fullscreen */
+@keyframes enterFullscreen {
+  from {
+    opacity: 0.8;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 /* Responsive adjustments */
 @media (max-width: 960px) {
   .session-view {
@@ -471,6 +634,19 @@
   
   .instruction-text {
     font-size: clamp(1.2rem, 2vw, 1.6rem);
+  }
+  
+  /* Fullscreen adjustments */
+  .session-view.fullscreen {
+    padding: 1rem;
+  }
+  
+  .session-view.fullscreen .instruction-display {
+    padding: 1.5rem;
+  }
+  
+  .session-view.fullscreen .instruction-text {
+    font-size: clamp(1.6rem, 3vw, 2.5rem);
   }
 }
 
@@ -509,6 +685,43 @@
     width: 80%;
     max-width: 250px;
   }
+  
+  /* Fullscreen mobile adjustments */
+  .session-view.fullscreen {
+    padding: 1rem 0.5rem;
+  }
+  
+  .session-view.fullscreen .timer-display {
+    margin-bottom: 1.5rem;
+  }
+  
+  .session-view.fullscreen .time {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+  }
+  
+  .session-view.fullscreen .instruction-display {
+    padding: 1.5rem 1rem;
+    min-height: 180px;
+  }
+  
+  .session-view.fullscreen .instruction-text {
+    font-size: clamp(1.4rem, 3vw, 2rem);
+  }
+  
+  .session-view.fullscreen .control-button {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    min-width: 120px;
+    width: 80%;
+  }
+  
+  .exit-fullscreen-btn {
+    top: 1rem;
+    right: 1rem;
+    width: 36px;
+    height: 36px;
+    font-size: 1.2rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -544,6 +757,28 @@
   
   .control-button {
     padding: 0.6rem 1.2rem;
+    width: 100%;
+  }
+  
+  /* Fullscreen mobile small screen adjustments */
+  .session-view.fullscreen .instruction-text {
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  }
+  
+  .session-view.fullscreen .instruction-display.medium-text .instruction-text {
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+  }
+  
+  .session-view.fullscreen .instruction-display.long-text .instruction-text {
+    font-size: clamp(1rem, 1.8vw, 1.3rem);
+  }
+  
+  .session-view.fullscreen .session-controls {
+    gap: 0.8rem;
+    flex-direction: column;
+  }
+  
+  .session-view.fullscreen .control-button {
     width: 100%;
   }
 }
