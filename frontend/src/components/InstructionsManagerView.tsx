@@ -133,12 +133,16 @@ const InstructionsManagerView: React.FC = () => {
                   <button 
                     onClick={() => handleEdit(instruction)}
                     className="edit-button"
+                    disabled={instruction.isDefault}
+                    title={instruction.isDefault ? "System instructions cannot be modified" : "Edit this instruction"}
                   >
                     Edit
                   </button>
                   <button 
                     onClick={() => handleDelete(instruction.id)}
                     className="delete-button"
+                    disabled={instruction.isDefault}
+                    title={instruction.isDefault ? "System instructions cannot be deleted" : "Delete this instruction"}
                   >
                     Delete
                   </button>

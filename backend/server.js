@@ -873,6 +873,12 @@ app.put('/api/instructions/:id', (req, res) => {
       return res.status(404).json({ error: 'Instruction file not found' });
     }
     
+    // Prevent updating system instructions
+    if (instructions[instructionIndex].isDefault) {
+      debugLog(`Attempted to update system instruction ${instructionId}`);
+      return res.status(403).json({ error: 'System instructions cannot be modified' });
+    }
+    
     debugLog(`Found instruction at index ${instructionIndex}, updating fields`);
     
     const updatedInstruction = {
@@ -915,13 +921,23 @@ app.delete('/api/instructions/:id', (req, res) => {
     const instructions = fs.readJsonSync(instructionsPath);
     debugLog(`Read ${instructions.length} instructions, filtering out ID: ${instructionId}`);
     
-    const initialLength = instructions.length;
-    const filteredInstructions = instructions.filter(i => i.id !== instructionId);
+    // Find the instruction before attempting to filter
+    const instructionToDelete = instructions.find(i => i.id === instructionId);
     
-    if (filteredInstructions.length === initialLength) {
+    // If instruction doesn't exist, return 404
+    if (!instructionToDelete) {
       debugLog(`Instruction with ID ${instructionId} not found for deletion`);
       return res.status(404).json({ error: 'Instruction file not found' });
     }
+    
+    // Prevent deleting system instructions
+    if (instructionToDelete.isDefault) {
+      debugLog(`Attempted to delete system instruction ${instructionId}`);
+      return res.status(403).json({ error: 'System instructions cannot be deleted' });
+    }
+    
+    const initialLength = instructions.length;
+    const filteredInstructions = instructions.filter(i => i.id !== instructionId);
     
     debugLog(`Removed instruction, writing updated file with ${filteredInstructions.length} entries`);
     fs.writeJsonSync(instructionsPath, filteredInstructions, { spaces: 2 });
