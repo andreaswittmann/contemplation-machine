@@ -5,6 +5,28 @@
 ## Summary
 This release introduces a refreshed set of default meditation presets and instructions, providing users with a more diverse and comprehensive meditation experience right out of the box. The update includes both English and German language options, covering different meditation styles and techniques to suit various preferences and needs.
 
+## Sub-Release 1.7.1 (May 2, 2025)
+
+This sub-release includes important documentation enhancements and implements a key protection feature for system instructions.
+
+### Changes in 1.7.1
+
+#### Feature Additions
+- **System Instructions Protection**: Added protection for default system instructions to prevent modification
+  - Implemented backend validation in PUT and DELETE endpoints to reject attempts to modify system instructions
+  - Enhanced the UI by disabling edit and delete buttons for system instructions
+  - Added tooltips to explain why system instruction buttons are disabled
+  - Made protection consistent between instructions and presets
+  - This addresses Issue #1 from the "Issues to Address" section below
+
+#### Documentation Improvements
+- **Enhanced Readme Documentation**:
+  - Added visual elements with Buddha statue and Contemplation Machine images
+  - Improved document structure with meaningful formatting (bold, italics, emojis)
+  - Expanded content on personalization capabilities and custom meditation sessions
+  - Highlighted the importance of repetition in sustainable mental transformation
+  - Added visual hierarchy to improve readability and user engagement
+
 ## New Default Content
 
 ### Updated Default Presets
