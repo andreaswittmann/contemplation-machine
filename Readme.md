@@ -515,7 +515,7 @@ A: The interface currently supports English and German. For contemplation conten
 
 ## A New Approach to Development
 
-The Contemplation Machine represents a fascinating case study in modern software development—one where the traditional barriers between experienced and novice developers have been significantly lowered through the use of advanced AI assistance. Despite having 30 years of IT experience, the creator had limited experience with JavaScript and the specific frameworks used in this project. Yet, through the use of GitHub Copilot's Agent Mode and effective prompting techniques, they were able to develop a sophisticated full-stack application that would normally require months of dedicated work by an experienced JavaScript developer.
+The Contemplation Machine represents a fascinating case study in modern software development—one where the traditional barriers between experienced and novice developers have been significantly lowered through the use of advanced AI assistance. Despite having 30 years of IT experience, the creator had limited experience with JavaScript and the specific frameworks used in this project. Yet, through the use of GitHub Copilot's Agent Mode and effective prompting techniques, he was able to develop a sophisticated full-stack application that would normally require months of dedicated work by an experienced JavaScript developer.
 
 > "The entire development and documentation process was completed using GitHub Copilot Agent Mode and prompting techniques, despite having little experience with JavaScript and the concrete frameworks used in the application."
 
