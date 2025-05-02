@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  meditation-app:
+  contemplation-machine:
     build:
       context: .
       dockerfile: Dockerfile

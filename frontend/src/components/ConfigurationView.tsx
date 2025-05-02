@@ -1,424 +1,406 @@
-import React, { useState } from 'react';
-import { useMeditationConfig, OpenAIVoice } from '../contexts/MeditationConfigContext';
+import React, { useState, useEffect } from 'react';
+import { useMeditationConfig, OpenAIVoice, defaultConfig } from '../contexts/MeditationConfigContext';
+import { useSession } from '../contexts/SessionContext';
 import { useInstructions } from '../contexts/InstructionsContext';
 import { useElevenLabsVoices } from '../contexts/ElevenLabsVoicesContext';
 import { usePresets } from '../contexts/PresetContext';
-import { useSession } from '../contexts/SessionContext';
-import SavePresetModal from './SavePresetModal';
+import { useNavigation } from '../App';
 import PresetList from './PresetList';
-import { format } from 'date-fns';
+import SavePresetModal from './SavePresetModal';
+import EditPresetModal from './EditPresetModal';
+import { ErrorBanner } from './ErrorBanner';
 
 const ConfigurationView: React.FC = () => {
-  const { config, updateConfig } = useMeditationConfig();
-  const { instructions, isLoading } = useInstructions();
-  const { voices: elevenLabsVoices, isLoading: isLoadingVoices } = useElevenLabsVoices();
-  const { presets, loadPresets, currentPreset, updatePreset, clearCurrentPreset, loadPreset } = usePresets();
+  const { config, updateConfig, resetConfig } = useMeditationConfig();
   const { startSession } = useSession();
+  const { instructions, fetchInstructions } = useInstructions();
+  const { voices: elevenLabsVoices } = useElevenLabsVoices();
+  const { presets, savePreset, loadPreset, updatePreset, currentPreset, clearCurrentPreset } = usePresets();
+  const { setActiveTab } = useNavigation();
+  
+  // Component state
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isPresetModalOpen, setIsPresetModalOpen] = useState(false);
-  const [isPresetListOpen, setIsPresetListOpen] = useState(false);
-  const [isUpdating, setIsUpdating] = useState(false);
-  const [selectedPresetId, setSelectedPresetId] = useState<string>('custom');
+  const [isSavePresetFormOpen, setIsSavePresetFormOpen] = useState(false);
+  const [isEditPresetModalOpen, setIsEditPresetModalOpen] = useState(false);
+  const [selectedPresetId, setSelectedPresetId] = useState<string>('');
+  const [currentPresetDescription, setCurrentPresetDescription] = useState<string>('');
 
-  // Function to handle successful preset save
-  const handlePresetSaved = () => {
-    loadPresets(); // Refresh the presets list
-  };
+  // Load instructions on mount - removed fetchInstructions from dependency array to prevent infinite loop
+  useEffect(() => {
+    fetchInstructions();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  // Handle preset selection change
+  // Update description when preset changes
+  useEffect(() => {
+    if (selectedPresetId) {
+      const preset = presets.find(p => p.id === selectedPresetId);
+      if (preset) {
+        setCurrentPresetDescription(preset.description);
+      }
+    } else {
+      setCurrentPresetDescription('');
+    }
+  }, [selectedPresetId, presets]);
+
+  // Handle preset selection
   const handlePresetChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
     const presetId = e.target.value;
-    if (presetId === 'custom') {
-      clearCurrentPreset();
-    } else {
+    setSelectedPresetId(presetId);
+    if (presetId) {
       await loadPreset(presetId);
     }
-    setSelectedPresetId(presetId);
   };
 
-  // Function to handle updating the current preset with new settings
-  const handleUpdatePreset = async () => {
-    if (!currentPreset) return;
-    
-    setIsUpdating(true);
-    try {
-      await updatePreset(currentPreset.id, {
-        config,
-        updatedAt: new Date().toISOString(),
-      });
-    } catch (error) {
-      console.error("Error updating preset:", error);
-    } finally {
-      setIsUpdating(false);
+  // Check if the currently selected preset is a system preset
+  const isSystemPreset = selectedPresetId && presets.find(p => p.id === selectedPresetId)?.isDefault === true;
+
+  // Handle configuration changes
+  const handleDurationChange = (value: string) => {
+    const duration = parseInt(value);
+    if (!isNaN(duration) && duration > 0) {
+      updateConfig({ duration });
     }
   };
 
-  // Function to handle starting a meditation session
-  const handleBeginSession = () => {
-    startSession();
-  };
-
-  // Update selected preset based on current configuration and currentPreset
-  React.useEffect(() => {
-    if (currentPreset) {
-      setSelectedPresetId(currentPreset.id);
-    } else {
-      setSelectedPresetId('custom');
-    }
-  }, [currentPreset]);
-
-  // Format date for display
-  const formatDate = (dateString: string) => {
-    try {
-      return format(new Date(dateString), 'MMM d, yyyy h:mm a');
-    } catch (err) {
-      return 'Unknown date';
-    }
-  };
-
-  // OpenAI voice descriptions
-  const openAIVoiceDescriptions: Record<OpenAIVoice, string> = {
-    alloy: 'Alloy - Versatile, balanced voice',
-    echo: 'Echo - Clear, confident voice',
-    fable: 'Fable - Warm, soft-spoken voice',
-    onyx: 'Onyx - Deep, authoritative voice',
-    nova: 'Nova - Bright, friendly voice',
-    shimmer: 'Shimmer - Gentle, soothing voice'
-  };
-
-  // Handle checkbox changes
-  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, checked } = e.target;
-    updateConfig({ [name]: checked });
-  };
-
-  // Handle duration change from slider
-  const handleDurationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    updateConfig({ duration: parseInt(e.target.value, 10) });
-  };
-
-  // Handle duration change from numeric input
-  const handleDurationInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = parseInt(e.target.value, 10);
-    if (!isNaN(value) && value >= 1 && value <= 60) {
-      updateConfig({ duration: value });
-    }
-  };
-
-  // Handle quick duration preset buttons
   const handleDurationPreset = (minutes: number) => {
     updateConfig({ duration: minutes });
   };
 
-  // Handle instruction file change
-  const handleInstructionFileChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = e.target.value;
-    updateConfig({
-      selectedInstructionId: value === "none" ? null : value
-    });
+  const handleUseVoiceGuidance = (e: React.ChangeEvent<HTMLInputElement>) => {
+    updateConfig({ useVoiceGuidance: e.target.checked });
   };
 
-  // Handle voice type change
   const handleVoiceTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    updateConfig({ voiceType: e.target.value as 'browser' | 'openai' | 'elevenlabs' });
+    const voiceType = e.target.value as 'browser' | 'openai' | 'elevenlabs';
+    updateConfig({ voiceType });
   };
 
-  // Handle OpenAI voice change
   const handleOpenAIVoiceChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     updateConfig({ openaiVoice: e.target.value as OpenAIVoice });
   };
 
-  // Handle ElevenLabs voice change
   const handleElevenLabsVoiceChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    updateConfig({
-      elevenlabsVoiceId: e.target.value
-    });
+    updateConfig({ elevenlabsVoiceId: e.target.value });
   };
 
+  const handleInstructionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    updateConfig({ selectedInstructionId: e.target.value });
+  };
+
+  // Separate handlers for bell sounds at start and end
+  const handleBellAtStartChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    updateConfig({ bellAtStart: e.target.checked });
+  };
+
+  const handleBellAtEndChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    updateConfig({ bellAtEnd: e.target.checked });
+  };
+
+  // Function to handle starting a contemplation session
+  const handleStartSession = () => {
+    if (!config.selectedInstructionId) {
+      setErrorMessage("Please select an instruction file before starting your session.");
+      return;
+    }
+    
+    if (config.useVoiceGuidance && config.voiceType === 'elevenlabs' && !config.elevenlabsVoiceId) {
+      setErrorMessage("Please select an ElevenLabs voice or choose a different voice provider.");
+      return;
+    }
+    
+    setErrorMessage(null);
+    startSession();
+    // Switch to the contemplate tab
+    setActiveTab('contemplate');
+  };
+
+  // Render the voice selection based on the selected voice type
+  const renderVoiceSelection = () => {
+    switch (config.voiceType) {
+      case 'browser':
+        return (
+          <div className="form-group">
+            <p>Using browser's default text-to-speech voice</p>
+          </div>
+        );
+      case 'openai':
+        return (
+          <div className="form-group">
+            <label htmlFor="openaiVoiceSelect">OpenAI Voice:</label>
+            <select
+              id="openaiVoiceSelect"
+              value={config.openaiVoice}
+              onChange={handleOpenAIVoiceChange}
+              className="form-control"
+            >
+              <option value="alloy">Alloy - Versatile, balanced voice</option>
+              <option value="echo">Echo - Clear, confident voice</option>
+              <option value="fable">Fable - Warm, soft-spoken voice</option>
+              <option value="onyx">Onyx - Deep, authoritative voice</option>
+              <option value="nova">Nova - Bright, friendly voice</option>
+              <option value="shimmer">Shimmer - Gentle, soothing voice</option>
+            </select>
+          </div>
+        );
+      case 'elevenlabs':
+        return (
+          <div className="form-group">
+            <label htmlFor="elevenLabsVoiceSelect">ElevenLabs Voice:</label>
+            <select
+              id="elevenLabsVoiceSelect"
+              value={config.elevenlabsVoiceId || ""}
+              onChange={handleElevenLabsVoiceChange}
+              className="form-control"
+            >
+              <option value="" disabled>Select an ElevenLabs voice</option>
+              {elevenLabsVoices.length > 0 ? (
+                elevenLabsVoices.map(voice => (
+                  <option key={voice.voice_id} value={voice.voice_id}>
+                    {voice.name}
+                  </option>
+                ))
+              ) : (
+                <option value="" disabled>Loading voices...</option>
+              )}
+            </select>
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
+  
   return (
     <div className="configuration-view">
-      <h2>Configure Your Meditation Session</h2>
+      <h2>Configure Your Contemplation Session</h2>
       
-      <div className="config-section preset-controls">
-        <div className="preset-selector">
-          <label htmlFor="presetSelect">Meditation Preset:</label>
+      <div className="config-section">
+        <h3>Preset</h3>
+        <div className="select-group">
+          <label htmlFor="presetSelect">Contemplation Preset:</label>
           <select
             id="presetSelect"
-            value={selectedPresetId}
             onChange={handlePresetChange}
-            className="preset-dropdown"
+            className="form-control"
+            value={selectedPresetId}
           >
-            <option value="custom">Custom configuration</option>
+            <option value="" disabled>Select a preset</option>
             {presets.map(preset => (
-              <option 
-                key={preset.id} 
-                value={preset.id}
-                className={preset.isDefault ? 'system-item' : ''}
-              >
+              <option key={preset.id} value={preset.id}>
                 {preset.isDefault ? `(System) ${preset.name}` : preset.name}
               </option>
             ))}
           </select>
         </div>
 
-        <div className="preset-buttons">
-          <button 
-            className="btn btn-primary" 
-            onClick={() => setIsPresetModalOpen(true)}
-          >
-            Save as New Preset
-          </button>
-          {currentPreset && (
-            <>
-              <button 
-                className="btn btn-primary"
-                onClick={handleUpdatePreset}
-                disabled={isUpdating || currentPreset.isDefault}
-                title={currentPreset.isDefault ? "System presets cannot be modified" : "Update current preset with these settings"}
-              >
-                {isUpdating ? 'Updating...' : 'Update Preset'}
-              </button>
-              <button 
-                className="btn btn-secondary"
-                onClick={() => {
-                  clearCurrentPreset();
-                  setSelectedPresetId('custom');
-                }}
-                disabled={isUpdating}
-              >
-                Clear
-              </button>
-            </>
-          )}
-        </div>
-
-        {currentPreset && currentPreset.description && (
+        {currentPresetDescription && (
           <div className="preset-description">
-            <p>{currentPreset.description}</p>
-            <span className="last-updated">Last updated: {formatDate(currentPreset.updatedAt)}</span>
+            <p>{currentPresetDescription}</p>
           </div>
         )}
+        
+        <div className="preset-controls-row">
+          <button 
+            onClick={() => setIsPresetModalOpen(true)}
+            className="btn-manage"
+            title="Access advanced preset management including System Default Settings"
+          >
+            Advanced
+          </button>
+          <button 
+            onClick={() => {
+              if (currentPreset && selectedPresetId) {
+                updatePreset(selectedPresetId, { config });
+              } else {
+                setErrorMessage("No preset selected to update");
+              }
+            }}
+            className="btn-update"
+            disabled={!currentPreset || !selectedPresetId || !!isSystemPreset}
+            title={isSystemPreset ? "System presets cannot be modified" : "Update the selected preset with current settings"}
+          >
+            Update
+          </button>
+          <button 
+            onClick={() => {
+              if (currentPreset && selectedPresetId && !isSystemPreset) {
+                setIsEditPresetModalOpen(true);
+              } else {
+                setErrorMessage("No preset selected to edit or the preset is a system preset");
+              }
+            }}
+            className="btn-edit"
+            disabled={!currentPreset || !selectedPresetId || !!isSystemPreset}
+            title={isSystemPreset ? "System presets cannot be modified" : "Edit preset name and description"}
+          >
+            Edit
+          </button>
+          <button 
+            onClick={() => setIsSavePresetFormOpen(true)}
+            className="btn-save"
+            title="Save current settings as a new preset"
+          >
+            Save New
+          </button>
+          <button 
+            onClick={() => {
+              resetConfig();
+              clearCurrentPreset();
+              setSelectedPresetId('');
+            }}
+            className="btn-clear"
+            title="Reset all settings to default values"
+          >
+            Clear
+          </button>
+        </div>
       </div>
-
+      
+      {errorMessage && <ErrorBanner message={errorMessage} onClose={() => setErrorMessage(null)} />}
+      
       <div className="config-section">
-        <h3>Session Duration</h3>
+        <h3>Duration</h3>
         <div className="duration-control">
-          <label htmlFor="duration">
-            <strong>Duration:</strong> {config.duration} minutes
-          </label>
           <div className="duration-slider-input">
             <input
               type="range"
-              id="duration"
-              name="duration"
               min="1"
-              max="60"
+              max="120"
               value={config.duration}
-              onChange={handleDurationChange}
+              onChange={(e) => handleDurationChange(e.target.value)}
               className="duration-slider"
+              aria-label="Contemplation duration in minutes"
             />
             <input
               type="number"
-              id="durationInput"
-              name="durationInput"
               min="1"
-              max="60"
+              max="120"
               value={config.duration}
-              onChange={handleDurationInputChange}
+              onChange={(e) => handleDurationChange(e.target.value)}
               className="duration-number"
-              aria-label="Meditation duration in minutes"
             />
+            <span className="duration-unit">min</span>
           </div>
+          
           <div className="duration-presets">
-            <button 
-              className="btn btn-small"
-              onClick={() => handleDurationPreset(5)}
-            >
-              5 min
-            </button>
-            <button 
-              className="btn btn-small"
-              onClick={() => handleDurationPreset(10)}
-            >
-              10 min
-            </button>
-            <button 
-              className="btn btn-small"
-              onClick={() => handleDurationPreset(15)}
-            >
-              15 min
-            </button>
-            <button 
-              className="btn btn-small"
-              onClick={() => handleDurationPreset(20)}
-            >
-              20 min
-            </button>
-            <button 
-              className="btn btn-small"
-              onClick={() => handleDurationPreset(30)}
-            >
-              30 min
-            </button>
+            <button className="btn-small" onClick={() => handleDurationPreset(5)}>5 min</button>
+            <button className="btn-small" onClick={() => handleDurationPreset(10)}>10 min</button>
+            <button className="btn-small" onClick={() => handleDurationPreset(15)}>15 min</button>
+            <button className="btn-small" onClick={() => handleDurationPreset(20)}>20 min</button>
+            <button className="btn-small" onClick={() => handleDurationPreset(30)}>30 min</button>
+            <button className="btn-small" onClick={() => handleDurationPreset(45)}>45 min</button>
+            <button className="btn-small" onClick={() => handleDurationPreset(60)}>1 hour</button>
           </div>
         </div>
       </div>
-
+      
       <div className="config-section">
-        <h3>Instruction File</h3>
+        <h3>Guidance</h3>
         <div className="select-group">
-          <label htmlFor="instructionFile">Select instruction file:</label>
-          {isLoading ? (
-            <p>Loading instruction files...</p>
-          ) : (
-            <select
-              id="instructionFile"
-              value={config.selectedInstructionId || "none"}
-              onChange={handleInstructionFileChange}
-            >
-              <option value="none">None (Silent meditation)</option>
-              {instructions.map(instruction => (
-                <option 
-                  key={instruction.id} 
-                  value={instruction.id}
-                  className={instruction.isDefault ? 'system-item' : ''}
-                >
-                  {instruction.isDefault ? `(System) ${instruction.name}` : instruction.name} ({instruction.content.split('\n').filter(l => l.trim()).length} instructions)
-                </option>
-              ))}
-            </select>
-          )}
-          {!instructions.length && !isLoading && (
-            <p className="config-note">No instruction files available. Create one in the Instructions tab.</p>
-          )}
+          <label htmlFor="instructionSelect">Instruction File:</label>
+          <select
+            id="instructionSelect"
+            value={config.selectedInstructionId || ""}
+            onChange={handleInstructionChange}
+            className="form-control"
+          >
+            <option value="" disabled>Select an instruction file</option>
+            {instructions.map(instruction => (
+              <option key={instruction.id} value={instruction.id}>
+                {instruction.isDefault ? `(System) ${instruction.name}` : instruction.name}
+              </option>
+            ))}
+          </select>
         </div>
-      </div>
-      
-      <div className="config-section">
-        <h3>Sound Settings</h3>
+        
         <div className="checkbox-group">
-          <label>
-            <input
-              type="checkbox"
-              name="bellAtStart"
-              checked={config.bellAtStart}
-              onChange={handleCheckboxChange}
-            />
-            Play bell at start
-          </label>
-        </div>
-        <div className="checkbox-group">
-          <label>
-            <input
-              type="checkbox"
-              name="bellAtEnd"
-              checked={config.bellAtEnd}
-              onChange={handleCheckboxChange}
-            />
-            Play bell at end
-          </label>
-        </div>
-      </div>
-      
-      <div className="config-section">
-        <h3>Guidance Settings</h3>
-        <div className="checkbox-group">
-          <label>
-            <input
-              type="checkbox"
-              name="useVoiceGuidance"
-              checked={config.useVoiceGuidance}
-              onChange={handleCheckboxChange}
-            />
-            Enable voice guidance
-          </label>
+          <input
+            type="checkbox"
+            id="voiceGuidanceCheck"
+            checked={config.useVoiceGuidance}
+            onChange={handleUseVoiceGuidance}
+          />
+          <label htmlFor="voiceGuidanceCheck">Use voice guidance</label>
         </div>
         
         {config.useVoiceGuidance && (
           <>
             <div className="select-group">
-              <label htmlFor="voiceType">Voice Provider:</label>
+              <label htmlFor="voiceTypeSelect">Voice Provider:</label>
               <select
-                id="voiceType"
+                id="voiceTypeSelect"
                 value={config.voiceType}
                 onChange={handleVoiceTypeChange}
+                className="form-control"
               >
-                <option value="browser">Browser TTS</option>
-                <option value="openai">OpenAI TTS</option>
-                <option value="elevenlabs">ElevenLabs TTS</option>
+                <option value="browser">Browser (Free)</option>
+                <option value="openai">OpenAI (Requires API key)</option>
+                <option value="elevenlabs">ElevenLabs (Requires API key)</option>
               </select>
             </div>
             
-            {config.voiceType === 'openai' && (
-              <div className="select-group">
-                <label htmlFor="openaiVoice">OpenAI Voice:</label>
-                <select
-                  id="openaiVoice"
-                  value={config.openaiVoice}
-                  onChange={handleOpenAIVoiceChange}
-                >
-                  {Object.entries(openAIVoiceDescriptions).map(([value, description]) => (
-                    <option key={value} value={value}>
-                      {description}
-                    </option>
-                  ))}
-                </select>
-                <p className="voice-note">
-                  Listen to voice samples on <a href="https://platform.openai.com/docs/guides/text-to-speech" 
-                     target="_blank" rel="noopener noreferrer">OpenAI's website</a>
-                </p>
-              </div>
-            )}
+            {renderVoiceSelection()}
           </>
         )}
         
-        {config.voiceType === 'elevenlabs' && (
-          <div className="select-group">
-            <label htmlFor="elevenlabsVoice">ElevenLabs Voice:</label>
-            {isLoadingVoices ? (
-              <p>Loading ElevenLabs voices...</p>
-            ) : (
-              <>
-                <select
-                  id="elevenlabsVoice"
-                  value={config.elevenlabsVoiceId || (elevenLabsVoices.length > 0 ? elevenLabsVoices[0].voice_id : '')}
-                  onChange={handleElevenLabsVoiceChange}
-                >
-                  {elevenLabsVoices.map(voice => (
-                    <option key={voice.voice_id} value={voice.voice_id}>
-                      {voice.name}
-                    </option>
-                  ))}
-                </select>
-                <p className="voice-note">
-                  Listen to voice samples on <a href="https://elevenlabs.io/text-to-speech" 
-                     target="_blank" rel="noopener noreferrer">ElevenLabs website</a>
-                </p>
-              </>
-            )}
+        <div className="bell-sounds-section">
+          <h4>Bell Sounds</h4>
+          <div className="checkbox-group">
+            <input
+              type="checkbox"
+              id="bellAtStartCheck"
+              checked={config.bellAtStart}
+              onChange={handleBellAtStartChange}
+            />
+            <label htmlFor="bellAtStartCheck">Play bell sound at start</label>
           </div>
-        )}
+          
+          <div className="checkbox-group">
+            <input
+              type="checkbox"
+              id="bellAtEndCheck"
+              checked={config.bellAtEnd}
+              onChange={handleBellAtEndChange}
+            />
+            <label htmlFor="bellAtEndCheck">Play bell sound at end</label>
+          </div>
+        </div>
       </div>
-
-      <div className="config-section">
-        <button 
-          className="btn btn-primary begin-session-button"
-          onClick={handleBeginSession}
-        >
-          Begin Session
-        </button>
-      </div>
-
-      {/* Add modals for preset functionality */}
-      <SavePresetModal 
-        isOpen={isPresetModalOpen} 
-        onClose={() => setIsPresetModalOpen(false)} 
-        onPresetSaved={handlePresetSaved}
-      />
       
-      <PresetList 
-        isOpen={isPresetListOpen}
-        onClose={() => setIsPresetListOpen(false)}
-      />
+      <button
+        className="start-button primary-button"
+        onClick={handleStartSession}
+        disabled={!config.selectedInstructionId}
+      >
+        Begin Contemplation
+      </button>
+      
+      {isPresetModalOpen && (
+        <PresetList 
+          isOpen={isPresetModalOpen} 
+          onClose={() => setIsPresetModalOpen(false)}
+        />
+      )}
+      
+      {isSavePresetFormOpen && (
+        <SavePresetModal
+          isOpen={isSavePresetFormOpen}
+          onClose={() => setIsSavePresetFormOpen(false)}
+          onSave={savePreset}
+          currentConfig={config}
+        />
+      )}
+
+      {isEditPresetModalOpen && currentPreset && (
+        <EditPresetModal
+          isOpen={isEditPresetModalOpen}
+          onClose={() => setIsEditPresetModalOpen(false)}
+          preset={currentPreset}
+          onSave={updatePreset}
+        />
+      )}
     </div>
   );
 };

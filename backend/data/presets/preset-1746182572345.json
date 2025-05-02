@@ -1,0 +1,18 @@
+{
+  "id": "preset-1746182572345",
+  "name": "My Quick Metta",
+  "description": "Same as System Metta but shorter. No Bells",
+  "createdAt": "2025-05-02T10:42:52.345Z",
+  "updatedAt": "2025-05-02T10:58:29.119Z",
+  "config": {
+    "duration": 45,
+    "bellAtStart": false,
+    "bellAtEnd": false,
+    "useVoiceGuidance": true,
+    "voiceType": "elevenlabs",
+    "openaiVoice": "alloy",
+    "elevenlabsVoiceId": "KoVIHoyLDrQyd4pGalbs",
+    "selectedInstructionId": "1746120048478"
+  },
+  "voiceDisplayName": "ElevenLabs ID: KoVIHoyLDrQyd4pGalbs"
+}

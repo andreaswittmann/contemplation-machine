@@ -8,11 +8,43 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Logo styles */
-.logo-container {
+/* Updated Title styles */
+.title-container {
   display: flex;
+  align-items: center;
   justify-content: center;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.title-word {
+  font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+  font-size: 2.2rem;
+  font-weight: 500;
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  letter-spacing: 1px;
+  background: linear-gradient(45deg, #ffffff, #e0e0ff);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.title-logo {
+  height: 60px;
+  width: auto;
+  margin: 0 10px;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.title-logo:hover {
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* Logo styles - keep for backward compatibility */
+.logo-container {
+  display: none; /* Hide the old logo container */
 }
 
 .app-logo {
@@ -23,23 +55,18 @@
   transition: transform 0.3s ease;
 }
 
-.app-logo:hover {
-  transform: scale(1.05);
-}
-
-/* Header */
+/* Header - updated */
 .App-header {
-  background-color: #4a6fa5;
+  background: linear-gradient(135deg, #4a6fa5, #354f78);
   padding: 1.5rem 0;
   color: white;
   min-height: auto;
   display: block;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .App-header h1 {
-  margin: 0 0 1rem;
-  font-size: 1.8rem;
-  font-weight: 500;
+  display: none; /* Hide the old h1 title */
 }
 
 /* Navigation */
@@ -80,8 +107,8 @@
   box-sizing: border-box;
 }
 
-/* When meditation is active, allow full width */
-.app-content.meditation-active {
+/* When contemplation is active, allow full width */
+.app-content.contemplation-active {
   max-width: 100%;
   padding: 0;
   margin: 0;
@@ -367,4 +394,174 @@ button:disabled {
 
 .begin-session-button:hover {
   background-color: #3e8e41;
+}
+
+/* Error Banner styles */
+.error-banner {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  border-radius: 4px;
+  padding: 10px 15px;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.error-banner-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.error-message {
+  flex-grow: 1;
+}
+
+.error-close-button {
+  background-color: transparent;
+  border: none;
+  color: #721c24;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0 0 0 15px;
+  margin: 0;
+}
+
+.error-close-button:hover {
+  color: #5a171c;
+  background-color: transparent;
+}
+
+/* Preset controls in a row - updated for single line */
+.preset-controls-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+  margin-top: 12px;
+  justify-content: space-between;
+}
+
+.preset-controls-row button {
+  flex: 1;
+  padding: 8px 8px;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+@media (max-width: 768px) {
+  .preset-controls-row {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .preset-controls-row button {
+    width: 100%;
+    padding: 10px;
+  }
+}
+
+/* Harmonized button styles between pages */
+.start-button,
+.primary-button {
+  background-color: #4CAF50;
+  color: white;
+  font-size: 1.1rem;
+  padding: 1rem 2rem;
+  width: 100%;
+  margin-top: 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.start-button:hover,
+.primary-button:hover {
+  background-color: #3e8e41;
+}
+
+.start-button:disabled,
+.primary-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+/* System preset style */
+option[disabled] {
+  color: #999;
+}
+
+.btn-secondary:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Preset Description */
+.preset-description {
+  margin: 10px 0;
+  padding: 10px;
+  background-color: #f5f9ff;
+  border-left: 3px solid #4a6fa5;
+  border-radius: 3px;
+  font-style: italic;
+  color: #666;
+}
+
+.preset-description p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* Color-coded buttons */
+.btn-manage {
+  background-color: #5e6d85;
+  color: white;
+}
+.btn-manage:hover {
+  background-color: #4e5d75;
+}
+
+.btn-update {
+  background-color: #4a90e2;
+  color: white;
+}
+.btn-update:hover {
+  background-color: #3a80d2;
+}
+
+.btn-edit {
+  background-color: #8e44ad;
+  color: white;
+}
+.btn-edit:hover {
+  background-color: #7e349d;
+}
+
+.btn-save {
+  background-color: #27ae60;
+  color: white;
+}
+.btn-save:hover {
+  background-color: #219955;
+}
+
+.btn-clear {
+  background-color: #e67e22;
+  color: white;
+}
+.btn-clear:hover {
+  background-color: #d67118;
+}
+
+/* Disabled state for all color-coded buttons */
+.btn-manage:disabled, .btn-update:disabled, .btn-edit:disabled, 
+.btn-save:disabled, .btn-clear:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  opacity: 0.7;
 }

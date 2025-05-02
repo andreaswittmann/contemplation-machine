@@ -1,4 +1,4 @@
-# Unified Dockerfile for Meditation App
+# Unified Dockerfile for Contemplation Machine
 # Build stage for the React frontend
 FROM node:18-alpine as frontend-build
 

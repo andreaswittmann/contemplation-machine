@@ -1,6 +1,6 @@
 {
-  "name": "frontend",
-  "version": "0.1.0",
+  "name": "contemplation-machine-frontend",
+  "version": "1.8.0",
   "private": true,
   "dependencies": {
     "@testing-library/dom": "^10.4.0",

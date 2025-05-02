@@ -65,7 +65,7 @@ const InstructionsManagerView: React.FC = () => {
 
   return (
     <div className="instructions-manager">
-      <h2>Meditation Instructions Manager</h2>
+      <h2>Contemplation Instructions Manager</h2>
       
       <div id="instruction-form" className="form-section">
         <InstructionForm 

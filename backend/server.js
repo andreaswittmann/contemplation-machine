@@ -21,7 +21,7 @@ const debugLog = (message, data = null) => {
   }
 };
 
-debugLog('Starting Meditation App server');
+debugLog('Starting Contemplation Machine server');
 
 // Directory paths
 const dataDir = path.join(__dirname, 'data');

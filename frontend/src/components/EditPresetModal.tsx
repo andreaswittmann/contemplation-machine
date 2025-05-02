@@ -1,50 +1,53 @@
-import React, { useState } from 'react';
-import { usePresets } from '../contexts/PresetContext';
-import { MeditationConfig } from '../contexts/MeditationConfigContext';
+import React, { useState, useEffect } from 'react';
+import { Preset } from '../contexts/PresetContext';
 
-interface SavePresetModalProps {
+interface EditPresetModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSave: (name: string, description: string) => Promise<any>;
-  currentConfig: MeditationConfig;
-  onPresetSaved?: () => void;
+  preset: Preset | null;
+  onSave: (presetId: string, updates: { name: string, description: string }) => Promise<any>;
 }
 
-const SavePresetModal: React.FC<SavePresetModalProps> = ({ isOpen, onClose, onSave, currentConfig, onPresetSaved }) => {
-  const { isLoading, error } = usePresets();
+const EditPresetModal: React.FC<EditPresetModalProps> = ({ isOpen, onClose, preset, onSave }) => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [isSaving, setIsSaving] = useState(false);
-  const [saveError, setSaveError] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
-  if (!isOpen) return null;
+  useEffect(() => {
+    if (preset) {
+      setName(preset.name);
+      setDescription(preset.description);
+    }
+  }, [preset]);
+
+  if (!isOpen || !preset) return null;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!name.trim()) {
-      setSaveError('Please enter a preset name');
+      setError('Please enter a preset name');
       return;
     }
     
     setIsSaving(true);
-    setSaveError(null);
+    setError(null);
     
     try {
-      const result = await onSave(name.trim(), description.trim());
+      const result = await onSave(preset.id, { 
+        name: name.trim(), 
+        description: description.trim() 
+      });
       
       if (result) {
-        // Reset form and close modal on success
-        setName('');
-        setDescription('');
-        onPresetSaved && onPresetSaved();
         onClose();
       } else {
-        setSaveError('Failed to save preset. Please try again.');
+        setError('Failed to update preset. Please try again.');
       }
     } catch (err) {
-      console.error('Error saving preset:', err);
-      setSaveError('An unexpected error occurred. Please try again.');
+      console.error('Error updating preset:', err);
+      setError('An unexpected error occurred. Please try again.');
     } finally {
       setIsSaving(false);
     }
@@ -52,9 +55,7 @@ const SavePresetModal: React.FC<SavePresetModalProps> = ({ isOpen, onClose, onSa
 
   const handleClose = () => {
     if (!isSaving) {
-      setName('');
-      setDescription('');
-      setSaveError(null);
+      setError(null);
       onClose();
     }
   };
@@ -63,13 +64,12 @@ const SavePresetModal: React.FC<SavePresetModalProps> = ({ isOpen, onClose, onSa
     <div className="modal-backdrop">
       <div className="modal-content">
         <div className="modal-header">
-          <h2>Save as Preset</h2>
+          <h2>Edit Preset</h2>
           <button className="close-button" onClick={handleClose} disabled={isSaving}>×</button>
         </div>
         
         <form onSubmit={handleSubmit}>
           <div className="modal-body">
-            {saveError && <div className="error-message">{saveError}</div>}
             {error && <div className="error-message">{error}</div>}
             
             <div className="form-group">
@@ -114,7 +114,7 @@ const SavePresetModal: React.FC<SavePresetModalProps> = ({ isOpen, onClose, onSa
               disabled={isSaving || !name.trim()}
               className="btn btn-primary"
             >
-              {isSaving ? 'Saving...' : 'Save Preset'}
+              {isSaving ? 'Saving...' : 'Update Preset'}
             </button>
           </div>
         </form>
@@ -123,4 +123,4 @@ const SavePresetModal: React.FC<SavePresetModalProps> = ({ isOpen, onClose, onSa
   );
 };
 
-export default SavePresetModal;
+export default EditPresetModal;

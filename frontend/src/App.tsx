@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createContext, useContext } from 'react';
 import './App.css';
 import './styles/responsive.css'; // Import responsive styles
 import './styles/animations.css'; // Import animations and transitions
@@ -15,29 +15,40 @@ import { ElevenLabsVoicesProvider } from './contexts/ElevenLabsVoicesContext';
 import { PresetProvider } from './contexts/PresetContext';
 import { ApiKeyProvider } from './contexts/ApiKeyContext';
 
-// Wrapper component that handles the meditation status
+// Create a navigation context to share the setActiveTab function
+type TabType = 'contemplate' | 'configure' | 'instructions' | 'settings';
+interface NavigationContextType {
+  setActiveTab: (tab: TabType) => void;
+}
+export const NavigationContext = createContext<NavigationContextType>({ 
+  setActiveTab: () => {} 
+});
+export const useNavigation = () => useContext(NavigationContext);
+
+// Wrapper component that handles the contemplation status
 const AppContent = () => {
-  const [activeTab, setActiveTab] = useState<'meditate' | 'configure' | 'instructions' | 'settings'>('meditate');
+  const [activeTab, setActiveTab] = useState<TabType>('contemplate');
   const { session } = useSession();
-  const isMeditationActive = session.isActive && !session.isPreparingAudio && !session.isBellPlaying;
+  const isContemplationActive = session.isActive && !session.isPreparingAudio && !session.isBellPlaying;
 
   return (
-    <>
+    <NavigationContext.Provider value={{ setActiveTab }}>
       <header className="App-header">
-        <div className="logo-container">
+        <div className="title-container">
+          <span className="title-word">Contemplation</span>
           <img 
             src="/assets/buddha-lotus-logo.png" 
-            alt="Buddha Meditation Logo" 
-            className="app-logo"
+            alt="Contemplation Machine Logo" 
+            className="title-logo"
           />
+          <span className="title-word">Machine</span>
         </div>
-        <h1 className="slide-in-bottom">Mindful Meditation</h1>
         <nav className="app-navigation">
           <button 
-            className={`${activeTab === 'meditate' ? 'active' : ''} btn-responsive touch-target`}
-            onClick={() => setActiveTab('meditate')}
+            className={`${activeTab === 'contemplate' ? 'active' : ''} btn-responsive touch-target`}
+            onClick={() => setActiveTab('contemplate')}
           >
-            Meditate
+            Contemplate
           </button>
           <button 
             className={`${activeTab === 'configure' ? 'active' : ''} btn-responsive touch-target`}
@@ -60,17 +71,17 @@ const AppContent = () => {
         </nav>
       </header>
 
-      <main className={`app-content responsive-container ${isMeditationActive ? 'meditation-active' : ''}`}>
-        {activeTab === 'meditate' && <div className="page-enter-active"><SessionView /></div>}
+      <main className={`app-content responsive-container ${isContemplationActive ? 'contemplation-active' : ''}`}>
+        {activeTab === 'contemplate' && <div className="page-enter-active"><SessionView /></div>}
         {activeTab === 'configure' && <div className="page-enter-active"><ConfigurationView /></div>}
         {activeTab === 'instructions' && <div className="page-enter-active"><InstructionsManagerView /></div>}
         {activeTab === 'settings' && <div className="page-enter-active"><SettingsView /></div>}
       </main>
 
       <footer className="app-footer">
-        <p>Meditation App - Version 1.5.0</p>
+        <p>Contemplation Machine - Version 1.8.0</p>
       </footer>
-    </>
+    </NavigationContext.Provider>
   );
 };
 

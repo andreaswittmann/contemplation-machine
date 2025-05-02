@@ -109,7 +109,7 @@ const PresetList: React.FC<PresetListProps> = ({ isOpen, onClose }) => {
     <div className="modal-backdrop">
       <div className="modal-content preset-list-modal">
         <div className="modal-header">
-          <h2>Meditation Presets</h2>
+          <h2>Advanced Preset Management</h2>
           <div className="modal-actions">
             <button className="btn-icon" onClick={handleRefresh} title="Refresh presets">
               🔄
@@ -119,6 +119,11 @@ const PresetList: React.FC<PresetListProps> = ({ isOpen, onClose }) => {
         </div>
         
         <div className="modal-body">
+          <div className="system-settings-info">
+            <p>This advanced menu allows you to manage all presets including System Default Settings.</p>
+            <p>Use the "Promote to Default" button to add your presets to System Defaults.</p>
+          </div>
+          
           {(error || localError) && (
             <div className="error-message">{error || localError}</div>
           )}
@@ -127,8 +132,8 @@ const PresetList: React.FC<PresetListProps> = ({ isOpen, onClose }) => {
             <div className="loading">Loading presets...</div>
           ) : presets.length === 0 ? (
             <div className="no-presets-message">
-              <p>No presets saved yet.</p>
-              <p>Configure your meditation settings and click "Save as Preset" to create one.</p>
+              <p>No contemplation presets saved yet.</p>
+              <p>Configure your contemplation settings and click "Save as Preset" to create one.</p>
             </div>
           ) : (
             <div className="preset-list">

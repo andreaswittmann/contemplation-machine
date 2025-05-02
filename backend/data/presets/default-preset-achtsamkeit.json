@@ -1,0 +1,19 @@
+{
+  "id": "default-preset-achtsamkeit",
+  "name": "Achtsamkeit auf den Atem - ElevenLabs-Emanuel (deutsch)",
+  "description": "",
+  "createdAt": "2025-05-01T11:54:10.006Z",
+  "updatedAt": "2025-05-01T11:54:10.006Z",
+  "isDefault": true,
+  "config": {
+    "duration": 24,
+    "bellAtStart": true,
+    "bellAtEnd": true,
+    "useVoiceGuidance": true,
+    "voiceType": "elevenlabs",
+    "openaiVoice": "alloy",
+    "elevenlabsVoiceId": "umDfZDi2AcMmDUsDsBfA",
+    "selectedInstructionId": "1746100381263"
+  },
+  "voiceDisplayName": "ElevenLabs ID: umDfZDi2AcMmDUsDsBfA"
+}

@@ -1,5 +1,5 @@
 // AudioService.ts
-// Handles all audio functionality for the meditation app
+// Handles all audio functionality for the contemplation app
 
 import { getApiUrl } from './ApiService';
 
@@ -315,7 +315,7 @@ export const speak = async (
   }
 };
 
-// Pre-generate audio for all instructions to avoid delays during meditation
+// Pre-generate audio for all instructions to avoid delays during contemplation
 export const preGenerateSessionAudio = async (
   instructionLines: string[],
   useOpenAI = true,

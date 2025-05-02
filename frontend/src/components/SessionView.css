@@ -83,8 +83,8 @@
   text-align: center;
 }
 
-/* When meditation is active, make the view use full window width */
-.session-view.active-meditation {
+/* When contemplation is active, make the view use full window width */
+.session-view.active-contemplation {
   max-width: 100%;
   width: 100%;
   margin: 0;
@@ -94,7 +94,7 @@
   transition: all 0.3s ease-in-out;
 }
 
-.session-view.active-meditation .active-session {
+.session-view.active-contemplation .active-session {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
@@ -620,7 +620,7 @@ body.body-fullscreen {
     padding: 1rem;
   }
   
-  .session-view.active-meditation .active-session {
+  .session-view.active-contemplation .active-session {
     padding: 1rem;
   }
   
@@ -729,7 +729,7 @@ body.body-fullscreen {
     padding: 0.75rem;
   }
   
-  .session-view.active-meditation .active-session {
+  .session-view.active-contemplation .active-session {
     padding: 0.75rem;
   }
   

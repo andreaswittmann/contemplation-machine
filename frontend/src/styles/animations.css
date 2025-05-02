@@ -1,4 +1,4 @@
-/* Animations and Transitions for Meditation App */
+/* Animations and Transitions for Contemplation Machine */
 
 /* Fade in animation */
 @keyframes fadeIn {
@@ -6,14 +6,30 @@
   to { opacity: 1; }
 }
 
-/* Gentle pulse animation for meditation timer */
+/* Gentle pulse animation for contemplation timer */
 @keyframes pulse {
   0% { transform: scale(1); }
   50% { transform: scale(1.05); }
   100% { transform: scale(1); }
 }
 
-/* Breathing animation for meditation visual */
+@keyframes breathePulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.8; }
+}
+
+/* Breathing animation for contemplation visual */
+@keyframes breatheIn {
+  from { transform: scale(1); }
+  to { transform: scale(1.05); }
+}
+
+@keyframes breatheOut {
+  from { transform: scale(1.05); }
+  to { transform: scale(1); }
+}
+
 @keyframes breathe {
   0%, 100% { transform: scale(0.95); opacity: 0.7; }
   50% { transform: scale(1.05); opacity: 1; }
@@ -49,7 +65,7 @@
 }
 
 .timer-pulse {
-  animation: pulse 4s ease-in-out infinite;
+  animation: breathePulse 4s infinite ease-in-out;
 }
 
 .breathe-animation {
@@ -121,8 +137,8 @@ button:active, .interactive:active {
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-/* Visual meditation progress */
-.meditation-progress-circle {
+/* Visual contemplation progress */
+.contemplation-progress-circle {
   transition: stroke-dashoffset 1s ease;
 }
 

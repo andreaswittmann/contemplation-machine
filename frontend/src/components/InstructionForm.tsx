@@ -103,7 +103,7 @@ const InstructionForm: React.FC<InstructionFormProps> = ({
 
   return (
     <div className="instruction-form">
-      <h3>{editingInstruction ? 'Edit Meditation Instruction File' : 'Add New Meditation Instruction File'}</h3>
+      <h3>{editingInstruction ? 'Edit Contemplation Instruction File' : 'Add New Contemplation Instruction File'}</h3>
       
       {message && (
         <div className={`message ${message.type}`}>
@@ -137,17 +137,15 @@ const InstructionForm: React.FC<InstructionFormProps> = ({
         
         <div className="form-group">
           <label htmlFor="instruction-content">
-            Instructions (one per line):
-            <div className="form-help">Each line will be presented as a separate instruction during meditation</div>
+            Instructions:
+            <div className="form-help">Each line will be presented as a separate instruction during contemplation</div>
           </label>
           <textarea
             id="instruction-content"
             value={content}
             onChange={(e) => setContent(e.target.value)}
-            placeholder="Focus on your breath...
-Notice any sensations in your body...
-Let thoughts come and go without judgment..."
-            rows={8}
+            placeholder="Enter your contemplation instructions, one per line..."
+            rows={10}
             required
           />
         </div>

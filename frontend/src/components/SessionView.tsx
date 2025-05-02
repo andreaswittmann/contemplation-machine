@@ -256,7 +256,7 @@ const SessionView: React.FC = () => {
     const classes = ['session-view', 'harmonized'];
 
     if (session.isActive) {
-      classes.push('active-meditation');
+      classes.push('active-contemplation');
     }
 
     if (isFullscreen) {
@@ -276,7 +276,7 @@ const SessionView: React.FC = () => {
         </div>
       ) : session.isBellPlaying ? (
         <div className="bell-playing-screen harmonized-card">
-          <h2>Meditation is starting...</h2>
+          <h2>Contemplation is starting...</h2>
           <div className="progress-container">
             <div className="progress-bar">
               <div
@@ -289,16 +289,16 @@ const SessionView: React.FC = () => {
         </div>
       ) : !session.isActive ? (
         <div className="session-start harmonized-card">
-          <h2 className="section-title">Ready to Meditate</h2>
+          <h2 className="section-title">Ready to Contemplate</h2>
 
           <div className="preset-selector">
-            <label htmlFor="presetSelect" className="form-label">Meditation Preset:</label>
+            <label htmlFor="presetSelect" className="form-label">Contemplation Preset:</label>
             <select
               id="presetSelect"
               value={selectedPresetId}
               onChange={handlePresetChange}
               className="preset-dropdown form-select"
-              aria-label="Select meditation preset"
+              aria-label="Select contemplation preset"
             >
               <option value="custom">Custom configuration</option>
               {presets.map(preset => (
@@ -347,7 +347,7 @@ const SessionView: React.FC = () => {
               console.log('[VIEW] Start button clicked');
               startSession();
             }}
-            aria-label="Begin meditation session"
+            aria-label="Begin contemplation session"
           >
             Begin Session
           </button>
@@ -413,7 +413,7 @@ const SessionView: React.FC = () => {
               <button
                 className="resume-button control-button"
                 onClick={resumeSession}
-                aria-label="Resume meditation session"
+                aria-label="Resume contemplation session"
               >
                 Resume
               </button>
@@ -421,7 +421,7 @@ const SessionView: React.FC = () => {
               <button
                 className="pause-button control-button"
                 onClick={pauseSession}
-                aria-label="Pause meditation session"
+                aria-label="Pause contemplation session"
               >
                 Pause
               </button>
@@ -429,7 +429,7 @@ const SessionView: React.FC = () => {
             <button
               className="stop-button control-button"
               onClick={stopSession}
-              aria-label="End meditation session"
+              aria-label="End contemplation session"
             >
               End Session
             </button>
