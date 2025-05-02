@@ -1,4 +1,4 @@
-# Meditation App Deployment Guide
+# Contemplation Machine Deployment Guide
 
 ## Unified Container Deployment
 
@@ -16,7 +16,7 @@ This application uses a single-container architecture that incorporates both the
 1. Clone the repository:
    ```bash
    git clone [repository-url]
-   cd meditation-app
+   cd contemplation-machine
    ```
 
 2. Set up environment variables:
@@ -93,8 +93,8 @@ Some users may encounter an "Error: Load failed" message when accessing the appl
 
 3. **Verify file paths in the container**
    ```bash
-   docker-compose exec meditation-app ls -la /app/frontend/build
-   docker-compose exec meditation-app ls -la /app/frontend/build/sounds
+   docker-compose exec contemplation-machine ls -la /app/frontend/build
+   docker-compose exec contemplation-machine ls -la /app/frontend/build/sounds
    ```
 
 4. **Try these workarounds**:
@@ -114,7 +114,7 @@ If you need to access the container to perform deeper debugging:
 
 ```bash
 # Access container shell
-docker-compose exec meditation-app sh
+docker-compose exec contemplation-machine sh
 
 # Check environment variables
 env | grep API_KEY
@@ -139,3 +139,12 @@ ls -la /app/data
 3. **Container Fails to Start**
    - Check Docker logs for startup errors
    - Verify port 8088 is not used by another application
+
+## Best Practices
+
+- Use unique, descriptive names for presets
+- Add detailed descriptions to explain the purpose of each preset
+- For organizational deployments, standardize default presets
+- Review and clean up unused presets periodically
+- Use promotion sparingly for truly valuable configurations
+- Back up preset files before major updates

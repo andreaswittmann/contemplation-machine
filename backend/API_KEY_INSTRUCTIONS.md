@@ -1,6 +1,6 @@
-# API Key Setup for Meditation App
+# API Key Setup for Contemplation Machine
 
-This meditation app uses both OpenAI's and ElevenLabs' Text-to-Speech (TTS) APIs for generating voice guidance during meditation sessions. To enable these functionalities, you need to add your API keys.
+This contemplation application uses both OpenAI's and ElevenLabs' Text-to-Speech (TTS) APIs for generating voice guidance during contemplation sessions. To enable these functionalities, you need to add your API keys.
 
 ## How to Add Your API Keys
 
@@ -24,7 +24,7 @@ If you don't have an OpenAI API key yet:
 2. Sign in or create an account
 3. Navigate to API keys section in your account dashboard
 4. Click "Create new secret key"
-5. Give your key a name (e.g., "Meditation App")
+5. Give your key a name (e.g., "Contemplation Machine")
 6. Copy the key immediately (OpenAI will only show it once)
 
 ## Getting an ElevenLabs API Key
@@ -47,11 +47,11 @@ If you don't have an ElevenLabs API key yet:
 
 After adding your API keys and restarting the server:
 
-1. Go to the meditation app
+1. Go to the Contemplation Machine
 2. In Configuration, enable voice guidance
 3. Select either "OpenAI TTS" or "ElevenLabs TTS" as the voice type
 4. Choose a voice from the available options
-5. Start a meditation session
+5. Start a contemplation session
 6. You should hear high-quality voice instructions
 
 If you encounter any issues, check the browser console and server logs for error messages.

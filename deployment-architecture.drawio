@@ -1,0 +1,220 @@
+<mxfile host="65bd71144e">
+    <diagram id="contemplation-machine-architecture" name="Contemplation Machine: Home Server Deployment Architecture">
+        <mxGraphModel dx="1708" dy="1336" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="home-network" value="Home Network (LAN/WLAN)" style="rounded=1;whiteSpace=wrap;html=1;container=0;fillColor=#f5f5f5;strokeColor=#666666;dashed=0;fontStyle=1;fontSize=14;verticalAlign=top;align=center;spacingTop=5;" vertex="1" parent="1">
+                    <mxGeometry x="435" y="62" width="710" height="758" as="geometry"/>
+                </mxCell>
+                <mxCell id="external-services" value="External Services" style="rounded=1;whiteSpace=wrap;html=1;container=1;fillColor=#fff2cc;strokeColor=#d6b656;dashed=0;fontStyle=1;fontSize=14;verticalAlign=top;align=center;spacingTop=5;" vertex="1" parent="1">
+                    <mxGeometry x="1175" y="282" width="200" height="220" as="geometry"/>
+                </mxCell>
+                <mxCell id="openai" value="OpenAI API&#xa;Text-to-Speech" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;dashed=0;fontSize=11;" vertex="1" parent="external-services">
+                    <mxGeometry x="40" y="50" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="elevenlabs" value="ElevenLabs API&#xa;Text-to-Speech" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;dashed=0;fontSize=11;" vertex="1" parent="external-services">
+                    <mxGeometry x="40" y="130" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="tailscale-cloud" value="Tailscale Network&#xa;Coordination Server" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;fillColor=#b0e3e6;strokeColor=#0e8088;dashed=0;fontSize=11;" vertex="1" parent="1">
+                    <mxGeometry x="255" y="536.37" width="170" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="client-devices" value="Client Devices" style="rounded=1;whiteSpace=wrap;html=1;container=1;fillColor=#d5e8d4;strokeColor=#82b366;dashed=0;fontStyle=1;fontSize=14;verticalAlign=top;align=center;spacingTop=5;" vertex="1" parent="1">
+                    <mxGeometry x="35" y="412.0000000000001" width="200" height="317.83" as="geometry"/>
+                </mxCell>
+                <mxCell id="laptop" value="Laptop Browser" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;dashed=0;fontSize=11;" vertex="1" parent="client-devices">
+                    <mxGeometry x="40" y="38.274782608695645" width="120" height="55.274782608695645" as="geometry"/>
+                </mxCell>
+                <mxCell id="phone" value="Mobile Browser" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;dashed=0;fontSize=11;" vertex="1" parent="client-devices">
+                    <mxGeometry x="40" y="107.36826086956523" width="120" height="55.274782608695645" as="geometry"/>
+                </mxCell>
+                <mxCell id="tablet" value="Tablet Browser" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;dashed=0;fontSize=11;" vertex="1" parent="client-devices">
+                    <mxGeometry x="40" y="176.46173913043478" width="120" height="55.274782608695645" as="geometry"/>
+                </mxCell>
+                <mxCell id="tv" value="Smart TV Browser" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;dashed=0;fontSize=11;" vertex="1" parent="client-devices">
+                    <mxGeometry x="40" y="249.97720000000004" width="120" height="50.8528" as="geometry"/>
+                </mxCell>
+                <mxCell id="router-cloud" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;" edge="1" parent="1" source="home-router" target="tailscale-cloud">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="865" y="612" as="sourcePoint"/>
+                        <mxPoint x="1225" y="382" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="laptop-cloud" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;dashed=1;" edge="1" parent="1" source="laptop" target="tailscale-cloud">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="-230" y="614.83" as="sourcePoint"/>
+                        <mxPoint x="-65" y="454.83000000000004" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="phone-cloud" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;dashed=1;" edge="1" parent="1" source="phone" target="tailscale-cloud">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="165" y="563.92" as="sourcePoint"/>
+                        <mxPoint x="-55" y="474.83000000000004" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="tablet-cloud" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;dashed=1;" edge="1" parent="1" source="tablet" target="tailscale-cloud">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="-230" y="714.83" as="sourcePoint"/>
+                        <mxPoint x="-55" y="494.83000000000004" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="tv-cloud" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;dashed=1;" edge="1" parent="1" source="tv" target="tailscale-cloud">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="-230" y="764.83" as="sourcePoint"/>
+                        <mxPoint x="-66" y="506.83000000000004" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="title" value="Contemplation Machine: Home Server Deployment Architecture" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=18;fontStyle=1" vertex="1" parent="1">
+                    <mxGeometry x="330" y="10" width="600" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="legend" value="Legend" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fontSize=12;" vertex="1" parent="1">
+                    <mxGeometry x="15" y="82" width="190" height="220" as="geometry"/>
+                </mxCell>
+                <mxCell id="legend-1" value="Server Hardware/UI Components" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;fontSize=10;" vertex="1" parent="legend">
+                    <mxGeometry y="30" width="190" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="legend-box-1" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="legend">
+                    <mxGeometry y="60" width="190" height="15" as="geometry"/>
+                </mxCell>
+                <mxCell id="legend-2" value="Container/Virtualization" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;fontSize=10;" vertex="1" parent="legend">
+                    <mxGeometry y="75" width="190" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="legend-box-2" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="legend">
+                    <mxGeometry y="105" width="190" height="15" as="geometry"/>
+                </mxCell>
+                <mxCell id="legend-3" value="Application Services" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;fontSize=10;" vertex="1" parent="legend">
+                    <mxGeometry y="120" width="190" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="legend-box-3" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="legend">
+                    <mxGeometry y="150" width="190" height="15" as="geometry"/>
+                </mxCell>
+                <mxCell id="legend-4" value="Network/Communication" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;fontSize=10;" vertex="1" parent="legend">
+                    <mxGeometry y="165" width="190" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="legend-box-4" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#b0e3e6;strokeColor=#0e8088;" vertex="1" parent="legend">
+                    <mxGeometry y="205" width="190" height="15" as="geometry"/>
+                </mxCell>
+                <mxCell id="connection-legend" value="Connection Types" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fontSize=12;" vertex="1" parent="1">
+                    <mxGeometry x="225" y="82" width="190" height="200" as="geometry"/>
+                </mxCell>
+                <mxCell id="connection-1" value="Solid line: Direct connection" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;fontSize=10;" vertex="1" parent="connection-legend">
+                    <mxGeometry y="30" width="190" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="connection-legend">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="10" y="87" as="sourcePoint"/>
+                        <mxPoint x="170" y="87" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="connection-line-1" value="" style="endArrow=none;html=1;rounded=0;" vertex="1" parent="connection-legend">
+                    <mxGeometry y="60" width="190" height="50" relative="1" as="geometry">
+                        <mxPoint x="4" y="45" as="sourcePoint"/>
+                        <mxPoint x="24" y="45" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="connection-2" value="Dashed line: Encrypted tunnel" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;fontSize=10;" vertex="1" parent="connection-legend">
+                    <mxGeometry y="110" width="190" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="connection-line-2" value="" style="endArrow=none;html=1;rounded=0;dashed=1;" vertex="1" parent="connection-legend">
+                    <mxGeometry y="150" width="190" height="50" relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.75;exitDx=0;exitDy=0;dashed=1;" edge="1" parent="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="245" y="252" as="sourcePoint"/>
+                        <mxPoint x="385" y="252" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="macbook-server" value="MacBook Home Server" style="rounded=1;whiteSpace=wrap;html=1;container=0;fillColor=#dae8fc;strokeColor=#6c8ebf;dashed=0;fontStyle=1;fontSize=13;verticalAlign=top;align=center;spacingTop=5;" vertex="1" parent="1">
+                    <mxGeometry x="474.47" y="98.5" width="641.33" height="633.5" as="geometry"/>
+                </mxCell>
+                <mxCell id="home-router" value="Home Router" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;dashed=0;fontSize=11;fontStyle=1" vertex="1" parent="1">
+                    <mxGeometry x="515.9266666666666" y="749.9959932497588" width="118.39999999999999" height="47.86885245901638" as="geometry"/>
+                </mxCell>
+                <mxCell id="docker-env" value="Docker Environment (Docker Desktop)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;dashed=0;verticalAlign=top;fontSize=12;fontStyle=1;align=center;spacingTop=3;container=0;" vertex="1" parent="1">
+                    <mxGeometry x="495" y="134.42" width="582.13" height="497.58" as="geometry"/>
+                </mxCell>
+                <mxCell id="tailscale" value="Tailscale Client" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b0e3e6;strokeColor=#0e8088;dashed=0;fontSize=11;fontStyle=1" vertex="1" parent="1">
+                    <mxGeometry x="540.5953076923079" y="661.9977342990043" width="118.39938461538463" height="45.879999999999995" as="geometry"/>
+                </mxCell>
+                <mxCell id="tailscale-docker" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;" edge="1" parent="1" source="tailscale" target="docker-network">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="915" y="637.5135211616349" as="sourcePoint"/>
+                        <mxPoint x="809.9349230769232" y="557.3" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="tailscale-cloud-connect" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;" edge="1" parent="1" source="tailscale" target="tailscale-cloud">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="815" y="482" as="sourcePoint"/>
+                        <mxPoint x="1225" y="352" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="docker-containers" value="Docker Containers" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;dashed=1;verticalAlign=top;fontSize=12;fontStyle=1;align=center;spacingTop=3;" vertex="1" parent="1">
+                    <mxGeometry x="515.9300000000001" y="165.31" width="532.53" height="439.11" as="geometry"/>
+                </mxCell>
+                <mxCell id="nginx" value="Nginx Reverse Proxy" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;dashed=0;fontSize=11;fontStyle=1" vertex="1" parent="docker-containers">
+                    <mxGeometry x="20.223407882625313" y="193.56060533363436" width="125.30117647058823" height="72.58464623903313" as="geometry"/>
+                </mxCell>
+                <mxCell id="app-container" value="Contemplation Machine Container" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;dashed=0;fontSize=11;fontStyle=1" vertex="1" parent="docker-containers">
+                    <mxGeometry x="187.95176470588234" y="60.487205199194264" width="302.8111764705882" height="338.7283491154879" as="geometry"/>
+                </mxCell>
+                <mxCell id="app-components" value="Application Components" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;dashed=1;verticalAlign=top;fontSize=11;fontStyle=1;align=center;spacingTop=3;" vertex="1" parent="app-container">
+                    <mxGeometry x="15.662647058823529" y="36.29232311951656" width="271.48588235294113" height="278.24114391629365" as="geometry"/>
+                </mxCell>
+                <mxCell id="frontend" value="React Frontend" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;dashed=0;fontSize=11;" vertex="1" parent="app-components">
+                    <mxGeometry x="20.88352941176471" y="48.389764159355394" width="229.71882352941174" height="48.389764159355394" as="geometry"/>
+                </mxCell>
+                <mxCell id="backend" value="Node.js Backend" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;dashed=0;fontSize=11;" vertex="1" parent="app-components">
+                    <mxGeometry x="20.88352941176471" y="120.97441039838847" width="229.71882352941174" height="48.389764159355394" as="geometry"/>
+                </mxCell>
+                <mxCell id="storage" value="File Storage" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#f5f5f5;strokeColor=#666666;dashed=0;fontSize=11;" vertex="1" parent="app-components">
+                    <mxGeometry x="93.97588235294118" y="193.55905663742158" width="83.53411764705884" height="72.58464623903309" as="geometry"/>
+                </mxCell>
+                <mxCell id="backend-storage" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="app-components" source="backend" target="storage">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="135.74294117647057" y="181.46161559758266" as="sourcePoint"/>
+                        <mxPoint x="135.74294117647057" y="217.7539387170993" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="frontend-backend" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="app-components" source="frontend" target="backend">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="135.74294117647057" y="108.87696935854964" as="sourcePoint"/>
+                        <mxPoint x="135.74294117647057" y="133.07185143822733" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="docker-app" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="docker-containers" source="nginx" target="app-container">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="146.18470588235292" y="181.4616155975828" as="sourcePoint"/>
+                        <mxPoint x="187.95176470588234" y="181.4616155975828" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="docker-network" value="Docker Network Bridge" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;dashed=0;fontSize=11;" vertex="1" parent="docker-containers">
+                    <mxGeometry x="0.0032200816893690402" y="356.6907737397421" width="167.73246153846156" height="96.77922626025789" as="geometry"/>
+                </mxCell>
+                <mxCell id="network-app" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;" edge="1" parent="docker-containers" source="docker-network" target="app-container">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="265.20184615384625" y="319.93599642453063" as="sourcePoint"/>
+                        <mxPoint x="265.20184615384625" y="283.64378657693396" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="network-nginx" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;" edge="1" parent="docker-containers" source="docker-network" target="nginx">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="215.86876923076923" y="319.93599642453063" as="sourcePoint"/>
+                        <mxPoint x="58.00292307692306" y="198.96196359920825" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="backend-elevenlabs" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="backend" target="elevenlabs">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="845" y="252" as="sourcePoint"/>
+                        <mxPoint x="1205" y="212" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="backend-openai" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="backend" target="openai">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="845" y="212" as="sourcePoint"/>
+                        <mxPoint x="1205" y="112" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

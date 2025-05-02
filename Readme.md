@@ -46,7 +46,7 @@ These stanzas are then delivered as both **visual text cues** and **high-quality
 
 This personalization capability, combined with repetition over time, leads to *sustainable transformation of the mind*—not just momentary insight but **lasting and profound change**. The included meditations are just a starting point; the application truly shines when you bring your own meaningful content to it.
 
-Originally developed as a private project, Contemplation Machine is now open source, inviting contributions from the mindfulness and developer communities to extend its capabilities and reach.
+Originally developed as a private project, Contemplation Machine is now open source.
 
 ---
 
@@ -135,11 +135,32 @@ Originally developed as a private project, Contemplation Machine is now open sou
    docker-compose up -d
    ```
 
-4. **Access the application** at `http://localhost:3000`
+4. **Access the application** at `http://localhost:8088`
 
-For detailed instructions see:
-- [📘 API Key Setup](./backend/API_KEY_INSTRUCTIONS.md)
-- [📘 Deployment Guide](./Deployment.md)
+### Setting up API Keys
+
+#### OpenAI API Key
+
+1. Go to [https://platform.openai.com](https://platform.openai.com)
+2. Sign in or create an account
+3. Navigate to API keys section in your account dashboard
+4. Click "Create new secret key"
+5. Give your key a name (e.g., "Contemplation Machine")
+6. Copy the key immediately (OpenAI will only show it once)
+
+#### ElevenLabs API Key
+
+1. Go to [https://elevenlabs.io](https://elevenlabs.io)
+2. Sign in or create an account
+3. Navigate to your Profile Settings
+4. Find the "API" section
+5. Copy your API key (or generate a new one if needed)
+
+### Security Note
+
+- Never commit your `.env` file with real API keys to version control
+- Keep your API keys secret and don't share them publicly
+- The `.env` file should already be listed in your `.gitignore` file
 
 ---
 
@@ -152,6 +173,37 @@ For detailed instructions see:
 3. **Create or select a preset** - Choose from default presets or create your own
 4. **Begin meditation** - Start your session and follow the guided instructions
 5. **End session** - When complete, you can end manually or wait for the timer to finish
+
+### Application Screenshots
+
+<div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+  <div style="flex: 1; min-width: 300px; max-width: 450px; margin-bottom: 20px;">
+    <img src="./assets/screenshot_settings.png" alt="Settings Page" width="100%"/>
+    <p><em>Settings page showing API key management for OpenAI and ElevenLabs text-to-speech services. API keys are encrypted before being stored on the server, ensuring secure voice synthesis integration.</em></p>
+  </div>
+  <div style="flex: 1; min-width: 300px; max-width: 450px; margin-bottom: 20px;">
+    <img src="./assets/screenshot_configure.png" alt="Configuration Page" width="100%"/>
+    <p><em>Configuration page where users can customize meditation sessions. The interface provides options for session duration, instruction selection, voice guidance settings, and the ability to save custom presets for future use.</em></p>
+  </div>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+  <div style="max-width: 450px;">
+    <img src="./assets/screenshot_contemplate.png" alt="Ready to Contemplate" width="100%"/>
+    <p><em>The Ready to Contemplate page displays a summary of the configured session settings before beginning. Users can review their selected instruction set, session duration, and audio preferences before starting their meditation practice.</em></p>
+  </div>
+  <div style="flex: 1; min-width: 300px; max-width: 450px; margin-bottom: 20px;">
+    <img src="./assets/screenshot_session.png" alt="Session Page" width="100%"/>
+    <p><em>Active meditation session showing a contemplation instruction with progress timer. The clean, distraction-free interface displays the remaining time, current instruction, and progress through the meditation sequence.</em></p>
+  </div>
+</div>
+
+<div style="display: flex; justify-content: center; margin-bottom: 20px;">
+   <div style="flex: 1; min-width: 300px; max-width: 450px; margin-bottom: 20px;">
+    <img src="./assets/screenshot_instruction.png" alt="Instructions Page" width="100%"/>
+    <p><em>Instructions Manager page where users can view, create, edit, and delete contemplation instruction files. Each instruction set can contain multiple lines that will be presented individually during meditation sessions.</em></p>
+  </div>
+</div>
 
 ### Voice Configuration
 
@@ -170,7 +222,7 @@ For detailed instructions see:
 - Configure through the settings page
 - Provides natural-sounding, customizable voices
 
-### Creating Custom Meditations
+### Creating Custom Contemplations
 
 1. Navigate to the **Instructions page**
 2. Click "**Add New Instruction**"
@@ -180,6 +232,115 @@ For detailed instructions see:
 6. **Use it** in any meditation session by selecting it from the dropdown
 
 > For best results, structure your content into clear, concise stanzas that contain complete thoughts. The application will distribute these stanzas evenly throughout your meditation session, creating natural pauses for contemplation between each one.
+
+### Working with Presets
+
+Presets allow you to save and reuse specific contemplation configurations, including:
+
+- Session duration
+- Background sound selection
+- Voice guidance settings
+- Instruction selection and timing
+- Ending behavior
+
+The app provides two types of presets:
+
+- **Built-in Presets**: Pre-configured presets that come with the application
+- **Custom Presets**: Presets you create and save yourself
+
+#### Creating Presets
+
+1. Configure contemplation settings in the app
+2. Click "Save as Preset"
+3. Enter a name and optional description
+4. Click "Save"
+
+#### Managing Presets
+
+- **Rename**: Edit the name or description of existing presets
+- **Update**: Save new settings to an existing preset
+- **Delete**: Remove presets you no longer need
+- **Apply**: Quickly load a preset's settings for your session
+
+#### File System Organization
+
+Presets are stored in a specific directory structure:
+
+```
+contemplation-machine/
+├── defaults/
+│   └── presets/           # Built-in presets (individual JSON files)
+└── data/
+    └── presets/           # Custom presets (individual JSON files)
+```
+
+#### Preset File Format
+
+Each preset is stored as a JSON file with the following format:
+
+```json
+{
+  "id": "preset-1234567890123",
+  "name": "Example Preset",
+  "description": "An example contemplation preset",
+  "isDefault": true,
+  "createdAt": "2025-04-30T12:00:00.000Z",
+  "updatedAt": "2025-04-30T12:00:00.000Z",
+  "config": {
+    "duration": 10,
+    "useVoiceGuidance": true,
+    "voiceType": "openai",
+    "openaiVoice": "alloy",
+    "backgroundSound": "nature",
+    "backgroundVolume": 0.5,
+    "instructions": [
+      {
+        "id": "default-instruction-1",
+        "playAt": 0
+      }
+    ],
+    "endBehavior": "bell"
+  }
+}
+```
+
+#### Development Feature: "Promote to Default" Button
+
+The "Promote to Default" button found in the Advanced Dialog for Presets in the Configuration Page is specifically designed as a **development tool**. It allows developers working on the Contemplation Machine to:
+
+1. Design and test new presets during development
+2. Promote well-designed presets to become part of the built-in presets in future releases
+3. Easily transfer preset configurations from the development environment to the release package
+
+When a preset is promoted using this button:
+- It's copied to the `defaults/presets/` directory
+- The `isDefault` property is set to `true`
+- It becomes a candidate for inclusion in the next release
+
+**Note:** This feature is intended for development purposes only. Regular users typically won't need this functionality as it relates to preparing content for future releases of the application.
+
+#### Advanced Preset Management
+
+**Manual Preset Creation:**
+1. Create a JSON file following the preset format above
+2. Save it in the `data/presets/` directory
+3. Ensure it has a unique ID (format: `preset-` followed by timestamp)
+4. Restart the application
+
+**Backing Up Presets:**
+- Copy the `data/presets/` directory to preserve your custom presets
+
+**Migrating Presets Between Installations:**
+1. Copy preset JSON files from source installation
+2. Place them in target's `data/presets/` directory
+3. Restart the application
+
+#### Preset Management Best Practices
+
+- Use unique, descriptive names for presets
+- Add detailed descriptions to explain the purpose of each preset
+- Review and clean up unused presets periodically
+- Back up preset files before major updates
 
 ---
 
@@ -205,11 +366,104 @@ For detailed instructions see:
 - Cached audio files
 - Local storage for preferences
 
-### Contributing
+### File System Organization
 
-We welcome contributions from the community! Please see our [Contributing Guidelines](./CONTRIBUTING.md) for details on how to get involved.
+```
+contemplation-machine/
+├── defaults/
+│   └── presets/           # Built-in presets (individual JSON files)
+└── data/
+    └── presets/           # Your saved presets (individual JSON files)
+    └── audio-cache/       # Cached audio files for TTS
+```
 
-All contributors are expected to adhere to our [Code of Conduct](./CODE_OF_CONDUCT.md).
+### Updating the Application
+
+To update to a new version:
+
+1. Pull the latest code:
+   ```bash
+   git pull
+   ```
+
+2. Rebuild and restart the container:
+   ```bash
+   docker-compose down
+   docker-compose build
+   docker-compose up -d
+   ```
+
+### Troubleshooting
+
+#### Common Issues
+
+1. **"Error: Load failed" Issue**
+   - Check browser console for specific errors
+   - Verify Docker logs: `docker-compose logs -f`
+   - Try a hard refresh (Ctrl+Shift+R or Cmd+Shift+R)
+   - Clear browser cache and reload
+
+2. **API Keys Not Working**
+   - Verify the environment variables are correctly set in `.env` file
+   - Check if keys are valid and have necessary permissions
+
+3. **Audio Generation Fails**
+   - Check OpenAI API key status and quota
+   - Verify the TTS endpoints are accessible from your environment
+
+4. **Container Fails to Start**
+   - Check Docker logs for startup errors
+   - Verify port 8088 is not used by another application
+
+---
+
+## 📊 Architecture Diagram
+
+### Application Architecture
+![Contemplation Machine Architecture](./assets/meditation-app-architecture.png)
+
+This diagram illustrates the core application architecture of the Contemplation Machine, showing how the frontend and backend components interact. The React-based frontend communicates with the Node.js backend via RESTful APIs, while the backend manages meditation instructions, presets, and handles text-to-speech processing through various service providers.
+
+### Deployment Architecture
+
+The Contemplation Machine is designed for flexible deployment options, with a focus on secure home server deployment. The diagram below illustrates the recommended setup for running the application on a home server with secure remote access capabilities.
+
+![Contemplation Machine Deployment Architecture](./assets/deployment-architecture.png)
+
+#### Deployment Components
+
+**Home Network Environment:**
+- **MacBook Home Server** - The primary hardware hosting the Contemplation Machine
+- **Docker Environment** - Runs containerized versions of all application components
+- **Docker Containers:**
+  - **Contemplation Machine Container** - Houses both frontend and backend components
+  - **Nginx Reverse Proxy** - Handles routing and secure access to the application
+
+**Application Components:**
+- **React Frontend** - The user interface for the meditation application
+- **Node.js Backend** - Processes requests and manages application logic
+- **File Storage** - Stores meditation presets, instructions, and cached audio files
+
+**Network Components:**
+- **Tailscale Client** - Provides secure remote access through encrypted tunnels
+- **Home Router** - Connects the server to both local network and internet
+- **Docker Network Bridge** - Facilitates communication between containers
+
+**External Services:**
+- **OpenAI API** - Provides high-quality text-to-speech capabilities
+- **ElevenLabs API** - Offers alternative text-to-speech with customizable voices
+- **Tailscale Network** - Coordinates secure connections between devices
+
+#### Secure Remote Access
+
+The deployment architecture enables secure access to the Contemplation Machine from anywhere, without exposing ports to the internet:
+
+1. Tailscale creates an encrypted mesh network between authorized devices
+2. Client devices (laptops, phones, tablets) connect to the application through this secure network
+3. All traffic is end-to-end encrypted between devices and the home server
+4. No port forwarding required, reducing security risks
+
+This deployment model provides the perfect balance of accessibility, security, and privacy for your meditation practice.
 
 ---
 
@@ -219,8 +473,44 @@ Contemplation Machine is licensed under the [MIT License](./LICENSE).
 
 ---
 
-## 📊 Architecture Diagram
+## ❓ Frequently Asked Questions
 
-![Contemplation Machine Architecture](./assets/meditation-app-architecture.png)
+### General Questions
+
+**Q: What makes Contemplation Machine different from other meditation apps?**  
+A: Contemplation Machine focuses on deep contemplation through structured exposure to meaningful ideas. Unlike apps that only offer guided meditations or simple timers, Contemplation Machine allows you to transform any meaningful text into a personalized contemplative experience with both visual and audio guidance.
+
+**Q: Do I need to be an experienced meditator to use this?**  
+A: Not at all! Contemplation Machine is designed for both beginners and experienced practitioners. The guided nature of the sessions provides structure for newcomers, while the customization options satisfy advanced users.
+
+**Q: Is this application affiliated with any particular spiritual tradition?**  
+A: No. While some presets include content from various wisdom traditions, Contemplation Machine is a secular tool that can be used with content from any tradition or none at all.
+
+### Technical Questions
+
+**Q: Are my meditation presets stored in the cloud?**  
+A: No. All presets and configurations are stored locally on your device or server. There is no cloud storage component or user accounts.
+
+**Q: Do I need an internet connection to use Contemplation Machine?**  
+A: An internet connection is required only if you want to use the OpenAI or ElevenLabs voice synthesis features. The browser-native text-to-speech works offline after initial setup.
+
+**Q: Can I use this application on mobile devices?**  
+A: Yes, Contemplation Machine has a responsive design that works on mobile browsers. However, for the best experience, we recommend using a tablet or desktop.
+
+**Q: Are there any known issues with text-to-speech on mobile devices?**  
+A: Yes, browser-native TTS engines on mobile devices sometimes have compatibility issues, particularly on Apple iPhones and iPads where the feature can be unstable. For iOS devices, we recommend using iCabMobile browser (available on the App Store) which provides the best TTS service quality. Laptop and desktop computers generally don't experience these TTS compatibility problems.
+
+### Content Questions
+
+**Q: How do I format my own contemplation text?**  
+A: The best format is to create distinct "stanzas" or thoughts separated by section names. Each section should follow this format: "Section Name - Your contemplation text here." This allows the application to properly distribute the content throughout your session.
+
+**Q: Can I import meditation instructions from other sources?**  
+A: Yes! You can copy content from books, articles, or other sources and format it according to our guidelines. The application also works well with AI-generated content from tools like ChatGPT when you need to summarize or restructure longer texts.
+
+**Q: What language does Contemplation Machine support?**  
+A: The interface currently supports English and German. For contemplation content, you can use any language supported by your chosen voice synthesis engine (browser native, OpenAI, or ElevenLabs).
+
+---
 
 *For the latest updates and changes, please refer to the [Release Notes](./RELEASE-1.8.0.md).*
