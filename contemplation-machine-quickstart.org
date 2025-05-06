@@ -229,10 +229,21 @@ pwd
 
 
 #+begin_src bash
-# Listing:
+# Listing: remove installation-test.org from git history
+cd ~/LocalProjects/ai-bootcamp/meditation-app
+git status
+git push
+
+## example how to use filter-branch
+git filter-branch --force --index-filter "git rm --cached --ignore-unmatch geheim.txt"  --prune-empty --tag-name-filter cat -- --all
+
+# git filter-branch for removing installation-test.org
+git filter-branch --force --index-filter "git rm --cached --ignore-unmatch installation-test.org"  --prune-empty --tag-name-filter cat -- --all
 
 
 
+
+  
 #+end_src
 
 
