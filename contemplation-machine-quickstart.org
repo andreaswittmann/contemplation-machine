@@ -25,10 +25,6 @@ git pull
 git status
 # List the files in the repository
 ls -la
-cat docker-compose.yml
-
-
-cd ~/test-meditation-app/contemplation-machine
 
 # Create the environment file from the provided sample
 cp .env.sample .env
@@ -65,30 +61,62 @@ echo "HOST: $HOST"
 
 # Display the environment file contents to verify configuration
 cat .env
-
-
 #+end_src
 
-This clones the repository and creates a basic environment configuration.
+This clones the repository and creates a basic environment configuration with API keys and port settings.
+
+** Understanding the Environment Configuration
+
+Our Docker setup is configured to:
+
+1. Always use port 3001 *inside* the container (fixed)
+2. Use the PORT from your .env file for the *external* port (customizable)
+3. Mount the .env file as a volume, so you can change API keys without rebuilding
+
+#+begin_src bash
+# View the docker-compose.yml file to understand the configuration
+cat docker-compose.yml
+#+end_src
+
+The key points in the docker-compose.yml are:
+- `"${PORT:-8088}:3001"` - Maps your chosen external port to the fixed internal port
+- `./.env:/app/.env` - Mounts your .env file into the container
+- `PORT=3001` in the environment section - Forces the internal port to remain fixed
 
 ** Create a Container for local testing.
 
 Now I want to test the application locally. I will use the settings from the .env file to create a container and run it.
 
 #+begin_src bash
-# Listing:
 # Build the Docker containers with a clean cache to ensure fresh builds
 docker-compose build --no-cache
 
 # Start the containers in detached mode to run in the background
-cat docker-compose.yml
 docker-compose up -d
-docker-compose down
-docker-compose down --timeout 0
 
 # Verify that the containers are running properly
 docker ps | grep contemplation-machine
 
+# Access the application in your browser at localhost:PORT (where PORT is from your .env file)
+# For example, if PORT=8077 in your .env file, the URL would be http://localhost:8077
+#+end_src
+
+** Changing Configuration Without Rebuilding
+
+You can change API keys or the external port without rebuilding the container:
+
+#+begin_src bash
+# Edit the .env file to change API keys or external port
+nano .env
+
+# Restart the container to apply changes
+docker-compose restart
+
+# Alternatively, you can override the PORT when starting the container
+PORT=9999 docker-compose up -d
+
+# Check the application is running on the new port
+curl http://localhost:9999/api/health
 #+end_src
 
 
@@ -117,15 +145,23 @@ This builds Docker images for both AMD64 (standard computers) and ARM64 (Apple S
 # Create data directory for persistence
 mkdir -p ~/contemplation-data
 
-# Run the container
+# Create a simple .env file with your API keys and desired port
+cat > ~/contemplation-env << EOF
+OPENAI_API_KEY=your_openai_key_here
+ELEVENLABS_API_KEY=your_elevenlabs_key_here
+PORT=8088
+EOF
+
+# Run the container with the .env file mounted
 docker run -d \
   --name meditation \
-  -p 8088:3001 \
+  -p 8088:8088 \
   -v ~/contemplation-data:/app/data \
+  -v ~/contemplation-env:/app/.env \
   yourusername/contemplation-machine:latest
 #+end_src
 
-The application should now be running and accessible at http://localhost:8088.
+The application should now be running and accessible at http://localhost:8088 (or whatever port you specified).
 
 ** Verify Container Status
 #+begin_src bash
