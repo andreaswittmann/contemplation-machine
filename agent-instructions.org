@@ -1,0 +1,91 @@
+#+TITLE: Instructions for Agents
+#+AUTHOR: Andreas Wittmann
+#+DATE: [2025-05-06]
+#+OPTIONS: ^:nil
+
+* Instructions for Agents
+This chapter is specifically designed for AI assistants and LLM-based agents to understand how to work with and generate live-scripting documents in Org-mode format.
+
+** What is Live-Scripting?
+Live-scripting is a documentation approach that combines narrative documentation with executable code blocks. In the context of Org-mode, it allows:
+- Writing documentation and code in the same file
+- Executing code blocks directly within the document
+- Maintaining reproducible technical documentation
+
+For AI assistants, understanding live-scripting is essential when helping users create installation guides, tutorials, or technical documentation that can be both read and executed.
+
+** Org-mode Structure for Live-Scripting
+When generating or modifying Org-mode files for live-scripting, adhere to the following structure:
+
+*** Document Header
+#+begin_example
+#+TITLE: Document Title
+#+AUTHOR: Author Name
+#+DATE: [YYYY-MM-DD]
+#+OPTIONS: ^:nil
+#+end_example
+
+*** Sections and Subsections
+Use Org-mode's hierarchical structure with asterisks
+
+*** Executable Code Blocks
+Code blocks are the core of live-scripting. Format them as:
+#+begin_src bash
+# Commands go here
+command1
+command2
+#+end_src
+#+end_example
+
+Where:
+- Commands are written exactly as they would be in a terminal or interpreter
+
+** Best Practices for AI-Generated Live-Scripts
+
+*** Progressive Validation
+Structure scripts to validate each step before proceeding to the next:
+
+#+begin_src bash
+# Install package
+npm install express
+
+# Verify installation
+npm list | grep express
+#+end_src
+
+*** Clear Section Divisions
+Divide complex procedures into clear logical sections:
+Each section should have a brief prose description about the obejctive of the following code.
+After every code block, there needs to be a brief decription about what was accomplished.
+
+*** Section Numbers
+Don't generate Section numbers, they will be provided by the export engines.
+Just use heading markers.
+
+*** Bash Code Blocks.
+These code blocks are designed to be executed step by step in a ansi-term terminal. Adhere to these guidelines:
+- Explain what the commands will do by prepending comment lines #
+- Use simple and complex, single-line commands
+- Complex sinlge-line commands need a good explanation in the comment line  
+- Avoid using complex multi-line commands.
+- Multi-line commands are possible but should be the exception
+- If you need create files, use Here-Documents. In this case multi-line commands are ok.
+- Remember that the code blocks are executed manually step by step, where the user verifies the output of every command.
+- Don't use echo statements as instructions for users. It makes no sense. The user can use the comment lines to understand what the code is doing.
+
+** Common Pitfalls for AI Assistants
+When generating live-scripts, avoid these common issues:
+
+1. ***Untested Assumptions***: Don't assume tools are installed or directories exist without checking
+2. ***Missing Dependencies***: Always include prerequisite checks
+3. ***Platform-Specific Commands***: Note when commands are OS-specific and provide alternatives
+5. ***Inconsistent Paths***: Use variables or consistent paths throughout the document
+6. ***Overwriting User Files***: Check before overwriting existing files
+7. ***Insecure Practices***: Avoid including hardcoded credentials or insecure commands
+
+By following these guidelines, AI assistants can create high-quality, executable documentation that serves as both a reference and a tool for users.
+
+* References
+- Project Repository: https://github.com/andreaswittmann/contemplation-machine
+- Docker Documentation: https://docs.docker.com/
+- Live-scripting Guide: https://github.com/andreaswittmann/live-scripting
