@@ -122,6 +122,8 @@ Originally developed as a private project, Contemplation Machine is now open sou
 
 ### Docker Deployment
 
+#### Option 1: Command Line Deployment
+
 1. **Clone the repository** and navigate to the project directory.
 
 2. **Configure your environment**:
@@ -136,6 +138,45 @@ Originally developed as a private project, Contemplation Machine is now open sou
    ```
 
 4. **Access the application** at `http://localhost:8088`
+
+#### Option 2: Docker Desktop Deployment from Docker Hub
+
+If you prefer using Docker Desktop's graphical interface to deploy the Contemplation Machine, follow these steps:
+
+1. **Search for the image on Docker Hub**:
+   
+   Open Docker Desktop and click on the search bar at the top of the window.
+   
+   ![Search for the image on Docker Hub](./assets/docker-hub_01.png)
+   
+   Type `awittmann386/contemplation-machine` and select it from the search results.
+
+2. **Pull the image**:
+   
+   Click the "Pull" button to download the image to your local machine.
+   
+   ![Pull the image](./assets/docker-hub_02.png)
+
+3. **Run a new container**:
+   
+   After pulling the image, click the "Run" button next to the image in Docker Hub or Images list.
+   
+   In the "Run a new container" dialog:
+   - You can optionally set a container name
+   - **Important:** Add a host port mapping (8010:3001 as shown in the image)
+   
+   ![Run a container with port mapping](./assets/docker-hub_03.png)
+   
+   Click "Run" to start the container.
+
+4. **Access the application**:
+   
+   Once running, you can access the application by:
+   - Clicking on the container name in Docker Desktop
+   - Clicking the link shown under "PORT(S)" (typically http://localhost:8010)
+   - Or opening your browser and navigating to http://localhost:8010
+
+The application logs displayed in Docker Desktop will show when the server is fully initialized and ready to use.
 
 ### Setting up API Keys
 
