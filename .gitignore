@@ -38,4 +38,6 @@ Thumbs.db
 
 # Audio files and cache directories
 /backend/data/audio-cache/
-*.mp3
+# Allow default audio cache files
+!/backend/defaults/audio-cache/
+!/backend/defaults/audio-cache/*.mp3

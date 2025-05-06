@@ -168,7 +168,7 @@ Originally developed as a private project, Contemplation Machine is now open sou
 
 ### Getting Started
 
-1. **Launch the application** - Access via your browser at localhost:3000 (or your configured domain)
+1. **Launch the application** - Access via your browser at localhost:8088 (or your configured domain)
 2. **Configure your session** - Adjust the duration, voice settings, and choose guided instructions
 3. **Create or select a preset** - Choose from default presets or create your own
 4. **Begin meditation** - Start your session and follow the guided instructions
