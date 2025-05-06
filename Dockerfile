@@ -41,8 +41,8 @@ COPY --from=frontend-build /app/frontend/build /app/frontend/build
 # List directories to verify the structure
 RUN ls -la /app && ls -la /app/frontend && ls -la /app/frontend/build || echo "Build directory not created properly"
 
-# Expose port for the unified app
-EXPOSE 3001
+# Expose port for the unified app - this is a documentation feature only
+EXPOSE 8088 3001
 
 # Set environment variables
 ENV PORT=3001

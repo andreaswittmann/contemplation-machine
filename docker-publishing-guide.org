@@ -91,6 +91,15 @@ docker buildx create --name mybuilder --use
 docker buildx build --platform linux/amd64,linux/arm64 \
   -t yourusername/contemplation-machine:latest \
   --push .
+
+# push readme
+hub-tool login
+hub-tool repo readme set <namespace>/<repo> --file README.docker.md
+
+
+
+hub-tool repo readme set <namespace>/<repo> --file README.md
+  
 #+end_src
 
 This builds and pushes images for both AMD64 (standard computers) and ARM64 (Apple Silicon, etc.) architectures.
