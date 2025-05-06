@@ -48,5 +48,8 @@ EXPOSE 3001
 ENV PORT=3001
 ENV NODE_ENV=production
 
+# Set Volume for persistent data
+VOLUME [ "/app/data" ]
+
 # Command to run the server
 CMD ["node", "server.js"]

@@ -1,0 +1,182 @@
+#+TITLE: Contemplation Machine Quickstart Guide
+#+AUTHOR: Your Name
+#+DATE: [2025-05-06]
+#+OPTIONS: ^:nil
+
+#+HTML_HEAD_EXTRA:<link rel="stylesheet" href="assets/toc-nav.css" />
+#+HTML_HEAD_EXTRA:<script src="assets/toc-nav.js"></script>
+HTML Version: [[file+sys:contemplation-machine-quickstart.html]]
+
+
+* Testing Contemplation Machine from Scratch
+
+** Clone and Set Up Environment
+#+begin_src bash
+# Create a dedicated test directory to avoid conflicts with existing files
+mkdir -p ~/test-meditation-app
+cd ~/test-meditation-app
+find .
+
+# Clone the repository
+git clone https://github.com/andreaswittmann/contemplation-machine.git
+# update the local git repository
+cd ~/test-meditation-app/contemplation-machine
+git pull
+git status
+# List the files in the repository
+ls -la
+cat docker-compose.yml
+
+
+cd ~/test-meditation-app/contemplation-machine
+
+# Create the environment file from the provided sample
+cp .env.sample .env
+
+cat .env
+# Meditation App Environment Configuration
+
+bash # create sub-shell so exports will not affect the current shell
+export OPENAI_API_KEY=sk-123456
+export ELEVENLABS_API_KEY=sk-foobar
+export PORT=8077
+export HOST=0.0.0.0
+
+echo "OPENAI_API_KEY: $OPENAI_API_KEY"
+echo "ELEVENLABS_API_KEY: $ELEVENLABS_API_KEY"
+echo "PORT: $PORT"
+echo "HOST: $HOST"
+
+
+# create a perl one-liner that replaces the API-Keys with the values of the shell varibales.
+perl -pi -e 's/(OPENAI_API_KEY=).*/$1$ENV{OPENAI_API_KEY}/;' .env
+perl -pi -e 's/(ELEVENLABS_API_KEY=).*/$1$ENV{ELEVENLABS_API_KEY}/;' .env
+perl -pi -e 's/(PORT=).*/$1$ENV{PORT}/;' .env
+perl -pi -e 's/(HOST=).*/$1$ENV{HOST}/;' .env
+cat .env 
+exit # subshell
+
+
+echo "OPENAI_API_KEY: $OPENAI_API_KEY"
+echo "ELEVENLABS_API_KEY: $ELEVENLABS_API_KEY"
+echo "PORT: $PORT"
+echo "HOST: $HOST"
+
+
+# Display the environment file contents to verify configuration
+cat .env
+
+
+#+end_src
+
+This clones the repository and creates a basic environment configuration.
+
+** Create a Container for local testing.
+
+Now I want to test the application locally. I will use the settings from the .env file to create a container and run it.
+
+#+begin_src bash
+# Listing:
+# Build the Docker containers with a clean cache to ensure fresh builds
+docker-compose build --no-cache
+
+# Start the containers in detached mode to run in the background
+cat docker-compose.yml
+docker-compose up -d
+docker-compose down
+docker-compose down --timeout 0
+
+# Verify that the containers are running properly
+docker ps | grep contemplation-machine
+
+#+end_src
+
+
+* Creating Multi-Arch Docker Image
+
+** Build for Multiple Platforms
+#+begin_src bash
+# Log in to Docker Hub
+docker login
+
+# Set up buildx builder
+docker buildx create --name mybuilder --use
+
+# Build and push multi-arch image
+docker buildx build --platform linux/amd64,linux/arm64 \
+  -t yourusername/contemplation-machine:latest \
+  --push .
+#+end_src
+
+This builds Docker images for both AMD64 (standard computers) and ARM64 (Apple Silicon, etc.) architectures and pushes them to Docker Hub.
+
+* Testing Docker Hub Image via Command Line
+
+** Pull and Run from Docker Hub
+#+begin_src bash
+# Create data directory for persistence
+mkdir -p ~/contemplation-data
+
+# Run the container
+docker run -d \
+  --name meditation \
+  -p 8088:3001 \
+  -v ~/contemplation-data:/app/data \
+  yourusername/contemplation-machine:latest
+#+end_src
+
+The application should now be running and accessible at http://localhost:8088.
+
+** Verify Container Status
+#+begin_src bash
+# Check container is running
+docker ps
+
+# View container logs
+docker logs meditation
+#+end_src
+
+These commands confirm the container is running properly.
+
+** Test Application Functionality
+#+begin_src bash
+# Simple curl test to verify API is responding
+curl http://localhost:8088/api/health
+#+end_src
+
+If working correctly, this should return a success response.
+
+** Clean up
+After testing and pushing the image we clean up.
+
+#+begin_src bash
+# Listing:
+docker ps -a
+docker stop meditation
+docker rm meditation
+
+# Stop and remove all running containers from the test
+docker-compose down
+
+# Navigate to the test directory
+cd ~/test-meditation-app
+
+# List all files and directories before removal for verification
+find .
+
+# Remove the test repository
+rm -rf contemplation-machine
+rm -rf ./*
+pwd
+
+#+end_src
+
+
+#+begin_src bash
+# Listing:
+
+
+
+#+end_src
+
+
