@@ -11,7 +11,11 @@ services:
       - .env
     environment:
       - NODE_ENV=production
+      # Force the internal port to be fixed at 3001 regardless of .env settings
+      - PORT=3001
     volumes:
+      # Mount .env file so changes are reflected without rebuilding
+      - ./.env:/app/.env
       # Map data directory to host filesystem
       - ./backend/data:/app/data
       # We're removing the specific audio-cache mapping to allow the initialization code to work
