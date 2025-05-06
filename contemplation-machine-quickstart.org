@@ -26,6 +26,10 @@ git status
 # List the files in the repository
 ls -la
 
+
+
+
+
 # Create the environment file from the provided sample
 cp .env.sample .env
 
@@ -33,16 +37,11 @@ cat .env
 # Meditation App Environment Configuration
 
 bash # create sub-shell so exports will not affect the current shell
-export OPENAI_API_KEY=sk-123456
-export ELEVENLABS_API_KEY=sk-foobar
-export PORT=8077
+export OPENAI_API_KEY=
+export OPENAI_API_KEY=sk-12345678
+export ELEVENLABS_API_KEY=sk-foobarbaz
+export PORT=8099
 export HOST=0.0.0.0
-
-echo "OPENAI_API_KEY: $OPENAI_API_KEY"
-echo "ELEVENLABS_API_KEY: $ELEVENLABS_API_KEY"
-echo "PORT: $PORT"
-echo "HOST: $HOST"
-
 
 # create a perl one-liner that replaces the API-Keys with the values of the shell varibales.
 perl -pi -e 's/(OPENAI_API_KEY=).*/$1$ENV{OPENAI_API_KEY}/;' .env
@@ -52,15 +51,19 @@ perl -pi -e 's/(HOST=).*/$1$ENV{HOST}/;' .env
 cat .env 
 exit # subshell
 
-
 echo "OPENAI_API_KEY: $OPENAI_API_KEY"
 echo "ELEVENLABS_API_KEY: $ELEVENLABS_API_KEY"
 echo "PORT: $PORT"
 echo "HOST: $HOST"
 
-
 # Display the environment file contents to verify configuration
 cat .env
+
+
+docker-compose up -d
+docker-compose down
+docker-compose down --timeout 0
+
 #+end_src
 
 This clones the repository and creates a basic environment configuration with API keys and port settings.
@@ -72,6 +75,7 @@ Our Docker setup is configured to:
 1. Always use port 3001 *inside* the container (fixed)
 2. Use the PORT from your .env file for the *external* port (customizable)
 3. Mount the .env file as a volume, so you can change API keys without rebuilding
+4. Default to port 8088 for external access if no PORT is specified
 
 #+begin_src bash
 # View the docker-compose.yml file to understand the configuration
@@ -80,6 +84,7 @@ cat docker-compose.yml
 
 The key points in the docker-compose.yml are:
 - `"${PORT:-8088}:3001"` - Maps your chosen external port to the fixed internal port
+   - If PORT is not specified, 8088 is used as the default external port
 - `./.env:/app/.env` - Mounts your .env file into the container
 - `PORT=3001` in the environment section - Forces the internal port to remain fixed
 
@@ -155,13 +160,28 @@ EOF
 # Run the container with the .env file mounted
 docker run -d \
   --name meditation \
-  -p 8088:8088 \
+  -p 8088:3001 \
   -v ~/contemplation-data:/app/data \
   -v ~/contemplation-env:/app/.env \
   yourusername/contemplation-machine:latest
 #+end_src
 
 The application should now be running and accessible at http://localhost:8088 (or whatever port you specified).
+
+** Using the Docker Desktop Default Port
+
+When downloading and running the container from Docker Hub via Docker Desktop:
+
+1. The container exposes port 8088 by default for external access
+2. The internal application always runs on port 3001
+3. Docker Desktop will automatically map port 8088 to the container
+
+You can verify this mapping in Docker Desktop's port settings for the container.
+
+If you need to change the port mapping after starting the container:
+1. Stop the container
+2. Edit the port settings in Docker Desktop
+3. Restart the container
 
 ** Verify Container Status
 #+begin_src bash
