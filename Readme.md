@@ -8,6 +8,7 @@ Want to see the Contemplation Machine in action? Check out this introduction vid
 
 <div align="center">
   <a href="https://www.youtube.com/watch?v=pRpbWXw4jV8" target="_blank">
+      <img src="https://img.youtube.com/vi/pRpbWXw4jV8/0.jpg" alt="Contemplation Machine Introduction Video" style="max-width:600px;" />
   </a>
   <p><em>Click to watch: Introduction to the Contemplation Machine</em></p>
 </div>
@@ -26,7 +27,6 @@ The Contemplation Machine is a **simple meditation app** with a *powerful purpos
 
 At its core, the app takes any set of instructions or contemplative statements and *evenly distributes* them across your chosen meditation timeframe, delivering them through **high-quality text-to-speech**. This simple approach serves a profound function.
 
-> Contemplation works like a magnifying glass focusing sunlight on paper - when held steady long enough, ignition occurs.
 
 Similarly, when the mind rests on a single thought, verse, or question for an extended period, a *natural deepening occurs*. Without effort, understanding penetrates beyond the surface, revealing layers of meaning inaccessible through casual reading.
 
