@@ -31,13 +31,5 @@
     "createdAt": "2025-05-01T17:20:48.478Z",
     "updatedAt": "2025-05-01T17:46:30.020Z",
     "isDefault": true
-  },
-  {
-    "id": "1746182787406",
-    "name": "Foo",
-    "description": "Bar",
-    "content": "**First** Instruction\nSecond Instruction\nThird Instruction\n\nFirth Instruction\nSixth Instrcution",
-    "createdAt": "2025-05-02T10:46:27.406Z",
-    "updatedAt": "2025-05-02T11:53:40.440Z"
-  }
+  }  
 ]
