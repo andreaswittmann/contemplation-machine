@@ -2,6 +2,19 @@
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
 
+### 🎬 Video Introduction
+
+Want to see the Contemplation Machine in action? Check out this introduction video:
+
+<div align="center">
+  <a href="https://www.youtube.com/watch?v=pRpbWXw4jV8" target="_blank">
+    <img src="https://img.youtube.com/vi/pRpbWXw4jV8/0.jpg" alt="Contemplation Machine Introduction Video" style="max-width:600px;" />
+  </a>
+  <p><em>Click to watch: Introduction to the Contemplation Machine</em></p>
+</div>
+
+This video provides a quick overview of the application's features and demonstrates how it can enhance your meditation practice.
+
 ## 🧘 Introduction
 
 ### The Art of Contemplation
