@@ -79,7 +79,7 @@ const AppContent = () => {
       </main>
 
       <footer className="app-footer">
-        <p>Contemplation Machine - Version 1.8.0</p>
+        <p>Contemplation Machine - Version 1.9.2</p>
       </footer>
     </NavigationContext.Provider>
   );

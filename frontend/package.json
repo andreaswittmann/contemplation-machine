@@ -1,5 +1,5 @@
-{
-  "name": "contemplation-machine-frontend",
+{  "name": "@contemplation-machine/frontend",
+  "version": "1.9.2", "name": "contemplation-machine-frontend",
   "version": "1.8.0",
   "private": true,
   "dependencies": {
