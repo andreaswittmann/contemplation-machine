@@ -23,6 +23,9 @@ WORKDIR /app
 COPY .env* ./
 # The file might not exist, but that's ok - Docker will just skip it without error
 
+# Copy VERSION.md for version endpoint
+COPY VERSION.md ./
+
 # Install backend dependencies first
 COPY backend/package*.json ./
 RUN npm install
