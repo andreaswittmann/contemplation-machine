@@ -1,0 +1,183 @@
+#+SETUPFILE: aw-org-html-themes/setup/theme-readtheorg-local.setup
+#+OPTIONS: toc:t
+#+STARTUP: overview
+#+Title: Contemplation Machine - Setup & Migration Guide
+#+Author: Andreas Wittmann
+#+Options: c:t
+
+- *PDF Version:* [[file:setup.pdf][setup.pdf]]
+- *HTML Version:* [[file:setup.html][setup.html]]
+
+* Contemplation Machine - Setup & Migration
+
+** Initial Setup on Asamadhi
+
+*** Prerequisites
+- Git, Docker, Docker Compose installed
+- SSH access to asamadhi
+- Optional: OpenAI or ElevenLabs API keys
+
+*** Step 1: Clone Repository
+
+#+BEGIN_src bash
+cd ~/LocalProjects
+rm -rf contemplation-machine
+git clone https://github.com/andreaswittmann/contemplation-machine.git
+cd contemplation-machine
+git log --oneline -5
+ls -la
+#+end_src
+
+*** Step 2: Configure Environment
+
+Copy `.env` from the existing installation:
+
+#+BEGIN_src bash
+cd ~/LocalProjects/contemplation-machine
+
+# Copy .env from old installation
+cp ~/LocalProjects/ai-bootcamp/meditation-app/.env .env
+
+cat .env
+#+end_src
+
+*** Step 3: Initialize Data Directories
+
+#+BEGIN_src bash
+cd ~/LocalProjects/contemplation-machine
+mkdir -p backend/data/presets backend/data/audio-cache
+ls -la backend/data/
+#+end_src
+
+*** Step 4: Build & Start
+
+#+BEGIN_src bash
+cd ~/LocalProjects/contemplation-machine
+docker compose build --no-cache
+docker compose up -d
+docker compose ps
+sleep 5
+curl http://localhost:3001/api/health
+#+end_src
+
+*Result:* Application running at http://localhost:3000 (frontend) and http://localhost:3001 (backend).
+
+** Migration from Existing Installation
+
+*** Step 1: Copy Production Data from Old Installation
+
+#+BEGIN_src bash
+cd ~/LocalProjects/ai-bootcamp/meditation-app/backend/data
+ls -la
+#+end_src
+
+*** Step 2: Migrate Data to New Installation
+
+#+BEGIN_src bash
+cd ~/LocalProjects/ai-bootcamp/meditation-app/backend/data
+
+# Copy production files to new installation
+cp instructions.json ~/LocalProjects/contemplation-machine/backend/data/ 2>/dev/null || true
+cp api-keys.json ~/LocalProjects/contemplation-machine/backend/data/ 2>/dev/null || true
+cp -r presets/* ~/LocalProjects/contemplation-machine/backend/data/presets/ 2>/dev/null || true
+cp -r audio-cache/* ~/LocalProjects/contemplation-machine/backend/data/audio-cache/ 2>/dev/null || true
+
+echo "Migration complete"
+ls -la ~/LocalProjects/contemplation-machine/backend/data/
+#+end_src
+
+*** Step 3: Verify Migration
+
+#+BEGIN_src bash
+cd ~/LocalProjects/contemplation-machine
+docker compose restart backend
+sleep 2
+curl http://localhost:3001/api/instructions | head -50
+curl http://localhost:3001/api/presets | head -50
+#+end_src
+
+*Result:* Production data migrated successfully.
+
+** Update Docker Installation
+
+*** Step 1: Connect to Remote Server
+
+Connect to the remote machine and navigate to the project directory:
+
+#+BEGIN_src bash
+ssh asamadhi
+
+cd ~/LocalProjects/contemplation-machine
+
+whoami
+pwd
+
+#+end_src
+
+*** Step 2: Update Code from Repository
+
+Pull the latest code changes:
+
+#+BEGIN_src bash
+cd ~/LocalProjects/contemplation-machine
+
+git pull
+git fetch --tags
+git describe --tags
+
+#+end_src
+
+*** Step 3: Stop Running Containers
+
+Stop all running containers:
+
+#+BEGIN_src bash
+cd ~/LocalProjects/contemplation-machine
+
+docker compose down
+
+#+end_src
+
+*** Step 4: Rebuild Docker Images
+
+Rebuild the backend and frontend images:
+
+#+BEGIN_src bash
+cd ~/LocalProjects/contemplation-machine
+
+docker compose build --no-cache
+
+#+end_src
+
+*** Step 5: Start Containers
+
+Start all services in background:
+
+#+BEGIN_src bash
+cd ~/LocalProjects/contemplation-machine
+
+docker compose up -d
+
+docker compose ps
+
+#+end_src
+
+*** Step 6: Verify Services
+
+Confirm that the application is running:
+
+#+BEGIN_src bash
+cd ~/LocalProjects/contemplation-machine
+
+docker compose logs backend | tail -10
+
+docker compose logs frontend | tail -10
+
+echo "Meditation app has been updated and is running"
+echo "Frontend: http://localhost:3000"
+echo "Backend: http://localhost:3001"
+
+#+end_src
+
+*Result:* The meditation-app installation is updated and running with the latest code.
+
