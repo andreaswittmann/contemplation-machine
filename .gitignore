@@ -36,8 +36,11 @@ Thumbs.db
 *.swp
 *.swo
 
-# Audio files and cache directories
-/backend/data/audio-cache/
-# Allow default audio cache files
-!/backend/defaults/audio-cache/
-!/backend/defaults/audio-cache/*.mp3
+# Runtime data and user configurations
+/backend/data/
+# Allow defaults to be tracked
+!/backend/defaults/
+!/backend/defaults/**
+
+# Package lock files (optional - uncomment to ignore)
+# package-lock.json
