@@ -53,7 +53,8 @@ ls -la backend/data/
 
 #+BEGIN_src bash
 cd ~/LocalProjects/contemplation-machine
-docker compose build --no-cache
+#docker compose build --no-cache
+docker compose build
 docker compose up -d
 docker compose ps
 sleep 5
@@ -100,83 +101,44 @@ curl http://localhost:3001/api/presets | head -50
 
 ** Update Docker Installation
 
-*** Step 1: Connect to Remote Server
+*** Update Process
 
-Connect to the remote machine and navigate to the project directory:
+Connect to the remote server, update code, stop containers, rebuild images, start containers, and verify services.
 
-#+BEGIN_src bash
+#+begin_src bash
+# Connect to remote server
 ssh asamadhi
 
+# Navigate to project directory
 cd ~/LocalProjects/contemplation-machine
 
 whoami
 pwd
 
-#+end_src
-
-*** Step 2: Update Code from Repository
-
-Pull the latest code changes:
-
-#+BEGIN_src bash
-cd ~/LocalProjects/contemplation-machine
-
+# Update code from repository
 git pull
 git fetch --tags
 git describe --tags
 
-#+end_src
-
-*** Step 3: Stop Running Containers
-
-Stop all running containers:
-
-#+BEGIN_src bash
-cd ~/LocalProjects/contemplation-machine
-
+# Stop running containers
 docker compose down
 
-#+end_src
+# Rebuild Docker images
+docker compose build
 
-*** Step 4: Rebuild Docker Images
-
-Rebuild the backend and frontend images:
-
-#+BEGIN_src bash
-cd ~/LocalProjects/contemplation-machine
-
-docker compose build --no-cache
-
-#+end_src
-
-*** Step 5: Start Containers
-
-Start all services in background:
-
-#+BEGIN_src bash
-cd ~/LocalProjects/contemplation-machine
-
+# Start containers in background
 docker compose up -d
 
 docker compose ps
 
-#+end_src
-
-*** Step 6: Verify Services
-
-Confirm that the application is running:
-
-#+BEGIN_src bash
-cd ~/LocalProjects/contemplation-machine
-
+# Verify services are running
 docker compose logs backend | tail -10
 
 docker compose logs frontend | tail -10
 
 echo "Meditation app has been updated and is running"
-echo "Frontend: http://localhost:3000"
+echo "Frontend: http://localhost:8088"
 echo "Backend: http://localhost:3001"
-
 #+end_src
 
 *Result:* The meditation-app installation is updated and running with the latest code.

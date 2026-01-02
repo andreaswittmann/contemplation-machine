@@ -44,3 +44,6 @@ Thumbs.db
 
 # Package lock files (optional - uncomment to ignore)
 # package-lock.json
+
+# Org HTML themes
+aw-org-html-themes/

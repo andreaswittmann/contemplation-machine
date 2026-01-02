@@ -1,0 +1,80 @@
+* My Journey with the Contemplation Machine: A Tool for Mindful Reflection
+
+** Summary
+   
+Have you ever wished for a tool that helps you deepen your understanding of important concepts through focused contemplation? What if you could create personalized guided meditations tailored to your specific needs? In this article, I share my experience developing the /Contemplation Machine/, an open-source app that fills a unique gap in the meditation app market. I'll explain what contemplation is, how this tool works, and provide practical installation guidance - all from my journey of creating this project in just four days using modern development techniques.
+
+** Introduction
+
+#+Attr_html: :width 600px
+#+Attr_org: :width 600px
+#+caption: Youtube Video introducing the Contemplation Machine
+[[file:data/My_Journey_with_the_Contemplation_Machine:_A_Tool_for_Mindful_Reflection/2025-05-23_10-22-32_2025-05-22_20-08-36.png]]
+
+A few weeks ago, I released a video on YouTube about my latest open-source project, the Contemplation Machine. I built this tool because I noticed something missing in the meditation app landscape - while there are countless meditation apps available, none specifically focus on helping users build their own structured contemplations. Today, I want to share the story behind this project and show you how it can enhance your mindfulness practice.
+
+** What is contemplation?
+
+Contemplation is often misunderstood or confused with meditation, but it's actually a distinct practice with its own benefits. In Tibetan Buddhism, there's a threefold training approach: study, contemplation, and meditation. During study, we actively use our minds to learn new concepts. In contemplation, we examine these concepts more deeply, allowing our minds to rest on a specific theme for an extended period. Finally, meditation helps us habituate our minds to a particular perspective.
+
+
+#+Attr_html: :width 500px
+#+Attr_org: :width 500px
+#+caption: Illustration created with DiffutionBee on MacBook Pro M2
+[[file:data/My_Journey_with_the_Contemplation_Machine:_A_Tool_for_Mindful_Reflection/2025-05-23_10-41-33_cinematicphotoApeacefulper_39143729.png]]
+
+
+What I find particularly valuable about contemplation is how it bridges the gap between intellectual understanding and experiential wisdom. While contemplation is traditionally used in spiritual contexts, I've found it equally powerful in professional and everyday settings. This realization was my primary motivation for creating the Contemplation Machine.
+
+** What is the Contemplation Machine?
+
+The Contemplation Machine is a meditation app with a specific focus on contemplation. Unlike standard meditation apps that provide pre-recorded sessions, my tool allows users to build their own contemplations and meditations from scratch. When I analyzed the market, I couldn't find anything similar that gave users this level of creative control over their practice.
+
+#+Attr_html: :width 500px
+#+Attr_org: :width 500px
+#+caption: Cartoon created with Dall-E 3 
+[[file:data/My_Journey_with_the_Contemplation_Machine:_A_Tool_for_Mindful_Reflection/2025-05-23_10-25-31_2025-05-23_10-25-19.png]]
+
+The app works by taking your written instructions - simple phrases or prompts that you want to contemplate - and distributing them evenly throughout your chosen meditation duration. It then plays these instructions back to you using text-to-speech technology, creating a completely personalized guided experience.
+
+** How to use it
+
+Using the Contemplation Machine is straightforward. When you first install it, several pre-built contemplations are available to try immediately. However, the real power comes from creating your own.
+
+To create a contemplation, you simply write a series of instructions, with each instruction on a single line in the text window. As a basis you can choose spiritual texts, or methods for personal development. For example, I demonstrated using the Four Brahmaviharas (loving-kindness, compassion, sympathetic joy, and equanimity) as a contemplation framework in the video. Another good example is practicing WOOP, a science-backed mental contrasting technique developed by psychologist Gabriele Oettingen that transforms wishes into achievable goals through four key steps: Wish, Outcome, Obstacle, and Plan. 
+
+Once your instructions are ready, you save them as an instruction file. Then, on the Configure page, you select your instruction file, choose a voice provider (browser-internal, OpenAI, or Eleven Labs), set the duration, and optionally add bell sounds to mark the beginning or end. After saving your configuration as a preset, you're ready to begin your practice with a single click.
+
+Using voice guidance, the quality of the voice is critical. According to my experience, Elevenlabs delivers the best quality, however at a premium price. The good news is that the Contemplation Machine only requests the Text-To-Speech API once for every instruction and caches the sound file.
+
+** How to install it
+
+Installing the Contemplation Machine is surprisingly simple. The easiest method is using Docker, which is how I typically run it myself. Here's how:
+
+1. Install Docker Desktop on your computer
+2. Search for the Contemplation Machine image
+3. Run it, specifying a port (like 8010)
+4. Open your browser and navigate to localhost:8010
+
+For my personal setup, I run it on an old MacBook that serves as my home server. Using Tailscale, I've created a network that allows me to access my Contemplation Machine from any device, anywhere. This deployment architecture - a home server running Docker with Tailscale networking - is what I recommend for the best experience.
+
+#+Attr_html: :width 800px
+#+Attr_org: :width 800px
+#+caption: Deployment Architecture Diagram
+[[file:data/My_Journey_with_the_Contemplation_Machine:_A_Tool_for_Mindful_Reflection/2025-05-23_10-31-29_2025-05-23_10-28-52.png]]
+
+
+An interesting side note: I developed the entire app in just four days using GitHub Copilot in Agent Mode. The app uses Node.js for the backend and React for the frontend, making it a fascinating case study in modern software development.
+
+** Conclusion
+
+Creating the Contemplation Machine has deepened my own practice while providing a valuable tool for others. What began as a personal project to enhance my contemplation practice has evolved into something I'm proud to share with the community. The process of building it was as contemplative as using it!
+
+I find myself using it almost daily now, creating new contemplations for both spiritual practice and professional development. There's something powerful about hearing your own carefully crafted words played back to you, which makes it easy to include new content in your daily meditation routine. 
+
+** Key Resources
+- GitHub Repository: https://github.com/andreaswittmann/contemplation-machine
+- YouTube Video: https://www.youtube.com/watch?v=pRpbWXw4jV8
+- Docker Image: https://hub.docker.com/r/awittmann386/contemplation-machine
+- Blog post (development story): https://anwi.gmbh/?p=979&lang=en
+

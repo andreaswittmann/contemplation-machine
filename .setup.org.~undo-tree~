@@ -1,0 +1,1436 @@
+(undo-tree-save-format-version . 1)
+"de29b6b193c29f60f1c08a3e7a8857618aaf2479"
+[nil nil nil nil (26968 1511 435031 0) 0 nil]
+([nil nil ((2437 . 3834) (#("
+# Listing: update meditation-app with docker on home server
+cd ~/LocalProjects/ai-bootcamp/
+ls -ltr
+cd meditation-app
+
+export PROJECT_DIR=$(pwd)
+echo $PROJECT_DIR
+cd $PROJECT_DIR
+
+# Pull latest changes from repository
+git pull
+git fetch --tags
+git describe --tags
+
+# Stop the running containers
+docker compose down
+
+# Rebuild the docker images
+docker compose build --no-cache
+rm build.log
+
+# Start the containers again
+docker compose up -d
+
+echo \"Meditation app has been updated and is running\"
+
+
+exit
+exit
+
+#+end_src
+
+*Result:* The meditation-app installation is updated and running with the latest code" 0 1 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 1 3 (face (font-lock-comment-delimiter-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 3 49 (face (font-lock-comment-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 49 61 (face (font-lock-comment-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 61 63 (face (font-lock-builtin-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 63 101 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 101 103 (face (font-lock-builtin-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 103 120 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 120 126 (face (font-lock-builtin-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 126 127 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 127 138 (face (font-lock-variable-name-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 138 141 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 141 144 (face (font-lock-builtin-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 144 146 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 146 150 (face (font-lock-builtin-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 150 152 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 152 163 (face (font-lock-variable-name-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 163 164 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 164 166 (face (font-lock-builtin-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 166 168 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 168 179 (face (font-lock-variable-name-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 179 181 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 181 183 (face (font-lock-comment-delimiter-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 183 219 (face (font-lock-comment-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 219 266 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 266 268 (face (font-lock-comment-delimiter-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 268 296 (face (font-lock-comment-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 296 317 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 317 319 (face (font-lock-comment-delimiter-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 319 345 (face (font-lock-comment-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 345 391 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 391 393 (face (font-lock-comment-delimiter-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 393 420 (face (font-lock-comment-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 420 442 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 442 446 (face (font-lock-builtin-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 446 447 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 447 495 (face (font-lock-string-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 495 498 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 498 502 (face (font-lock-keyword-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 502 503 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 503 507 (face (font-lock-keyword-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 507 509 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 509 518 (face org-block-end-line font-lock-multiline t font-lock-fontified t fontified t) 518 519 (face org-block-end-line fontified t) 519 520 (fontified t) 520 529 (org-emphasis t font-lock-multiline t face (bold) fontified t) 529 605 (fontified t)) . 2437) (t 26967 50909 306227 339000) (1268 . 2253) 544 (t 26967 50025 426993 7000)) nil (26968 1511 435030 0) 0 nil])
+([nil nil ((1227 . 7410) (#("my MacBook Pro home server with Docker.
+
+*** Data Preservation During Updates
+
+The meditation app uses Docker volume mounts to persist all user data during container rebuilds and restarts. This ensures that:
+
+- **Instructions and Presets**: Custom meditation instructions and preset configurations stored in =backend/data/presets/= are preserved
+- **Audio Cache**: Generated MP3 files in =backend/data/audio-cache/= persist across updates, avoiding re-generation of audio
+- **API Keys**: Stored API keys in =backend/data/api-keys.json= are retained
+- **Analytics**: Session analytics in =backend/data/cache-analytics.json= are preserved
+
+The =docker-compose.yml= file defines volume mounts that map these local directories to container paths:
+- =./backend/data= → =/app/data= (backend container)
+- This mapping ensures data survives container lifecycle changes
+
+When you run =docker compose down= followed by =docker compose up -d=, the containers are replaced but the volumes remain untouched, preserving all persistent data.
+
+To customize the meditation sessions, you can edit the instructions.json and preset configuration files in the backend/data directory.
+
+
+
+
+#+BEGIN_src bash
+ssh asamadhi
+whoami
+bash
+
+set -e  # Exit on error
+
+# Listing: update meditation-app with docker on home server
+cd ~/LocalProjects/ai-bootcamp/
+ls -ltr
+cd meditation-app
+
+export PROJECT_DIR=$(pwd)
+echo \"Project directory: $PROJECT_DIR\"
+
+# Verify docker-compose.yml exists
+if [ ! -f \"$PROJECT_DIR/docker-compose.yml\" ]; then
+  echo \"ERROR: docker-compose.yml not found in $PROJECT_DIR\"
+  exit 1
+fi
+
+# Verify docker is available
+if ! command -v docker &> /dev/null; then
+  echo \"ERROR: Docker is not installed or not in PATH\"
+  exit 1
+fi
+
+echo \"Starting meditation-app update...\"
+
+# Pull latest changes from repository
+echo \"Pulling latest changes...\"
+git pull
+git fetch --tags
+git describe --tags
+
+# Stop the running containers
+echo \"Stopping containers...\"
+docker compose down
+
+# Rebuild the docker images
+echo \"Rebuilding Docker images...\"
+docker compose build --no-cache
+[ -f build.log ] && rm build.log
+
+# Start the containers again
+echo \"Starting containers...\"
+docker compose up -d
+
+# Wait for services to be ready
+echo \"Waiting for services to start...\"
+sleep 5
+
+echo \"✓ Meditation app has been updated and is running\"
+echo \"✓ All data files (instructions, presets, audio cache) have been preserved\"
+
+exit
+exit
+
+#+end_src
+
+*Result:* The meditation-app installation is updated with the latest code. All data files including instructions, presets, MP3 audio cache, and API keys are preserved through Docker volume mounts" 0 41 (fontified t) 41 43 (face org-level-3 fontified t) 43 45 (face org-level-3 fontified t) 45 77 (face org-level-3 fontified t) 77 211 (fontified t) 211 239 (org-emphasis t font-lock-multiline t face (bold) fontified t) 239 308 (fontified t) 308 331 (org-emphasis t font-lock-multiline t face (org-verbatim) fontified t) 331 348 (fontified t) 348 363 (org-emphasis t font-lock-multiline t face (bold) fontified t) 363 388 (fontified t) 388 415 (org-emphasis t font-lock-multiline t face (org-verbatim) fontified t) 415 474 (fontified t) 474 486 (org-emphasis t font-lock-multiline t face (bold) fontified t) 486 507 (fontified t) 507 535 (org-emphasis t font-lock-multiline t face (org-verbatim) fontified t) 535 551 (fontified t) 551 564 (org-emphasis t font-lock-multiline t face (bold) fontified t) 564 587 (fontified t) 587 622 (org-emphasis t font-lock-multiline t face (org-verbatim) fontified t) 622 642 (fontified t) 642 662 (org-emphasis t font-lock-multiline t face (org-verbatim) fontified t) 662 745 (fontified t) 745 761 (org-emphasis t font-lock-multiline t face (org-verbatim) fontified t) 761 764 (fontified t) 764 775 (org-emphasis t font-lock-multiline t face (org-verbatim) fontified t) 775 875 (fontified t) 875 896 (org-emphasis t font-lock-multiline t face (org-verbatim) fontified t) 896 909 (fontified t) 909 931 (org-emphasis t font-lock-multiline t face (org-verbatim) fontified t) 931 1026 (fontified t) 1026 1027 (fontified t) 1027 1167 (fontified t) 1167 1183 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified nil) 1183 1184 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified nil) 1184 1210 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified nil) 1210 2607 (fontified nil)) . 1227) 544 (t 26967 50914 887791 695000)) nil (26968 1511 435029 0) 0 nil])
+([nil nil ((1227 . 2056) (#("a home server with Docker using live-scripting methodology.
+
+*** Data Preservation During Updates
+
+The meditation app uses Docker volume mounts to persist all user data during container rebuilds and restarts. This ensures that:
+
+- **Instructions and Presets**: Custom meditation instructions and preset configurations stored in =backend/data/presets/= are preserved
+- **Audio Cache**: Generated MP3 files in =backend/data/audio-cache/= persist across updates, avoiding re-generation of audio
+- **API Keys**: Stored API keys in =backend/data/api-keys.json= are retained
+- **Analytics**: Session analytics in =backend/data/cache-analytics.json= are preserved
+
+The =docker-compose.yml= file defines volume mounts that map these local directories to container paths:
+- =./backend/data= → =/app/data= (backend container)
+- This mapping ensures data survives container lifecycle changes
+
+When you run =docker compose down= followed by =docker compose up -d=, the containers are replaced but the volumes remain untouched, preserving all persistent data.
+
+*** Step 1: Remote Connection and Navigation
+
+First, establish SSH connection to the remote server and navigate to the project directory.
+
+#+BEGIN_src bash
+ssh asamadhi
+whoami
+bash
+#+end_src
+
+*Expected output:* You should see the username and be in the remote shell. Then navigate to the project location:
+
+#+BEGIN_src bash
+cd ~/LocalProjects/ai-bootcamp/meditation-app
+pwd
+#+end_src
+
+*Expected output:* =/Users/asamadhi/LocalProjects/ai-bootcamp/meditation-app=
+
+Verify the project structure is intact:
+
+#+BEGIN_src bash
+ls -la | head -20
+#+end_src
+
+*Expected output:* You should see =docker-compose.yml=, =backend/=, =frontend/=, and other project files listed.
+
+*** Step 2: Verify Prerequisites
+
+Before pulling updates, verify that Docker is available and accessible:
+
+#+BEGIN_src bash
+docker --version
+docker compose version
+#+end_src
+
+*Expected output:* Both commands should return version numbers. If either fails, Docker is not properly installed.
+
+Check that the docker-compose.yml file exists in the current directory:
+
+#+BEGIN_src bash
+test -f docker-compose.yml && echo \"✓ docker-compose.yml found\" || echo \"✗ docker-compose.yml NOT found\"
+#+end_src
+
+*Expected output:* ✓ docker-compose.yml found
+
+*** Step 3: Pull Latest Changes from Repository
+
+Fetch the latest code from the git repository:
+
+#+BEGIN_src bash
+git pull
+git fetch --tags
+git describe --tags
+#+end_src
+
+*Expected output:* You should see downloaded commits and the latest tag (e.g., =v1.9.2= or similar).
+
+Verify the git status is clean:
+
+#+BEGIN_src bash
+git status
+#+end_src
+
+*Expected output:* Should indicate =On branch main= with no uncommitted changes.
+
+*** Step 4: Check Current Running Containers
+
+Before stopping containers, verify what is currently running:
+
+#+BEGIN_src bash
+docker ps
+#+end_src
+
+*Expected output:* You should see the meditation-app frontend and backend containers running. Note the container names and status.
+
+*** Step 5: Stop and Remove Running Containers
+
+Stop all running containers gracefully:
+
+#+BEGIN_src bash
+docker compose down
+#+end_src
+
+*Expected output:* Messages indicating containers and networks are being stopped and removed.
+
+Verify containers are stopped:
+
+#+BEGIN_src bash
+docker ps
+#+end_src
+
+*Expected output:* Should show no containers running (empty list or only header).
+
+*** Step 6: Rebuild Docker Images
+
+Rebuild the Docker images with the latest code. This process may take several minutes:
+
+#+BEGIN_src bash
+docker compose build --no-cache
+#+end_src
+
+*Expected output:* You should see building progress for both backend and frontend services, with messages like =Successfully built= and =Successfully tagged=.
+
+Verify images were created:
+
+#+BEGIN_src bash
+docker images | grep meditation
+#+end_src
+
+*Expected output:* Should show newly built images for meditation-app frontend and backend.
+
+*** Step 7: Start Containers and Verify Data Preservation
+
+Start all services with the new images:
+
+#+BEGIN_src bash
+docker compose up -d
+#+end_src
+
+*Expected output:* Messages indicating services are being started (e.g., =Creating meditation-app-backend= or =Starting meditation-app-frontend=).
+
+Check that containers are running:
+
+#+BEGIN_src bash
+docker ps
+#+end_src
+
+*Expected output:* Both frontend and backend containers should be running with status =Up=.
+
+*** Step 8: Validate Data Preservation
+
+Verify that your persistent data files remain intact on the host filesystem:
+
+#+BEGIN_src bash
+ls -lh backend/data/ | head -10
+#+end_src
+
+*Expected output:* Should show =api-keys.json=, =cache-analytics.json=, =instructions.json=, =presets/=, and =audio-cache/=.
+
+Check that preset files are preserved:
+
+#+BEGIN_src bash
+ls -lh backend/data/presets/ | wc -l
+#+end_src
+
+*Expected output:* A count showing multiple preset files (at least 4 default presets plus any custom ones).
+
+Verify audio cache exists:
+
+#+BEGIN_src bash
+du -sh backend/data/audio-cache/
+#+end_src
+
+*Expected output:* Should show the total size of cached audio files (several hundred MB if cache is populated).
+
+*** Step 9: Verify Services are Healthy
+
+Check the logs from the backend service to ensure it started correctly:
+
+#+BEGIN_src bash
+docker compose logs backend | tail -20
+#+end_src
+
+*Expected output:* Should show server startup messages, API initialization, and successful connection messages.
+
+Check the frontend logs:
+
+#+BEGIN_src bash
+docker compose logs frontend | tail -15
+#+end_src
+
+*Expected output:* Should show nginx startup or build completion messages.
+
+*** Step 10: Final Status
+
+Display a summary of the updated system:
+
+#+BEGIN_src bash
+echo \"=== Meditation App Update Complete ===\" && docker ps --format \"table {{.Names}}\\t{{.Status}}\" && echo \"=== Data Files ===\" && du -sh backend/data/*
+#+end_src
+
+*Expected output:* Both containers listed as =Up=, and storage usage for data directory components.
+
+Exit the remote session:
+
+#+BEGIN_src bash
+exit
+exit
+#+end_src
+
+*Result:* The meditation-app installation is updated with the latest code. All data files including instructions, presets, MP3 audio cache, and API keys have been preserved through Docker volume mounts. The application is running and ready for us" 0 61 (fontified t) 61 63 (face org-level-3 fontified t) 63 65 (face org-level-3 fontified t) 65 97 (face org-level-3 fontified t) 97 231 (fontified t) 231 259 (org-emphasis t font-lock-multiline t face (bold) fontified t) 259 328 (fontified t) 328 351 (org-emphasis t font-lock-multiline t face (org-verbatim) fontified t) 351 368 (fontified t) 368 383 (org-emphasis t font-lock-multiline t face (bold) fontified t) 383 408 (fontified t) 408 435 (org-emphasis t font-lock-multiline t face (org-verbatim) fontified t) 435 494 (fontified t) 494 506 (org-emphasis t font-lock-multiline t face (bold) fontified t) 506 527 (fontified t) 527 555 (org-emphasis t font-lock-multiline t face (org-verbatim) fontified t) 555 571 (fontified t) 571 584 (org-emphasis t font-lock-multiline t face (bold) fontified t) 584 607 (fontified t) 607 642 (org-emphasis t font-lock-multiline t face (org-verbatim) fontified t) 642 662 (fontified t) 662 682 (org-emphasis t font-lock-multiline t face (org-verbatim) fontified t) 682 765 (fontified t) 765 781 (org-emphasis t font-lock-multiline t face (org-verbatim) fontified t) 781 784 (fontified t) 784 795 (org-emphasis t font-lock-multiline t face (org-verbatim) fontified t) 795 895 (fontified t) 895 916 (org-emphasis t font-lock-multiline t face (org-verbatim) fontified t) 916 929 (fontified t) 929 951 (org-emphasis t font-lock-multiline t face (org-verbatim) fontified t) 951 1048 (fontified t) 1048 1050 (face org-level-3 fontified t) 1050 1052 (face org-level-3 fontified t) 1052 1092 (face org-level-3 fontified t) 1092 1187 (fontified t) 1187 1203 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 1203 1204 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 1204 1229 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 1229 1238 (face org-block-end-line font-lock-multiline t font-lock-fontified t fontified t) 1238 1239 (face org-block-end-line fontified t) 1239 1240 (fontified t) 1240 1258 (org-emphasis t font-lock-multiline t face (bold) fontified t) 1258 1355 (fontified t) 1355 1371 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 1371 1372 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 1372 1374 (src-block t face (font-lock-builtin-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 1374 1402 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 1402 1418 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 1418 1421 (src-block t face (font-lock-builtin-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 1421 1422 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 1422 1431 (face org-block-end-line font-lock-multiline t font-lock-fontified t fontified nil) 1431 1432 (face org-block-end-line fontified nil) 1432 6182 (fontified nil)) . 1227) 544 (t 26967 51352 345044 382000)) nil (26968 1511 435029 0) 0 nil])
+([nil nil ((1 . 14930) (#("+SETUPFILE: ~/Seafile/org2/aw-org-html-themes/setup/theme-readtheorg-local.setup
+#++SETUPFILE: https://github.com/andreaswittmann/aw-org-html-themes/setup/theme-readtheorg-local.setup
+#+OPTIONS: toc:nil
+#+STARTUP: overview
+#+Title: Meditation App
+#+Author: Andreas wittmann
+#+Options: c:t
+#+TODO: TODO(t!/!) MAYB(b!/!) WAIT(w!/!) OPEN(o!/!) |  DONE(d!/) CANC(c!/!)
+#+TODO:  | PROJ(p!/!) NOTE(n!/)  MEET(m!/!)
+#+Include: \"~/Seafile/org2/latex_setup.org\"
+
+- *PDF Version:* [[file:setup.pdf][setup.pdf]]
+- *HTML Version:* [[file:setup.html][setup.html]]
+
+#+TOC: headlines 4
+
+* Meditation App
+
+** Introduction
+
+Meditation App is a comprehensive application designed to provide guided meditation experiences. Built with modern web technologies and AI-powered voice synthesis, it offers customizable meditation sessions, multiple instruction sets, and flexible audio presets for a personalized mindfulness practice.
+
+** Migration
+This document uses the [[life-scripting][https://github.com/andreaswittmann/live-scripting]] approach to migrate the project from the old project path to the new location.
+
+
+** Update Docker Installation
+[2025-09-15 Mon 16:19] This section demonstrates how to update the meditation-app installation on my MacBook Pro home server with Docker.
+
+
+
+To customize the meditation sessions, you can edit the instructions.json and preset configuration files in the backend/data directory.
+
+
+
+
+#+BEGIN_src bash
+ssh asamadhi
+whoami
+bash
+
+
+# Listing: update meditation-app with docker on home server
+cd ~/LocalProjects/ai-bootcamp/
+ls -ltr
+cd meditation-app
+
+export PROJECT_DIR=$(pwd)
+echo $PROJECT_DIR
+cd $PROJECT_DIR
+
+# Pull latest changes from repository
+git pull
+git fetch --tags
+git describe --tags
+
+# Stop the running containers
+docker compose down
+
+# Rebuild the docker images
+docker compose build --no-cache
+rm build.log
+
+# Start the containers again
+docker compose up -d
+
+echo \"Meditation app has been updated and is running\"
+
+
+exit
+exit
+
+#+end_src
+
+*Result:* The meditation-app installation is updated and running with the latest code." 0 95 (fontified t) 95 182 (font-lock-multiline t htmlize-link (:uri "https://github.com/andreaswittmann/aw-org-html-themes/setup/theme-readtheorg-local.setup") help-echo "LINK: https://github.com/andreaswittmann/aw-org-html-themes/setup/theme-readtheorg-local.setup" keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight face org-link fontified t) 182 183 (font-lock-multiline t htmlize-link (:uri "https://github.com/andreaswittmann/aw-org-html-themes/setup/theme-readtheorg-local.setup") help-echo "LINK: https://github.com/andreaswittmann/aw-org-html-themes/setup/theme-readtheorg-local.setup" keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight face org-link rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link) fontified t) 183 184 (fontified t) 184 202 (face org-meta-line font-lock-fontified t fontified t) 202 203 (fontified t) 203 222 (face org-meta-line font-lock-fontified t fontified t) 222 223 (fontified t) 223 231 (face org-document-info-keyword font-lock-fontified t fontified t) 231 232 (fontified t) 232 247 (face org-document-title font-lock-fontified t fontified t) 247 256 (face org-document-info-keyword font-lock-fontified t fontified t) 256 257 (fontified t) 257 274 (face org-document-info font-lock-fontified t fontified t) 274 288 (face org-meta-line font-lock-fontified t fontified t) 288 289 (fontified t) 289 364 (face org-meta-line font-lock-fontified t fontified t) 364 365 (fontified t) 365 408 (face org-meta-line font-lock-fontified t fontified t) 408 409 (fontified t) 409 452 (face org-meta-line font-lock-fontified t fontified t) 452 456 (fontified t) 456 470 (org-emphasis t font-lock-multiline t face (bold) fontified t) 470 471 (fontified t) 471 488 (face org-link font-lock-multiline t htmlize-link (:uri "file:setup.pdf") help-echo "LINK: file:setup.pdf" keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight invisible org-link fontified t) 488 489 (rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link) face org-link font-lock-multiline t htmlize-link (:uri "file:setup.pdf") help-echo "LINK: file:setup.pdf" keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight invisible org-link fontified t) 489 497 (font-lock-multiline t htmlize-link (:uri "file:setup.pdf") help-echo "LINK: file:setup.pdf" keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight face org-link fontified t) 497 498 (rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link) font-lock-multiline t htmlize-link (:uri "file:setup.pdf") help-echo "LINK: file:setup.pdf" keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight face org-link fontified t) 498 499 (font-lock-multiline t htmlize-link (:uri "file:setup.pdf") help-echo "LINK: file:setup.pdf" keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight invisible org-link face org-link fontified t) 499 500 (font-lock-multiline t htmlize-link (:uri "file:setup.pdf") help-echo "LINK: file:setup.pdf" keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight invisible org-link face org-link rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link) fontified t) 500 503 (fontified t) 503 518 (org-emphasis t font-lock-multiline t face (bold) fontified t) 518 519 (fontified t) 519 537 (face org-link font-lock-multiline t htmlize-link (:uri "file:setup.html") help-echo "LINK: file:setup.html" keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight invisible org-link fontified t) 537 538 (rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link) face org-link font-lock-multiline t htmlize-link (:uri "file:setup.html") help-echo "LINK: file:setup.html" keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight invisible org-link fontified t) 538 547 (font-lock-multiline t htmlize-link (:uri "file:setup.html") help-echo "LINK: file:setup.html" keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight face org-link fontified t) 547 548 (rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link) font-lock-multiline t htmlize-link (:uri "file:setup.html") help-echo "LINK: file:setup.html" keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight face org-link fontified t) 548 549 (font-lock-multiline t htmlize-link (:uri "file:setup.html") help-echo "LINK: file:setup.html" keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight invisible org-link face org-link fontified t) 549 550 (font-lock-multiline t htmlize-link (:uri "file:setup.html") help-echo "LINK: file:setup.html" keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight invisible org-link face org-link rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link) fontified t) 550 552 (fontified t) 552 570 (face org-meta-line font-lock-fontified t fontified t) 570 571 (fontified t) 571 572 (fontified t) 572 574 (face org-level-1 fontified t) 574 588 (face org-level-1 fontified t) 588 589 (fontified t) 589 590 (fontified t) 590 591 (face org-level-2 fontified t) 591 593 (face org-level-2 fontified t) 593 605 (face org-level-2 fontified t) 605 606 (fontified t) 606 910 (fontified t) 910 911 (fontified t) 911 912 (face org-level-2 fontified t) 912 914 (face org-level-2 fontified t) 914 923 (face org-level-2 fontified t) 923 924 (fontified t) 924 947 (fontified t) 947 964 (face org-link font-lock-multiline t htmlize-link (:uri "life-scripting") help-echo "LINK: life-scripting" keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight invisible org-link fontified t) 964 965 (rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link) face org-link font-lock-multiline t htmlize-link (:uri "life-scripting") help-echo "LINK: life-scripting" keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight invisible org-link fontified t) 965 1013 (font-lock-multiline t htmlize-link (:uri "life-scripting") help-echo "LINK: life-scripting" keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight face org-link fontified t) 1013 1014 (rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link) font-lock-multiline t htmlize-link (:uri "life-scripting") help-echo "LINK: life-scripting" keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight face org-link fontified t) 1014 1015 (font-lock-multiline t htmlize-link (:uri "life-scripting") help-echo "LINK: life-scripting" keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight invisible org-link face org-link fontified t) 1015 1016 (font-lock-multiline t htmlize-link (:uri "life-scripting") help-echo "LINK: life-scripting" keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight invisible org-link face org-link rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link) fontified t) 1016 1096 (fontified t) 1096 1097 (fontified t) 1097 1098 (fontified t) 1098 1099 (face org-level-2 fontified t) 1099 1101 (face org-level-2 fontified t) 1101 1127 (face org-level-2 fontified t) 1127 1128 (fontified t) 1128 1149 (face (org-date) keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight fontified t) 1149 1150 (face (org-date) keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link) fontified t) 1150 1226 (fontified t) 1226 1408 (fontified t) 1408 1424 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 1424 1425 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 1425 1452 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 1452 1454 (src-block t face (font-lock-comment-delimiter-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 1454 1512 (src-block t face (font-lock-comment-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 1512 1514 (src-block t face (font-lock-builtin-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 1514 1552 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 1552 1554 (src-block t face (font-lock-builtin-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 1554 1571 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 1571 1577 (src-block t face (font-lock-builtin-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 1577 1578 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 1578 1589 (src-block t face (font-lock-variable-name-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 1589 1592 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 1592 1595 (src-block t face (font-lock-builtin-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 1595 1597 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 1597 1601 (src-block t face (font-lock-builtin-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 1601 1603 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 1603 1614 (src-block t face (font-lock-variable-name-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 1614 1615 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 1615 1617 (src-block t face (font-lock-builtin-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 1617 1619 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 1619 1630 (src-block t face (font-lock-variable-name-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 1630 1632 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 1632 1634 (src-block t face (font-lock-comment-delimiter-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 1634 1670 (src-block t face (font-lock-comment-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 1670 1717 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 1717 1719 (src-block t face (font-lock-comment-delimiter-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 1719 1747 (src-block t face (font-lock-comment-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 1747 1768 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 1768 1770 (src-block t face (font-lock-comment-delimiter-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 1770 1796 (src-block t face (font-lock-comment-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 1796 1842 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 1842 1844 (src-block t face (font-lock-comment-delimiter-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 1844 1871 (src-block t face (font-lock-comment-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 1871 1893 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 1893 1897 (src-block t face (font-lock-builtin-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 1897 1898 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 1898 1946 (src-block t face (font-lock-string-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 1946 1949 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 1949 1953 (src-block t face (font-lock-keyword-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 1953 1954 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 1954 1958 (src-block t face (font-lock-keyword-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 1958 1960 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 1960 1969 (face org-block-end-line font-lock-multiline t font-lock-fontified t fontified t) 1969 1970 (face org-block-end-line fontified t) 1970 1971 (fontified t) 1971 1980 (org-emphasis t font-lock-multiline t face (bold) fontified t) 1980 2055 (fontified t) 2055 2056 (fontified t) 2056 2057 (fontified t)) . 1) (undo-tree-id57 . -452) (undo-tree-id58 . -453) (undo-tree-id59 . -452) (undo-tree-id60 . -453) (undo-tree-id61 . -543) (undo-tree-id62 . -543) 544 (t 26967 51371 261762 876000)) nil (26968 1511 435028 0) 0 nil])
+([nil nil ((85 . 1877) (#("+SETUPFILE: https://github.com/andreaswittmann/aw-org-html-themes/setup/theme-readtheorg-local.setup
+#+OPTIONS: toc:nil
+#+STARTUP: overview
+#+Title: Meditation App - Setup & Deployment Guide
+#+Author: Andreas Wittmann
+#+Options: c:t
+#+TODO: TODO(t!/!) MAYB(b!/!) WAIT(w!/!) OPEN(o!/!) |  DONE(d!/) CANC(c!/!)
+#+TODO:  | PROJ(p!/!) NOTE(n!/)  MEET(m!/!)
+#+Include: \"~/Seafile/org2/latex_setup.org\"
+
+- *PDF Version:* [[file:setup.pdf][setup.pdf]]
+- *HTML Version:* [[file:setup.html][setup.html]]
+
+#+TOC: headlines 4
+
+* Meditation App
+
+** Introduction
+
+Meditation App is a comprehensive application designed to provide guided meditation experiences. Built with modern web technologies and AI-powered voice synthesis, it offers customizable meditation sessions, multiple instruction sets, and flexible audio presets for a personalized mindfulness practice.
+
+The application follows a live-scripting documentation approach, combining narrative documentation with executable code blocks. This document serves both as a reference guide and as reproducible deployment procedures.
+
+** Project Structure Overview
+
+The meditation-app project is organized as follows:
+
+*** Root Level
+- Configuration files: ~docker-compose.yml~, ~Dockerfile~, ~dev.sh~, ~docker-compose.yml~
+- Documentation: ~README.md~, ~Deployment.md~, ~IMPLEMENTATION-PLAN.md~, ~VERSION.md~
+- Release notes: ~RELEASE-*.md~ files tracking version history
+- Architecture diagrams: ~meditation-app-architecture.drawio~, ~deployment-architecture.drawio~
+
+*** Backend Directory (~backend/~)
+The backend serves as the REST API and session management layer:
+- ~server.js~ - Main server application
+- ~package.json~ - Node.js dependencies
+- ~Dockerfile~ - Container configuration for backend
+- ~sample.env~ - Environment variable template
+- ~utils/keyManager.js~ - API key management utility
+
+*** Backend Data Directory (~backend/data/~)
+Persistent data storage for meditation sessions:
+- ~instructions.json~ - Core meditation instruction set
+- ~api-keys.json~ - Registered API keys for external services
+- ~cache-analytics.json~ - Session analytics and cache data
+- ~audio-cache/~ - Directory containing 400+ cached meditation audio files (.mp3)
+- ~presets/~ - Meditation session configurations
+
+*** Backend Presets (~backend/data/presets/~)
+Default and custom meditation session configurations:
+- ~default-preset-mindfulness.json~ - Mindfulness meditation template
+- ~default-preset-metta-sutta.json~ - Loving-kindness meditation template
+- ~default-preset-achtsamkeit.json~ - German mindfulness variant
+- ~default-preset-woop.json~ - WOOP (Wish, Outcome, Obstacle, Plan) goal-setting
+- ~preset-*.json~ - User-created presets with timestamps
+
+*** Backend Defaults Directory (~backend/defaults/~)
+Fallback configuration and clean audio cache:
+- ~instructions.json~ - Default instruction set
+- ~audio-cache/~ - Core meditation audio files
+- ~presets/~ - Default meditation templates (4 base presets)
+
+*** Frontend Directory (~frontend/~)
+React TypeScript application for user interface:
+- ~package.json~ - React dependencies and build scripts
+- ~tsconfig.json~ - TypeScript configuration
+- ~Dockerfile~ - Container configuration for frontend
+- ~nginx.conf~ - Web server configuration for production
+- ~README.md~ - Frontend-specific documentation
+
+*** Frontend Source (~frontend/src/~)
+TypeScript React components and services:
+- *Components* (~components/~): UI components including SessionView, SettingsView, InstructionsManagerView
+- *Contexts* (~contexts/~): React context providers for global state management
+- *Services* (~services/~): API and Audio service integrations
+- *Styles* (~styles/~): CSS modules for responsive design
+
+*** Frontend Assets (~frontend/public/~)
+Static assets and resources:
+- ~index.html~ - HTML entry point
+- ~manifest.json~ - PWA manifest configuration
+- ~assets/~ - Logo and image files
+- ~sounds/~ - Bell sound effects for session start/end
+
+** Prerequisites
+
+Before proceeding with setup, verify the following are installed:
+
+#+BEGIN_src bash
+# Check Node.js installation and version
+node --version
+
+# Check npm installation
+npm --version
+
+# Check Docker installation
+docker --version
+
+# Check docker-compose availability
+docker compose version
+
+# Check git is installed
+git --version
+
+#+end_src
+
+*Expected Output:* All commands should return version numbers without errors.
+
+** Verify Directory Structure
+
+Execute this section to verify the project directory structure matches the expected layout:
+
+#+BEGIN_src bash
+cd ~/LocalProjects/ai-bootcamp/meditation-app
+
+# Verify root level files
+echo \"=== Checking Root Configuration Files ===\"
+ls -lh docker-compose.yml Dockerfile dev.sh package.json 2>/dev/null | tail -5
+
+# Verify backend directory structure
+echo \"=== Checking Backend Directory ===\"
+ls -lh backend/server.js backend/package.json backend/Dockerfile backend/utils/keyManager.js
+
+# Verify backend data directories
+echo \"=== Checking Backend Data Structure ===\"
+ls -lh backend/data/instructions.json backend/data/api-keys.json backend/data/cache-analytics.json
+
+# Verify backend presets
+echo \"=== Checking Backend Presets ===\"
+ls -lh backend/data/presets/ | grep -E \"default-preset|preset-\" | head -10
+
+# Verify audio cache exists
+echo \"=== Checking Audio Cache ===\"
+find backend/data/audio-cache -type f -name \"*.mp3\" | wc -l
+
+# Verify frontend structure
+echo \"=== Checking Frontend Structure ===\"
+ls -lh frontend/package.json frontend/tsconfig.json frontend/src/App.tsx frontend/public/index.html
+
+# Verify frontend components
+echo \"=== Checking Frontend Components ===\"
+ls frontend/src/components/ | grep -E \"\\.tsx$\" | head -8
+
+#+end_src
+
+*Expected Result:* All file paths should exist and be accessible, confirming the correct directory structure.
+
+** Update Docker Installation
+[2025-09-15 Mon 16:19] This section demonstrates how to update the meditation-app installation on a MacBook Pro home server with Docker.
+
+*** Prerequisites for Update
+- SSH access to the target machine
+- Docker and docker-compose installed on target
+- Git repository access
+- Sufficient disk space for Docker build cache
+
+*** Step 1: Connect to Remote Server and Navigate to Project
+
+#+BEGIN_src bash
+# Connect to remote server
+ssh asamadhi
+
+# Verify current location and user
+whoami
+pwd
+
+# Navigate to project directory
+cd ~/LocalProjects/ai-bootcamp/meditation-app
+
+# Display project directory path
+export PROJECT_DIR=$(pwd)
+echo \"Project directory: $PROJECT_DIR\"
+
+# List recent changes in project
+ls -ltr | tail -10
+
+#+end_src
+
+*Verification:* You should be logged into the remote machine with the meditation-app directory as your current location.
+
+*** Step 2: Update Code from Repository
+
+This step pulls the latest changes, including new presets, audio files, and code updates:
+
+#+BEGIN_src bash
+cd ~/LocalProjects/ai-bootcamp/meditation-app
+
+# Fetch latest repository information
+git fetch origin
+
+# Display current branch and status
+git branch -v
+git status
+
+# Pull latest changes to main branch
+git pull origin main
+
+# Display latest commit information
+git log -1 --oneline
+
+# List all available version tags
+git fetch --tags
+git describe --tags --abbrev=0
+
+# Display full version information
+git describe --tags
+
+#+end_src
+
+*Verification:* Check that ~git pull~ completes without conflicts. The output should show the latest commit hash and version tags.
+
+*** Step 3: Stop Running Containers and Clear Build Cache
+
+Before rebuilding, stop all running containers and remove old build artifacts:
+
+#+BEGIN_src bash
+cd ~/LocalProjects/ai-bootcamp/meditation-app
+
+# Display currently running containers
+docker compose ps
+
+# Stop all running containers gracefully
+docker compose down
+
+# Verify containers are stopped
+docker compose ps
+
+# Remove old build log if it exists
+rm -f build.log
+
+# Display available Docker images before rebuild
+echo \"=== Docker Images Before Cleanup ===\"
+docker images | grep meditation
+
+#+end_src
+
+*Verification:* All containers should be in stopped state. The ~docker compose ps~ output should be empty or show no running containers.
+
+*** Step 4: Rebuild Docker Images
+
+This step rebuilds the backend and frontend Docker images with the latest code:
+
+#+BEGIN_src bash
+cd ~/LocalProjects/ai-bootcamp/meditation-app
+
+# Build Docker images without using cache (forces full rebuild)
+docker compose build --no-cache
+
+# Verify new images were created
+docker images | grep meditation
+
+# Display image size information
+docker images --format \"table {{.Repository}}\\t{{.Size}}\" | grep meditation
+
+# Check build completion status
+echo \"Docker build completed successfully\"
+
+#+end_src
+
+*Expected Result:* Both backend and frontend images should be rebuilt. Image sizes should be in the 500MB-1.5GB range depending on dependencies.
+
+*** Step 5: Start Containers and Verify Services
+
+Start the updated application and verify all services are running:
+
+#+BEGIN_src bash
+cd ~/LocalProjects/ai-bootcamp/meditation-app
+
+# Start all containers in background mode
+docker compose up -d
+
+# Display running containers
+docker compose ps
+
+# Wait for services to initialize
+sleep 5
+
+# Check backend service logs
+echo \"=== Backend Service Status ===\"
+docker compose logs backend | tail -20
+
+# Check frontend service logs
+echo \"=== Frontend Service Status ===\"
+docker compose logs frontend | tail -20
+
+# Verify port bindings
+echo \"=== Port Bindings ===\"
+docker compose ps --format \"table {{.Names}}\\t{{.Ports}}\"
+
+#+end_src
+
+*Verification:* Both backend and frontend containers should show \"Up\" status. No errors should appear in the logs.
+
+*** Step 6: Validate Application Functionality
+
+Perform final validation that the application is functioning correctly:
+
+#+BEGIN_src bash
+cd ~/LocalProjects/ai-bootcamp/meditation-app
+
+# Check if backend API is responding
+echo \"=== Testing Backend API Health ===\"
+curl -s http://localhost:3001/health 2>/dev/null || echo \"Backend health check endpoint not available\"
+
+# Verify backend is listening on correct port
+lsof -i :3001 2>/dev/null | head -3 || netstat -an | grep 3001 || echo \"Port 3001 status check\"
+
+# Check frontend is serving content
+echo \"=== Testing Frontend Access ===\"
+curl -s http://localhost:3000 | head -20
+
+# Display final status confirmation
+echo \"=== Application Update Complete ===\"
+echo \"Meditation app has been updated and is running\"
+echo \"Backend: http://localhost:3001\"
+echo \"Frontend: http://localhost:3000\"
+
+#+end_src
+
+*Result:* The meditation-app installation is updated and running with the latest code. Access the application at http://localhost:3000.
+
+** Customizing Meditation Sessions
+
+The meditation experience can be tailored by editing configuration files in the backend/data directory:
+
+*** Modifying Instructions
+
+Edit the core instruction set that guides meditation sessions:
+
+#+BEGIN_src bash
+cd ~/LocalProjects/ai-bootcamp/meditation-app/backend/data
+
+# View current instructions structure
+head -50 instructions.json
+
+# Backup original instructions before modification
+cp instructions.json instructions.json.backup
+
+# Edit instructions using your preferred editor
+nano instructions.json
+
+# Validate JSON syntax after editing
+python3 -m json.tool instructions.json > /dev/null && echo \"JSON is valid\" || echo \"JSON syntax error\"
+
+#+end_src
+
+*** Managing Presets
+
+Create custom meditation presets by editing preset files:
+
+#+BEGIN_src bash
+cd ~/LocalProjects/ai-bootcamp/meditation-app/backend/data/presets
+
+# List all available presets
+ls -lh *.json
+
+# View a default preset as template
+cat default-preset-mindfulness.json | python3 -m json.tool | head -30
+
+# Copy a preset as starting point for custom version
+cp default-preset-mindfulness.json custom-preset-mypractice.json
+
+# Edit the custom preset
+nano custom-preset-mypractice.json
+
+# Validate the new preset
+python3 -m json.tool custom-preset-mypractice.json > /dev/null && echo \"Preset is valid\"
+
+#+end_src
+
+** Monitoring and Troubleshooting
+
+*** View Real-time Logs
+
+Monitor application logs in real-time:
+
+#+BEGIN_src bash
+cd ~/LocalProjects/ai-bootcamp/meditation-app
+
+# Stream logs from all services
+docker compose logs -f
+
+# View only backend logs
+docker compose logs -f backend
+
+# View only frontend logs with timestamps
+docker compose logs -f --timestamps frontend
+
+# Exit log streaming with Ctrl+C
+
+#+end_src
+
+*** Inspect Running Containers
+
+Debug container state and configuration:
+
+#+BEGIN_src bash
+cd ~/LocalProjects/ai-bootcamp/meditation-app
+
+# List all containers with detailed information
+docker compose ps -a
+
+# Inspect backend container configuration
+docker inspect meditation-app-backend-1
+
+# Execute shell in running container for debugging
+docker compose exec backend sh
+
+# Check container resource usage
+docker stats
+
+#+end_src
+
+** Backup and Recovery
+
+*** Create Backup of Data Directory
+
+Preserve user data and custom configurations:
+
+#+BEGIN_src bash
+cd ~/LocalProjects/ai-bootcamp/meditation-app
+
+# Create timestamped backup
+BACKUP_DATE=$(date +%Y%m%d_%H%M%S)
+tar -czf backend/data_backup_$BACKUP_DATE.tar.gz backend/data/
+
+# Verify backup was created
+ls -lh backend/data_backup_*.tar.gz | tail -3
+
+# Store backup in safe location (optional)
+# cp backend/data_backup_$BACKUP_DATE.tar.gz ~/backups/
+
+echo \"Backup created: backend/data_backup_$BACKUP_DATE.tar.gz\"
+
+#+end_src
+
+*** Restore from Backup
+
+Recover data from a previous backup:
+
+#+BEGIN_src bash
+cd ~/LocalProjects/ai-bootcamp/meditation-app
+
+# List available backups
+ls -lh backend/data_backup_*.tar.gz
+
+# Extract backup (replace filename with actual backup)
+tar -xzf backend/data_backup_20250102_120000.tar.gz
+
+# Verify restoration
+ls -lh backend/data/
+
+echo \"Data restored from backup\"
+
+#+end_src
+
+** Version Management
+
+Check and track application versions:
+
+#+BEGIN_src bash
+cd ~/LocalProjects/ai-bootcamp/meditation-app
+
+# Display current version
+cat VERSION.md
+
+# List all available version tags
+git tag -l | sort -V | tail -10
+
+# Show changelog for recent versions
+ls -lh RELEASE-*.md | tail -5
+
+# Display detailed version information
+git describe --tags --long
+
+#+end_src
+
+* Appendix: Configuration Reference
+
+** Environment Variables
+
+The application uses environment variables defined in ~backend/sample.env~:
+
+#+BEGIN_SRC bash
+# Backend Port Configuration
+PORT=3001
+
+# Frontend Port Configuration
+FRONTEND_PORT=3000
+
+# API Keys for External Services
+ELEVENLABS_API_KEY=your_key_here
+
+# Data Directory Configuration
+DATA_DIR=./data
+DEFAULT_DIR=./defaults
+
+#+END_SRC
+
+** Key Files Summary
+
+| File | Purpose | Location |
+|------|---------|----------|
+| docker-compose.yml | Service orchestration | Root |
+| server.js | Backend application | backend/ |
+| App.tsx | Frontend main component | frontend/src/ |
+| instructions.json | Meditation content | backend/data/ |
+| Preset JSON files | Session configurations | backend/data/presets/ |
+| Audio cache | MP3 meditation audio | backend/data/audio-cache/ |
+
+* End of Setup Guide" 0 12 (fontified t) 12 99 (font-lock-multiline t keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight face org-link htmlize-link (:uri "https://github.com/andreaswittmann/aw-org-html-themes/setup/theme-readtheorg-local.setup") help-echo "LINK: https://github.com/andreaswittmann/aw-org-html-themes/setup/theme-readtheorg-local.setup" fontified t) 99 100 (font-lock-multiline t keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight face org-link htmlize-link (:uri "https://github.com/andreaswittmann/aw-org-html-themes/setup/theme-readtheorg-local.setup") help-echo "LINK: https://github.com/andreaswittmann/aw-org-html-themes/setup/theme-readtheorg-local.setup" rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link) fontified t) 100 101 (fontified t) 101 119 (face org-meta-line font-lock-fontified t fontified t) 119 120 (fontified t) 120 139 (face org-meta-line font-lock-fontified t fontified t) 139 140 (fontified t) 140 148 (face org-document-info-keyword font-lock-fontified t fontified t) 148 149 (fontified t) 149 191 (face org-document-title font-lock-fontified t fontified t) 191 200 (face org-document-info-keyword font-lock-fontified t fontified t) 200 201 (fontified t) 201 218 (face org-document-info font-lock-fontified t fontified t) 218 232 (face org-meta-line font-lock-fontified t fontified t) 232 233 (fontified t) 233 308 (face org-meta-line font-lock-fontified t fontified t) 308 309 (fontified t) 309 352 (face org-meta-line font-lock-fontified t fontified t) 352 353 (fontified t) 353 396 (face org-meta-line font-lock-fontified t fontified t) 396 400 (fontified t) 400 414 (org-emphasis t font-lock-multiline t face (bold) fontified t) 414 415 (fontified t) 415 432 (face org-link font-lock-multiline t keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight invisible org-link htmlize-link (:uri "file:setup.pdf") help-echo "LINK: file:setup.pdf" fontified t) 432 433 (face org-link font-lock-multiline t keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight invisible org-link rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link) htmlize-link (:uri "file:setup.pdf") help-echo "LINK: file:setup.pdf" fontified t) 433 441 (font-lock-multiline t keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight face org-link htmlize-link (:uri "file:setup.pdf") help-echo "LINK: file:setup.pdf" fontified t) 441 442 (font-lock-multiline t keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight face org-link rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link) htmlize-link (:uri "file:setup.pdf") help-echo "LINK: file:setup.pdf" fontified t) 442 443 (font-lock-multiline t keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight invisible org-link face org-link htmlize-link (:uri "file:setup.pdf") help-echo "LINK: file:setup.pdf" fontified t) 443 444 (font-lock-multiline t keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight invisible org-link face org-link htmlize-link (:uri "file:setup.pdf") help-echo "LINK: file:setup.pdf" rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link) fontified t) 444 447 (fontified t) 447 462 (org-emphasis t font-lock-multiline t face (bold) fontified t) 462 463 (fontified t) 463 481 (face org-link font-lock-multiline t keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight invisible org-link htmlize-link (:uri "file:setup.html") help-echo "LINK: file:setup.html" fontified t) 481 482 (face org-link font-lock-multiline t keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight invisible org-link rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link) htmlize-link (:uri "file:setup.html") help-echo "LINK: file:setup.html" fontified t) 482 491 (font-lock-multiline t keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight face org-link htmlize-link (:uri "file:setup.html") help-echo "LINK: file:setup.html" fontified t) 491 492 (font-lock-multiline t keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight face org-link rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link) htmlize-link (:uri "file:setup.html") help-echo "LINK: file:setup.html" fontified t) 492 493 (font-lock-multiline t keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight invisible org-link face org-link htmlize-link (:uri "file:setup.html") help-echo "LINK: file:setup.html" fontified t) 493 494 (font-lock-multiline t keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight invisible org-link face org-link htmlize-link (:uri "file:setup.html") help-echo "LINK: file:setup.html" rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link) fontified t) 494 496 (fontified t) 496 514 (face org-meta-line font-lock-fontified t fontified t) 514 515 (fontified t) 515 516 (fontified t) 516 518 (face org-level-1 fontified t) 518 532 (face org-level-1 fontified t) 532 533 (fontified t) 533 534 (fontified t) 534 535 (face org-level-2 fontified t) 535 537 (face org-level-2 fontified t) 537 549 (face org-level-2 fontified t) 549 550 (fontified t) 550 1073 (fontified t) 1073 1074 (face nil fontified t) 1074 1075 (face org-level-2 fontified t) 1075 1077 (face org-level-2 fontified t) 1077 1103 (face org-level-2 fontified t) 1103 1104 (fontified t) 1104 1158 (fontified t) 1158 1160 (face org-level-3 fontified t) 1160 1162 (face org-level-3 fontified t) 1162 1172 (face org-level-3 fontified t) 1172 1196 (fontified t) 1196 1216 (org-emphasis t font-lock-multiline t face (org-code) fontified t) 1216 1218 (fontified t) 1218 1230 (org-emphasis t font-lock-multiline t face (org-code) fontified t) 1230 1232 (fontified t) 1232 1240 (org-emphasis t font-lock-multiline t face (org-code) fontified t) 1240 1242 (fontified t) 1242 1262 (org-emphasis t font-lock-multiline t face (org-code) fontified t) 1262 1280 (fontified t) 1280 1291 (org-emphasis t font-lock-multiline t face (org-code) fontified t) 1291 1293 (fontified t) 1293 1308 (org-emphasis t font-lock-multiline t face (org-code) fontified t) 1308 1310 (fontified t) 1310 1334 (org-emphasis t font-lock-multiline t face (org-code) fontified t) 1334 1336 (fontified t) 1336 1348 (org-emphasis t font-lock-multiline t face (org-code) fontified t) 1348 1366 (fontified t) 1366 1380 (org-emphasis t font-lock-multiline t face (org-code) fontified t) 1380 1416 (fontified t) 1416 1437 (fontified t) 1437 1473 (org-emphasis t font-lock-multiline t face (org-code) fontified t) 1473 1475 (fontified t) 1475 1507 (org-emphasis t font-lock-multiline t face (org-code) fontified t) 1507 1508 (fontified t) 1508 1509 (fontified t) 1509 1511 (face org-level-3 fontified t) 1511 1513 (face org-level-3 fontified t) 1513 1532 (face org-level-3 fontified t) 1532 1542 (org-emphasis t font-lock-multiline t face (org-code org-level-3) fontified t) 1542 1543 (face org-level-3 fontified t) 1543 1611 (fontified t) 1611 1622 (org-emphasis t font-lock-multiline t face (org-code) fontified t) 1622 1651 (fontified t) 1651 1665 (org-emphasis t font-lock-multiline t face (org-code) fontified t) 1665 1691 (fontified t) 1691 1703 (org-emphasis t font-lock-multiline t face (org-code) fontified t) 1703 1744 (fontified t) 1744 1756 (org-emphasis t font-lock-multiline t face (org-code) fontified t) 1756 1791 (fontified t) 1791 1812 (org-emphasis t font-lock-multiline t face (org-code) fontified t) 1812 1843 (fontified t) 1843 1845 (face org-level-3 fontified t) 1845 1847 (face org-level-3 fontified t) 1847 1871 (face org-level-3 fontified t) 1871 1886 (org-emphasis t font-lock-multiline t face (org-code org-level-3) fontified t) 1886 1887 (face org-level-3 fontified t) 1887 1939 (fontified t) 1939 1958 (org-emphasis t font-lock-multiline t face (org-code) fontified t) 1958 1995 (fontified t) 1995 2010 (org-emphasis t font-lock-multiline t face (org-code) fontified t) 2010 2016 (fontified t) 2016 2055 (fontified t) 2055 2057 (fontified nil) 2057 2079 (fontified nil) 2079 2117 (fontified nil) 2117 2131 (fontified nil) 2131 2199 (fontified nil) 2199 2209 (fontified nil) 2209 2247 (fontified nil) 2247 2249 (fontified nil) 2249 2251 (fontified nil) 2251 2268 (fontified nil) 2268 2291 (fontified nil) 2291 2292 (fontified nil) 2292 2349 (fontified nil) 2349 2382 (fontified nil) 2382 2419 (fontified nil) 2419 2452 (fontified nil) 2452 2493 (fontified nil) 2493 2526 (fontified nil) 2526 2558 (fontified nil) 2558 2584 (fontified nil) 2584 2639 (fontified nil) 2639 2654 (fontified nil) 2654 2695 (fontified nil) 2695 2697 (fontified nil) 2697 2699 (fontified nil) 2699 2727 (fontified nil) 2727 2746 (fontified nil) 2746 2747 (fontified nil) 2747 2748 (fontified nil) 2748 2796 (fontified t) 2796 2815 (org-emphasis t font-lock-multiline t face (org-code) fontified t) 2815 2844 (fontified t) 2844 2858 (org-emphasis t font-lock-multiline t face (org-code) fontified t) 2858 2891 (fontified t) 2891 2901 (org-emphasis t font-lock-multiline t face (org-code) fontified t) 2901 2951 (fontified t) 2951 2953 (face org-level-3 fontified t) 2953 2955 (face org-level-3 fontified t) 2955 2975 (face org-level-3 fontified t) 2975 2986 (org-emphasis t font-lock-multiline t face (org-code org-level-3) fontified t) 2986 2987 (face org-level-3 fontified t) 2987 3008 (fontified t) 3008 3037 (fontified t) 3037 3039 (fontified t) 3039 3053 (org-emphasis t font-lock-multiline t face (org-code) fontified t) 3053 3095 (fontified t) 3095 3110 (org-emphasis t font-lock-multiline t face (org-code) fontified t) 3110 3140 (fontified t) 3140 3152 (org-emphasis t font-lock-multiline t face (org-code) fontified t) 3152 3194 (fontified t) 3194 3206 (org-emphasis t font-lock-multiline t face (org-code) fontified t) 3206 3251 (fontified t) 3251 3262 (org-emphasis t font-lock-multiline t face (org-code) fontified t) 3262 3298 (fontified t) 3298 3300 (face org-level-3 fontified t) 3300 3302 (face org-level-3 fontified t) 3302 3319 (face org-level-3 fontified t) 3319 3334 (org-emphasis t font-lock-multiline t face (org-code org-level-3) fontified t) 3334 3335 (face org-level-3 fontified t) 3335 3380 (fontified t) 3380 3392 (org-emphasis t font-lock-multiline t face (bold) fontified t) 3392 3394 (fontified t) 3394 3407 (org-emphasis t font-lock-multiline t face (org-code) fontified t) 3407 3487 (fontified t) 3487 3497 (org-emphasis t font-lock-multiline t face (bold) fontified t) 3497 3499 (fontified t) 3499 3510 (org-emphasis t font-lock-multiline t face (org-code) fontified t) 3510 3567 (fontified t) 3567 3577 (org-emphasis t font-lock-multiline t face (bold) fontified t) 3577 3579 (fontified t) 3579 3590 (org-emphasis t font-lock-multiline t face (org-code) fontified t) 3590 3630 (fontified t) 3630 3638 (org-emphasis t font-lock-multiline t face (bold) fontified t) 3638 3640 (fontified t) 3640 3649 (org-emphasis t font-lock-multiline t face (org-code) fontified t) 3649 3687 (fontified t) 3687 3689 (face org-level-3 fontified t) 3689 3691 (face org-level-3 fontified t) 3691 3708 (face org-level-3 fontified t) 3708 3726 (org-emphasis t font-lock-multiline t face (org-code org-level-3) fontified t) 3726 3727 (face org-level-3 fontified t) 3727 3759 (fontified t) 3759 3771 (org-emphasis t font-lock-multiline t face (org-code) fontified t) 3771 3793 (fontified t) 3793 3808 (org-emphasis t font-lock-multiline t face (org-code) fontified t) 3808 3838 (fontified t) 3838 3840 (fontified t) 3840 3849 (org-emphasis t font-lock-multiline t face (org-code) fontified t) 3849 3856 (fontified t) 3856 3875 (fontified t) 3875 3884 (org-emphasis t font-lock-multiline t face (org-code) fontified t) 3884 3928 (fontified t) 3928 3929 (face nil fontified t) 3929 3930 (face org-level-2 fontified t) 3930 3932 (face org-level-2 fontified t) 3932 3945 (face org-level-2 fontified t) 3945 3946 (fontified t) 3946 4014 (fontified t) 4014 4030 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 4030 4031 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 4031 4033 (face (font-lock-comment-delimiter-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 4033 4072 (face (font-lock-comment-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 4072 4088 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 4088 4090 (face (font-lock-comment-delimiter-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 4090 4113 (face (font-lock-comment-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 4113 4128 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 4128 4130 (face (font-lock-comment-delimiter-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 4130 4156 (face (font-lock-comment-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 4156 4174 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 4174 4176 (face (font-lock-comment-delimiter-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 4176 4210 (face (font-lock-comment-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 4210 4234 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 4234 4236 (face (font-lock-comment-delimiter-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 4236 4248 (face (font-lock-comment-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 4248 4259 (face (font-lock-comment-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 4259 4274 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 4274 4283 (face org-block-end-line font-lock-multiline t font-lock-fontified t fontified t) 4283 4284 (face org-block-end-line fontified t) 4284 4285 (fontified t) 4285 4303 (org-emphasis t font-lock-multiline t face (bold) fontified t) 4303 4363 (fontified t) 4363 4364 (face nil fontified t) 4364 4365 (face org-level-2 fontified t) 4365 4367 (face org-level-2 fontified t) 4367 4393 (face org-level-2 fontified t) 4393 4488 (fontified t) 4488 4504 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 4504 4505 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 4505 4507 (face (font-lock-builtin-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 4507 4552 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 4552 4554 (face (font-lock-comment-delimiter-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 4554 4578 (face (font-lock-comment-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 4578 4582 (face (font-lock-builtin-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 4582 4583 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 4583 4584 (face (font-lock-string-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 4584 4587 (face (font-lock-string-face org-block) org-emphasis t font-lock-multiline t src-block t font-lock-fontified t fontified t) 4587 4622 (face (font-lock-string-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 4622 4625 (face (font-lock-string-face org-block) org-emphasis t font-lock-multiline t src-block t font-lock-fontified t fontified t) 4625 4626 (face (font-lock-string-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 4626 4707 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 4707 4709 (face (font-lock-comment-delimiter-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 4709 4744 (face (font-lock-comment-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 4744 4748 (face (font-lock-builtin-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 4748 4749 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 4749 4750 (face (font-lock-string-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 4750 4753 (face (font-lock-string-face org-block) org-emphasis t font-lock-multiline t src-block t font-lock-fontified t fontified t) 4753 4781 (face (font-lock-string-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 4781 4784 (face (font-lock-string-face org-block) org-emphasis t font-lock-multiline t src-block t font-lock-fontified t fontified t) 4784 4785 (face (font-lock-string-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 4785 4880 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 4880 4882 (face (font-lock-comment-delimiter-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 4882 4914 (face (font-lock-comment-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 4914 4918 (face (font-lock-builtin-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 4918 4919 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 4919 4920 (face (font-lock-string-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 4920 4923 (face (font-lock-string-face org-block) org-emphasis t font-lock-multiline t src-block t font-lock-fontified t fontified t) 4923 4956 (face (font-lock-string-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 4956 4959 (face (font-lock-string-face org-block) org-emphasis t font-lock-multiline t src-block t font-lock-fontified t fontified t) 4959 4960 (face (font-lock-string-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 4960 5061 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 5061 5063 (face (font-lock-comment-delimiter-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 5063 5086 (face (font-lock-comment-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 5086 5090 (face (font-lock-builtin-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 5090 5091 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 5091 5092 (face (font-lock-string-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 5092 5095 (face (font-lock-string-face org-block) org-emphasis t font-lock-multiline t src-block t font-lock-fontified t fontified t) 5095 5121 (face (font-lock-string-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 5121 5124 (face (font-lock-string-face org-block) org-emphasis t font-lock-multiline t src-block t font-lock-fontified t fontified t) 5124 5125 (face (font-lock-string-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 5125 5165 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 5165 5189 (face (font-lock-string-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 5189 5202 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 5202 5204 (face (font-lock-comment-delimiter-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 5204 5230 (face (font-lock-comment-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 5230 5234 (face (font-lock-builtin-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 5234 5235 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 5235 5236 (face (font-lock-string-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 5236 5239 (face (font-lock-string-face org-block) org-emphasis t font-lock-multiline t src-block t font-lock-fontified t fontified t) 5239 5261 (face (font-lock-string-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 5261 5264 (face (font-lock-string-face org-block) org-emphasis t font-lock-multiline t src-block t font-lock-fontified t fontified t) 5264 5265 (face (font-lock-string-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 5265 5310 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 5310 5317 (face (font-lock-string-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 5317 5327 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 5327 5329 (face (font-lock-comment-delimiter-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 5329 5355 (face (font-lock-comment-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 5355 5356 (face (font-lock-builtin-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 5356 5359 (face (font-lock-builtin-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 5359 5360 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 5360 5361 (face (font-lock-string-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 5361 5364 (face (font-lock-string-face org-block) org-emphasis t font-lock-multiline t src-block t font-lock-fontified t fontified t) 5364 5393 (face (font-lock-string-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 5393 5396 (face (font-lock-string-face org-block) org-emphasis t font-lock-multiline t src-block t font-lock-fontified t fontified t) 5396 5397 (face (font-lock-string-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 5397 5428 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 5428 5499 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 5499 5501 (face (font-lock-comment-delimiter-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 5501 5528 (face (font-lock-comment-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 5528 5532 (face (font-lock-builtin-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 5532 5533 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 5533 5571 (face (font-lock-string-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 5571 5610 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 5610 5618 (face (font-lock-string-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 5618 5630 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 5630 5639 (face org-block-end-line font-lock-multiline t font-lock-fontified t fontified nil) 5639 5640 (face org-block-end-line fontified nil) 5640 5751 (fontified nil) 5751 5752 (face nil fontified t) 5752 5753 (face org-level-2 fontified t) 5753 5755 (face org-level-2 fontified t) 5755 5781 (face org-level-2 fontified t) 5781 5782 (fontified t) 5782 5803 (face (org-date) keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight fontified t) 5803 5804 (face (org-date) rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link) keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight fontified t) 5804 5920 (fontified t) 5920 5922 (face org-level-3 fontified t) 5922 5924 (face org-level-3 fontified t) 5924 5948 (face org-level-3 fontified t) 5948 6104 (fontified t) 6104 6106 (face org-level-3 fontified t) 6106 6108 (face org-level-3 fontified t) 6108 6164 (face org-level-3 fontified t) 6164 6166 (fontified t) 6166 6182 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 6182 6183 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 6183 6185 (src-block t face (font-lock-comment-delimiter-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 6185 6210 (src-block t face (font-lock-comment-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 6210 6224 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 6224 6226 (src-block t face (font-lock-comment-delimiter-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 6226 6259 (src-block t face (font-lock-comment-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 6259 6266 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 6266 6269 (src-block t face (font-lock-builtin-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 6269 6271 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 6271 6273 (src-block t face (font-lock-comment-delimiter-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 6273 6303 (src-block t face (font-lock-comment-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 6303 6305 (src-block t face (font-lock-builtin-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 6305 6350 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 6350 6352 (src-block t face (font-lock-comment-delimiter-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 6352 6383 (src-block t face (font-lock-comment-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 6383 6389 (src-block t face (font-lock-builtin-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 6389 6390 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 6390 6401 (src-block t face (font-lock-variable-name-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 6401 6404 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 6404 6407 (src-block t face (font-lock-builtin-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 6407 6409 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 6409 6413 (src-block t face (font-lock-builtin-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 6413 6414 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 6414 6447 (src-block t face (font-lock-string-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 6447 6449 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 6449 6451 (src-block t face (font-lock-comment-delimiter-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 6451 6482 (src-block t face (font-lock-comment-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 6482 6502 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 6502 6511 (face org-block-end-line font-lock-multiline t font-lock-fontified t fontified t) 6511 6512 (face org-block-end-line fontified t) 6512 6513 (fontified t) 6513 6528 (org-emphasis t font-lock-multiline t face (bold) fontified t) 6528 6635 (fontified t) 6635 6637 (face org-level-3 fontified t) 6637 6639 (face org-level-3 fontified t) 6639 6674 (face org-level-3 fontified t) 6674 6767 (fontified t) 6767 6783 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 6783 6784 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 6784 6786 (src-block t face (font-lock-builtin-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 6786 6831 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 6831 6833 (src-block t face (font-lock-comment-delimiter-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 6833 6869 (src-block t face (font-lock-comment-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 6869 6887 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 6887 6889 (src-block t face (font-lock-comment-delimiter-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 6889 6923 (src-block t face (font-lock-comment-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 6923 6949 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 6949 6951 (src-block t face (font-lock-comment-delimiter-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 6951 6986 (src-block t face (font-lock-comment-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 6986 7008 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 7008 7010 (src-block t face (font-lock-comment-delimiter-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 7010 7044 (src-block t face (font-lock-comment-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 7044 7066 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 7066 7068 (src-block t face (font-lock-comment-delimiter-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 7068 7100 (src-block t face (font-lock-comment-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 7100 7149 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 7149 7151 (src-block t face (font-lock-comment-delimiter-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 7151 7184 (src-block t face (font-lock-comment-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 7184 7205 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 7205 7214 (face org-block-end-line font-lock-multiline t font-lock-fontified t fontified t) 7214 7215 (face org-block-end-line fontified t) 7215 7216 (fontified t) 7216 7231 (org-emphasis t font-lock-multiline t face (bold) fontified t) 7231 7243 (fontified t) 7243 7251 (org-emphasis t font-lock-multiline t face (org-code) fontified t) 7251 7253 (org-emphasis t font-lock-multiline t face (org-code) fontified t) 7253 7347 (fontified t) 7347 10514 (fontified nil) 10514 10515 (face nil fontified t) 10515 10516 (face org-level-2 fontified t) 10516 10518 (face org-level-2 fontified t) 10518 10549 (face org-level-2 fontified t) 10549 10656 (fontified t) 10656 10658 (face org-level-3 fontified t) 10658 10660 (face org-level-3 fontified t) 10660 10682 (face org-level-3 fontified t) 10682 10748 (fontified t) 10748 10764 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 10764 10765 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 10765 10767 (src-block t face (font-lock-builtin-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 10767 10825 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 10825 10827 (src-block t face (font-lock-comment-delimiter-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 10827 10863 (src-block t face (font-lock-comment-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 10863 10891 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 10891 10893 (src-block t face (font-lock-comment-delimiter-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 10893 10942 (src-block t face (font-lock-comment-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 10942 10989 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 10989 10991 (src-block t face (font-lock-comment-delimiter-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 10991 11037 (src-block t face (font-lock-comment-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 11037 11061 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 11061 11063 (src-block t face (font-lock-comment-delimiter-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 11063 11098 (src-block t face (font-lock-comment-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 11098 11152 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 11152 11156 (src-block t face (font-lock-builtin-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 11156 11157 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 11157 11172 (src-block t face (font-lock-string-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 11172 11176 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 11176 11180 (src-block t face (font-lock-builtin-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 11180 11181 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 11181 11200 (src-block t face (font-lock-string-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 11200 11202 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 11202 11211 (face org-block-end-line font-lock-multiline t font-lock-fontified t fontified t) 11211 11212 (face org-block-end-line fontified t) 11212 11213 (fontified t) 11213 11215 (face org-level-3 fontified t) 11215 11217 (face org-level-3 fontified t) 11217 11233 (face org-level-3 fontified t) 11233 11294 (fontified t) 11294 11310 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 11310 11311 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 11311 11313 (src-block t face (font-lock-builtin-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 11313 11379 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 11379 11381 (src-block t face (font-lock-comment-delimiter-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 11381 11408 (src-block t face (font-lock-comment-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 11408 11423 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 11423 11425 (src-block t face (font-lock-comment-delimiter-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 11425 11459 (src-block t face (font-lock-comment-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 11459 11530 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 11530 11532 (src-block t face (font-lock-comment-delimiter-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 11532 11583 (src-block t face (font-lock-comment-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 11583 11649 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 11649 11651 (src-block t face (font-lock-comment-delimiter-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 11651 11674 (src-block t face (font-lock-comment-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 11674 11710 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 11710 11712 (src-block t face (font-lock-comment-delimiter-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 11712 11736 (src-block t face (font-lock-comment-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 11736 11802 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 11802 11806 (src-block t face (font-lock-builtin-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 11806 11807 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 11807 11824 (src-block t face (font-lock-string-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 11824 11826 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 11826 11835 (face org-block-end-line font-lock-multiline t font-lock-fontified t fontified t) 11835 11836 (face org-block-end-line fontified t) 11836 11837 (face nil fontified t) 11837 11838 (face org-level-2 fontified t) 11838 11840 (face org-level-2 fontified t) 11840 11870 (face org-level-2 fontified t) 11870 11872 (fontified t) 11872 11874 (face org-level-3 fontified t) 11874 11876 (face org-level-3 fontified t) 11876 11895 (face org-level-3 fontified t) 11895 11937 (fontified t) 11937 11953 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 11953 11954 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 11954 11956 (src-block t face (font-lock-builtin-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 11956 12001 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 12001 12003 (src-block t face (font-lock-comment-delimiter-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 12003 12014 (src-block t face (font-lock-comment-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 12014 12033 (src-block t face (font-lock-comment-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 12033 12057 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 12057 12059 (src-block t face (font-lock-comment-delimiter-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 12059 12082 (src-block t face (font-lock-comment-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 12082 12114 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 12114 12116 (src-block t face (font-lock-comment-delimiter-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 12116 12156 (src-block t face (font-lock-comment-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 12156 12202 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 12202 12204 (src-block t face (font-lock-comment-delimiter-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 12204 12235 (src-block t face (font-lock-comment-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 12235 12236 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 12236 12245 (face org-block-end-line font-lock-multiline t font-lock-fontified t fontified nil) 12245 12246 (face org-block-end-line fontified nil) 12246 12678 (fontified nil) 12678 12679 (face nil fontified t) 12679 12680 (face org-level-2 fontified t) 12680 12682 (face org-level-2 fontified t) 12682 12701 (face org-level-2 fontified t) 12701 12703 (fontified t) 12703 12705 (face org-level-3 fontified t) 12705 12707 (face org-level-3 fontified t) 12707 12738 (face org-level-3 fontified t) 12738 12787 (fontified t) 12787 12803 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 12803 12804 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 12804 12806 (src-block t face (font-lock-builtin-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 12806 12851 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 12851 12853 (src-block t face (font-lock-comment-delimiter-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 12853 12879 (src-block t face (font-lock-comment-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 12879 12890 (src-block t face (font-lock-variable-name-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 12890 12944 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 12944 12955 (src-block t face (font-lock-variable-name-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 12955 12978 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 12978 12980 (src-block t face (font-lock-comment-delimiter-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 12980 13006 (src-block t face (font-lock-comment-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 13006 13053 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 13053 13055 (src-block t face (font-lock-comment-delimiter-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 13055 13096 (src-block t face (font-lock-comment-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 13096 13098 (src-block t face (font-lock-comment-delimiter-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 13098 13152 (src-block t face (font-lock-comment-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 13152 13153 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 13153 13157 (src-block t face (font-lock-builtin-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 13157 13158 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 13158 13215 (src-block t face (font-lock-string-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 13215 13217 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 13217 13226 (face org-block-end-line font-lock-multiline t font-lock-fontified t fontified t) 13226 13227 (face org-block-end-line fontified t) 13227 13228 (fontified t) 13228 13230 (face org-level-3 fontified t) 13230 13232 (face org-level-3 fontified t) 13232 13251 (face org-level-3 fontified t) 13251 13291 (fontified t) 13291 13307 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 13307 13308 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 13308 13310 (src-block t face (font-lock-builtin-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 13310 13355 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 13355 13357 (src-block t face (font-lock-comment-delimiter-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 13357 13380 (src-block t face (font-lock-comment-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 13380 13417 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 13417 13419 (src-block t face (font-lock-comment-delimiter-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 13419 13472 (src-block t face (font-lock-comment-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 13472 13525 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 13525 13527 (src-block t face (font-lock-comment-delimiter-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 13527 13546 (src-block t face (font-lock-comment-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 13546 13568 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 13568 13572 (src-block t face (font-lock-builtin-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 13572 13573 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 13573 13600 (src-block t face (font-lock-string-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 13600 13602 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 13602 13611 (face org-block-end-line font-lock-multiline t font-lock-fontified t fontified t) 13611 13612 (face org-block-end-line fontified t) 13612 13613 (face nil fontified t) 13613 13614 (face org-level-2 fontified t) 13614 13616 (face org-level-2 fontified t) 13616 13634 (face org-level-2 fontified t) 13634 13675 (fontified t) 13675 13691 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 13691 13692 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 13692 13694 (src-block t face (font-lock-builtin-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 13694 13739 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 13739 13741 (src-block t face (font-lock-comment-delimiter-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 13741 13765 (src-block t face (font-lock-comment-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 13765 13781 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 13781 13783 (src-block t face (font-lock-comment-delimiter-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 13783 13815 (src-block t face (font-lock-comment-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 13815 13848 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 13848 13850 (src-block t face (font-lock-comment-delimiter-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 13850 13885 (src-block t face (font-lock-comment-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 13885 13916 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 13916 13918 (src-block t face (font-lock-comment-delimiter-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 13918 13955 (src-block t face (font-lock-comment-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 13955 13983 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 13983 13992 (face org-block-end-line font-lock-multiline t font-lock-fontified t fontified t) 13992 13993 (face org-block-end-line fontified t) 13993 13994 (face nil fontified t) 13994 13996 (face org-level-1 fontified t) 13996 14029 (face org-level-1 fontified t) 14029 14030 (fontified t) 14030 14031 (fontified t) 14031 14032 (face org-level-2 fontified t) 14032 14034 (face org-level-2 fontified t) 14034 14055 (face org-level-2 fontified t) 14055 14056 (fontified t) 14056 14111 (fontified t) 14111 14131 (org-emphasis t font-lock-multiline t face (org-code) fontified t) 14131 14134 (fontified t) 14134 14150 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 14150 14151 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 14151 14153 (src-block t face (font-lock-comment-delimiter-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 14153 14180 (src-block t face (font-lock-comment-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 14180 14184 (src-block t face (font-lock-variable-name-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 14184 14191 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 14191 14193 (src-block t face (font-lock-comment-delimiter-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 14193 14221 (src-block t face (font-lock-comment-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 14221 14234 (src-block t face (font-lock-variable-name-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 14234 14241 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 14241 14243 (src-block t face (font-lock-comment-delimiter-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 14243 14274 (src-block t face (font-lock-comment-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 14274 14292 (src-block t face (font-lock-variable-name-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 14292 14308 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 14308 14310 (src-block t face (font-lock-comment-delimiter-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 14310 14339 (src-block t face (font-lock-comment-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 14339 14347 (src-block t face (font-lock-variable-name-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 14347 14355 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 14355 14366 (src-block t face (font-lock-variable-name-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 14366 14379 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 14379 14388 (face org-block-end-line font-lock-multiline t font-lock-fontified t fontified t) 14388 14389 (face org-block-end-line fontified t) 14389 14390 (fontified t) 14390 14391 (face org-level-2 fontified t) 14391 14393 (face org-level-2 fontified t) 14393 14410 (face org-level-2 fontified t) 14410 14411 (fontified t) 14411 14412 (fontified t) 14412 14441 (face org-table fontified t) 14441 14442 (face org-table-row fontified t) 14442 14471 (face org-table fontified t) 14471 14472 (face org-table-row fontified t) 14472 14525 (face org-table fontified t) 14525 14526 (face org-table-row fontified t) 14526 14572 (face org-table fontified t) 14572 14573 (face org-table-row fontified t) 14573 14626 (face org-table fontified t) 14626 14627 (face org-table-row fontified t) 14627 14685 (face org-table fontified t) 14685 14686 (face org-table-row fontified t) 14686 14756 (face org-table fontified t) 14756 14757 (face org-table-row fontified t) 14757 14823 (face org-table fontified t) 14823 14824 (face org-table-row fontified t) 14824 14825 (face nil fontified t) 14825 14827 (face org-level-1 fontified t) 14827 14845 (face org-level-1 fontified t)) . 85) (undo-tree-id55 . -487) (undo-tree-id56 . -487) 572 (t 26967 51590 297423 368000)) nil (26968 1511 435026 0) 0 nil])
+([nil nil ((844 . 845) (t 26967 51751 656373 343000)) nil (26968 1511 435025 0) 0 nil])
+([nil nil ((845 . 853)) nil (26968 1511 435025 0) 0 nil])
+([nil nil ((#("t" 0 1 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t)) . -851) (undo-tree-id53 . -1) (#("u" 0 1 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t)) . -852) (undo-tree-id54 . -1) 853) nil (26968 1511 435024 0) 0 nil])
+([nil nil ((851 . 852)) nil (26968 1511 435024 0) 0 nil])
+([nil nil ((#("t" 0 1 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t)) . -851) (undo-tree-id52 . -1) 852) nil (26968 1511 435023 0) 0 nil])
+([nil nil ((851 . 855)) nil (26968 1511 435023 0) 0 nil])
+([nil nil ((856 . 857)) nil (26968 1511 435022 0) 0 nil])
+([nil nil ((856 . 862)) nil (26968 1511 435022 0) 0 nil])
+([nil nil ((#("o" 0 1 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t)) . -860) (undo-tree-id50 . -1) (#("r" 0 1 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t)) . -861) (undo-tree-id51 . -1) 862) nil (26968 1511 435022 0) 0 nil])
+([nil nil ((860 . 869)) nil (26968 1511 435021 0) 0 nil])
+([nil nil ((#("o" 0 1 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t)) . -860) (undo-tree-id44 . -1) (#("r" 0 1 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t)) . -861) (undo-tree-id45 . -1) (#("i" 0 1 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t)) . -862) (undo-tree-id46 . -1) (#("g" 0 1 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t)) . -863) (undo-tree-id47 . -1) (#("i" 0 1 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t)) . -864) (undo-tree-id48 . -1) (#("n" 0 1 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t)) . -865) (undo-tree-id49 . -1) 866) nil (26968 1511 435020 0) 0 nil])
+([nil nil ((860 . 866)) nil (26968 1511 435018 0) 0 nil])
+([nil nil ((131 . 4216) (#("Meditation App - Docker Update Guide
+#+Author: Andreas Wittmann
+#+Options: c:t
+
+- *PDF Version:* [[file:setup.pdf][setup.pdf]]
+- *HTML Version:* [[file:setup.html][setup.html]]
+
+* Meditation App - Docker Update
+
+** Overview
+
+This guide demonstrates how to update the meditation-app installation with Docker on a MacBook Pro home server.
+
+** Update Docker Installation
+
+*** Step 1: Connect to Remote Server
+
+Connect to the remote machine and navigate to the project directory:
+
+#+BEGIN_src bash
+ssh asamadhi
+
+cd ~/LocalProjects/ai-bootcamp/meditation-app
+
+whoami
+pwd
+
+#+end_src
+
+*** Step 2: Update Code from Repository
+
+Pull the latest code changes:
+
+#+BEGIN_src bash
+cd ~/LocalProjects/ai-bootcamp/meditation-app
+
+git status
+git remote -v" 0 37 (face org-document-title font-lock-fontified t fontified t) 37 46 (face org-document-info-keyword font-lock-fontified t fontified t) 46 47 (fontified t) 47 64 (face org-document-info font-lock-fontified t fontified t) 64 78 (face org-meta-line font-lock-fontified t fontified t) 78 82 (fontified t) 82 96 (org-emphasis t font-lock-multiline t face (bold) fontified t) 96 97 (fontified t) 97 114 (face org-link font-lock-multiline t keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight invisible org-link htmlize-link (:uri "file:setup.pdf") help-echo "LINK: file:setup.pdf" fontified t) 114 115 (face org-link font-lock-multiline t keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight invisible org-link rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link) htmlize-link (:uri "file:setup.pdf") help-echo "LINK: file:setup.pdf" fontified t) 115 123 (font-lock-multiline t keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight face org-link htmlize-link (:uri "file:setup.pdf") help-echo "LINK: file:setup.pdf" fontified t) 123 124 (font-lock-multiline t keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight face org-link rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link) htmlize-link (:uri "file:setup.pdf") help-echo "LINK: file:setup.pdf" fontified t) 124 125 (font-lock-multiline t keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight invisible org-link face org-link htmlize-link (:uri "file:setup.pdf") help-echo "LINK: file:setup.pdf" fontified t) 125 126 (font-lock-multiline t keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight invisible org-link face org-link htmlize-link (:uri "file:setup.pdf") help-echo "LINK: file:setup.pdf" rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link) fontified t) 126 129 (fontified t) 129 144 (org-emphasis t font-lock-multiline t face (bold) fontified t) 144 145 (fontified t) 145 163 (face org-link font-lock-multiline t keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight invisible org-link htmlize-link (:uri "file:setup.html") help-echo "LINK: file:setup.html" fontified t) 163 164 (face org-link font-lock-multiline t keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight invisible org-link rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link) htmlize-link (:uri "file:setup.html") help-echo "LINK: file:setup.html" fontified t) 164 173 (font-lock-multiline t keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight face org-link htmlize-link (:uri "file:setup.html") help-echo "LINK: file:setup.html" fontified t) 173 174 (font-lock-multiline t keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight face org-link rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link) htmlize-link (:uri "file:setup.html") help-echo "LINK: file:setup.html" fontified t) 174 175 (font-lock-multiline t keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight invisible org-link face org-link htmlize-link (:uri "file:setup.html") help-echo "LINK: file:setup.html" fontified t) 175 176 (font-lock-multiline t keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight invisible org-link face org-link htmlize-link (:uri "file:setup.html") help-echo "LINK: file:setup.html" rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link) fontified t) 176 177 (fontified t) 177 178 (fontified t) 178 180 (face org-level-1 fontified t) 180 210 (face org-level-1 fontified t) 210 211 (fontified t) 211 212 (fontified t) 212 213 (face org-level-2 fontified t) 213 215 (face org-level-2 fontified t) 215 223 (face org-level-2 fontified t) 223 224 (fontified t) 224 337 (fontified t) 337 338 (fontified t) 338 339 (face org-level-2 fontified t) 339 341 (face org-level-2 fontified t) 341 367 (face org-level-2 fontified t) 367 368 (fontified t) 368 369 (fontified t) 369 371 (face org-level-3 fontified t) 371 373 (face org-level-3 fontified t) 373 405 (face org-level-3 fontified t) 405 477 (fontified t) 477 493 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 493 494 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 494 508 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 508 510 (face (font-lock-builtin-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 510 562 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 562 565 (face (font-lock-builtin-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 565 567 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 567 576 (face org-block-end-line font-lock-multiline t font-lock-fontified t fontified t) 576 577 (face org-block-end-line fontified t) 577 578 (fontified t) 578 580 (face org-level-3 fontified t) 580 582 (face org-level-3 fontified t) 582 617 (face org-level-3 fontified t) 617 650 (fontified t) 650 666 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 666 667 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 667 669 (face (font-lock-builtin-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 669 738 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t)) . 131) (undo-tree-id31 . -725) (undo-tree-id32 . -566) (undo-tree-id33 . -494) (undo-tree-id34 . -507) (undo-tree-id35 . -508) (undo-tree-id36 . -554) (undo-tree-id37 . -555) (undo-tree-id38 . -562) (undo-tree-id39 . -667) (undo-tree-id40 . -725) (undo-tree-id41 . -714) (undo-tree-id42 . -725) (undo-tree-id43 . -177)) nil (26968 1511 435017 0) 0 nil])
+([nil nil ((4111 . 4834) (#("ai-bootcamp/meditation-app
+
+git pull
+git fetch --tags
+git describe --tags
+
+#+end_src
+
+*** Step 3: Stop Running Containers
+
+Stop all running containers:
+
+#+BEGIN_src bash
+cd ~/LocalProjects/ai-bootcamp/meditation-app
+
+docker compose down
+
+#+end_src
+
+*** Step 4: Rebuild Docker Images
+
+Rebuild the backend and frontend images:
+
+#+BEGIN_src bash
+cd ~/LocalProjects/ai-bootcamp/meditation-app
+
+docker compose build --no-cache
+
+#+end_src
+
+*** Step 5: Start Containers
+
+Start all services in background:
+
+#+BEGIN_src bash
+cd ~/LocalProjects/ai-bootcamp/meditation-app
+
+docker compose up -d
+
+docker compose ps
+
+#+end_src
+
+*** Step 6: Verify Services
+
+Confirm that the application is running:
+
+#+BEGIN_src bash
+cd ~/LocalProjects/ai-bootcamp/meditation-app" 0 27 (fontified nil) 27 75 (src-block t font-lock-fontified t fontified nil) 75 84 (font-lock-fontified t fontified nil) 84 85 (fontified nil) 85 86 (fontified nil) 86 88 (fontified nil) 88 90 (fontified nil) 90 121 (fontified nil) 121 153 (fontified nil) 153 169 (font-lock-fontified t fontified nil) 169 170 (font-lock-fontified t fontified nil) 170 172 (src-block t font-lock-fontified t fontified nil) 172 238 (src-block t font-lock-fontified t fontified nil) 238 247 (font-lock-fontified t fontified nil) 247 248 (fontified nil) 248 249 (fontified nil) 249 251 (fontified nil) 251 253 (fontified nil) 253 282 (fontified nil) 282 326 (fontified nil) 326 342 (font-lock-fontified t fontified nil) 342 343 (font-lock-fontified t fontified nil) 343 345 (src-block t font-lock-fontified t fontified nil) 345 423 (src-block t font-lock-fontified t fontified nil) 423 432 (font-lock-fontified t fontified nil) 432 433 (fontified nil) 433 434 (fontified nil) 434 436 (fontified nil) 436 438 (fontified nil) 438 462 (fontified nil) 462 499 (fontified nil) 499 515 (font-lock-fontified t fontified nil) 515 516 (font-lock-fontified t fontified nil) 516 518 (src-block t font-lock-fontified t fontified nil) 518 604 (src-block t font-lock-fontified t fontified nil) 604 613 (font-lock-fontified t fontified nil) 613 614 (fontified nil) 614 615 (fontified nil) 615 617 (fontified nil) 617 619 (fontified nil) 619 642 (fontified nil) 642 684 (fontified nil) 684 685 (fontified nil) 685 686 (fontified nil) 686 702 (font-lock-fontified t fontified nil) 702 703 (font-lock-fontified t fontified nil) 703 705 (src-block t font-lock-fontified t fontified nil) 705 748 (src-block t font-lock-fontified t fontified nil)) . 4111) (undo-tree-id29 . -37) (undo-tree-id30 . -54) (t 26967 52682 43869 31000) (599 . 3978) (#("/ai-bootcamp
+git clone https://github.com/andreaswittmann/contemplation-machine.git meditation-app
+cd meditation-app
+git log --oneline -5
+#+end_src
+
+*** Step 2: Configure Environment
+
+#+BEGIN_src bash
+cd ~/LocalProjects/ai-bootcamp/meditation-app
+cp backend/sample.env .env
+cat .env
+#+end_src
+
+Edit `.env` with your API keys if needed (leave empty for browser native TTS).
+
+*** Step 3: Initialize Data Directories
+
+#+BEGIN_src bash
+cd ~/LocalProjects/ai-bootcamp/meditation-app
+mkdir -p backend/data/presets backend/data/audio-cache
+ls -la backend/data/
+#+end_src
+
+*** Step 4: Build & Start
+
+#+BEGIN_src bash
+cd ~/LocalProjects/ai-bootcamp/meditation-app
+docker compose build --no-cache
+docker compose up -d
+docker compose ps
+sleep 5
+curl http://localhost:3001/api/health
+#+end_src
+
+*Result:* Application running at http://localhost:3000 (frontend) and http://localhost:3001 (backend).
+
+** Migration from Existing Installation
+
+*** Step 1: Backup Source Data
+
+On your current installation:
+
+#+BEGIN_src bash
+cd ~/LocalProjects/ai-bootcamp/meditation-app/backend/data
+mkdir -p ~/backups/meditation-app-$(date +%Y%m%d)
+cp -r . ~/backups/meditation-app-$(date +%Y%m%d)/
+ls -la ~/backups/meditation-app-$(date +%Y%m%d)/
+#+end_src
+
+*** Step 2: Create Migration Package
+
+#+BEGIN_src bash
+cd ~/LocalProjects/ai-bootcamp/meditation-app
+mkdir -p migration-package/{presets,audio-cache}
+cp backend/data/instructions.json migration-package/ 2>/dev/null || true
+cp backend/data/api-keys.json migration-package/ 2>/dev/null || true
+cp backend/data/presets/*.json migration-package/presets/ 2>/dev/null || true
+cp -r backend/data/audio-cache/* migration-package/audio-cache/ 2>/dev/null || true
+tar -czf meditation-app-migration-$(date +%Y%m%d).tar.gz migration-package/
+ls -lh meditation-app-migration-*.tar.gz
+#+end_src
+
+*** Step 3: Transfer to Asamadhi
+
+#+BEGIN_src bash
+# From source server to asamadhi
+scp meditation-app-migration-*.tar.gz asamadhi:~/LocalProjects/ai-bootcamp/
+#+end_src
+
+*** Step 4: Extract & Migrate on Asamadhi
+
+#+BEGIN_src bash
+ssh asamadhi
+cd ~/LocalProjects/ai-bootcamp/meditation-app
+docker compose down
+tar -xzf ../meditation-app-migration-*.tar.gz
+#+end_src
+
+*** Step 5: Restore Data Files
+
+#+BEGIN_src bash
+cd ~/LocalProjects/ai-bootcamp/meditation-app
+# Backup current data
+cp -r backend/data backend/data.backup
+
+# Restore custom data
+cp migration-package/instructions.json backend/data/ 2>/dev/null || true
+cp migration-package/api-keys.json backend/data/ 2>/dev/null || true
+cp migration-package/presets/*.json backend/data/presets/ 2>/dev/null || true
+cp -r migration-package/audio-cache/* backend/data/audio-cache/ 2>/dev/null || true
+
+ls -la backend/data/
+#+end_src
+
+*** Step 6: Restart & Verify
+
+#+BEGIN_src bash
+cd ~/LocalProjects/ai-bootcamp/meditation-app
+docker compose up -d
+docker compose logs backend | tail -10
+curl http://localhost:3001/api/instructions | head -50
+curl http://localhost:3001/api/presets | head -50
+#+end_src
+
+*Result:* Your custom instructions, presets, and audio files are now migrated.
+
+*** Step 7: Cleanup
+
+#+BEGIN_src bash
+cd ~/LocalProjects/ai-bootcamp/meditation-app
+rm -rf migration-package
+rm -f meditation-app-migration-*.tar.gz
+echo \"Migration complete and cleaned up\"
+#+end_src
+
+** Update Docker Installation
+
+*** Step 1: Connect to Remote Server
+
+Connect to the remote machine and navigate to the project directory:
+
+#+BEGIN_src bash
+ssh asamadhi
+
+cd ~/LocalProjects/ai-bootcamp/meditation-app" 0 23 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 23 82 (src-block t face (org-block) font-lock-fontified t font-lock-multiline t htmlize-link (:uri "https://github.com/andreaswittmann/contemplation-machine.git") help-echo "LINK: https://github.com/andreaswittmann/contemplation-machine.git" keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight fontified t) 82 83 (src-block t face (org-block) font-lock-fontified t font-lock-multiline t htmlize-link (:uri "https://github.com/andreaswittmann/contemplation-machine.git") help-echo "LINK: https://github.com/andreaswittmann/contemplation-machine.git" keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link) fontified t) 83 99 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 99 101 (src-block t face (font-lock-builtin-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 101 138 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 138 147 (face org-block-end-line font-lock-multiline t font-lock-fontified t fontified t) 147 148 (face org-block-end-line fontified t) 148 149 (fontified t) 149 151 (face org-level-3 fontified t) 151 153 (face org-level-3 fontified t) 153 182 (face org-level-3 fontified t) 182 184 (fontified t) 184 200 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 200 201 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 201 203 (src-block t face (font-lock-builtin-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 203 283 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 283 292 (face org-block-end-line font-lock-multiline t font-lock-fontified t fontified t) 292 293 (face org-block-end-line fontified t) 293 374 (fontified t) 374 376 (face org-level-3 fontified t) 376 378 (face org-level-3 fontified t) 378 413 (face org-level-3 fontified t) 413 415 (fontified t) 415 431 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 431 432 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 432 434 (src-block t face (font-lock-builtin-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 434 554 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 554 563 (face org-block-end-line font-lock-multiline t font-lock-fontified t fontified t) 563 564 (face org-block-end-line fontified t) 564 565 (fontified t) 565 567 (face org-level-3 fontified t) 567 569 (face org-level-3 fontified t) 569 590 (face org-level-3 fontified t) 590 592 (fontified t) 592 608 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 608 609 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 609 611 (src-block t face (font-lock-builtin-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 611 739 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 739 770 (src-block t face (org-block) font-lock-fontified t font-lock-multiline t htmlize-link (:uri "http://localhost:3001/api/health") help-echo "LINK: http://localhost:3001/api/health" keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight fontified t) 770 771 (src-block t face (org-block) font-lock-fontified t font-lock-multiline t htmlize-link (:uri "http://localhost:3001/api/health") help-echo "LINK: http://localhost:3001/api/health" keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link) fontified t) 771 772 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 772 781 (face org-block-end-line font-lock-multiline t font-lock-fontified t fontified t) 781 782 (face org-block-end-line fontified t) 782 783 (fontified t) 783 792 (org-emphasis t font-lock-multiline t face (bold) fontified t) 792 816 (fontified t) 816 836 (font-lock-multiline t htmlize-link (:uri "http://localhost:3000") help-echo "LINK: http://localhost:3000" keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight face org-link fontified t) 836 837 (font-lock-multiline t htmlize-link (:uri "http://localhost:3000") help-echo "LINK: http://localhost:3000" keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight face org-link rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link) fontified t) 837 853 (fontified t) 853 873 (font-lock-multiline t htmlize-link (:uri "http://localhost:3001") help-echo "LINK: http://localhost:3001" keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight face org-link fontified t) 873 874 (font-lock-multiline t htmlize-link (:uri "http://localhost:3001") help-echo "LINK: http://localhost:3001" keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight face org-link rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link) fontified t) 874 887 (fontified t) 887 888 (face org-level-2 fontified t) 888 890 (face org-level-2 fontified t) 890 926 (face org-level-2 fontified t) 926 928 (fontified t) 928 930 (face org-level-3 fontified t) 930 932 (face org-level-3 fontified t) 932 958 (face org-level-3 fontified t) 958 991 (fontified t) 991 1007 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 1007 1008 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 1008 1010 (src-block t face (font-lock-builtin-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 1010 1032 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 1032 1216 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 1216 1225 (face org-block-end-line font-lock-multiline t font-lock-fontified t fontified nil) 1225 1226 (face org-block-end-line fontified nil) 1226 3457 (fontified nil)) . 599) (t 26967 52552 863705 134000)) nil (26968 1511 435012 0) 0 nil])
+([nil nil ((1552 . 2628) (#(":
+
+#+BEGIN_src bash
+cd ~/LocalProjects/contemplation-machine/backend/data
+mkdir -p ~/backups/meditation-app-$(date +%Y%m%d)
+cp -r . ~/backups/meditation-app-$(date +%Y%m%d)/
+ls -la ~/backups/meditation-app-$(date +%Y%m%d)/
+#+end_src
+
+*** Step 2: Create Migration Package
+
+#+BEGIN_src bash
+cd ~/LocalProjects/contemplation-machine
+mkdir -p migration-package/{presets,audio-cache}
+cp backend/data/instructions.json migration-package/ 2>/dev/null || true
+cp backend/data/api-keys.json migration-package/ 2>/dev/null || true
+cp backend/data/presets/*.json migration-package/presets/ 2>/dev/null || true
+cp -r backend/data/audio-cache/* migration-package/audio-cache/ 2>/dev/null || true
+tar -czf meditation-app-migration-$(date +%Y%m%d).tar.gz migration-package/
+ls -lh meditation-app-migration-*.tar.gz
+#+end_src
+
+*** Step 3: Transfer to Asamadhi
+
+#+BEGIN_src bash
+# From source server to asamadhi
+scp meditation-app-migration-*.tar.gz asamadhi:~/LocalProjects" 0 3 (fontified t) 3 19 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 19 20 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 20 22 (face (font-lock-builtin-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 22 70 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 70 223 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 223 232 (face org-block-end-line font-lock-multiline t font-lock-fontified t fontified nil) 232 233 (face org-block-end-line fontified nil) 233 234 (fontified nil) 234 236 (fontified nil) 236 238 (fontified nil) 238 267 (fontified nil) 267 270 (fontified nil) 270 271 (fontified nil) 271 957 (fontified nil)) . 1552) (t 26967 52712 629466 217000)) nil (26968 1511 435011 0) 0 nil])
+([nil nil ((#("~/Seafile/org2/" 0 15 (font-lock-fontified t fontified nil)) . 14) 311 (t 26968 902 617009 847000)) nil (26968 1511 435010 0) 0 nil])
+([nil nil ((83 . 84) (#("nil" 0 3 (face org-meta-line font-lock-fontified t fontified t)) . 83) 438 (t 26968 946 647481 697000)) nil (26968 1511 435010 0) 0 nil])
+([nil nil ((83 . 86) (#("t" 0 1 (face org-meta-line font-lock-fontified t fontified t)) . 83) (t 26968 1163 667655 559000)) nil (26968 1511 435009 0) 0 nil])
+([nil nil ((#("n" 0 1 (face org-meta-line font-lock-fontified t fontified t)) . -83) (undo-tree-id0 . -1) (undo-tree-id1 . -1) (undo-tree-id2 . -1) (undo-tree-id3 . -1) (undo-tree-id4 . -1) (undo-tree-id5 . -1) (undo-tree-id6 . -1) (undo-tree-id7 . -1) (undo-tree-id8 . -1) (undo-tree-id9 . -1) (undo-tree-id10 . -1) (undo-tree-id11 . -1) (#("i" 0 1 (face org-meta-line font-lock-fontified t fontified t)) . -84) (undo-tree-id12 . -1) (undo-tree-id13 . -1) (undo-tree-id14 . -1) (undo-tree-id15 . -1) (undo-tree-id16 . -1) (undo-tree-id17 . -1) (undo-tree-id18 . -1) (undo-tree-id19 . -1) (undo-tree-id20 . -1) (#("l" 0 1 (face org-meta-line font-lock-fontified t fontified t)) . -85) (undo-tree-id21 . -1) (undo-tree-id22 . -1) (undo-tree-id23 . -1) (undo-tree-id24 . -1) (undo-tree-id25 . -1) (undo-tree-id26 . -1) (undo-tree-id27 . -1) (undo-tree-id28 . -1) 86 (t 26968 1333 625603 761000)) nil (26968 1511 435008 0) 0 nil])
+([nil nil ((83 . 84)) nil (26968 1511 434980 0) 0 nil])
+([nil nil ((2737 . 2744) (#("
+docker" 0 7 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t)) . 2737) (t 26968 1511 496934 319000)) nil (26968 2854 923537 0) 0 nil])
+([nil nil ((1487 . 2562) (#("Backup Source Data
+
+On your current installation at the source:
+
+#+BEGIN_src bash
+cd ~/LocalProjects/ai-bootcamp/meditation-app/backend/data
+mkdir -p ~/backups/meditation-app-$(date +%Y%m%d)
+cp -r . ~/backups/meditation-app-$(date +%Y%m%d)/
+ls -la ~/backups/meditation-app-$(date +%Y%m%d)/
+#+end_src
+
+*** Step 2: Create Migration Package
+
+#+BEGIN_src bash
+cd ~/LocalProjects/ai-bootcamp/meditation-app
+mkdir -p migration-package/{presets,audio-cache}
+cp backend/data/instructions.json migration-package/ 2>/dev/null || true
+cp backend/data/api-keys.json migration-package/ 2>/dev/null || true
+cp backend/data/presets/*.json migration-package/presets/ 2>/dev/null || true
+cp -r backend/data/audio-cache/* migration-package/audio-cache/ 2>/dev/null || true
+tar -czf meditation-app-migration-$(date +%Y%m%d).tar.gz migration-package/
+ls -lh meditation-app-migration-*.tar.gz
+#+end_src
+
+*** Step 3: Transfer to Asamadhi
+
+#+BEGIN_src bash
+# From source directory to asamadhi's contemplation-machine
+cd ~/LocalProjects/ai-bootcamp/meditation-app
+scp meditation-app-migration-*.tar.gz asamadhi:~/LocalProjects/contemplation-machine/
+#+end_src
+
+*** Step 4: Extract & Migrate on Asamadhi
+
+#+BEGIN_src bash
+ssh asamadhi
+cd ~/LocalProjects/contemplation-machine
+Docker compose down
+tar -xzf ~/meditation-app-migration-*.tar.gz -C .
+#+end_src
+
+*** Step 5: Restore Data Files
+
+#+BEGIN_src bash
+cd ~/LocalProjects/contemplation-machine
+# Backup current data
+cp -r backend/data backend/data.backup
+
+# Restore custom data
+cp migration-package/instructions.json backend/data/ 2>/dev/null || true
+cp migration-package/api-keys.json backend/data/ 2>/dev/null || true
+cp migration-package/presets/*.json backend/data/presets/ 2>/dev/null || true
+cp -r migration-package/audio-cache/* backend/data/audio-cache/ 2>/dev/null || true
+
+ls -la backend/data/
+#+end_src
+
+*** Step 6: Restart & Verify
+
+#+BEGIN_src bash
+cd ~/LocalProjects/contemplation-machine
+docker compose up -d
+docker compose logs backend | tail -10
+curl http://localhost:3001/api/instructions | head -50
+curl http://localhost:3001/api/presets | head -50
+#+end_src
+
+*Result:* Your custom instructions, presets, and audio files are now migrated.
+
+*** Step 7: Cleanup
+
+#+BEGIN_src bash
+cd ~/LocalProjects/contemplation-machine
+rm -rf migration-package
+rm -f meditation-app-migration-*.tar.gz
+echo \"Migration complete and cleaned up\"
+#+end_src" 0 18 (face org-level-3 fontified t) 18 20 (fontified t) 20 48 (fontified t) 48 65 (fontified t) 65 81 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 81 82 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 82 84 (face (font-lock-builtin-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 84 118 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 118 290 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 290 299 (face org-block-end-line font-lock-multiline t font-lock-fontified t fontified t) 299 300 (face org-block-end-line fontified t) 300 301 (fontified t) 301 303 (face org-level-3 fontified t) 303 305 (face org-level-3 fontified t) 305 315 (face org-level-3 fontified t) 315 337 (face org-level-3 fontified t) 337 338 (fontified t) 338 339 (fontified t) 339 355 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 355 356 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 356 358 (face (font-lock-builtin-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 358 359 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 359 519 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 519 523 (face (font-lock-builtin-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 523 547 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 547 588 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 588 592 (face (font-lock-builtin-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 592 666 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 666 670 (face (font-lock-builtin-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 670 750 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 750 754 (face (font-lock-builtin-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 754 872 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 872 881 (face org-block-end-line font-lock-multiline t font-lock-fontified t fontified t) 881 882 (face org-block-end-line fontified t) 882 883 (fontified t) 883 885 (face org-level-3 fontified t) 885 887 (face org-level-3 fontified t) 887 915 (face org-level-3 fontified t) 915 917 (fontified t) 917 933 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 933 934 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 934 936 (face (font-lock-comment-delimiter-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 936 983 (face (font-lock-comment-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 983 994 (face (font-lock-comment-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 994 996 (face (font-lock-builtin-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 996 1124 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 1124 1126 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 1126 1135 (face org-block-end-line font-lock-multiline t font-lock-fontified t fontified t) 1135 1136 (face org-block-end-line fontified t) 1136 1137 (fontified t) 1137 1139 (face org-level-3 fontified t) 1139 1141 (face org-level-3 fontified t) 1141 1178 (face org-level-3 fontified t) 1178 1180 (fontified t) 1180 1196 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 1196 1197 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 1197 1210 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 1210 1212 (face (font-lock-builtin-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 1212 1321 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 1321 1330 (face org-block-end-line font-lock-multiline t font-lock-fontified t fontified t) 1330 1331 (face org-block-end-line fontified t) 1331 1332 (fontified t) 1332 1334 (face org-level-3 fontified t) 1334 1336 (face org-level-3 fontified t) 1336 1362 (face org-level-3 fontified t) 1362 1364 (fontified t) 1364 1380 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 1380 1381 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 1381 1383 (src-block t face (font-lock-builtin-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 1383 1422 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 1422 1424 (src-block t face (font-lock-comment-delimiter-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 1424 1444 (src-block t face (font-lock-comment-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 1444 1484 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 1484 1486 (src-block t face (font-lock-comment-delimiter-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 1486 1506 (src-block t face (font-lock-comment-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 1506 1574 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 1574 1578 (src-block t face (font-lock-builtin-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 1578 1643 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 1643 1647 (src-block t face (font-lock-builtin-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 1647 1721 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 1721 1725 (src-block t face (font-lock-builtin-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 1725 1805 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 1805 1809 (src-block t face (font-lock-builtin-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 1809 1832 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 1832 1841 (face org-block-end-line font-lock-multiline t font-lock-fontified t fontified t) 1841 1842 (face org-block-end-line fontified t) 1842 1843 (fontified t) 1843 1845 (face org-level-3 fontified t) 1845 1847 (face org-level-3 fontified t) 1847 1871 (face org-level-3 fontified t) 1871 1873 (fontified t) 1873 1889 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 1889 1890 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 1890 1892 (src-block t face (font-lock-builtin-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 1892 1996 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 1996 2033 (src-block t face (org-block) font-lock-fontified t font-lock-multiline t htmlize-link (:uri "http://localhost:3001/api/instructions") help-echo "LINK: http://localhost:3001/api/instructions" keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight fontified t) 2033 2034 (src-block t face (org-block) font-lock-fontified t font-lock-multiline t htmlize-link (:uri "http://localhost:3001/api/instructions") help-echo "LINK: http://localhost:3001/api/instructions" keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link) fontified t) 2034 2051 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 2051 2083 (src-block t face (org-block) font-lock-fontified t font-lock-multiline t htmlize-link (:uri "http://localhost:3001/api/presets") help-echo "LINK: http://localhost:3001/api/presets" keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight fontified t) 2083 2084 (src-block t face (org-block) font-lock-fontified t font-lock-multiline t htmlize-link (:uri "http://localhost:3001/api/presets") help-echo "LINK: http://localhost:3001/api/presets" keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link) fontified t) 2084 2096 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 2096 2105 (face org-block-end-line font-lock-multiline t font-lock-fontified t fontified t) 2105 2106 (face org-block-end-line fontified t) 2106 2107 (fontified t) 2107 2116 (org-emphasis t font-lock-multiline t face (bold) fontified t) 2116 2187 (fontified t) 2187 2189 (face org-level-3 fontified t) 2189 2191 (face org-level-3 fontified t) 2191 2206 (face org-level-3 fontified t) 2206 2208 (fontified t) 2208 2224 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 2224 2225 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 2225 2227 (src-block t face (font-lock-builtin-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 2227 2331 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 2331 2335 (src-block t face (font-lock-builtin-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 2335 2336 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 2336 2371 (src-block t face (font-lock-string-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 2371 2372 (src-block t face (org-block) font-lock-multiline t font-lock-fontified t fontified t) 2372 2381 (face org-block-end-line font-lock-multiline t font-lock-fontified t fontified t)) . 1487) (undo-tree-id38 . -1214) (undo-tree-id39 . -1214) (undo-tree-id40 . -20) (undo-tree-id41 . -1250) (undo-tree-id42 . -1250)) nil (26968 2854 923536 0) 0 nil])
+([nil nil ((#("A" 0 1 (face org-level-2 fontified t)) . -368) (undo-tree-id37 . -1) 369 (t 26968 2316 731891 453000)) nil (26968 2854 923534 0) 0 nil])
+([nil nil ((368 . 369)) nil (26968 2854 923533 0) 0 nil])
+([nil nil ((368 . 982) (#("asamadhi
+
+*** Prerequisites
+- Git, Docker, Docker Compose installed
+- SSH access to asamadhi
+- Optional: OpenAI or ElevenLabs API keys
+
+*** Step 1: Clone Repository
+
+#+BEGIN_src bash
+ssh asamadhi
+cd ~/LocalProjects
+git clone https://github.com/andreaswittmann/contemplation-machine.git
+cd contemplation-machine
+git log --oneline -5
+#+end_src
+
+*** Step 2: Configure Environment
+
+#+BEGIN_src bash
+cd ~/LocalProjects/contemplation-machine
+cp backend/sample.env .env
+cat .env
+#+end_src
+
+Edit `.env` with your API keys if needed (leave empty for browser native TTS)." 0 8 (face org-level-2 fontified t) 8 9 (fontified t) 9 10 (fontified t) 10 12 (face org-level-3 fontified t) 12 14 (face org-level-3 fontified t) 14 27 (face org-level-3 fontified t) 27 28 (fontified t) 28 135 (fontified t) 135 136 (fontified t) 136 138 (face org-level-3 fontified t) 138 140 (face org-level-3 fontified t) 140 164 (face org-level-3 fontified t) 164 165 (fontified t) 165 166 (fontified t) 166 182 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 182 183 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 183 196 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 196 198 (face (font-lock-builtin-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 198 214 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 214 225 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 225 284 (face (org-block) font-lock-multiline t keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight src-block t font-lock-fontified t htmlize-link (:uri "https://github.com/andreaswittmann/contemplation-machine.git") help-echo "LINK: https://github.com/andreaswittmann/contemplation-machine.git" fontified t) 284 285 (face (org-block) font-lock-multiline t keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight src-block t font-lock-fontified t htmlize-link (:uri "https://github.com/andreaswittmann/contemplation-machine.git") help-echo "LINK: https://github.com/andreaswittmann/contemplation-machine.git" rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link) fontified t) 285 286 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 286 288 (face (font-lock-builtin-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 288 332 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 332 341 (face org-block-end-line font-lock-multiline t font-lock-fontified t fontified t) 341 342 (face org-block-end-line fontified t) 342 343 (fontified t) 343 345 (face org-level-3 fontified t) 345 347 (face org-level-3 fontified t) 347 376 (face org-level-3 fontified t) 376 377 (fontified t) 377 378 (fontified t) 378 394 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 394 395 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 395 397 (face (font-lock-builtin-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 397 472 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 472 481 (face org-block-end-line font-lock-multiline t font-lock-fontified t fontified t) 481 482 (face org-block-end-line fontified t) 482 561 (fontified t)) . 368) (undo-tree-id23 . -463) (undo-tree-id24 . -263) (undo-tree-id25 . -263) (undo-tree-id26 . -195) (undo-tree-id27 . -183) (undo-tree-id28 . -196) (undo-tree-id29 . -215) (undo-tree-id30 . -286) (undo-tree-id31 . -311) (undo-tree-id32 . -395) (undo-tree-id33 . -436) (undo-tree-id34 . -394) (undo-tree-id35 . -371) (undo-tree-id36 . -371)) nil (26968 2874 9312 0) 0 nil])
+([nil nil ((nil rear-nonsticky nil 1318 . 1319) (nil fontified nil 1287 . 1319) (1287 . 1319) (t 26968 2700 73095 262000)) nil (26968 4537 281402 0) 0 nil] [nil nil ((nil rear-nonsticky nil 3515 . 3516) (nil font-lock-face (:foreground "#333333" :background "#FFFFFF" :extend t) 3475 . 3516) (nil fontified nil 3475 . 3516) (nil font-lock-face (:foreground "#333333" :background "#FFFFFF" :extend t) 2390 . 3475) (nil fontified nil 2390 . 3475) (nil font-lock-face (:foreground "#333333" :background "#FFFFFF" :extend t) 2349 . 2390) (nil fontified nil 2349 . 2390) (nil font-lock-face (:foreground "#333333" :background "#FFFFFF" :extend t) 1287 . 2349) (nil fontified nil 1287 . 2349) (1287 . 3516) (t 26968 2700 73095 262000)) ((#("asamadhi@Samadhi contemplation-machine % cd ~/LocalProjects/contemplation-machine
+asamadhi@Samadhi contemplation-machine % cp backend/sample.env .env
+cp: backend/sample.env: No such file or directory
+asamadhi@Samadhi contemplation-machine % cat .env
+cat: .env: No such file or directory
+asamadhi@Samadhi contemplation-machine % ls
+CODE_OF_CONDUCT.md                      RELEASE-1.9.2.md
+Deployment.md                           Readme.md
+Dockerfile                              VERSION.md
+LICENSE                                 agent-instructions.org
+README.docker.md                        assets
+RELEASE-1.1.0.md                        backend
+RELEASE-1.1.1.md                        contemplation-machine-quickstart.html
+RELEASE-1.2.0.md                        contemplation-machine-quickstart.org
+RELEASE-1.3.0.md                        deployment-architecture.drawio
+RELEASE-1.4.0.md                        dev.sh
+RELEASE-1.5.0.md                        docker-compose.yml
+RELEASE-1.6.0.md                        frontend
+RELEASE-1.7.0.md                        meditation-app-architecture.drawio
+RELEASE-1.8.0.md                        meditation.md
+RELEASE-1.9.0.md                        migrate-env.js
+RELEASE-1.9.1.md
+asamadhi@Samadhi contemplation-machine % ls  backend 
+API_KEY_INSTRUCTIONS.md defaults                server.js
+Dockerfile              package-lock.json       temp.js
+data                    package.json            utils
+asamadhi@Samadhi contemplation-machine % ls -la backend 
+total 264
+drwxr-xr-x  11 asamadhi  staff    352  2 Jan 19:08 .
+drwxr-xr-x  36 asamadhi  staff   1152  2 Jan 19:08 ..
+-rw-r--r--   1 asamadhi  staff   2007  2 Jan 19:08 API_KEY_INSTRUCTIONS.md
+-rw-r--r--   1 asamadhi  staff    382  2 Jan 19:08 Dockerfile
+drwxr-xr-x   4 asamadhi  staff    128  2 Jan 19:08 data
+drwxr-xr-x   5 asamadhi  staff    160  2 Jan 19:08 defaults
+-rw-r--r--   1 asamadhi  staff  46931  2 Jan 19:08 package-lock.json
+-rw-r--r--   1 asamadhi  staff    651  2 Jan 19:08 package.json
+-rw-r--r--   1 asamadhi  staff  66601  2 Jan 19:08 server.js
+-rw-r--r--   1 asamadhi  staff     79  2 Jan 19:08 temp.js
+drwxr-xr-x   3 asamadhi  staff     96  2 Jan 19:08 utils
+asamadhi@Samadhi contemplation-machine % " 0 1062 (font-lock-face (:foreground "#333333" :background "#FFFFFF" :extend t) face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified nil) 1062 1103 (font-lock-face (:foreground "#333333" :background "#FFFFFF" :extend t) face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified nil) 1103 1410 (font-lock-face (:foreground "#333333" :background "#FFFFFF" :extend t) face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified nil) 1410 2188 (font-lock-face (:foreground "#333333" :background "#FFFFFF" :extend t) face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified nil) 2188 2228 (font-lock-face (:foreground "#333333" :background "#FFFFFF" :extend t) face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified nil) 2228 2229 (font-lock-face (:foreground "#333333" :background "#FFFFFF" :extend t) face (org-block) font-lock-multiline t src-block t font-lock-fontified t rear-nonsticky nil fontified nil)) . 1287) (undo-tree-id44 . -873) (undo-tree-id45 . -2229) (nil font-lock-face nil 1287 . 2349) (nil font-lock-face nil 2349 . 2390) (nil font-lock-face nil 2697 . 3475) (nil font-lock-face nil 2390 . 2697) (nil font-lock-face nil 3515 . 3516) (nil font-lock-face nil 3475 . 3515) (nil rear-nonsticky t 3515 . 3516)) (26968 2874 8700 0) 0 nil] [nil nil ((#("
+" 0 1 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t)) . -1254) (undo-tree-id0 . -1) (undo-tree-id1 . -1) (undo-tree-id2 . -1) (undo-tree-id3 . -1) (undo-tree-id4 . -1) (undo-tree-id5 . -1) (undo-tree-id6 . -1) (undo-tree-id7 . -1) (undo-tree-id8 . -1) (undo-tree-id9 . -1) (undo-tree-id10 . -1) (undo-tree-id11 . -1) (undo-tree-id12 . -1) (undo-tree-id13 . -1) (undo-tree-id14 . -1) (undo-tree-id15 . -1) (undo-tree-id16 . -1) (undo-tree-id17 . -1) (undo-tree-id18 . -1) (undo-tree-id19 . -1) (undo-tree-id20 . -1) (undo-tree-id21 . -1) (undo-tree-id22 . -1) 1255 (t 26968 2700 73095 262000)) ((1254 . 1255)) (26968 2854 923711 0) 0 nil])
+([nil nil ((1255 . 1256)) nil (26968 4537 281402 0) 0 nil])
+nil
+([nil nil ((1254 . 1255)) ((#("¥" 0 1 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t)) . 1254) (undo-tree-id43 . -1)) (26968 2854 923500 0) 0 nil])
+([nil nil ((#("e" 0 1 (face (org-block) font-lock-multiline t fontified t src-block t font-lock-fontified t)) . -1318) (undo-tree-id67 . -1) 1319) nil (26968 4537 281401 0) 0 nil])
+nil
+([nil nil ((#("cach" 0 4 (face (org-block) font-lock-multiline t fontified t src-block t font-lock-fontified t)) . -1314) (undo-tree-id66 . -4) 1318) nil (26968 4537 281401 0) 0 nil])
+([nil nil ((#("no-" 0 3 (face (org-block) font-lock-multiline t fontified t src-block t font-lock-fontified t)) . -1311) (undo-tree-id65 . -3) 1314) nil (26968 4537 281400 0) 0 nil])
+([nil nil ((#("-" 0 1 (face (org-block) font-lock-multiline t fontified t src-block t font-lock-fontified t)) . -1310) (undo-tree-id64 . -1) 1311) nil (26968 4537 281399 0) 0 nil])
+([nil nil ((#(" " 0 1 (face (org-block) font-lock-multiline t fontified t src-block t font-lock-fontified t)) . -1308) (undo-tree-id62 . -1) (#("-" 0 1 (face (org-block) font-lock-multiline t fontified t src-block t font-lock-fontified t)) . -1309) (undo-tree-id63 . -1) 1310) nil (26968 4537 281399 0) 0 nil])
+([nil nil ((3357 . 3358)) nil (26968 4537 281397 0) 0 nil])
+([nil nil ((#("docker compose build --no-cache
+" 0 32 (face (font-lock-comment-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified nil)) . 3357) (#("#" 0 1 (face (font-lock-comment-delimiter-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t)) . -3357) (undo-tree-id61 . -1) 3358) nil (26968 4537 281397 0) 0 nil])
+([nil nil ((nil rear-nonsticky nil 3389 . 3390) (nil fontified nil 3358 . 3390) (nil fontified nil 3357 . 3358) (3357 . 3390)) nil (26968 4537 281394 0) 0 nil])
+([nil nil ((nil rear-nonsticky nil 3422 . 3423) (nil fontified nil 3391 . 3423) (nil fontified nil 3390 . 3391) (3390 . 3423)) nil (26968 4537 281393 0) 0 nil])
+([nil nil ((#("#" 0 1 (face (font-lock-comment-delimiter-face org-block) font-lock-multiline t fontified t src-block t font-lock-fontified t)) . -3390) (undo-tree-id60 . -1) 3391) nil (26968 4537 281392 0) 0 nil])
+([nil nil ((#("c" 0 1 (face (org-block) font-lock-multiline t fontified t font-lock-fontified t src-block t)) . -3416) (undo-tree-id55 . -1) (#("a" 0 1 (face (org-block) font-lock-multiline t fontified t font-lock-fontified t src-block t)) . -3417) (undo-tree-id56 . -1) (#("c" 0 1 (face (org-block) font-lock-multiline t fontified t font-lock-fontified t src-block t)) . -3418) (undo-tree-id57 . -1) (#("h" 0 1 (face (org-block) font-lock-multiline t fontified t font-lock-fontified t src-block t)) . -3419) (undo-tree-id58 . -1) (#("e" 0 1 (face (org-block) font-lock-multiline t fontified t font-lock-fontified t src-block t)) . -3420) (undo-tree-id59 . -1) 3421) nil (26968 4537 281390 0) 0 nil])
+([nil nil ((#("no-" 0 3 (face (org-block) font-lock-multiline t fontified t font-lock-fontified t src-block t)) . -3413) (undo-tree-id54 . -3) 3416) nil (26968 4537 281388 0) 0 nil])
+([nil nil ((#("-" 0 1 (face (org-block) font-lock-multiline t fontified t font-lock-fontified t src-block t)) . -3411) (undo-tree-id52 . -1) (#("-" 0 1 (face (org-block) font-lock-multiline t fontified t font-lock-fontified t src-block t)) . -3412) (undo-tree-id53 . -1) 3413) nil (26968 4537 281387 0) 0 nil])
+([nil nil ((#("#" 0 1 (face (font-lock-comment-delimiter-face org-block) font-lock-multiline t fontified t src-block t font-lock-fontified t)) . -3357) (undo-tree-id51 . -1) 3358) nil (26968 4537 281386 0) 0 nil])
+([nil nil ((3389 . 3390)) nil (26968 4537 281385 0) 0 nil])
+([nil nil ((#("#" 0 1 (src-block t face (font-lock-comment-delimiter-face org-block) font-lock-multiline t font-lock-fontified t fontified t)) . -3389) (undo-tree-id46 . -1) (undo-tree-id47 . -1) (undo-tree-id48 . -1) (undo-tree-id49 . -1) (undo-tree-id50 . -1) 3390) nil (26968 4537 281384 0) 0 nil])
+([nil nil ((3357 . 3358)) nil (26968 4537 281369 0) 0 nil])
+([nil nil ((3050 . 3051) (t 26968 4537 295628 832000)) nil (26968 5284 805747 0) 0 nil])
+([nil nil ((3051 . 3056)) nil (26968 5284 805747 0) 0 nil])
+([nil nil ((3056 . 3060)) nil (26968 5284 805747 0) 0 nil])
+([nil nil ((#("i" 0 1 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t)) . -3056) (undo-tree-id39 . -1) (undo-tree-id40 . -1) (#("d" 0 1 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t)) . -3057) (undo-tree-id41 . -1) (undo-tree-id42 . -1) (#("e" 0 1 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t)) . -3058) (undo-tree-id43 . -1) (undo-tree-id44 . -1) (#("o" 0 1 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t)) . -3059) (undo-tree-id45 . -1) (undo-tree-id46 . -1) 3060) nil (26968 5284 805746 0) 0 nil])
+([nil nil ((3056 . 3057)) nil (26968 5284 805738 0) 0 nil])
+([nil nil ((3057 . 3057) (3057 . 3058)) nil (26968 5284 805737 0) 0 nil])
+([nil nil ((#("V" 0 1 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t)) . -3055) (undo-tree-id29 . -1) (undo-tree-id30 . -1) (undo-tree-id31 . -1) (undo-tree-id32 . -1) (#("E" 0 1 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t)) . -3056) (undo-tree-id33 . -1) (undo-tree-id34 . -1) (undo-tree-id35 . -1) (#("R" 0 1 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t)) . -3057) (undo-tree-id36 . -1) (undo-tree-id37 . -1) (undo-tree-id38 . -1) 3058) nil (26968 5284 805736 0) 0 nil])
+([nil nil ((3055 . 3056)) nil (26968 5284 805730 0) 0 nil])
+([nil nil ((3056 . 3062)) nil (26968 5284 805730 0) 0 nil])
+([nil nil ((3062 . 3065)) nil (26968 5284 805730 0) 0 nil])
+([nil nil ((#("#" 0 1 (face (font-lock-comment-delimiter-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t)) . -3372) (undo-tree-id28 . -1) 3373) nil (26968 5284 805729 0) 0 nil])
+([nil nil ((3404 . 3405)) nil (26968 5284 805729 0) 0 nil])
+([nil nil ((2674 . 3435) (#("Step 1: Connect to Remote Server
+
+Connect to the remote machine and navigate to the project directory:
+
+#+BEGIN_src bash
+ssh asamadhi
+
+cd ~/LocalProjects/contemplation-machine
+
+whoami
+pwd
+
+#+end_src
+
+*** Step 2: Update Code from Repository
+
+Pull the latest code changes:
+
+#+BEGIN_src bash
+cd ~/LocalProjects/contemplation-machine
+
+git pull
+git fetch --tags
+git describe --tags
+cat VERSION.md
+
+#+end_src
+
+*** Step 3: Stop Running Containers
+
+Stop all running containers:
+
+#+BEGIN_src bash
+cd ~/LocalProjects/contemplation-machine
+
+docker compose down
+
+#+end_src
+
+*** Step 4: Rebuild Docker Images
+
+Rebuild the backend and frontend images:
+
+#+BEGIN_src bash
+cd ~/LocalProjects/contemplation-machine
+
+docker compose build --no-cache
+#docker compose build 
+
+#+end_src
+
+*** Step 5: Start Containers
+
+Start all services in background:
+
+#+BEGIN_src bash
+cd ~/LocalProjects/contemplation-machine
+
+docker compose up -d
+
+docker compose ps
+
+#+end_src
+
+*** Step 6: Verify Services
+
+Confirm that the application is running:
+
+#+BEGIN_src bash
+cd ~/LocalProjects/contemplation-machine
+
+docker compose logs backend | tail -10
+
+docker compose logs frontend | tail -10
+
+echo \"Meditation app has been updated and is running\"
+echo \"Frontend: http://localhost:3000\"
+echo \"Backend: http://localhost:3001\"
+" 0 32 (face org-level-3 fontified t) 32 33 (fontified t) 33 104 (fontified t) 104 120 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 120 121 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 121 135 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 135 137 (face (font-lock-builtin-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 137 175 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 175 184 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 184 187 (face (font-lock-builtin-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 187 189 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 189 198 (face org-block-end-line font-lock-multiline t font-lock-fontified t fontified t) 198 199 (face org-block-end-line fontified t) 199 200 (fontified t) 200 202 (face org-level-3 fontified t) 202 204 (face org-level-3 fontified t) 204 239 (face org-level-3 fontified t) 239 240 (fontified t) 240 272 (fontified t) 272 288 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 288 289 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 289 291 (face (font-lock-builtin-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 291 308 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 308 382 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 382 391 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 391 393 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 393 402 (face org-block-end-line font-lock-multiline t font-lock-fontified t fontified t) 402 403 (face org-block-end-line fontified t) 403 404 (fontified t) 404 406 (face org-level-3 fontified t) 406 408 (face org-level-3 fontified t) 408 439 (face org-level-3 fontified t) 439 440 (fontified t) 440 471 (fontified t) 471 487 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 487 488 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 488 490 (face (font-lock-builtin-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 490 551 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 551 560 (face org-block-end-line font-lock-multiline t font-lock-fontified t fontified t) 560 561 (face org-block-end-line fontified t) 561 562 (fontified t) 562 564 (face org-level-3 fontified t) 564 566 (face org-level-3 fontified t) 566 595 (face org-level-3 fontified t) 595 596 (fontified t) 596 639 (fontified t) 639 655 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 655 656 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 656 658 (face (font-lock-builtin-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 658 698 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 698 729 (face (org-block) font-lock-multiline t fontified t font-lock-fontified t src-block t) 729 730 (face (org-block) font-lock-multiline t rear-nonsticky t fontified t font-lock-fontified t src-block t) 730 731 (src-block t face (font-lock-comment-delimiter-face org-block) font-lock-multiline t font-lock-fontified t fontified t) 731 752 (face (font-lock-comment-face org-block) font-lock-multiline t fontified t font-lock-fontified t src-block t) 752 753 (face (font-lock-comment-face org-block) font-lock-multiline t rear-nonsticky t fontified t font-lock-fontified t src-block t) 753 754 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 754 763 (face org-block-end-line font-lock-multiline t font-lock-fontified t fontified t) 763 764 (face org-block-end-line fontified t) 764 765 (fontified t) 765 767 (face org-level-3 fontified t) 767 769 (face org-level-3 fontified t) 769 793 (face org-level-3 fontified t) 793 794 (fontified t) 794 830 (fontified t) 830 846 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 846 847 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 847 849 (face (font-lock-builtin-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 849 930 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 930 939 (face org-block-end-line font-lock-multiline t font-lock-fontified t fontified t) 939 940 (face org-block-end-line fontified t) 940 941 (fontified t) 941 943 (face org-level-3 fontified t) 943 945 (face org-level-3 fontified t) 945 968 (face org-level-3 fontified t) 968 969 (fontified t) 969 1012 (fontified t) 1012 1028 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 1028 1029 (face org-block-begin-line font-lock-multiline t font-lock-fontified t fontified t) 1029 1031 (face (font-lock-builtin-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 1031 1069 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 1069 1087 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 1087 1152 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 1152 1156 (face (font-lock-builtin-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 1156 1157 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 1157 1205 (face (font-lock-string-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 1205 1206 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 1206 1210 (face (font-lock-builtin-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 1210 1211 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 1211 1222 (face (font-lock-string-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 1222 1242 (face (font-lock-string-face org-block) font-lock-multiline t keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight htmlize-link (:uri "http://localhost:3000") help-echo "LINK: http://localhost:3000" src-block t font-lock-fontified t fontified t) 1242 1243 (face (font-lock-string-face org-block) font-lock-multiline t keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight htmlize-link (:uri "http://localhost:3000") help-echo "LINK: http://localhost:3000" rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link) src-block t font-lock-fontified t fontified t) 1243 1244 (face (font-lock-string-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 1244 1245 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 1245 1249 (face (font-lock-builtin-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 1249 1250 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 1250 1260 (face (font-lock-string-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 1260 1280 (face (font-lock-string-face org-block) font-lock-multiline t keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight htmlize-link (:uri "http://localhost:3001") help-echo "LINK: http://localhost:3001" src-block t font-lock-fontified t fontified t) 1280 1281 (face (font-lock-string-face org-block) font-lock-multiline t keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight htmlize-link (:uri "http://localhost:3001") help-echo "LINK: http://localhost:3001" rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link) src-block t font-lock-fontified t fontified t) 1281 1282 (face (font-lock-string-face org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t) 1282 1283 (face (org-block) font-lock-multiline t src-block t font-lock-fontified t fontified t)) . 2674) (undo-tree-id4 . -698) (undo-tree-id5 . -697) (undo-tree-id6 . -698) (undo-tree-id7 . -889) (undo-tree-id8 . -289) (undo-tree-id9 . -330) (undo-tree-id10 . -331) (undo-tree-id11 . -340) (undo-tree-id12 . -357) (undo-tree-id13 . -530) (undo-tree-id14 . -135) (undo-tree-id15 . -381) (undo-tree-id16 . -381) (undo-tree-id17 . -381) (undo-tree-id18 . -889) (undo-tree-id19 . -377) (undo-tree-id20 . -488) (undo-tree-id21 . -529) (undo-tree-id22 . -530) (undo-tree-id23 . -730) (undo-tree-id24 . -889) (undo-tree-id25 . -289) (undo-tree-id26 . -730) (undo-tree-id27 . -730)) nil (26968 5284 805728 0) 0 nil])
+([nil nil ((#("3" 0 1 (face (font-lock-string-face org-block) font-lock-multiline t keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link) src-block t font-lock-fontified t htmlize-link (:uri "http://localhost:3") help-echo "LINK: http://localhost:3" fontified t)) . -3392) (undo-tree-id0 . -1) (#("0" 0 1 (face (font-lock-string-face org-block) font-lock-multiline t keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link) src-block t font-lock-fontified t htmlize-link (:uri "http://localhost:30") help-echo "LINK: http://localhost:30" fontified t)) . -3393) (undo-tree-id1 . -1) (#("0" 0 1 (face (font-lock-string-face org-block) font-lock-multiline t keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link) src-block t font-lock-fontified t htmlize-link (:uri "http://localhost:300") help-echo "LINK: http://localhost:300" fontified t)) . -3394) (undo-tree-id2 . -1) (#("0" 0 1 (src-block t face (font-lock-string-face org-block) font-lock-fontified t font-lock-multiline t htmlize-link (:uri "http://localhost:3000") help-echo "LINK: http://localhost:3000" keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link) fontified t)) . -3395) (undo-tree-id3 . -1) 3396 (t 26968 5247 950255 322000)) nil (26968 5284 805717 0) 0 nil])
+([nil current ((3392 . 3396)) nil (26968 5284 805684 0) 0 nil])
+nil

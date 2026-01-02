@@ -1,0 +1,530 @@
+[nodemon] starting `node server.js`
+[2026-01-02T12:22:13.100Z] Starting Contemplation Machine server
+Default audio cache directory: /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/backend/defaults/audio-cache
+Default audio cache exists: true
+Default audio cache files: 38
+Target audio cache directory: /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/backend/data/audio-cache
+Target audio cache exists: true
+Target audio cache files: 38
+Starting smart copy of audio cache (preserving existing files)...
+Audio cache initialization complete. Copied 0 new files while preserving existing ones.
+[2026-01-02T12:22:13.104Z] Initializing default configurations...
+[2026-01-02T12:22:13.105Z] Loaded 4 default instructions
+[2026-01-02T12:22:13.105Z] Loaded 4 user instructions
+[2026-01-02T12:22:13.105Z] Saved 4 merged instructions
+[2026-01-02T12:22:13.105Z] Looking for default presets in directory: /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/backend/defaults/presets
+[2026-01-02T12:22:13.105Z] Found 4 preset files in defaults/presets directory
+[2026-01-02T12:22:13.105Z] Loaded default preset from file: default-preset-achtsamkeit.json
+[2026-01-02T12:22:13.106Z] Loaded default preset from file: default-preset-metta-sutta.json
+[2026-01-02T12:22:13.106Z] Loaded default preset from file: default-preset-mindfulness.json
+[2026-01-02T12:22:13.106Z] Loaded default preset from file: default-preset-woop.json
+[2026-01-02T12:22:13.106Z] Loaded 4 default presets
+Loaded cache analytics data with 37 entries
+Running in development: Serving frontend from /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/frontend/build
+Frontend build directory found at /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/frontend/build
+Found 11 files in build directory: .DS_Store, asset-manifest.json, assets, favicon.ico, index.html, logo192.png, logo512.png, manifest.json, robots.txt, sounds...
+Server running in unified container mode at http://0.0.0.0:3001
+For local access: http://localhost:3001
+API available at: http://localhost:3001/api
+Frontend available at: http://localhost:3001
+For network access: http://192.168.178.169:3001
+For network access: http://100.70.158.67:3001
+For network access: http://192.168.64.1:3001
+[nodemon] restarting due to changes...
+[nodemon] starting `node server.js`
+[2026-01-02T12:22:13.218Z] Starting Contemplation Machine server
+Default audio cache directory: /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/backend/defaults/audio-cache
+Default audio cache exists: true
+Default audio cache files: 38
+Target audio cache directory: /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/backend/data/audio-cache
+Target audio cache exists: true
+Target audio cache files: 38
+Starting smart copy of audio cache (preserving existing files)...
+Audio cache initialization complete. Copied 0 new files while preserving existing ones.
+[2026-01-02T12:22:13.223Z] Initializing default configurations...
+[2026-01-02T12:22:13.224Z] Loaded 4 default instructions
+[2026-01-02T12:22:13.224Z] Loaded 4 user instructions
+[2026-01-02T12:22:13.224Z] Saved 4 merged instructions
+[2026-01-02T12:22:13.224Z] Looking for default presets in directory: /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/backend/defaults/presets
+[2026-01-02T12:22:13.224Z] Found 4 preset files in defaults/presets directory
+[2026-01-02T12:22:13.225Z] Loaded default preset from file: default-preset-achtsamkeit.json
+[2026-01-02T12:22:13.225Z] Loaded default preset from file: default-preset-metta-sutta.json
+[2026-01-02T12:22:13.225Z] Loaded default preset from file: default-preset-mindfulness.json
+[2026-01-02T12:22:13.225Z] Loaded default preset from file: default-preset-woop.json
+[2026-01-02T12:22:13.225Z] Loaded 4 default presets
+Loaded cache analytics data with 37 entries
+[nodemon] restarting due to changes...
+Running in development: Serving frontend from /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/frontend/build
+Frontend build directory found at /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/frontend/build
+Found 11 files in build directory: .DS_Store, asset-manifest.json, assets, favicon.ico, index.html, logo192.png, logo512.png, manifest.json, robots.txt, sounds...
+Server running in unified container mode at http://0.0.0.0:3001
+For local access: http://localhost:3001
+API available at: http://localhost:3001/api
+Frontend available at: http://localhost:3001
+For network access: http://192.168.178.169:3001
+For network access: http://100.70.158.67:3001
+For network access: http://192.168.64.1:3001
+[nodemon] starting `node server.js`
+[2026-01-02T12:22:13.324Z] Starting Contemplation Machine server
+Default audio cache directory: /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/backend/defaults/audio-cache
+Default audio cache exists: true
+Default audio cache files: 38
+Target audio cache directory: /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/backend/data/audio-cache
+Target audio cache exists: true
+Target audio cache files: 38
+Starting smart copy of audio cache (preserving existing files)...
+Audio cache initialization complete. Copied 0 new files while preserving existing ones.
+[2026-01-02T12:22:13.328Z] Initializing default configurations...
+[2026-01-02T12:22:13.328Z] Loaded 4 default instructions
+[2026-01-02T12:22:13.328Z] Loaded 4 user instructions
+[2026-01-02T12:22:13.329Z] Saved 4 merged instructions
+[2026-01-02T12:22:13.329Z] Looking for default presets in directory: /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/backend/defaults/presets
+[2026-01-02T12:22:13.329Z] Found 4 preset files in defaults/presets directory
+[2026-01-02T12:22:13.329Z] Loaded default preset from file: default-preset-achtsamkeit.json
+[2026-01-02T12:22:13.329Z] Loaded default preset from file: default-preset-metta-sutta.json
+[2026-01-02T12:22:13.329Z] Loaded default preset from file: default-preset-mindfulness.json
+[2026-01-02T12:22:13.329Z] Loaded default preset from file: default-preset-woop.json
+[2026-01-02T12:22:13.329Z] Loaded 4 default presets
+Loaded cache analytics data with 37 entries
+Running in development: Serving frontend from /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/frontend/build
+Frontend build directory found at /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/frontend/build
+Found 11 files in build directory: .DS_Store, asset-manifest.json, assets, favicon.ico, index.html, logo192.png, logo512.png, manifest.json, robots.txt, sounds...
+Server running in unified container mode at http://0.0.0.0:3001
+For local access: http://localhost:3001
+API available at: http://localhost:3001/api
+Frontend available at: http://localhost:3001
+For network access: http://192.168.178.169:3001
+For network access: http://100.70.158.67:3001
+For network access: http://192.168.64.1:3001
+[nodemon] restarting due to changes...
+[nodemon] starting `node server.js`
+[2026-01-02T12:22:13.449Z] Starting Contemplation Machine server
+Default audio cache directory: /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/backend/defaults/audio-cache
+Default audio cache exists: true
+Default audio cache files: 38
+Target audio cache directory: /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/backend/data/audio-cache
+Target audio cache exists: true
+Target audio cache files: 38
+Starting smart copy of audio cache (preserving existing files)...
+Audio cache initialization complete. Copied 0 new files while preserving existing ones.
+[2026-01-02T12:22:13.453Z] Initializing default configurations...
+[2026-01-02T12:22:13.454Z] Loaded 4 default instructions
+[2026-01-02T12:22:13.454Z] Loaded 4 user instructions
+[2026-01-02T12:22:13.454Z] Saved 4 merged instructions
+[2026-01-02T12:22:13.455Z] Looking for default presets in directory: /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/backend/defaults/presets
+[2026-01-02T12:22:13.455Z] Found 4 preset files in defaults/presets directory
+[2026-01-02T12:22:13.455Z] Loaded default preset from file: default-preset-achtsamkeit.json
+[2026-01-02T12:22:13.455Z] Loaded default preset from file: default-preset-metta-sutta.json
+[2026-01-02T12:22:13.455Z] Loaded default preset from file: default-preset-mindfulness.json
+[2026-01-02T12:22:13.455Z] Loaded default preset from file: default-preset-woop.json
+[2026-01-02T12:22:13.455Z] Loaded 4 default presets
+Loaded cache analytics data with 37 entries
+Running in development: Serving frontend from /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/frontend/build
+Frontend build directory found at /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/frontend/build
+Found 11 files in build directory: .DS_Store, asset-manifest.json, assets, favicon.ico, index.html, logo192.png, logo512.png, manifest.json, robots.txt, sounds...
+Server running in unified container mode at http://0.0.0.0:3001
+For local access: http://localhost:3001
+API available at: http://localhost:3001/api
+Frontend available at: http://localhost:3001
+For network access: http://192.168.178.169:3001
+For network access: http://100.70.158.67:3001
+For network access: http://192.168.64.1:3001
+[nodemon] restarting due to changes...
+[nodemon] starting `node server.js`
+[2026-01-02T12:22:13.559Z] Starting Contemplation Machine server
+Default audio cache directory: /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/backend/defaults/audio-cache
+Default audio cache exists: true
+Default audio cache files: 38
+Target audio cache directory: /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/backend/data/audio-cache
+Target audio cache exists: true
+Target audio cache files: 38
+Starting smart copy of audio cache (preserving existing files)...
+Audio cache initialization complete. Copied 0 new files while preserving existing ones.
+[2026-01-02T12:22:13.564Z] Initializing default configurations...
+[2026-01-02T12:22:13.564Z] Loaded 4 default instructions
+[2026-01-02T12:22:13.564Z] Loaded 4 user instructions
+[2026-01-02T12:22:13.565Z] Saved 4 merged instructions
+[2026-01-02T12:22:13.565Z] Looking for default presets in directory: /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/backend/defaults/presets
+[2026-01-02T12:22:13.565Z] Found 4 preset files in defaults/presets directory
+[2026-01-02T12:22:13.565Z] Loaded default preset from file: default-preset-achtsamkeit.json
+[2026-01-02T12:22:13.565Z] Loaded default preset from file: default-preset-metta-sutta.json
+[2026-01-02T12:22:13.565Z] Loaded default preset from file: default-preset-mindfulness.json
+[2026-01-02T12:22:13.565Z] Loaded default preset from file: default-preset-woop.json
+[2026-01-02T12:22:13.565Z] Loaded 4 default presets
+Loaded cache analytics data with 37 entries
+Running in development: Serving frontend from /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/frontend/build
+Frontend build directory found at /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/frontend/build
+Found 11 files in build directory: .DS_Store, asset-manifest.json, assets, favicon.ico, index.html, logo192.png, logo512.png, manifest.json, robots.txt, sounds...
+Server running in unified container mode at http://0.0.0.0:3001
+For local access: http://localhost:3001
+API available at: http://localhost:3001/api
+Frontend available at: http://localhost:3001
+For network access: http://192.168.178.169:3001
+For network access: http://100.70.158.67:3001
+For network access: http://192.168.64.1:3001
+[nodemon] restarting due to changes...
+[nodemon] starting `node server.js`
+[2026-01-02T12:22:13.671Z] Starting Contemplation Machine server
+Default audio cache directory: /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/backend/defaults/audio-cache
+Default audio cache exists: true
+Default audio cache files: 38
+Target audio cache directory: /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/backend/data/audio-cache
+Target audio cache exists: true
+Target audio cache files: 38
+Starting smart copy of audio cache (preserving existing files)...
+Audio cache initialization complete. Copied 0 new files while preserving existing ones.
+[2026-01-02T12:22:13.675Z] Initializing default configurations...
+[2026-01-02T12:22:13.676Z] Loaded 4 default instructions
+[2026-01-02T12:22:13.676Z] Loaded 4 user instructions
+[2026-01-02T12:22:13.676Z] Saved 4 merged instructions
+[2026-01-02T12:22:13.676Z] Looking for default presets in directory: /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/backend/defaults/presets
+[2026-01-02T12:22:13.676Z] Found 4 preset files in defaults/presets directory
+[2026-01-02T12:22:13.676Z] Loaded default preset from file: default-preset-achtsamkeit.json
+[2026-01-02T12:22:13.676Z] Loaded default preset from file: default-preset-metta-sutta.json
+[2026-01-02T12:22:13.676Z] Loaded default preset from file: default-preset-mindfulness.json
+[2026-01-02T12:22:13.676Z] Loaded default preset from file: default-preset-woop.json
+[2026-01-02T12:22:13.677Z] Loaded 4 default presets
+Loaded cache analytics data with 37 entries
+Running in development: Serving frontend from /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/frontend/build
+Frontend build directory found at /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/frontend/build
+Found 11 files in build directory: .DS_Store, asset-manifest.json, assets, favicon.ico, index.html, logo192.png, logo512.png, manifest.json, robots.txt, sounds...
+Server running in unified container mode at http://0.0.0.0:3001
+For local access: http://localhost:3001
+API available at: http://localhost:3001/api
+Frontend available at: http://localhost:3001
+For network access: http://192.168.178.169:3001
+For network access: http://100.70.158.67:3001
+For network access: http://192.168.64.1:3001
+[nodemon] restarting due to changes...
+[nodemon] starting `node server.js`
+[2026-01-02T12:22:13.794Z] Starting Contemplation Machine server
+Default audio cache directory: /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/backend/defaults/audio-cache
+Default audio cache exists: true
+Default audio cache files: 38
+Target audio cache directory: /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/backend/data/audio-cache
+Target audio cache exists: true
+Target audio cache files: 38
+Starting smart copy of audio cache (preserving existing files)...
+Audio cache initialization complete. Copied 0 new files while preserving existing ones.
+[2026-01-02T12:22:13.798Z] Initializing default configurations...
+[2026-01-02T12:22:13.799Z] Loaded 4 default instructions
+[2026-01-02T12:22:13.799Z] Loaded 4 user instructions
+[2026-01-02T12:22:13.799Z] Saved 4 merged instructions
+[2026-01-02T12:22:13.799Z] Looking for default presets in directory: /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/backend/defaults/presets
+[2026-01-02T12:22:13.799Z] Found 4 preset files in defaults/presets directory
+[2026-01-02T12:22:13.799Z] Loaded default preset from file: default-preset-achtsamkeit.json
+[2026-01-02T12:22:13.800Z] Loaded default preset from file: default-preset-metta-sutta.json
+[2026-01-02T12:22:13.800Z] Loaded default preset from file: default-preset-mindfulness.json
+[2026-01-02T12:22:13.800Z] Loaded default preset from file: default-preset-woop.json
+[2026-01-02T12:22:13.800Z] Loaded 4 default presets
+Loaded cache analytics data with 37 entries
+Running in development: Serving frontend from /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/frontend/build
+Frontend build directory found at /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/frontend/build
+Found 11 files in build directory: .DS_Store, asset-manifest.json, assets, favicon.ico, index.html, logo192.png, logo512.png, manifest.json, robots.txt, sounds...
+Server running in unified container mode at http://0.0.0.0:3001
+For local access: http://localhost:3001
+API available at: http://localhost:3001/api
+Frontend available at: http://localhost:3001
+For network access: http://192.168.178.169:3001
+For network access: http://100.70.158.67:3001
+For network access: http://192.168.64.1:3001
+[nodemon] restarting due to changes...
+[nodemon] starting `node server.js`
+[2026-01-02T12:22:13.909Z] Starting Contemplation Machine server
+Default audio cache directory: /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/backend/defaults/audio-cache
+Default audio cache exists: true
+Default audio cache files: 38
+Target audio cache directory: /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/backend/data/audio-cache
+Target audio cache exists: true
+Target audio cache files: 38
+Starting smart copy of audio cache (preserving existing files)...
+Audio cache initialization complete. Copied 0 new files while preserving existing ones.
+[2026-01-02T12:22:13.913Z] Initializing default configurations...
+[2026-01-02T12:22:13.913Z] Loaded 4 default instructions
+[2026-01-02T12:22:13.913Z] Loaded 4 user instructions
+[2026-01-02T12:22:13.914Z] Saved 4 merged instructions
+[2026-01-02T12:22:13.914Z] Looking for default presets in directory: /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/backend/defaults/presets
+[2026-01-02T12:22:13.914Z] Found 4 preset files in defaults/presets directory
+[2026-01-02T12:22:13.914Z] Loaded default preset from file: default-preset-achtsamkeit.json
+[2026-01-02T12:22:13.914Z] Loaded default preset from file: default-preset-metta-sutta.json
+[2026-01-02T12:22:13.914Z] Loaded default preset from file: default-preset-mindfulness.json
+[2026-01-02T12:22:13.914Z] Loaded default preset from file: default-preset-woop.json
+[2026-01-02T12:22:13.914Z] Loaded 4 default presets
+Loaded cache analytics data with 37 entries
+Running in development: Serving frontend from /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/frontend/build
+Frontend build directory found at /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/frontend/build
+Found 11 files in build directory: .DS_Store, asset-manifest.json, assets, favicon.ico, index.html, logo192.png, logo512.png, manifest.json, robots.txt, sounds...
+Server running in unified container mode at http://0.0.0.0:3001
+For local access: http://localhost:3001
+API available at: http://localhost:3001/api
+Frontend available at: http://localhost:3001
+For network access: http://192.168.178.169:3001
+For network access: http://100.70.158.67:3001
+For network access: http://192.168.64.1:3001
+[nodemon] restarting due to changes...
+[nodemon] starting `node server.js`
+[2026-01-02T12:22:14.028Z] Starting Contemplation Machine server
+Default audio cache directory: /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/backend/defaults/audio-cache
+Default audio cache exists: true
+Default audio cache files: 38
+Target audio cache directory: /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/backend/data/audio-cache
+Target audio cache exists: true
+Target audio cache files: 38
+Starting smart copy of audio cache (preserving existing files)...
+Audio cache initialization complete. Copied 0 new files while preserving existing ones.
+[2026-01-02T12:22:14.033Z] Initializing default configurations...
+[2026-01-02T12:22:14.033Z] Loaded 4 default instructions
+[2026-01-02T12:22:14.033Z] Loaded 4 user instructions
+[2026-01-02T12:22:14.034Z] Saved 4 merged instructions
+[2026-01-02T12:22:14.034Z] Looking for default presets in directory: /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/backend/defaults/presets
+[2026-01-02T12:22:14.034Z] Found 4 preset files in defaults/presets directory
+[2026-01-02T12:22:14.034Z] Loaded default preset from file: default-preset-achtsamkeit.json
+[2026-01-02T12:22:14.034Z] Loaded default preset from file: default-preset-metta-sutta.json
+[2026-01-02T12:22:14.034Z] Loaded default preset from file: default-preset-mindfulness.json
+[2026-01-02T12:22:14.034Z] Loaded default preset from file: default-preset-woop.json
+[2026-01-02T12:22:14.034Z] Loaded 4 default presets
+Loaded cache analytics data with 37 entries
+Running in development: Serving frontend from /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/frontend/build
+Frontend build directory found at /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/frontend/build
+Found 11 files in build directory: .DS_Store, asset-manifest.json, assets, favicon.ico, index.html, logo192.png, logo512.png, manifest.json, robots.txt, sounds...
+Server running in unified container mode at http://0.0.0.0:3001
+For local access: http://localhost:3001
+API available at: http://localhost:3001/api
+Frontend available at: http://localhost:3001
+For network access: http://192.168.178.169:3001
+For network access: http://100.70.158.67:3001
+For network access: http://192.168.64.1:3001
+[nodemon] restarting due to changes...
+[nodemon] starting `node server.js`
+[2026-01-02T12:22:14.138Z] Starting Contemplation Machine server
+Default audio cache directory: /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/backend/defaults/audio-cache
+Default audio cache exists: true
+Default audio cache files: 38
+Target audio cache directory: /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/backend/data/audio-cache
+Target audio cache exists: true
+Target audio cache files: 38
+Starting smart copy of audio cache (preserving existing files)...
+Audio cache initialization complete. Copied 0 new files while preserving existing ones.
+[2026-01-02T12:22:14.142Z] Initializing default configurations...
+[2026-01-02T12:22:14.143Z] Loaded 4 default instructions
+[2026-01-02T12:22:14.143Z] Loaded 4 user instructions
+[2026-01-02T12:22:14.144Z] Saved 4 merged instructions
+[2026-01-02T12:22:14.144Z] Looking for default presets in directory: /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/backend/defaults/presets
+[2026-01-02T12:22:14.144Z] Found 4 preset files in defaults/presets directory
+[2026-01-02T12:22:14.144Z] Loaded default preset from file: default-preset-achtsamkeit.json
+[2026-01-02T12:22:14.144Z] Loaded default preset from file: default-preset-metta-sutta.json
+[2026-01-02T12:22:14.144Z] Loaded default preset from file: default-preset-mindfulness.json
+[2026-01-02T12:22:14.144Z] Loaded default preset from file: default-preset-woop.json
+[2026-01-02T12:22:14.144Z] Loaded 4 default presets
+Loaded cache analytics data with 37 entries
+Running in development: Serving frontend from /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/frontend/build
+Frontend build directory found at /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/frontend/build
+Found 11 files in build directory: .DS_Store, asset-manifest.json, assets, favicon.ico, index.html, logo192.png, logo512.png, manifest.json, robots.txt, sounds...
+Server running in unified container mode at http://0.0.0.0:3001
+For local access: http://localhost:3001
+API available at: http://localhost:3001/api
+Frontend available at: http://localhost:3001
+For network access: http://192.168.178.169:3001
+For network access: http://100.70.158.67:3001
+For network access: http://192.168.64.1:3001
+[nodemon] restarting due to changes...
+[nodemon] starting `node server.js`
+[2026-01-02T12:22:14.247Z] Starting Contemplation Machine server
+Default audio cache directory: /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/backend/defaults/audio-cache
+Default audio cache exists: true
+Default audio cache files: 38
+Target audio cache directory: /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/backend/data/audio-cache
+Target audio cache exists: true
+Target audio cache files: 38
+Starting smart copy of audio cache (preserving existing files)...
+Audio cache initialization complete. Copied 0 new files while preserving existing ones.
+[2026-01-02T12:22:14.251Z] Initializing default configurations...
+[2026-01-02T12:22:14.252Z] Loaded 4 default instructions
+[2026-01-02T12:22:14.252Z] Loaded 4 user instructions
+[2026-01-02T12:22:14.252Z] Saved 4 merged instructions
+[2026-01-02T12:22:14.252Z] Looking for default presets in directory: /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/backend/defaults/presets
+[2026-01-02T12:22:14.252Z] Found 4 preset files in defaults/presets directory
+[2026-01-02T12:22:14.253Z] Loaded default preset from file: default-preset-achtsamkeit.json
+[2026-01-02T12:22:14.253Z] Loaded default preset from file: default-preset-metta-sutta.json
+[2026-01-02T12:22:14.253Z] Loaded default preset from file: default-preset-mindfulness.json
+[2026-01-02T12:22:14.253Z] Loaded default preset from file: default-preset-woop.json
+[2026-01-02T12:22:14.253Z] Loaded 4 default presets
+Loaded cache analytics data with 37 entries
+Running in development: Serving frontend from /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/frontend/build
+Frontend build directory found at /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/frontend/build
+Found 11 files in build directory: .DS_Store, asset-manifest.json, assets, favicon.ico, index.html, logo192.png, logo512.png, manifest.json, robots.txt, sounds...
+[nodemon] restarting due to changes...
+Server running in unified container mode at http://0.0.0.0:3001
+For local access: http://localhost:3001
+API available at: http://localhost:3001/api
+Frontend available at: http://localhost:3001
+For network access: http://192.168.178.169:3001
+For network access: http://100.70.158.67:3001
+For network access: http://192.168.64.1:3001
+[nodemon] starting `node server.js`
+[2026-01-02T12:22:14.345Z] Starting Contemplation Machine server
+Default audio cache directory: /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/backend/defaults/audio-cache
+Default audio cache exists: true
+Default audio cache files: 38
+Target audio cache directory: /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/backend/data/audio-cache
+Target audio cache exists: true
+Target audio cache files: 38
+Starting smart copy of audio cache (preserving existing files)...
+Audio cache initialization complete. Copied 0 new files while preserving existing ones.
+[2026-01-02T12:22:14.349Z] Initializing default configurations...
+[2026-01-02T12:22:14.350Z] Loaded 4 default instructions
+[2026-01-02T12:22:14.350Z] Loaded 4 user instructions
+[2026-01-02T12:22:14.350Z] Saved 4 merged instructions
+[2026-01-02T12:22:14.350Z] Looking for default presets in directory: /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/backend/defaults/presets
+[2026-01-02T12:22:14.351Z] Found 4 preset files in defaults/presets directory
+[2026-01-02T12:22:14.351Z] Loaded default preset from file: default-preset-achtsamkeit.json
+[2026-01-02T12:22:14.351Z] Loaded default preset from file: default-preset-metta-sutta.json
+[2026-01-02T12:22:14.351Z] Loaded default preset from file: default-preset-mindfulness.json
+[2026-01-02T12:22:14.351Z] Loaded default preset from file: default-preset-woop.json
+[2026-01-02T12:22:14.351Z] Loaded 4 default presets
+Loaded cache analytics data with 37 entries
+Running in development: Serving frontend from /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/frontend/build
+Frontend build directory found at /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/frontend/build
+Found 11 files in build directory: .DS_Store, asset-manifest.json, assets, favicon.ico, index.html, logo192.png, logo512.png, manifest.json, robots.txt, sounds...
+Server running in unified container mode at http://0.0.0.0:3001
+For local access: http://localhost:3001
+API available at: http://localhost:3001/api
+Frontend available at: http://localhost:3001
+For network access: http://192.168.178.169:3001
+For network access: http://100.70.158.67:3001
+For network access: http://192.168.64.1:3001
+[nodemon] restarting due to changes...
+[nodemon] starting `node server.js`
+[2026-01-02T12:22:14.455Z] Starting Contemplation Machine server
+Default audio cache directory: /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/backend/defaults/audio-cache
+Default audio cache exists: true
+Default audio cache files: 38
+Target audio cache directory: /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/backend/data/audio-cache
+Target audio cache exists: true
+Target audio cache files: 38
+Starting smart copy of audio cache (preserving existing files)...
+Audio cache initialization complete. Copied 0 new files while preserving existing ones.
+[2026-01-02T12:22:14.459Z] Initializing default configurations...
+[2026-01-02T12:22:14.459Z] Loaded 4 default instructions
+[2026-01-02T12:22:14.459Z] Loaded 4 user instructions
+[2026-01-02T12:22:14.460Z] Saved 4 merged instructions
+[2026-01-02T12:22:14.461Z] Looking for default presets in directory: /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/backend/defaults/presets
+[2026-01-02T12:22:14.461Z] Found 4 preset files in defaults/presets directory
+[2026-01-02T12:22:14.461Z] Loaded default preset from file: default-preset-achtsamkeit.json
+[2026-01-02T12:22:14.461Z] Loaded default preset from file: default-preset-metta-sutta.json
+[2026-01-02T12:22:14.461Z] Loaded default preset from file: default-preset-mindfulness.json
+[2026-01-02T12:22:14.461Z] Loaded default preset from file: default-preset-woop.json
+[2026-01-02T12:22:14.461Z] Loaded 4 default presets
+Loaded cache analytics data with 37 entries
+Running in development: Serving frontend from /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/frontend/build
+Frontend build directory found at /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/frontend/build
+Found 11 files in build directory: .DS_Store, asset-manifest.json, assets, favicon.ico, index.html, logo192.png, logo512.png, manifest.json, robots.txt, sounds...
+Server running in unified container mode at http://0.0.0.0:3001
+For local access: http://localhost:3001
+API available at: http://localhost:3001/api
+Frontend available at: http://localhost:3001
+For network access: http://192.168.178.169:3001
+For network access: http://100.70.158.67:3001
+For network access: http://192.168.64.1:3001
+[nodemon] restarting due to changes...
+[nodemon] starting `node server.js`
+[2026-01-02T12:22:14.560Z] Starting Contemplation Machine server
+Default audio cache directory: /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/backend/defaults/audio-cache
+Default audio cache exists: true
+Default audio cache files: 38
+Target audio cache directory: /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/backend/data/audio-cache
+Target audio cache exists: true
+Target audio cache files: 38
+Starting smart copy of audio cache (preserving existing files)...
+Audio cache initialization complete. Copied 0 new files while preserving existing ones.
+[2026-01-02T12:22:14.564Z] Initializing default configurations...
+[2026-01-02T12:22:14.565Z] Loaded 4 default instructions
+[2026-01-02T12:22:14.565Z] Loaded 4 user instructions
+[2026-01-02T12:22:14.566Z] Saved 4 merged instructions
+[2026-01-02T12:22:14.566Z] Looking for default presets in directory: /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/backend/defaults/presets
+[2026-01-02T12:22:14.566Z] Found 4 preset files in defaults/presets directory
+[2026-01-02T12:22:14.566Z] Loaded default preset from file: default-preset-achtsamkeit.json
+[2026-01-02T12:22:14.566Z] Loaded default preset from file: default-preset-metta-sutta.json
+[2026-01-02T12:22:14.566Z] Loaded default preset from file: default-preset-mindfulness.json
+[2026-01-02T12:22:14.566Z] Loaded default preset from file: default-preset-woop.json
+[2026-01-02T12:22:14.566Z] Loaded 4 default presets
+Loaded cache analytics data with 37 entries
+Running in development: Serving frontend from /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/frontend/build
+Frontend build directory found at /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/frontend/build
+Found 11 files in build directory: .DS_Store, asset-manifest.json, assets, favicon.ico, index.html, logo192.png, logo512.png, manifest.json, robots.txt, sounds...
+Server running in unified container mode at http://0.0.0.0:3001
+For local access: http://localhost:3001
+API available at: http://localhost:3001/api
+Frontend available at: http://localhost:3001
+For network access: http://192.168.178.169:3001
+For network access: http://100.70.158.67:3001
+For network access: http://192.168.64.1:3001
+[nodemon] restarting due to changes...
+[nodemon] starting `node server.js`
+[2026-01-02T12:22:14.671Z] Starting Contemplation Machine server
+Default audio cache directory: /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/backend/defaults/audio-cache
+Default audio cache exists: true
+Default audio cache files: 38
+Target audio cache directory: /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/backend/data/audio-cache
+Target audio cache exists: true
+Target audio cache files: 38
+Starting smart copy of audio cache (preserving existing files)...
+Audio cache initialization complete. Copied 0 new files while preserving existing ones.
+[2026-01-02T12:22:14.675Z] Initializing default configurations...
+[2026-01-02T12:22:14.675Z] Loaded 4 default instructions
+[2026-01-02T12:22:14.676Z] Loaded 4 user instructions
+[2026-01-02T12:22:14.676Z] Saved 4 merged instructions
+[2026-01-02T12:22:14.676Z] Looking for default presets in directory: /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/backend/defaults/presets
+[2026-01-02T12:22:14.676Z] Found 4 preset files in defaults/presets directory
+[2026-01-02T12:22:14.677Z] Loaded default preset from file: default-preset-achtsamkeit.json
+[2026-01-02T12:22:14.677Z] Loaded default preset from file: default-preset-metta-sutta.json
+[2026-01-02T12:22:14.677Z] Loaded default preset from file: default-preset-mindfulness.json
+[2026-01-02T12:22:14.677Z] Loaded default preset from file: default-preset-woop.json
+[2026-01-02T12:22:14.677Z] Loaded 4 default presets
+Loaded cache analytics data with 37 entries
+Running in development: Serving frontend from /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/frontend/build
+Frontend build directory found at /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/frontend/build
+Found 11 files in build directory: .DS_Store, asset-manifest.json, assets, favicon.ico, index.html, logo192.png, logo512.png, manifest.json, robots.txt, sounds...
+Server running in unified container mode at http://0.0.0.0:3001
+For local access: http://localhost:3001
+API available at: http://localhost:3001/api
+Frontend available at: http://localhost:3001
+For network access: http://192.168.178.169:3001
+For network access: http://100.70.158.67:3001
+For network access: http://192.168.64.1:3001
+[nodemon] restarting due to changes...
+[nodemon] starting `node server.js`
+[2026-01-02T12:22:14.775Z] Starting Contemplation Machine server
+Default audio cache directory: /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/backend/defaults/audio-cache
+Default audio cache exists: true
+Default audio cache files: 38
+Target audio cache directory: /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/backend/data/audio-cache
+Target audio cache exists: true
+Target audio cache files: 38
+Starting smart copy of audio cache (preserving existing files)...
+Audio cache initialization complete. Copied 0 new files while preserving existing ones.
+[2026-01-02T12:22:14.780Z] Initializing default configurations...
+[2026-01-02T12:22:14.780Z] Loaded 4 default instructions
+[2026-01-02T12:22:14.781Z] Loaded 4 user instructions
+[2026-01-02T12:22:14.781Z] Saved 4 merged instructions
+[2026-01-02T12:22:14.781Z] Looking for default presets in directory: /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/backend/defaults/presets
+[2026-01-02T12:22:14.781Z] Found 4 preset files in defaults/presets directory
+[2026-01-02T12:22:14.781Z] Loaded default preset from file: default-preset-achtsamkeit.json
+[2026-01-02T12:22:14.781Z] Loaded default preset from file: default-preset-metta-sutta.json
+[2026-01-02T12:22:14.782Z] Loaded default preset from file: default-preset-mindfulness.json
+[2026-01-02T12:22:14.782Z] Loaded default preset from file: default-preset-woop.json
+[2026-01-02T12:22:14.782Z] Loaded 4 default presets
+Loaded cache analytics data with 37 entries
+Running in development: Serving frontend from /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/frontend/build
+Frontend build directory found at /Users/aupeksha/LocalProjects/ai-bootcamp/meditation-app/frontend/build
+Found 11 files in build directory: .DS_Store, asset-manifest.json, assets, favicon.ico, index.html, logo192.png, logo512.png, manifest.json, robots.txt, sounds...
+Server running in unified container mode at http://0.0.0.0:3001
+For local access: http://localhost:3001
+API available at: http://localhost:3001/api
+Frontend available at: http://localhost:3001
+For network access: http://192.168.178.169:3001
+For network access: http://100.70.158.67:3001
+For network access: http://192.168.64.1:3001
+[nodemon] restarting due to changes...
+^C
+Shutting down servers...
