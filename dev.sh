@@ -12,6 +12,8 @@ show_usage() {
     echo "Commands:"
     echo "  help    Show this help message (default)"
     echo "  run     Start the development servers"
+    echo "  stop    Stop the development servers"
+    echo "  status  Show running server processes and port status"
     echo "  clean   Clean node_modules, build directories, and cache"
     echo "  build   Build the frontend and backend for production"
     echo "  check   Compare git-tracked files with filesystem files"
@@ -221,6 +223,160 @@ build() {
     echo "Build completed successfully!"
 }
 
+# Function to show server and port status
+status() {
+    local frontend_port=3000
+    local backend_port=3001
+
+    echo "=== Server Process Status ==="
+
+    if command -v pgrep >/dev/null 2>&1; then
+        local frontend_pids
+        local backend_pids
+        frontend_pids=$(pgrep -f "react-scripts start" || true)
+        backend_pids=$(pgrep -f "nodemon server.js|node server.js" || true)
+
+        if [ -n "$frontend_pids" ]; then
+            echo "Frontend dev server (react-scripts) running: PID(s) $frontend_pids"
+        else
+            echo "Frontend dev server (react-scripts) not running"
+        fi
+
+        if [ -n "$backend_pids" ]; then
+            echo "Backend server (node/nodemon) running: PID(s) $backend_pids"
+        else
+            echo "Backend server (node/nodemon) not running"
+        fi
+    else
+        echo "Process check skipped (pgrep not available)"
+    fi
+
+    echo ""
+    echo "=== Port Status ==="
+
+    if command -v lsof >/dev/null 2>&1; then
+        check_port_with_lsof() {
+            local port=$1
+            local label=$2
+            local output
+            output=$(lsof -n -iTCP:"$port" -sTCP:LISTEN 2>/dev/null)
+            if [ -n "$output" ]; then
+                echo "$label port $port: IN USE"
+                echo "$output" | awk 'NR==1 || NR==2 {print}'
+            else
+                echo "$label port $port: FREE"
+            fi
+        }
+        check_port_with_lsof "$frontend_port" "Frontend"
+        check_port_with_lsof "$backend_port" "Backend"
+    elif command -v ss >/dev/null 2>&1; then
+        check_port_with_ss() {
+            local port=$1
+            local label=$2
+            if ss -ltn "sport = :$port" | awk 'NR>1 {exit 1} END {exit 0}'; then
+                echo "$label port $port: FREE"
+            else
+                echo "$label port $port: IN USE"
+                ss -ltn "sport = :$port"
+            fi
+        }
+        check_port_with_ss "$frontend_port" "Frontend"
+        check_port_with_ss "$backend_port" "Backend"
+    elif command -v netstat >/dev/null 2>&1; then
+        check_port_with_netstat() {
+            local port=$1
+            local label=$2
+            if netstat -an 2>/dev/null | grep -E "[:.]$port .*LISTEN" >/dev/null; then
+                echo "$label port $port: IN USE"
+                netstat -an 2>/dev/null | grep -E "[:.]$port .*LISTEN" | head -n 1
+            else
+                echo "$label port $port: FREE"
+            fi
+        }
+        check_port_with_netstat "$frontend_port" "Frontend"
+        check_port_with_netstat "$backend_port" "Backend"
+    else
+        echo "Port check skipped (no lsof/ss/netstat available)"
+    fi
+}
+
+# Function to stop development servers
+stop() {
+    local stopped=0
+    local frontend_port=3000
+    local backend_port=3001
+    local extra_stopped=0
+
+    echo "Stopping development servers..."
+
+    if command -v pgrep >/dev/null 2>&1; then
+        local frontend_pids
+        local backend_pids
+        frontend_pids=$(pgrep -f "react-scripts start" || true)
+        backend_pids=$(pgrep -f "nodemon server.js|node server.js" || true)
+
+        if [ -n "$frontend_pids" ]; then
+            echo "Stopping frontend dev server: PID(s) $frontend_pids"
+            kill $frontend_pids 2>/dev/null || true
+            stopped=1
+        else
+            echo "Frontend dev server not running"
+        fi
+
+        if [ -n "$backend_pids" ]; then
+            echo "Stopping backend server: PID(s) $backend_pids"
+            kill $backend_pids 2>/dev/null || true
+            stopped=1
+        else
+            echo "Backend server not running"
+        fi
+    else
+        echo "Process stop skipped (pgrep not available)"
+    fi
+
+    if command -v lsof >/dev/null 2>&1; then
+        local frontend_blockers
+        local backend_blockers
+        frontend_blockers=$(lsof -n -iTCP:"$frontend_port" -sTCP:LISTEN -t 2>/dev/null | tr '\n' ' ')
+        backend_blockers=$(lsof -n -iTCP:"$backend_port" -sTCP:LISTEN -t 2>/dev/null | tr '\n' ' ')
+
+        if [ -n "$frontend_blockers" ]; then
+            echo "Stopping processes blocking port $frontend_port: $frontend_blockers"
+            kill $frontend_blockers 2>/dev/null || true
+            extra_stopped=1
+        fi
+
+        if [ -n "$backend_blockers" ]; then
+            echo "Stopping processes blocking port $backend_port: $backend_blockers"
+            kill $backend_blockers 2>/dev/null || true
+            extra_stopped=1
+        fi
+    elif command -v ss >/dev/null 2>&1; then
+        local frontend_blockers
+        local backend_blockers
+        frontend_blockers=$(ss -ltnp "sport = :$frontend_port" | awk 'NR>1 {print $NF}' | sed 's/.*pid=\([0-9]\+\).*/\1/' | sort -u | tr '\n' ' ')
+        backend_blockers=$(ss -ltnp "sport = :$backend_port" | awk 'NR>1 {print $NF}' | sed 's/.*pid=\([0-9]\+\).*/\1/' | sort -u | tr '\n' ' ')
+
+        if [ -n "$frontend_blockers" ]; then
+            echo "Stopping processes blocking port $frontend_port: $frontend_blockers"
+            kill $frontend_blockers 2>/dev/null || true
+            extra_stopped=1
+        fi
+
+        if [ -n "$backend_blockers" ]; then
+            echo "Stopping processes blocking port $backend_port: $backend_blockers"
+            kill $backend_blockers 2>/dev/null || true
+            extra_stopped=1
+        fi
+    elif command -v netstat >/dev/null 2>&1; then
+        echo "Port blocker termination skipped (lsof/ss not available; netstat lacks PID details on some systems)."
+    fi
+
+    if [ "$stopped" -eq 0 ] && [ "$extra_stopped" -eq 0 ]; then
+        echo "No running development servers found."
+    fi
+}
+
 # Function to run development servers
 run() {
     # Check for required environment variables
@@ -280,6 +436,12 @@ COMMAND=${1:-help}  # Default to 'help' if no command provided
 case "$COMMAND" in
     "run")
         run
+        ;;
+    "stop")
+        stop
+        ;;
+    "status")
+        status
         ;;
     "clean")
         clean
