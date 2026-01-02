@@ -437,6 +437,39 @@ export const isAudioCached = (
   return isCached;
 };
 
+// Fetch available OpenAI voices (hardcoded since OpenAI doesn't provide a voice listing API)
+export const fetchOpenAIVoices = async (): Promise<any> => {
+  try {
+    console.log('[AUDIO-SERVICE] Fetching OpenAI voices (using hardcoded values)...');
+    
+    // Return hardcoded OpenAI voices with descriptions
+    const openAIVoices = {
+      voices: [
+        { id: 'alloy', name: 'Alloy', description: 'Versatile, balanced voice' },
+        { id: 'ash', name: 'Ash', description: 'Rich, warm voice' },
+        { id: 'coral', name: 'Coral', description: 'Bright, energetic voice' },
+        { id: 'echo', name: 'Echo', description: 'Clear, confident voice' },
+        { id: 'fable', name: 'Fable', description: 'Warm, soft-spoken voice' },
+        { id: 'onyx', name: 'Onyx', description: 'Deep, authoritative voice' },
+        { id: 'nova', name: 'Nova', description: 'Bright, friendly voice' },
+        { id: 'sage', name: 'Sage', description: 'Calm, measured voice' },
+        { id: 'shimmer', name: 'Shimmer', description: 'Gentle, soothing voice' }
+      ],
+      models: [
+        { id: 'tts-1', name: 'TTS-1 (Fast, standard quality)' },
+        { id: 'tts-1-hd', name: 'TTS-1-HD (High quality)' },
+        { id: 'gpt-4o-mini-tts', name: 'GPT-4o Mini TTS (Advanced)' }
+      ]
+    };
+    
+    console.log('[AUDIO-SERVICE] Returning hardcoded OpenAI voices:', openAIVoices.voices.length, 'voices');
+    return openAIVoices;
+  } catch (error) {
+    console.error('[AUDIO-SERVICE] Error fetching OpenAI voices:', error);
+    throw error;
+  }
+};
+
 // Fetch available ElevenLabs voices
 export const fetchElevenLabsVoices = async (): Promise<any> => {
   try {
@@ -726,6 +759,7 @@ export default {
   setCurrentInstructionId,
   cleanup,
   playPreGeneratedAudio,
+  fetchOpenAIVoices,
   fetchElevenLabsVoices,
   preGenerateSessionAudioProgressive,
   getCacheAnalytics,
