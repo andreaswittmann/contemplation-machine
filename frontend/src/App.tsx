@@ -28,8 +28,16 @@ export const useNavigation = () => useContext(NavigationContext);
 // Wrapper component that handles the contemplation status
 const AppContent = () => {
   const [activeTab, setActiveTab] = useState<TabType>('contemplate');
+  const [version, setVersion] = useState('1.9.2');
   const { session } = useSession();
   const isContemplationActive = session.isActive && !session.isPreparingAudio && !session.isBellPlaying;
+
+  useEffect(() => {
+    fetch('/api/version')
+      .then(response => response.json())
+      .then(data => setVersion(data.version))
+      .catch(err => console.error('Version fetch failed:', err));
+  }, []);
 
   return (
     <NavigationContext.Provider value={{ setActiveTab }}>
@@ -79,7 +87,7 @@ const AppContent = () => {
       </main>
 
       <footer className="app-footer">
-        <p>Contemplation Machine - Version 1.9.2</p>
+        <p>Contemplation Machine - Version {version}</p>
       </footer>
     </NavigationContext.Provider>
   );

@@ -538,6 +538,17 @@ app.post('/api/tts/cache/manage', (req, res) => {
 // API Endpoints
 // Note: All API endpoints are prefixed with /api to distinguish them from frontend routes
 
+// Version endpoint - reads from VERSION.md
+app.get('/api/version', (req, res) => {
+  try {
+    const version = fs.readFileSync(path.join(__dirname, '../VERSION.md'), 'utf8').trim();
+    res.json({ version });
+  } catch (err) {
+    console.error('Error reading VERSION.md:', err);
+    res.json({ version: '1.9.2' }); // fallback
+  }
+});
+
 // Cache status endpoint - for diagnostics
 app.get('/api/tts/cache/status', (req, res) => {
   try {
